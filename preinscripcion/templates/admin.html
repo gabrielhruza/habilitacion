@@ -79,7 +79,8 @@
 
 <div id="content" class="container-fluid">
 
-{% block ciclo %}
+{% comment %}
+{# block ciclo #}
 <div class="row">
   <div class="col-sm-12 col-md-4 form-horizontal">
     <div class="form-group">
@@ -94,7 +95,8 @@
    </div>
   </div>
 </div>  
-{% endblock %}
+{# endblock #}
+{% endcomment %}
 
     <div class="col-md-12">
 	    {% block content %}{% endblock %}

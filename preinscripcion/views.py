@@ -16,6 +16,7 @@ from .models import Preinscripcion4Anios, Postulante, PostulanteLimpio, CicloLec
 from .decorators import group_required
 import datetime
 
+
 # Create your views here.
 #login y demases 
 def login_mio(request):
@@ -155,6 +156,24 @@ def admin_preinscripciones(request):
           'postulantes': postulantes 
           }
           )
+
+
+#listado de todas las preinscripciones de un ciclo lectivo
+@group_required('gestionpreinscripciones')
+def admin_p_cl(request, year):
+
+  postulantes = Postulante.objects.all()
+  resultado = []
+
+  for postulante in postulantes:
+    if postulante.preinscripcion.cicloLectivo.fecha_apertura_ciclo.year == int(year):
+      resultado.append(postulante)  
+
+  return render(request, 'admin/preinscripciones.html',{
+          'postulantes': resultado
+          }
+          )
+
 
 #listado de todas los postulantes
 @login_required(login_url='/accounts/login/')

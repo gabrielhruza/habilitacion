@@ -24,3 +24,8 @@ body {
 .dynamic-form {
 	margin-bottom: 1em;
 }
+
+.well{
+	#background-color: white !important;
+	#margin-top: 1em;
+}

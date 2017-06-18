@@ -16,7 +16,7 @@ body {
 
 .navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-brand:hover{
 	color: white;
-	text-shadow: 1px 1px black;
+	#text-shadow: 1px 1px black;
 }
 
 .container-fluid{
