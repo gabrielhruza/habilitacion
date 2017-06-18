@@ -13,6 +13,7 @@ from django.forms import formset_factory
 from .forms import Preinscripcion4AniosForm, PostulanteForm, ResponsableForm, HermanoForm, CicloLectivoForm
 from .models import Preinscripcion4Anios, Postulante, PostulanteLimpio, CicloLectivo, CicloLectivo
 
+from .decorators import group_required
 import datetime
 
 # Create your views here.
@@ -143,8 +144,9 @@ def admin_mio(request):
   return render(request, 'admin.html')
 
 
+## operaciones relacionadas con el rol gestionpreinscripciones
 #listado de todas las preinscripciones
-@login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
 def admin_preinscripciones(request):
 
   postulantes = Postulante.objects.all()
@@ -156,6 +158,7 @@ def admin_preinscripciones(request):
 
 #listado de todas los postulantes
 @login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
 def admin_postulantes(request):
 
   postulantes = Postulante.objects.all()
@@ -178,6 +181,7 @@ def admin_postulantes_confirmados(request):
 
 #confirmar formulario seleccionado
 @login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
 def admin_confirmar(request, pid):
 
   preinscripcion  = Preinscripcion4Anios.objects.get(pk=pid)
@@ -223,6 +227,7 @@ def admin_confirmar(request, pid):
 
 #desconfirmar la preinscripcion seleccionada
 @login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
 def admin_desconfirmar(request, pid):
 
   preinscripcion  = Preinscripcion4Anios.objects.get(pk=pid)
@@ -249,8 +254,10 @@ def admin_desconfirmar(request, pid):
 
   return admin_preinscripciones(request)
 
+
 #ver una preinscripcion en particular
 @login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
 def admin_preinscripcion(request, pid):
 
   p  = Preinscripcion4Anios.objects.get(pk=pid)
@@ -260,8 +267,10 @@ def admin_preinscripcion(request, pid):
           }
   )
 
+## operaciones relacionadas con el rol gestionciclolectivo
 #dar de alta ciclo lectivo
 @login_required(login_url='/accounts/login/')
+@group_required('gestionciclolectivo')
 def admin_alta_ciclolectivo(request):
 
   context = CicloLectivoForm(prefix='cl')
@@ -282,6 +291,7 @@ def admin_alta_ciclolectivo(request):
 
 #Listado de ciclos lectivos
 @login_required(login_url='/accounts/login/')
+@group_required('gestionciclolectivo')
 def admin_index_ciclolectivo(request):
 
   cl_index = CicloLectivo.objects.all()
