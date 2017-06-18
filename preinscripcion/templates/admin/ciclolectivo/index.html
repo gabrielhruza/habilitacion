@@ -1,0 +1,59 @@
+{% extends 'admin.html' %}
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista de Ciclos Lectivos</h3>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px; overflow-y: scroll;">
+    <table class="table table-bordered table-striped table-hover" id="tabla">
+        <thead style="font-size: 10px">
+            <tr>
+                <th>Id</th>
+                <th>Inicio</th>
+                <th>Fin</th>
+                <th>Inicio preinscripciones nivel inicial</th>
+                <th>Fin preinscripciones nivel inicial</th>
+				<th>Vacantes</th>
+				<th>Nro de Sorteo</th>
+				<th>Sorteo</th>
+				<th>Confirmados</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cl in cl_index %}
+            <tr>
+                <td><a href="">{{ cl.id }}</a></td>
+                <td>{{ cl.fecha_apertura_ciclo }}</td>
+                <td>{{ cl.fecha_cierre_ciclo }}</td>
+                <td>{{ cl.fecha_inicio_preinsc_ni }}</td>
+                <td>{{ cl.fecha_fin_preinsc_ni }}</td>
+                <td>{{ cl.vacantes }}</td>
+                <td>{{ cl.ultimo_nro_sorteo }}</td>
+                <td>{{ cl.fecha_dia_sorteo }}</td>
+                <td>1000</td>
+                <td>
+                <a href="">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </a>
+                | 
+                <a href="">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+</div>
+
+{% endblock %}

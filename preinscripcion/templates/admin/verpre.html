@@ -1,0 +1,37 @@
+{% extends 'admin.html' %}
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="alert alert-success" role="alert">
+    {% for message in messages %}
+    <p><b>{{ message }}</b></p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Preinscripción</h3>
+        <button type="button" class="btn btn-default btn-sm pull-right" onClick="window.print()" style="margin-top: -23px">
+  			<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+		</button>
+    </div>
+<div class="panel-body">
+
+	<p><h4>Fecha: <b>{{ p.fecha }}</b></h4></p>
+	<p><h4>Hora: <b>{{ p.hora }}</b></h4></p>
+	<p><h4>Nro de Preinscripto: <b>{{ p.nro_de_preinscripto }}</b></h4></p>
+	<p><h4>Nro de Sorteo: <b>{{ p.nro_de_sorteo }}</b></h4></p>
+	<p><h4>Estado: <b>{{ p.estado }}</b></h4></p>
+	<p><h4>Ciclo Lectivo: <b>{{ p.cicloLectivo.fecha_apertura_ciclo }}</b></h4></p>
+	<p><h4>Fecha de Sorteo: <b>{{ p.cicloLectivo.fecha_dia_sorteo }}</b></h4></p>
+	<p><h4>Motivo: <b>{{ p.motivo }}</b></h4></p>
+</div>
+
+</div>
+
+{% endblock %}

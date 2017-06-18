@@ -1,0 +1,32 @@
+body {
+	background-image: url('../images/fondo-admin.jpg');
+}
+
+.navbar-default{
+	background-color: #015bb5;
+	border-color: #015bb5;
+	border-radius: 0px;
+	margin-bottom: 3%;
+	font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a , .navbar-default .navbar-brand{
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-brand:hover{
+	color: white;
+	text-shadow: 1px 1px black;
+}
+
+.container-fluid{
+	width: 95%;
+}
+
+.glyphicon {
+	#font-size: 18px !important;
+}
+
+.glyphicon-remove {
+	color: #a94442;
+}

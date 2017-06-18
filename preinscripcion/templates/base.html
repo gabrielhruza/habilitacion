@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#222">
+    
+    {% load static %}
+    <link rel="icon" sizes="192x192" href="{% static 'preinscripcion/images/ico.png' %}">
+    <link rel="icon" href="{% static 'preinscripcion/images/ico.png' %}" sizes="32x32">
+	<link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/jquery-ui.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/mio.css' %}" />
+
+	<script src="{% static 'preinscripcion/js/jquery.min.js' %}"></script>
+	<script src="{% static 'preinscripcion/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'preinscripcion/js/jquery-ui.js' %}"></script>
+    <script src="{% static 'preinscripcion/js/base.js' %}"></script>
+
+
+    <title>{% block title %}Preinscripciones{% endblock %}</title>
+</head>
+
+<body>
+
+
+    <div id="content" class="container">
+    <div class="img-logo">
+    <img src="{% static 'preinscripcion/images/logo.png' %}">
+    </div>
+    {% block content %}{% endblock %}
+    </div>
+
+</body>
+</html>
