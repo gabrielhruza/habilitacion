@@ -56,10 +56,13 @@
 	</div>
 	<div class="col-xs-12 col-md-12">
 		<h3>Hermanos</h3>
+		<hr>
 		{% for hno in formpost.hermanos.all %}
-			<h4>Apellido: <b>{{ hno.apellido }} </b></h4>
-			<h4>Nombre: <b>{{ hno.nombre }} </b></h4>
+			<h4>Apellido y Nombre: <b>{{ hno.apellido }} <span></span> {{ hno.nombre }}</b></h4>
 			<h4>DNI: <b>{{ hno.dni }} </b></h4>
+			<h4>Genero: <b>{{ hno.genero }} </b></h4>
+			<h4>Numero de Preinscripcion: <b>{{ hno.preinscripcion.nro_de_preinscripto }}</b></h4>
+			<hr>
 		{% endfor %}
 	</div>
 	</div>
