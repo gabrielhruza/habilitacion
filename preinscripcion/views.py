@@ -64,6 +64,7 @@ def preinscripcion4_new(request):
         formvivecon = formvivecon.save()
         formp       = formp.save()
 
+        
         #actualizo el ciclo lectivo para la actual preinscripcion
         formpact        = Preinscripcion4Anios.objects.get(pk=formp.id)
         ciclo_lectivo   = CicloLectivo.objects.get(pk=3)
@@ -82,12 +83,25 @@ def preinscripcion4_new(request):
         years = str(int(diff/365))
         
         formpost.edad      = years
-        formpostn          = formpost.save()
+        formpost.save()
 
         #Agrego los hermanos para cada postulante
         for hno in hnos:
-          hnon = hno.save()
-          formpost.hermanos.add(hnon)
+          hno = hno.save(commit=False)
+          hno.edad    = years
+          hno.padre   = formpadre
+          hno.madre   = formmadre
+          hno.tutor   = formtutor
+          hno.vive_con = formvivecon
+
+          hno_preinsc         = Preinscripcion4Anios()
+          hno_preinsc.motivo  = formp.motivo
+
+          hno_preinsc.cicloLectivo = ciclo_lectivo
+          hno_preinsc.save()
+          hno.preinscripcion  = hno_preinsc
+          hno.save()
+          formpost.hermanos.add(hno)
 
         #crear pdf de la preinscripcion
         return render(request, 'preinscripcion4anios/exito.html', {
@@ -103,7 +117,7 @@ def preinscripcion4_new(request):
         formtutor    = ResponsableForm(prefix='tutor')
         formvivecon  = ResponsableForm(prefix='vivecon')
 
-        HermanosFormSet = formset_factory(PostulanteForm, max_num=4, min_num=0)
+        HermanosFormSet = formset_factory(PostulanteForm, max_num=4)
         hermanosFormSet = HermanosFormSet(prefix='hno')
 
         return render(request, 'preinscripcion4anios/new.html',{
