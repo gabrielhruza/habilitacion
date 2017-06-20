@@ -11,7 +11,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.forms import formset_factory
 
 from .forms import Preinscripcion4AniosForm, PostulanteForm, ResponsableForm, HermanoForm, CicloLectivoForm
-from .models import Preinscripcion4Anios, Postulante, PostulanteLimpio, CicloLectivo, CicloLectivo
+from .models import Preinscripcion4Anios, Postulante, PostulanteConfirmado, CicloLectivo, CicloLectivo
 
 from .decorators import group_required
 import datetime
@@ -43,7 +43,7 @@ def logout_mio(request):
 
 #vista para anonimos
 def preinscripcion4_new(request):
-    HermanosFormSet = formset_factory(HermanoForm)
+    HermanosFormSet = formset_factory(PostulanteForm)
     
     if request.method == "POST":
 
@@ -103,7 +103,7 @@ def preinscripcion4_new(request):
         formtutor    = ResponsableForm(prefix='tutor')
         formvivecon  = ResponsableForm(prefix='vivecon')
 
-        HermanosFormSet = formset_factory(HermanoForm, max_num=4, min_num=0)
+        HermanosFormSet = formset_factory(PostulanteForm, max_num=4, min_num=0)
         hermanosFormSet = HermanosFormSet(prefix='hno')
 
         return render(request, 'preinscripcion4anios/new.html',{
@@ -191,7 +191,7 @@ def admin_postulantes(request):
 @login_required(login_url='/accounts/login/')
 def admin_postulantes_confirmados(request):
 
-  pls = PostulanteLimpio.objects.all()
+  pls = PostulanteConfirmado.objects.all()
 
   return render(request, 'admin/postulantes-confirmados.html',{
           'pls': pls 
@@ -205,13 +205,13 @@ def admin_confirmar(request, pid):
 
   preinscripcion  = Preinscripcion4Anios.objects.get(pk=pid)
 
-  #obtengo postulante limpio
+  #obtengo postulante confirmado
   p                 = Postulante.objects.get(preinscripcion_id=preinscripcion.id)
-  pl                = PostulanteLimpio()
+  pl                = PostulanteConfirmado()
   pl.dni            = p.dni
 
   #sino existe lo doy de alta, sino envio errores
-  ple = PostulanteLimpio.objects.filter(dni=pl.dni).exists()
+  ple = PostulanteConfirmado.objects.filter(dni=pl.dni).exists()
   
   if ple == False:
       pl.postulante     = p
@@ -263,7 +263,7 @@ def admin_desconfirmar(request, pid):
     ciclo_lectivo.save()
 
     p   = Postulante.objects.get(preinscripcion=pid)
-    pl  = PostulanteLimpio.objects.get(postulante=p.id)
+    pl  = PostulanteConfirmado.objects.get(postulante=p.id)
     pl.delete()
 
     preinscripcion.nro_de_sorteo = 0

@@ -73,16 +73,15 @@ class Postulante(models.Model):
     dni 				= models.CharField(max_length=8)
     genero				= models.CharField(max_length=15, choices=GENERO, default='MASCULINO')
     domicilio 			= models.CharField(max_length=150)
-    nacionalidad		= models.CharField(max_length=150)
     vive_con			= models.ForeignKey(Responsable, related_name='vive_con', blank=True, null=True) 
     padre				= models.ForeignKey(Responsable, related_name='padre', null=True) 
     madre				= models.ForeignKey(Responsable, related_name='madre', null=True) 
     tutor				= models.ForeignKey(Responsable, related_name='tutor', null=True) 
-    hermanos			= models.ManyToManyField(Hermano, blank=True, null=True)
+    hermanos			= models.ManyToManyField('self', blank=True, null=True)
     preinscripcion      = models.ForeignKey(Preinscripcion4Anios, null=True)
 
 
-class PostulanteLimpio(models.Model):
+class PostulanteConfirmado(models.Model):
     dni                 = models.CharField(max_length=8, unique=True)
     postulante          = models.ForeignKey(Postulante, null=True)
 

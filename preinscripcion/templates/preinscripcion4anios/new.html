@@ -24,30 +24,45 @@
                 <div class="col-md-4 col-xs-12">
                 {% bootstrap_field formpost.fecha_nacimiento %}
                 </div>
-                <div class="col-md-6 col-xs-12">
+                <div class="col-md-2 col-xs-12">
                 {% bootstrap_field formpost.genero %}
                 </div>
-                <div class="col-md-6 col-xs-12">
+                <div class="col-md-3 col-xs-12">
                 {% bootstrap_field formpost.dni %}
                 </div>
-                <div class="col-md-6 col-xs-12">
+                <div class="col-md-7 col-xs-12">
                 {% bootstrap_field formpost.domicilio %}
                 </div>
-                <div class="col-md-6 col-xs-12">
-                {% bootstrap_field formpost.nacionalidad %}
-                </div>
-                <div class="col-md-12 col-xs-12" id="hnos">
+                
+                <div class="col-md-12 col-xs-12 individual-form" id="hnos">
                 <h4>¿Tiene hermanos de la misma edad?</h4>
 
                 {{ hermanosFormSet.management_form }}
                 {% for formh in hermanosFormSet %}
-                <div class="individual-form">
-                    <div class="col-md-12 col-xs-12 form-inline">
-                    {% bootstrap_form formh %}
-                    </div>
+                <div class="dynamic-form">
+                <div class="col-md-4 col-xs-12">
+                {% bootstrap_field formh.apellido %}
+                </div>
+                <div class="col-md-4 col-xs-12">
+                {% bootstrap_field formh.nombre %}
+                </div>
+                <div class="col-md-4 col-xs-12">
+                {% bootstrap_field formh.fecha_nacimiento %}
+                </div>
+                <div class="col-md-2 col-xs-12">
+                {% bootstrap_field formh.genero %}
+                </div>
+                <div class="col-md-3 col-xs-12">
+                {% bootstrap_field formh.dni %}
+                </div>
+                <div class="col-md-7 col-xs-12">
+                {% bootstrap_field formh.domicilio %}
+                </div>
                 </div>
                 {% endfor %}
                 </div>
+
+
             </div>
             </div>
             </fieldset>     

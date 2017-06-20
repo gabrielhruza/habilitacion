@@ -33,7 +33,6 @@ class PostulanteForm(forms.ModelForm):
             'dni',
             'genero',
             'domicilio',
-            'nacionalidad',
             ]
         exclude = ['padre', 'madre', 'hermanos', 'edad']
 
