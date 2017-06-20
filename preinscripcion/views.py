@@ -67,7 +67,7 @@ def preinscripcion4_new(request):
         
         #actualizo el ciclo lectivo para la actual preinscripcion
         formpact        = Preinscripcion4Anios.objects.get(pk=formp.id)
-        ciclo_lectivo   = CicloLectivo.objects.get(pk=3)
+        ciclo_lectivo   = CicloLectivo.objects.get(pk=1)
         formpact.cicloLectivo = ciclo_lectivo
         formpactn        = formpact.save()
 
