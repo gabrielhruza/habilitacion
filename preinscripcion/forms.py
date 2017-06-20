@@ -1,5 +1,5 @@
 from django import forms
-from .models import Preinscripcion4Anios,Postulante, Responsable, Hermano, CicloLectivo
+from .models import Preinscripcion4Anios,Postulante, Responsable, CicloLectivo
 
 from django.forms import inlineformset_factory
 
@@ -16,11 +16,6 @@ class Preinscripcion4AniosForm(forms.ModelForm):
             raise forms.ValidationError('Escribir el motivo')
 
         return caja
-
-class HermanoForm(forms.ModelForm):
-    class Meta:
-        model   = Hermano
-        fields  = ['apellido', 'nombre', 'dni',]
 
 
 class PostulanteForm(forms.ModelForm):

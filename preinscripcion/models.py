@@ -51,12 +51,6 @@ class Responsable(models.Model):
     telefonoPersonal	= models.CharField(max_length=30, null=True, blank=True)
 
 
-class Hermano(models.Model):
-    apellido    = models.CharField(max_length=50)    
-    nombre      = models.CharField(max_length=50)    
-    dni         = models.CharField(max_length=8)
-
-
 class Postulante(models.Model):
 	#FEMENINO 	= 'Femenino'
     #MASCULINO 	= 'Masculino'
