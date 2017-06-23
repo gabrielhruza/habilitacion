@@ -121,3 +121,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
 
 STATIC_URL = '/static/'
+
+#pdf
+#WKHTMLTOPDF_CMD = '/home/mint/tmp/habilitacion/habilitacion/lib/python2.7/site-packages/wkhtmltopdf/'
+STATIC_ROOT = '/static/pdfs/'

@@ -1,0 +1,199 @@
+Downloading/unpacking WeasyPrint
+  Running setup.py (path:/tmp/pip_build_root/WeasyPrint/setup.py) egg_info for package WeasyPrint
+    warning: no files found matching 'pytest.ini'
+    warning: no files found matching 'tox.ini'
+    no previously-included directories found matching 'docs/_build'
+Requirement already satisfied (use --upgrade to upgrade): lxml>=3.0 in /usr/lib/python2.7/dist-packages (from WeasyPrint)
+Requirement already satisfied (use --upgrade to upgrade): html5lib>=0.999999999 in /usr/local/lib/python2.7/dist-packages (from WeasyPrint)
+Downloading/unpacking tinycss2>=0.5 (from WeasyPrint)
+  Running setup.py (path:/tmp/pip_build_root/tinycss2/setup.py) egg_info for package tinycss2
+Downloading/unpacking cssselect>=0.6 (from WeasyPrint)
+  Downloading cssselect-1.0.1-py2.py3-none-any.whl
+Downloading/unpacking cffi>=0.6 (from WeasyPrint)
+  Running setup.py (path:/tmp/pip_build_root/cffi/setup.py) egg_info for package cffi
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+Downloading/unpacking cairocffi>=0.5 (from WeasyPrint)
+  Running setup.py (path:/tmp/pip_build_root/cairocffi/setup.py) egg_info for package cairocffi
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    Package libffi was not found in the pkg-config search path.
+    Perhaps you should add the directory containing `libffi.pc'
+    to the PKG_CONFIG_PATH environment variable
+    No package 'libffi' found
+    c/_cffi_backend.c:2:20: fatal error: Python.h: No existe el archivo o el directorio
+     #include <Python.h>
+                        ^
+    compilation terminated.
+    Traceback (most recent call last):
+      File "<string>", line 17, in <module>
+      File "/tmp/pip_build_root/cairocffi/setup.py", line 44, in <module>
+        extras_require={'xcb': ['xcffib>=0.3.2']},
+      File "/usr/lib/python2.7/distutils/core.py", line 111, in setup
+        _setup_distribution = dist = klass(attrs)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/dist.py", line 320, in __init__
+        self.fetch_build_eggs(attrs['setup_requires'])
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/dist.py", line 377, in fetch_build_eggs
+        replace_conflicting=True,
+      File "/usr/local/lib/python2.7/dist-packages/pkg_resources/__init__.py", line 852, in resolve
+        dist = best[req.key] = env.best_match(req, ws, installer)
+      File "/usr/local/lib/python2.7/dist-packages/pkg_resources/__init__.py", line 1124, in best_match
+        return self.obtain(req, installer)
+      File "/usr/local/lib/python2.7/dist-packages/pkg_resources/__init__.py", line 1136, in obtain
+        return installer(requirement)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/dist.py", line 445, in fetch_build_egg
+        return cmd.easy_install(req)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 673, in easy_install
+        return self.install_item(spec, dist.location, tmpdir, deps)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 699, in install_item
+        dists = self.install_eggs(spec, download, tmpdir)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 880, in install_eggs
+        return self.build_and_install(setup_script, setup_base)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 1119, in build_and_install
+        self.run_setup(setup_script, setup_base, args)
+      File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 1107, in run_setup
+        raise DistutilsError("Setup script exited with %s" % (v.args[0],))
+    distutils.errors.DistutilsError: Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+    Complete output from command python setup.py egg_info:
+    Package libffi was not found in the pkg-config search path.
+
+Perhaps you should add the directory containing `libffi.pc'
+
+to the PKG_CONFIG_PATH environment variable
+
+No package 'libffi' found
+
+Package libffi was not found in the pkg-config search path.
+
+Perhaps you should add the directory containing `libffi.pc'
+
+to the PKG_CONFIG_PATH environment variable
+
+No package 'libffi' found
+
+Package libffi was not found in the pkg-config search path.
+
+Perhaps you should add the directory containing `libffi.pc'
+
+to the PKG_CONFIG_PATH environment variable
+
+No package 'libffi' found
+
+Package libffi was not found in the pkg-config search path.
+
+Perhaps you should add the directory containing `libffi.pc'
+
+to the PKG_CONFIG_PATH environment variable
+
+No package 'libffi' found
+
+Package libffi was not found in the pkg-config search path.
+
+Perhaps you should add the directory containing `libffi.pc'
+
+to the PKG_CONFIG_PATH environment variable
+
+No package 'libffi' found
+
+c/_cffi_backend.c:2:20: fatal error: Python.h: No existe el archivo o el directorio
+
+ #include <Python.h>
+
+                    ^
+
+compilation terminated.
+
+Traceback (most recent call last):
+
+  File "<string>", line 17, in <module>
+
+  File "/tmp/pip_build_root/cairocffi/setup.py", line 44, in <module>
+
+    extras_require={'xcb': ['xcffib>=0.3.2']},
+
+  File "/usr/lib/python2.7/distutils/core.py", line 111, in setup
+
+    _setup_distribution = dist = klass(attrs)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/dist.py", line 320, in __init__
+
+    self.fetch_build_eggs(attrs['setup_requires'])
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/dist.py", line 377, in fetch_build_eggs
+
+    replace_conflicting=True,
+
+  File "/usr/local/lib/python2.7/dist-packages/pkg_resources/__init__.py", line 852, in resolve
+
+    dist = best[req.key] = env.best_match(req, ws, installer)
+
+  File "/usr/local/lib/python2.7/dist-packages/pkg_resources/__init__.py", line 1124, in best_match
+
+    return self.obtain(req, installer)
+
+  File "/usr/local/lib/python2.7/dist-packages/pkg_resources/__init__.py", line 1136, in obtain
+
+    return installer(requirement)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/dist.py", line 445, in fetch_build_egg
+
+    return cmd.easy_install(req)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 673, in easy_install
+
+    return self.install_item(spec, dist.location, tmpdir, deps)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 699, in install_item
+
+    dists = self.install_eggs(spec, download, tmpdir)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 880, in install_eggs
+
+    return self.build_and_install(setup_script, setup_base)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 1119, in build_and_install
+
+    self.run_setup(setup_script, setup_base, args)
+
+  File "/usr/local/lib/python2.7/dist-packages/setuptools/command/easy_install.py", line 1107, in run_setup
+
+    raise DistutilsError("Setup script exited with %s" % (v.args[0],))
+
+distutils.errors.DistutilsError: Setup script exited with error: command 'x86_64-linux-gnu-gcc' failed with exit status 1
+
+----------------------------------------
+Cleaning up...
+Command python setup.py egg_info failed with error code 1 in /tmp/pip_build_root/cairocffi
+Storing debug log for failure in /home/mint/.pip/pip.log

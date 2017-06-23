@@ -6,9 +6,8 @@
 
 <h2>Preinscripción Nivel Inicial <small>(Sala de 4 años)</small></h2>
 <hr>
-
         <div class="row">
-        <div class="col-xs-12 col-md-10 col-md-offset-1 well" style="">
+        <div class="col-xs-12 col-md-10 col-md-offset-1" style="">
 
         {% if messages %}
         <div class="alert alert-success" role="alert">
@@ -18,10 +17,12 @@
         </div>
         {% endif %}
 
+       <div id='progress'><div id='progress-complete'></div></div>
+
         <form method="POST" class="p4a-form" id="preinsc4Form" novalidate>{% csrf_token %}
             
             <fieldset id="postulante">
-            <h3>Datos del Postulante</h3>
+            <legend>Datos del Postulante</legend>
             <div class="well">
             <div class="row">
                 <div class="col-md-4 col-xs-12">
@@ -44,7 +45,7 @@
                 </div>
 
                 <div class="col-md-12 col-xs-12 individual-form" id="hnos">
-                <h4>¿Tiene hermanos de la misma edad?</h4>
+                <h4>¿Tiene hermanos de la misma edad? <small>Si no los tiene, por favor haga click en 'Borrar'.</small></h4>
 
                 {{ hermanosFormSet.management_form }}
                 {% for formh in hermanosFormSet %}
@@ -76,7 +77,7 @@
             </fieldset>   
 
             <fieldset>
-            <h3>Datos del Padre</h3>
+            <legend>Datos del Padre</legend>
             <div class="well">
             <div class="row">
                 <div class="col-xs-12 col-md-4">
@@ -105,7 +106,7 @@
             </fieldset>
 
             <fieldset>
-            <h3>Datos de la Madre</h3>
+            <legend>Datos de la Madre</legend>
             <div class="well">
             <div class="row">
                 <div class="col-xs-12 col-md-4">
@@ -134,7 +135,7 @@
             </fieldset>
 
             <fieldset id="tutor">
-            <h3>Datos del Tutor</h3>
+            <legend>Datos del Tutor</legend>
             <div class="well">
             <div class="row">
                 <div class="col-xs-12 col-md-4">
@@ -163,7 +164,7 @@
             </fieldset>
 
             <fieldset id="vivecon">
-            <h3>Vive con</h3>
+            <legend>¿Con quién vive actualmente el/la niño/a?</legend>
             <div class="well">
             <div class="row">
             
@@ -208,7 +209,7 @@
             </fieldset>
 
             <fieldset id="motivo">
-            <h3>Motivo</h3>
+            <legend>Escriba motivos por los cuales quiere inscribir a su hijo/a</legend>
             <div class="well">
             {% bootstrap_form formp %}
             </div>
@@ -219,18 +220,18 @@
             </div>
             </fieldset>
 
-        <button type="submit" class="btn btn-success" id="preinscribirse">Preinscribirse</button>
+        <button type="submit" class="btn btn-success pull-right" id="preinscribirse">Preinscribirse</button>
         </div>
         </form>
         </div><!--/.col-->
         </div><!--/.row-->
 
 {% load static %}
-<script type="text/javascript" src="{% static 'preinscripcion/js/formToWizard.js' %}"></script>
+<script type="text/javascript" src="{% static 'preinscripcion/js/jquery.formtowizard.js' %}"></script>
+<script type="text/javascript" src="{% static 'preinscripcion/js/jquery.validate.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'preinscripcion/js/formtowizard_setup.js' %}"></script>
+<script type="text/javascript" src="{% static 'preinscripcion/js/validator_espaniol.js' %}"></script>
 <script type="text/javascript">
-$("#preinsc4Form").formToWizard({ submitButton: 'preinscribirse' });
-</script>
-<script>
     $( function() {
         $( "#{{ formpostulante.fecha_nacimiento.auto_id }}" ).datepicker(
             {   
@@ -250,6 +251,9 @@ $("#preinsc4Form").formToWizard({ submitButton: 'preinscribirse' });
             }
         );
     });
+</script>
+<script type="text/javascript">
+    //$( "#{{ formpadre.domicilio.auto_id }}" ).click(alert());
 </script>
 <script src="{% static 'preinscripcion/js/jquery.formset.js' %}" type="text/javascript"> </script>
 <script type="text/javascript">

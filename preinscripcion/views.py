@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from reportlab.pdfgen import canvas
 from django.contrib import messages
-from django.http import HttpResponse
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
@@ -78,12 +76,17 @@ def preinscripcion4_new(request):
     else:
       madre_context = formmadre
 
-    if formtutor.is_valid(): 
-      tutor_context = formtutor
-    else:
-      tutor_context = formtutor
 
-    if not formvivecon.is_bound:
+    tutor_cambio_valido = False
+    if formtutor.has_changed():
+      if formtutor.is_valid(): 
+        tutor_context = formtutor
+        tutor_cambio_valido = True
+      else:
+        tutor_context = formtutor
+
+    vivecon_cambio_valido = False
+    if formvivecon.has_changed():
       if formvivecon.is_valid(): 
         vivecon_context = formvivecon
       else:
@@ -110,9 +113,9 @@ def preinscripcion4_new(request):
 
       
     
-    #si los formularios necesariamente validados suman = 4 ya se puede empezar a 
+    #si los formularios necesariamente validados suman = 5 ya se puede empezar a 
     #guardar los datos
-    if cdor == 5:
+    if cdor == 5 :
 
       formpostulante = formpostulante.save(commit=False)
 
@@ -129,8 +132,11 @@ def preinscripcion4_new(request):
         if cl.fecha_apertura_ciclo.year == siguiente_anio:
           ciclo_lectivo   = cl
 
+      #formp4anios = formp4anios.save(commit=False)    
       formp4anios.cicloLectivo = ciclo_lectivo
       formp4anios = formp4anios.save()
+
+
 
       #calculo de edad del changuito/a
       diff = (datetime.date.today() - formpostulante.fecha_nacimiento).days
@@ -145,20 +151,21 @@ def preinscripcion4_new(request):
 
       #Agrego los hermanos para cada postulante
       for hno in hnos:
-        hno = hno.save(commit=False)
-        hno.edad    = edad
-        hno.padre   = formpadre
-        hno.madre   = formmadre
-        #hno.tutor   = formtutor
-        #hno.vive_con = formvivecon
+        #if hno.has_changed():
+          hno = hno.save(commit=False)
+          hno.edad    = edad
+          hno.padre   = formpadre
+          hno.madre   = formmadre
+          #hno.tutor   = formtutor
+          #hno.vive_con = formvivecon
 
-        hno_preinsc         = Preinscripcion4Anios()
-        hno_preinsc.motivo  = formp4anios.motivo
-        hno_preinsc.cicloLectivo = ciclo_lectivo
-        hno_preinsc.save()
-        hno.preinscripcion  = hno_preinsc
-        hno.save()
-        formpostulante.hermanos.add(hno)
+          hno_preinsc         = Preinscripcion4Anios()
+          hno_preinsc.motivo  = formp4anios.motivo
+          hno_preinsc.cicloLectivo = ciclo_lectivo
+          hno_preinsc.save()
+          hno.preinscripcion  = hno_preinsc
+          hno.save()
+          formpostulante.hermanos.add(hno)
 
       
       return render(request, 'preinscripcion4anios/exito.html', {
@@ -176,24 +183,7 @@ def preinscripcion4_new(request):
     'hermanosFormSet' : hermanosFormSet_context,
     }
         )
-
-
-def preinscripcion4_imprimir(request):
-    # Create the HttpResponse object with the appropriate PDF headers.
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="preinscripcion.pdf"'
-
-    # Create the PDF object, using the response object as its "file."
-    p = canvas.Canvas(response)
-
-    # Draw things on the PDF. Here's where the PDF generation happens.
-    # See the ReportLab documentation for the full list of functionality.
-    p.drawString(100, 100, "Hello world.")
-
-    # Close the PDF object cleanly, and we're done.
-    p.showPage()
-    p.save()
-    return response
+  
 
 
 #operaciones de administradores
