@@ -129,7 +129,8 @@
             var stepName = 'step' + i;
             $('#' + stepName + 'commands').append(
                 '<' + options.buttonTag + ' href="#" id="' + stepName + 'Prev" class="' + options.prevBtnClass + '">' +
-                options.prevBtnName +
+                '<span class="glyphicon glyphicon-chevron-left"></span>' +
+                options.prevBtnName + 
                 '</' + options.buttonTag + '>'
             );
 
@@ -145,7 +146,7 @@
             var stepName = 'step' + i;
             $('#' + stepName + 'commands').append(
                 '<' + options.buttonTag + ' href="#" id="' + stepName + 'Next" class="' + options.nextBtnClass + '">' +
-                options.nextBtnName +
+                options.nextBtnName + '<span class="glyphicon glyphicon-chevron-right"></span>' +
                 '</' + options.buttonTag + '>');
 
             $("#" + stepName + "Next").bind( "click", function(e) {
