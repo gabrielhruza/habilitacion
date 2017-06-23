@@ -133,10 +133,9 @@ def preinscripcion4_new(request):
           ciclo_lectivo   = cl
 
       #formp4anios = formp4anios.save(commit=False)    
-      formp4anios.cicloLectivo = ciclo_lectivo
       formp4anios = formp4anios.save()
-
-
+      formp4anios.cicloLectivo = ciclo_lectivo
+      formp4anios.save()
 
       #calculo de edad del changuito/a
       diff = (datetime.date.today() - formpostulante.fecha_nacimiento).days
