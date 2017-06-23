@@ -13,51 +13,53 @@
 
 	<div class="row">	
 	<div class="col-xs-12 col-md-12">
-		<h4>Numero de Preinscripcion: <b>{{ formp.nro_de_preinscripto }}</b></h4>
-		<h4>Fecha: <b>{{ formp.fecha }} <span></span> {{ formp.hora }} Hs.</b></h4>
+		<h4>Numero de Preinscripcion: <b>{{ postulante.preinscripcion.nro_de_preinscripto }}</b></h4>
+		<h4>Fecha: <b>{{ postulante.preinscripcion.fecha }} <span></span> {{ postulante.preinscripcion.hora }} Hs.</b></h4>
 		
 		<h3>Datos del Postulante</h3>
-		<h4>Apellido y Nombre: <b>{{ formpost.apellido }} <span></span> {{ formpost.nombre }}</b></h4>
-		<h4>DNI: <b>{{ formpost.dni }}</b></h4>
-		<h4>Fecha de Nacimiento: <b>{{ formpost.fecha_nacimiento }}</b></h4>
-		<h4>Género: <b>{{ formpost.genero }}</b></h4>
+		<h4>Apellido y Nombre: <b>{{ postulante.apellido }} <span></span> {{ postulante.nombre }}</b></h4>
+		<h4>DNI: <b>{{ postulante.dni }}</b></h4>
+		<h4>Fecha de Nacimiento: <b>{{ postulante.fecha_nacimiento }}</b></h4>
+		<h4>Edad: <b>{{ postulante.edad }}</b></h4>
+		<h4>Género: <b>{{ postulante.genero }}</b></h4>
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>Datos del Padre</h3>
-		<h4>Apellido y Nombre: <b>{{ formpost.padre.apellido }} <span></span> {{ formpost.padre.nombre }}</b></h4>
-		<h4>DNI: <b>{{ formpost.padre.dni }}</b></h4>
-		<h4>Teléfono: <b>{{ formpost.padre.telefonoPersonal }}</b></h4>
-		<h4>Email: <b>{{ formpost.padre.email }}</b></h4>
-		<h4>Domicilio: <b>{{ formpost.padre.domicilio }}</b></h4>
+		<h4>Apellido y Nombre: <b>{{ postulante.padre.apellido }} <span></span> {{ postulante.padre.nombre }}</b></h4>
+		<h4>DNI: <b>{{ postulante.padre.dni }}</b></h4>
+		<h4>Teléfono: <b>{{ postulante.padre.telefonoPersonal }}</b></h4>
+		<h4>Email: <b>{{ postulante.padre.email }}</b></h4>
+		<h4>Domicilio: <b>{{ postulante.padre.domicilio }}</b></h4>
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>Datos de la Madre</h3>
-		<h4>Apellido y Nombre: <b>{{ formpost.madre.apellido }} <span></span> {{ formpost.madre.nombre }}</b></h4>
-		<h4>DNI: <b>{{ formpost.madre.dni }}</b></h4>
-		<h4>Teléfono: <b>{{ formpost.madre.telefonoPersonal }}</b></h4>
-		<h4>Email: <b>{{ formpost.madre.email }}</b></h4>
-		<h4>Domicilio: <b>{{ formpost.madre.domicilio }}</b></h4>
+		<h4>Apellido y Nombre: <b>{{ postulante.madre.apellido }} <span></span> {{ postulante.madre.nombre }}</b></h4>
+		<h4>DNI: <b>{{ postulante.madre.dni }}</b></h4>
+		<h4>Teléfono: <b>{{ postulante.madre.telefonoPersonal }}</b></h4>
+		<h4>Email: <b>{{ postulante.madre.email }}</b></h4>
+		<h4>Domicilio: <b>{{ postulante.madre.domicilio }}</b></h4>
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>Datos del Tutor</h3>
-		<h4>Apellido y Nombre: <b>{{ formpost.tutor.apellido }} <span></span> {{ formpost.tutor.nombre }}</b></h4>
-		<h4>DNI: <b>{{ formpost.tutor.dni }}</b></h4>
-		<h4>Teléfono: <b>{{ formpost.tutor.telefonoPersonal }}</b></h4>
-		<h4>Email: <b>{{ formpost.tutor.email }}</b></h4>
-		<h4>Domicilio: <b>{{ formpost.tutor.domicilio }}</b></h4>
+		<h4>Apellido y Nombre: <b>{{ postulante.tutor.apellido }} <span></span> {{ postulante.tutor.nombre }}</b></h4>
+		<h4>DNI: <b>{{ postulante.tutor.dni }}</b></h4>
+		<h4>Teléfono: <b>{{ postulante.tutor.telefonoPersonal }}</b></h4>
+		<h4>Email: <b>{{ postulante.tutor.email }}</b></h4>
+		<h4>Domicilio: <b>{{ postulante.tutor.domicilio }}</b></h4>
 	</div>
 	<div class="col-xs-12 col-md-6">
 		<h3>Datos de la persona con quien vive</h3>
-		<h4>Apellido y Nombre: <b>{{ formpost.vive_con.apellido }} <span></span> {{ formpost.vive_con.nombre }}</b></h4>
-		<h4>DNI: <b>{{ formpost.vive_con.dni }}</b></h4>
-		<h4>Teléfono: <b>{{ formpost.vive_con.telefonoPersonal }}</b></h4>
-		<h4>Email: <b>{{ formpost.vive_con.email }}</b></h4>
-		<h4>Domicilio: <b>{{ formpost.vive_con.domicilio }}</b></h4>
+		<h4>Apellido y Nombre: <b>{{ postulante.vive_con.apellido }} <span></span> {{ postulante.vive_con.nombre }}</b></h4>
+		<h4>DNI: <b>{{ postulante.vive_con.dni }}</b></h4>
+		<h4>Teléfono: <b>{{ postulante.vive_con.telefonoPersonal }}</b></h4>
+		<h4>Email: <b>{{ postulante.vive_con.email }}</b></h4>
+		<h4>Domicilio: <b>{{ postulante.vive_con.domicilio }}</b></h4>
 	</div>
+
 	<div class="col-xs-12 col-md-12">
 		<h3>Hermanos</h3>
 		<hr>
-		{% for hno in formpost.hermanos.all %}
+		{% for hno in postulante.hermanos.all %}
 			<h4>Apellido y Nombre: <b>{{ hno.apellido }} <span></span> {{ hno.nombre }}</b></h4>
 			<h4>DNI: <b>{{ hno.dni }} </b></h4>
 			<h4>Genero: <b>{{ hno.genero }} </b></h4>

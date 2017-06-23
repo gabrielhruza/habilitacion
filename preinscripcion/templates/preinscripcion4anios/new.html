@@ -1,39 +1,48 @@
 {% extends "base.html" %}
 
-{% block content %}
-
 {% load bootstrap3 %}
+
+{% block content %}
 
 <h2>Preinscripción Nivel Inicial <small>(Sala de 4 años)</small></h2>
 <hr>
 
         <div class="row">
-        <div class="col-xs-12 col-md-9 col-md-offset-1" style="margin-top: -40px;">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 well" style="">
+
+        {% if messages %}
+        <div class="alert alert-success" role="alert">
+            {% for message in messages %}
+        <p><b>{{ message }}</b></p>
+        {% endfor %}
+        </div>
+        {% endif %}
+
         <form method="POST" class="p4a-form" id="preinsc4Form" novalidate>{% csrf_token %}
             
-          	<fieldset id="postulante">
-            <h3>Datos del Potulante</h3>
+            <fieldset id="postulante">
+            <h3>Datos del Postulante</h3>
             <div class="well">
             <div class="row">
                 <div class="col-md-4 col-xs-12">
-                {% bootstrap_field formpost.apellido %}
+                {% bootstrap_field formpostulante.apellido %}
                 </div>
                 <div class="col-md-4 col-xs-12">
-                {% bootstrap_field formpost.nombre %}
+                {% bootstrap_field formpostulante.nombre %}
                 </div>
                 <div class="col-md-4 col-xs-12">
-                {% bootstrap_field formpost.fecha_nacimiento %}
+                {% bootstrap_field formpostulante.fecha_nacimiento %}
                 </div>
                 <div class="col-md-2 col-xs-12">
-                {% bootstrap_field formpost.genero %}
+                {% bootstrap_field formpostulante.genero %}
                 </div>
                 <div class="col-md-3 col-xs-12">
-                {% bootstrap_field formpost.dni %}
+                {% bootstrap_field formpostulante.dni %}
                 </div>
                 <div class="col-md-7 col-xs-12">
-                {% bootstrap_field formpost.domicilio %}
+                {% bootstrap_field formpostulante.domicilio %}
                 </div>
-                
+
                 <div class="col-md-12 col-xs-12 individual-form" id="hnos">
                 <h4>¿Tiene hermanos de la misma edad?</h4>
 
@@ -62,39 +71,9 @@
                 {% endfor %}
                 </div>
 
-
             </div>
             </div>
-            </fieldset>     
-
-            <fieldset>
-            <h3>Datos de la Madre</h3>
-            <div class="well">
-            <div class="row">
-                <div class="col-xs-12 col-md-4">
-                    {% bootstrap_field formmadre.apellido  %}
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    {% bootstrap_field formmadre.nombre  %}
-                </div>
-                <div class="col-xs-12 col-md-4">
-                    {% bootstrap_field formmadre.dni  %}
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    {% bootstrap_field formmadre.email  %}
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    {% bootstrap_field formmadre.telefonoPersonal  %}
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    {% bootstrap_field formmadre.domicilio  %}
-                </div>
-                <div class="col-xs-12 col-md-6">
-                    {% bootstrap_field formmadre.nacionalidad  %}
-                </div>
-            </div>
-            </div>
-            </fieldset>      
+            </fieldset>   
 
             <fieldset>
             <h3>Datos del Padre</h3>
@@ -120,6 +99,35 @@
                 </div>
                 <div class="col-xs-12 col-md-6">
                     {% bootstrap_field formpadre.nacionalidad  %}
+                </div>
+            </div>
+            </div>
+            </fieldset>
+
+            <fieldset>
+            <h3>Datos de la Madre</h3>
+            <div class="well">
+            <div class="row">
+                <div class="col-xs-12 col-md-4">
+                    {% bootstrap_field formmadre.apellido  %}
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    {% bootstrap_field formmadre.nombre  %}
+                </div>
+                <div class="col-xs-12 col-md-4">
+                    {% bootstrap_field formmadre.dni  %}
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    {% bootstrap_field formmadre.email  %}
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    {% bootstrap_field formmadre.telefonoPersonal  %}
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    {% bootstrap_field formmadre.domicilio  %}
+                </div>
+                <div class="col-xs-12 col-md-6">
+                    {% bootstrap_field formmadre.nacionalidad  %}
                 </div>
             </div>
             </div>
@@ -206,43 +214,46 @@
             </div>
             <div class="checkbox">
                 <label>
-                <input type="checkbox"> Acepto los términos y condiciones.
+                <input type="checkbox"> Acepto los términos y condiciones presentados en este link.
                 </label>
             </div>
             </fieldset>
 
-            <button type="submit" class="btn btn-success" id="preinscribirse">Preinscribirse</button>
+        <button type="submit" class="btn btn-success" id="preinscribirse">Preinscribirse</button>
+        </div>
         </form>
         </div><!--/.col-->
         </div><!--/.row-->
 
-        {% load static %}
-        <script type="text/javascript" src="{% static 'preinscripcion/js/formToWizard.js' %}"></script>
-        <script type="text/javascript">
-        	$("#preinsc4Form").formToWizard({ submitButton: 'preinscribirse' });
-        </script>
-        <script src="{% static 'preinscripcion/js/jquery.formset.js' %}" type="text/javascript"> </script>
-        <script type="text/javascript">
-        $('.individual-form').formset();
-        //$('.dynamic-form').remove();
-        </script>
-        <script>
-          $( function() {
-            $( "#{{ formpost.fecha_nacimiento.auto_id }}" ).datepicker(
-                {
-                    dateFormat: "dd/mm/yy",
-                    firstDay: 1,
-                    maxDate: '0',
-                    dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
-                    dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
-                    monthNames: 
-                        ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
+{% load static %}
+<script type="text/javascript" src="{% static 'preinscripcion/js/formToWizard.js' %}"></script>
+<script type="text/javascript">
+$("#preinsc4Form").formToWizard({ submitButton: 'preinscribirse' });
+</script>
+<script>
+    $( function() {
+        $( "#{{ formpostulante.fecha_nacimiento.auto_id }}" ).datepicker(
+            {   
+                changeMonth: true,
+                changeYear: true,
+                dateFormat: "dd/mm/yy",
+                firstDay: 1,
+                maxDate: '-3Y',
+                dayNamesMin: ["Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa"],
+                dayNamesShort: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+                monthNames: 
+                    ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio",
                         "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
-                    monthNamesShort: 
-                        ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
+                monthNamesShort: 
+                    ["Ene", "Feb", "Mar", "Abr", "May", "Jun",
                         "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"]
-                }
-                );
-          } );
-        </script>
+            }
+        );
+    });
+</script>
+<script src="{% static 'preinscripcion/js/jquery.formset.js' %}" type="text/javascript"> </script>
+<script type="text/javascript">
+    $('.individual-form').formset();
+    //$('.dynamic-form').remove();
+</script>
 {% endblock %}

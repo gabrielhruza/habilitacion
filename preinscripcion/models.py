@@ -44,7 +44,7 @@ class Preinscripcion4Anios(models.Model):
 class Responsable(models.Model):  
     apellido 			= models.CharField(max_length=50)
     nombre 				= models.CharField(max_length=50)
-    dni 				= models.CharField(max_length=8, default='12345678')
+    dni 				= models.CharField(max_length=8)
     email 				= models.EmailField()
     domicilio 			= models.CharField(max_length=150)
     nacionalidad		= models.CharField(max_length=150)

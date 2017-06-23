@@ -43,92 +43,138 @@ def logout_mio(request):
 
 #vista para anonimos
 def preinscripcion4_new(request):
-    HermanosFormSet = formset_factory(PostulanteForm)
+
+  padre_context = ResponsableForm(prefix='padre')
+  madre_context = ResponsableForm(prefix='madre')
+  tutor_context = ResponsableForm(prefix='tutor')
+  vivecon_context = ResponsableForm(prefix='vivecon')
+  postulante_context = PostulanteForm(prefix='postulante')
+  p4anios_context = Preinscripcion4AniosForm(prefix='preinscripcion')
+
+  HermanosFormSet         = formset_factory(PostulanteForm, max_num=4)
+  hermanosFormSet_context = HermanosFormSet(prefix='hno')
     
-    if request.method == "POST":
+  if request.method == "POST":
+    cdor = 0
 
-        formp      = Preinscripcion4AniosForm(request.POST, prefix='p') # Bound form
-        formpost   = PostulanteForm(request.POST, prefix='postulante') # Bound form
-        formpadre  = ResponsableForm(request.POST, prefix='padre') # Bound form
-        formmadre  = ResponsableForm(request.POST, prefix='madre') # Bound form
-        formtutor  = ResponsableForm(request.POST, prefix='tutor') # Bound form
-        formvivecon  = ResponsableForm(request.POST, prefix='vivecon') # Bound form
-        hnos       = HermanosFormSet(request.POST, prefix='hno')
-        
-        formpadre   = formpadre.save()
-        formmadre   = formmadre.save()
+    formpadre   = ResponsableForm(request.POST, prefix='padre') # Bound form    
+    formmadre   = ResponsableForm(request.POST, prefix='madre') # Bound form    
+    formtutor   = ResponsableForm(request.POST, prefix='tutor') # Bound form    
+    formvivecon = ResponsableForm(request.POST, prefix='vivecon') # Bound form    
+    formpostulante = PostulanteForm(request.POST, prefix='postulante') # Bound form    
+    formp4anios = Preinscripcion4AniosForm(request.POST, prefix='preinscripcion') # Bound form    
+    hnos       = HermanosFormSet(request.POST, prefix='hno') # Bound form
 
-        
-        formtutor   = formtutor.save()
-
-        formvivecon = formvivecon.save()
-        formp       = formp.save()
-
-        
-        #actualizo el ciclo lectivo para la actual preinscripcion
-        formpact        = Preinscripcion4Anios.objects.get(pk=formp.id)
-        ciclo_lectivo   = CicloLectivo.objects.get(pk=1)
-        formpact.cicloLectivo = ciclo_lectivo
-        formpactn        = formpact.save()
-
-        formpost                = formpost.save(commit=False)
-        formpost.padre          = formpadre
-        formpost.madre          = formmadre
-        formpost.tutor          = formtutor
-        formpost.vive_con       = formvivecon
-        formpost.preinscripcion = formp
-
-        #calculo la edad
-        diff = (datetime.date.today() - formpost.fecha_nacimiento).days
-        years = str(int(diff/365))
-        
-        formpost.edad      = years
-        formpost.save()
-
-        #Agrego los hermanos para cada postulante
-        for hno in hnos:
-          hno = hno.save(commit=False)
-          hno.edad    = years
-          hno.padre   = formpadre
-          hno.madre   = formmadre
-          hno.tutor   = formtutor
-          hno.vive_con = formvivecon
-
-          hno_preinsc         = Preinscripcion4Anios()
-          hno_preinsc.motivo  = formp.motivo
-
-          hno_preinsc.cicloLectivo = ciclo_lectivo
-          hno_preinsc.save()
-          hno.preinscripcion  = hno_preinsc
-          hno.save()
-          formpost.hermanos.add(hno)
-
-        #crear pdf de la preinscripcion
-        return render(request, 'preinscripcion4anios/exito.html', {
-           'formp'   : formpact,
-           'formpost': formpost,
-            }
-            )
+    #comienzo validaciones para cada uno
+    if formpadre.is_valid(): 
+      cdor += 1
+      padre_context = formpadre
     else:
-        formp        = Preinscripcion4AniosForm(prefix='p')
-        formpost     = PostulanteForm(prefix='postulante')
-        formpadre    = ResponsableForm(prefix='padre')
-        formmadre    = ResponsableForm(prefix='madre')
-        formtutor    = ResponsableForm(prefix='tutor')
-        formvivecon  = ResponsableForm(prefix='vivecon')
+      padre_context = formpadre
 
-        HermanosFormSet = formset_factory(PostulanteForm, max_num=4)
-        hermanosFormSet = HermanosFormSet(prefix='hno')
+    if formmadre.is_valid():
+      cdor += 1
+      madre_context = formmadre
+    else:
+      madre_context = formmadre
 
-        return render(request, 'preinscripcion4anios/new.html',{
-          'formp': formp , 
-          'formpost': formpost, 
-          'formpadre': formpadre,
-          'formmadre': formmadre,
-          'formtutor': formtutor,
-          'formvivecon' : formvivecon,
-          'hermanosFormSet' : hermanosFormSet,
-          }
+    if formtutor.is_valid(): 
+      tutor_context = formtutor
+    else:
+      tutor_context = formtutor
+
+    if not formvivecon.is_bound:
+      if formvivecon.is_valid(): 
+        vivecon_context = formvivecon
+      else:
+        vivecon_context = formvivecon
+
+    if formpostulante.is_valid(): 
+      cdor += 1
+      postulante_context = formpostulante
+    else:
+      postulante_context = formpostulante
+
+    if formp4anios.is_valid(): 
+      cdor += 1
+      p4anios_context = formp4anios
+    else:
+      p4anios_context = formp4anios
+
+    #validacion de cada hermano
+    if hnos.is_valid():
+      cdor += 1
+      hermanosFormSet_context = hnos
+    else:
+      hermanosFormSet_context = hnos
+
+      
+    
+    #si los formularios necesariamente validados suman = 4 ya se puede empezar a 
+    #guardar los datos
+    if cdor == 5:
+
+      formpostulante = formpostulante.save(commit=False)
+
+      formpadre   = formpadre.save()
+      formmadre   = formmadre.save()
+      #formtutor.save()
+      #formvivecon.save()
+
+      #calcular ciclo lectivo y asignar a la preinscripcion
+      siguiente_anio   = datetime.date.today().year + 1
+      cles  = CicloLectivo.objects.all()
+
+      for cl in cles:
+        if cl.fecha_apertura_ciclo.year == siguiente_anio:
+          ciclo_lectivo   = cl
+
+      formp4anios.cicloLectivo = ciclo_lectivo
+      formp4anios = formp4anios.save()
+
+      #calculo de edad del changuito/a
+      diff = (datetime.date.today() - formpostulante.fecha_nacimiento).days
+      edad = str(int(diff/365))
+
+      formpostulante.padre  = formpadre
+      formpostulante.madre  = formmadre
+      formpostulante.edad   = edad
+      formpostulante.preinscripcion = formp4anios
+
+      formpostulante.save()
+
+      #Agrego los hermanos para cada postulante
+      for hno in hnos:
+        hno = hno.save(commit=False)
+        hno.edad    = edad
+        hno.padre   = formpadre
+        hno.madre   = formmadre
+        #hno.tutor   = formtutor
+        #hno.vive_con = formvivecon
+
+        hno_preinsc         = Preinscripcion4Anios()
+        hno_preinsc.motivo  = formp4anios.motivo
+        hno_preinsc.cicloLectivo = ciclo_lectivo
+        hno_preinsc.save()
+        hno.preinscripcion  = hno_preinsc
+        hno.save()
+        formpostulante.hermanos.add(hno)
+
+      
+      return render(request, 'preinscripcion4anios/exito.html', {
+        'postulante'  : formpostulante
+        })
+
+
+  return render(request, 'preinscripcion4anios/new.html',{
+    'formpadre'   : padre_context,
+    'formmadre'   : madre_context,
+    'formtutor'   : tutor_context,
+    'formvivecon' : vivecon_context,
+    'formpostulante'  : postulante_context,
+    'formp'           : p4anios_context,
+    'hermanosFormSet' : hermanosFormSet_context,
+    }
         )
 
 
