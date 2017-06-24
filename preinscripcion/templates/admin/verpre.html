@@ -6,11 +6,11 @@
 {% block content %}
 
 {% if messages %}
-<div class="alert alert-success" role="alert">
-    {% for message in messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }}" role="alert">    
     <p><b>{{ message }}</b></p>
-    {% endfor %}
-</div>
+  </div>
+  {% endfor %}
 {% endif %}
 
 <div class="panel panel-info">
@@ -31,6 +31,7 @@
 	<p><h4>Fecha de Sorteo: <b>{{ p.cicloLectivo.fecha_dia_sorteo }}</b></h4></p>
 	<p><h4>Motivo: <b>{{ p.motivo }}</b></h4></p>
 	<hr>
+  <a  href="{% url 'admin_preinscripciones' %}" class="btn btn-default">Cancelar</a>
 	<a onclick="modal('{% url 'admin_confirmar' p.id %}')" href="#" class="btn btn-primary">
 	Confirmar</a>
 </div>

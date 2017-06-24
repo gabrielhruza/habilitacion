@@ -287,6 +287,10 @@ def admin_confirmar(request, pid):
 
     messages.success(request, 'Preinscripción CONFIRMADA. Puede imprimir el comprobante.')
 
+    #mensaje por si tiene hermanos
+    if p.hermanos:
+      messages.info(request, "El postulante tiene hermanos de la misma edad, advertir de que el responsable deberá realizar el mismo procedimiento con las demás preinscripciones.")  
+
   else:
     messages.error(request, "El formulario ya se encuentra CONFIRMADO.")
 
