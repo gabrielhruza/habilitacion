@@ -73,6 +73,7 @@
                     createPrevButton(i);
                     // move submit button to the last step
                     $(submmitButtonName).addClass('next').detach().appendTo("#step" + i + "commands");
+                    $(submmitButtonName).prop('disabled','disabled');
                 }
                 else {
                     $("#step" + i).hide();

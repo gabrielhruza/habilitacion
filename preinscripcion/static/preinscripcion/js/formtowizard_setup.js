@@ -16,7 +16,7 @@
                 buttonTag:    'button',
                 showProgress: true,
                 nextBtnName: 'Siguiente',
-                prevBtnName: 'Volver',
+                prevBtnName: 'Anterior',
                 validateBeforeNext: function(form, step) {
                     var stepIsValid = true;
                     var validator = form.validate();

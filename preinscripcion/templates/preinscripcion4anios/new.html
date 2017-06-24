@@ -215,7 +215,7 @@
             </div>
             <div class="checkbox">
                 <label>
-                <input type="checkbox"> Acepto los términos y condiciones presentados en este link.
+                <input id="terms" type="checkbox"> Acepto los términos y condiciones presentados en este link.
                 </label>
             </div>
             </fieldset>
@@ -285,6 +285,17 @@
         });
 
     });
+
+    //habilitar el boton submit cdo "Acepta los terminos y condiciones"
+    $("#terms").click(function () {   
+        
+        if (this.checked) {
+            $('#preinscribirse').prop('disabled', false);
+        }else{
+            $('#preinscribirse').prop('disabled', 'disabled');
+        };
+    }
+    )
 
 </script>
 
