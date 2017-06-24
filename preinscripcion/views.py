@@ -85,12 +85,11 @@ def preinscripcion4_new(request):
       else:
         tutor_context = formtutor
 
-    vivecon_cambio_valido = False
-    if formvivecon.has_changed():
-      if formvivecon.is_valid(): 
-        vivecon_context = formvivecon
-      else:
-        vivecon_context = formvivecon
+    if formvivecon.is_valid(): 
+      vivecon_context = formvivecon
+      cdor += 1
+    else:
+      vivecon_context = formvivecon
 
     if formpostulante.is_valid(): 
       cdor += 1
@@ -111,16 +110,15 @@ def preinscripcion4_new(request):
     else:
       hermanosFormSet_context = hnos
 
-      
-    
     #si los formularios necesariamente validados suman = 5 ya se puede empezar a 
     #guardar los datos
-    if cdor == 5 :
+    if cdor == 6 :
 
       formpostulante = formpostulante.save(commit=False)
 
       formpadre   = formpadre.save()
       formmadre   = formmadre.save()
+      
       #formtutor.save()
       #formvivecon.save()
 
