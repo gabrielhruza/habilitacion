@@ -119,9 +119,13 @@ def preinscripcion4_new(request):
 
       formpadre   = formpadre.save()
       formmadre   = formmadre.save()
-      
-      #formtutor.save()
-      #formvivecon.save()
+      formvivecon = formvivecon.save()
+
+      tutor_cambio = False
+      if formtutor.has_changed():
+        tutor_cambio = True
+        formtutor = formtutor.save()
+        formpostulante.tutor = formtutor
 
       #calcular ciclo lectivo y asignar a la preinscripcion
       siguiente_anio   = datetime.date.today().year + 1
@@ -142,6 +146,7 @@ def preinscripcion4_new(request):
 
       formpostulante.padre  = formpadre
       formpostulante.madre  = formmadre
+      formpostulante.vive_con= formvivecon
       formpostulante.edad   = edad
       formpostulante.preinscripcion = formp4anios
 
@@ -154,9 +159,12 @@ def preinscripcion4_new(request):
           hno.edad    = edad
           hno.padre   = formpadre
           hno.madre   = formmadre
-          #hno.tutor   = formtutor
-          #hno.vive_con = formvivecon
+          hno.vive_con = formvivecon
 
+          if tutor_cambio:
+            hno.tutor   = formtutor
+
+          print 'jola'
           hno_preinsc         = Preinscripcion4Anios()
           hno_preinsc.motivo  = formp4anios.motivo
           hno_preinsc.cicloLectivo = ciclo_lectivo
