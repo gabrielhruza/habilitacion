@@ -77,11 +77,12 @@ def preinscripcion4_new(request):
       madre_context = formmadre
 
 
-    tutor_cambio_valido = False
+    switch_tutor = False
     if formtutor.has_changed():
+      switch_tutor = True
       if formtutor.is_valid(): 
         tutor_context = formtutor
-        tutor_cambio_valido = True
+        switch_tutor = False
       else:
         tutor_context = formtutor
 
@@ -112,7 +113,7 @@ def preinscripcion4_new(request):
 
     #si los formularios necesariamente validados suman = 5 ya se puede empezar a 
     #guardar los datos
-    if cdor == 6 :
+    if (cdor == 6 and switch_tutor == False):
 
       formpostulante = formpostulante.save(commit=False)
 
