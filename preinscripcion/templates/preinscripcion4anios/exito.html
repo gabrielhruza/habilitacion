@@ -95,14 +95,14 @@
 			</div>
 		</div>
 	</div>
+
+	{% if postulante.hermanos.all|length > 0 %}
 	<div class="col-xs-12 col-md-12">
 		<div class="card card-inverse card-success box-shadow--6dp" style="margin-top: 3%">
 			<div class="card-block">
 		    	<blockquote class="card-blockquote">
-					{% if postulante.hermanos %}
 					<h3>Hermanos</h3>
-					<hr>
-					{% endif %}
+					<hr>	
 					{% for hno in postulante.hermanos.all %}
 						<h4>Apellido y Nombre: <b>{{ hno.apellido }} <span></span> {{ hno.nombre }}</b></h4>
 						<h4>DNI: <b>{{ hno.dni }} </b></h4>
@@ -114,6 +114,7 @@
 			</div>
 		</div>
 	</div>
+	{% endif %}
 	<p></p>
 		<button type="button" class="btn btn-default pull-right" onClick="window.print()" style="margin-top:2%;margin-right:2%;">
 	  	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
