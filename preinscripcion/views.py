@@ -300,7 +300,7 @@ def admin_confirmar(request, pid):
     messages.success(request, 'Preinscripción CONFIRMADA. Puede imprimir el comprobante.')
 
     #mensaje por si tiene hermanos
-    if p.hermanos:
+    if p.hermanos.all():
       messages.info(request, "El postulante tiene hermanos de la misma edad, advertir de que el responsable deberá realizar el mismo procedimiento con las demás preinscripciones.")  
 
   else:
@@ -344,10 +344,15 @@ def admin_desconfirmar(request, pid):
 @group_required('gestionpreinscripciones')
 def admin_preinscripcion(request, pid):
 
+  #obtengo la preinscripcion con ese pid
   p  = Preinscripcion4Anios.objects.get(pk=pid)
 
+  #obtengo el postulante de esa preinscripcion
+  postulante = Postulante.objects.get(preinscripcion = p)
+
   return render(request, 'admin/verpre.html',{
-          'p': p 
+          'p': p,
+          'postulante' : postulante
           }
   )
 

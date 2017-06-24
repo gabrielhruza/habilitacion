@@ -23,14 +23,71 @@
     </div>
 <div class="panel-body">
 
-	<p><h4>Fecha: <b>{{ p.fecha }}</b></h4></p>
-	<p><h4>Hora: <b>{{ p.hora }}</b></h4></p>
-	<p><h4>Nro de Preinscripto: <b>{{ p.nro_de_preinscripto }}</b></h4></p>
-	<p><h4>Nro de Sorteo: <b>{{ p.nro_de_sorteo }}</b></h4></p>
-	<p><h4>Estado: <b>{{ p.estado }}</b></h4></p>
-	<p><h4>Ciclo Lectivo: <b>{{ p.cicloLectivo.fecha_apertura_ciclo }}</b></h4></p>
-	<p><h4>Fecha de Sorteo: <b>{{ p.cicloLectivo.fecha_dia_sorteo }}</b></h4></p>
-	<p><h4>Motivo: <b>{{ p.motivo }}</b></h4></p>
+  <div class="row">
+  <div class="col-xs-12 col-md-6">
+
+  <div class="panel panel-info">
+  <div class="panel-body">
+  	<h4>Fecha: <b>{{ p.fecha }} {{ p.hora }} hs.</b></h4>
+  	<h4>Nro de Preinscripto: <b>{{ p.nro_de_preinscripto }}</b></h4>
+  	<h4>Nro de Sorteo: <b>{{ p.nro_de_sorteo }}</b></h4>
+  	<h4>Estado: <b>{{ p.estado }}</b></h4>
+  	<h4>Ciclo Lectivo: <b>{{ p.cicloLectivo.fecha_apertura_ciclo.year }}</b></h4>
+  	<h4>Fecha de Sorteo: <b>{{ p.cicloLectivo.fecha_dia_sorteo }}</b></h4>
+  	<h4>Motivo:</h4><h5><b>{{ p.motivo }}</b></h5>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del postulante</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.apellido }} <span></span> {{ postulante.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.dni }}</b></h5>
+    <h5>Fecha de Nacimiento: <b>{{ postulante.fecha_nacimiento }}</b></h5>
+    <h5>Edad: <b>{{ postulante.edad }}</b></h5>
+    <h5>Género: <b>{{ postulante.genero }}</b></h5>
+  </div>
+  </div>
+
+  </div>
+  </div>
+
+  {% if postulante.hermanos.all %}
+  <div class="panel panel-info">
+  <div class="panel-body">
+  <p><h5>Hermanos de la misma edad</h5></p><hr>
+  
+  <div class="row">
+  {% for hno in postulante.hermanos.all %}
+  <div class="col-xs-12 col-md-4">
+    <blockquote>
+      <h5>Apellido y Nombre: <b>{{ hno.apellido }} {{ hno.nombre }}</b></h5>
+      <h5>Nro de preinscripción: <b>{{ hno.preinscripcion.nro_de_preinscripto }}</b></h5>
+      <h5>Género: <b>{{ hno.genero }}</b></h5>
+    </blockquote>
+  </div>
+  <div class="col-xs-12 col-md-4">  
+    {% for hno2 in hno.hermanos.all %}
+    {% if not hno2 == postulante %}
+      <blockquote>
+      <h5>Apellido y Nombre: <b>{{ hno2.apellido }} {{ hno2.nombre }}</b></h5>
+      <h5>Nro de preinscripción: <b>{{ hno2.preinscripcion.nro_de_preinscripto }}</b></h5>
+      <h5>Género: <b>{{ hno2.genero }}</b></h5>
+      </blockquote>
+    {% endif %}
+    {% endfor %}
+  </div>
+  {% endfor %}
+  </div>
+
+  </div>
+  </div>
+  {% endif %}
+
 	<hr>
   <a  href="{% url 'admin_preinscripciones' %}" class="btn btn-default">Cancelar</a>
 	<a onclick="modal('{% url 'admin_confirmar' p.id %}')" href="#" class="btn btn-primary">
