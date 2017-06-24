@@ -39,6 +39,7 @@ class Preinscripcion4Anios(models.Model):
     motivo              = models.TextField(default='No contesta')
     confirmado          = models.BooleanField(default=False)
     cicloLectivo        = models.ForeignKey(CicloLectivo, null=True)
+    fecha_confirmado    = models.DateField(null=True)
 
 
 class Responsable(models.Model):  

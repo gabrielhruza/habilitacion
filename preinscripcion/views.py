@@ -290,6 +290,7 @@ def admin_confirmar(request, pid):
     preinscripcion.nro_de_sorteo = nro_sorteo
     preinscripcion.confirmado = True
     preinscripcion.estado     = 'CONFIRMADO'
+    preinscripcion.fecha_confirmado = datetime.date.today()
     preinscripcion.save()
 
     messages.success(request, 'Preinscripción CONFIRMADA. Puede imprimir el comprobante.')

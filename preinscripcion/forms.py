@@ -9,7 +9,7 @@ class Preinscripcion4AniosForm(forms.ModelForm):
         model = Preinscripcion4Anios
         fields = ['motivo']
         exclude = ['nro_de_preinscripto', 'nro_de_sorteo',
-                   'estado', 'postulante', 'cicloLectivo', 'confirmado']
+                   'estado', 'postulante', 'cicloLectivo', 'confirmado', 'fecha_confirmado']
 
     def clean_motivo(self):
         caja = self.cleaned_data.get('motivo')
