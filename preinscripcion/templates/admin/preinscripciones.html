@@ -3,8 +3,8 @@
 {% block content %}
 
 {% if messages %}
-<div class="alert alert-danger" role="alert">
-    
+<div class="alert alert-danger alert-dismissable alert-link" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
     {% for message in messages %}
     <p><b>{{ message }}</b></p>
     {% endfor %}
