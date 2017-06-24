@@ -197,7 +197,10 @@ def preinscripcion4_new(request):
 #pagina de inicio de admin
 @login_required(login_url='/accounts/login/')
 def admin_mio(request):
-  
+    
+  #request.session["cles"] = CicloLectivo.objects.all() 
+  #request.session["cl"] = datetime.date.today().year + 1
+
   return render(request, 'admin.html')
 
 
@@ -218,6 +221,7 @@ def admin_preinscripciones(request):
 @group_required('gestionpreinscripciones')
 def admin_p_cl(request, year):
 
+  request.session["cl"] = year
   postulantes = Postulante.objects.all()
   resultado = []
 
@@ -226,7 +230,7 @@ def admin_p_cl(request, year):
       resultado.append(postulante)  
 
   return render(request, 'admin/preinscripciones.html',{
-          'postulantes': resultado
+          'postulantes': resultado,
           }
           )
 

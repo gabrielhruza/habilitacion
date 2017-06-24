@@ -89,9 +89,13 @@
     <label for="ciclolectivo" class="col-sm-4 control-label" style="color: white">Ciclo Lectivo:</label>
     <div class="col-sm-4">
       <select class="form-control" id="ciclolectivo">
-      <option>2016</option>
-      <option>2017</option>
-      <option>2018</option>
+      {% for cl in request.session.cles %}
+        {% if cl.fecha_apertura_ciclo.year == request.session.cl %}
+        <option selected="true"> {{ request.session.cl }}</option>
+        {% else %}
+        <option> {{ request.session.cl }}</option>
+        {% endif%}
+      {% endfor %}
       </select>    
     </div>
    </div>
