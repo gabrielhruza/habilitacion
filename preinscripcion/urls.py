@@ -2,8 +2,6 @@ from django.conf.urls import url
 
 from . import views
 
-from wkhtmltopdf.views import PDFTemplateView
-
 urlpatterns = [
     
     url(r'^preinscripcion4/new/$', views.preinscripcion4_new, name='preinscripcion4_new'),
@@ -25,8 +23,5 @@ urlpatterns = [
 
     url(r'^administrador/ciclolectivo/new/$', views.admin_alta_ciclolectivo, name='admin_alta_ciclolectivo'),
     url(r'^administrador/ciclolectivo/$', views.admin_index_ciclolectivo, name='admin_index_ciclolectivo'),
-
-    url(r'^pdf/$', PDFTemplateView.as_view(template_name='admin.html',
-                                           filename='my_pdf.pdf'), name='pdf'),
 
 ]
