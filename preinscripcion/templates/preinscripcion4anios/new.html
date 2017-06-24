@@ -259,5 +259,33 @@
 <script type="text/javascript">
     $('.individual-form').formset();
     //$('.dynamic-form').remove();
+
+    //nancy tunning // si relleno en padre tmb rellena en madre
+    $(function () {
+
+        //domicilio
+        var $src_dom = $('#{{ formpadre.domicilio.auto_id }}'),
+            $dst_dom = $('#{{ formmadre.domicilio.auto_id }}');
+        $src_dom.on('input', function () {
+        $dst_dom.val($src_dom.val());
+        });
+
+        //telefono
+        var $src_tel = $('#{{ formpadre.telefonoPersonal.auto_id }}'),
+            $dst_tel = $('#{{ formmadre.telefonoPersonal.auto_id }}');
+        $src_tel.on('input', function () {
+        $dst_tel.val($src_tel.val());
+        });
+
+        //mail
+        var $src_mail = $('#{{ formpadre.email.auto_id }}'),
+            $dst_mail = $('#{{ formmadre.email.auto_id }}');
+        $src_mail.on('input', function () {
+        $dst_mail.val($src_mail.val());
+        });
+
+    });
+
 </script>
+
 {% endblock %}
