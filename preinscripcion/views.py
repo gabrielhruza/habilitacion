@@ -350,9 +350,18 @@ def admin_preinscripcion(request, pid):
   #obtengo el postulante de esa preinscripcion
   postulante = Postulante.objects.get(preinscripcion = p)
 
+  hnos = []
+  if postulante.hermanos.all():
+    for hno in postulante.hermanos.all():
+      hnos.append(hno)
+      for hno2 in hno.hermanos.all():
+        if not hno2 == postulante:
+          hnos.append(hno2)
+
   return render(request, 'admin/verpre.html',{
           'p': p,
-          'postulante' : postulante
+          'postulante' : postulante,
+          'hermanos'  : hnos
           }
   )
 

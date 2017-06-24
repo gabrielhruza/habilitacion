@@ -56,36 +56,26 @@
   </div>
   </div>
 
-  {% if postulante.hermanos.all %}
-  <div class="panel panel-info">
-  <div class="panel-body">
-  <p><h5>Hermanos de la misma edad</h5></p><hr>
-  
-  <div class="row">
-  {% for hno in postulante.hermanos.all %}
-  <div class="col-xs-12 col-md-4">
-    <blockquote>
-      <h5>Apellido y Nombre: <b>{{ hno.apellido }} {{ hno.nombre }}</b></h5>
-      <h5>Nro de preinscripción: <b>{{ hno.preinscripcion.nro_de_preinscripto }}</b></h5>
-      <h5>Género: <b>{{ hno.genero }}</b></h5>
-    </blockquote>
-  </div>
-  <div class="col-xs-12 col-md-4">  
-    {% for hno2 in hno.hermanos.all %}
-    {% if not hno2 == postulante %}
-      <blockquote>
-      <h5>Apellido y Nombre: <b>{{ hno2.apellido }} {{ hno2.nombre }}</b></h5>
-      <h5>Nro de preinscripción: <b>{{ hno2.preinscripcion.nro_de_preinscripto }}</b></h5>
-      <h5>Género: <b>{{ hno2.genero }}</b></h5>
-      </blockquote>
-    {% endif %}
-    {% endfor %}
-  </div>
-  {% endfor %}
-  </div>
 
-  </div>
-  </div>
+  {% if hermanos %}
+    <div class="panel panel-info">
+    <div class="panel-body">
+    <p><h5>Hermanos de la misma edad</h5></p><hr>
+    
+    <div class="row">
+    {% for hno in hermanos %}
+    <div class="col-xs-12 col-md-4">
+      <blockquote>
+        <h5>Apellido y Nombre: <b>{{ hno.apellido }} {{ hno.nombre }}</b></h5>
+        <h5>Nro de preinscripción: <b>{{ hno.preinscripcion.nro_de_preinscripto }}</b></h5>
+        <h5>Género: <b>{{ hno.genero }}</b></h5>
+      </blockquote>
+    </div>
+    {% endfor %}
+    </div>
+
+    </div>
+    </div>
   {% endif %}
 
 	<hr>
