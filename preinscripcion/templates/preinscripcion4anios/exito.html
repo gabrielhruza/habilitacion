@@ -6,7 +6,7 @@
 	<div class="well">
 		<div class="alert alert-success" role="alert">
 		<b><h4>La preinscripción ha sido exitosa, ahora puede imprimir su comprobante.</h4>
-		<h4>Por favor controle que los datos rellenados sean los correctos.</h4></b>
+		<h4><i>Por favor controle que los datos rellenados sean los correctos.</i></h4></b>
 		</div>
 	<div class="row">	
 	
@@ -23,7 +23,8 @@
 	</div>
 	</div>
 	</div>
-	
+
+	<!-- <h3>Datos del Postulante</h3> -->
 	<div class="col-xs-12 col-md-12">		
 	<div class="card card-inverse card-primary box-shadow--6dp" style="margin-top: 1%">
 	<div class="card-block">
@@ -37,7 +38,7 @@
 	</div>
 	</div>
 	</div>	
-		<!-- <h3>Datos del Postulante</h3> -->
+	<!-- <h3>Datos del Postulante</h3> -->
 	
 	<div class="col-xs-12 col-md-6">
 		<div class="card card-inverse card-info box-shadow--6dp" style="margin-top: 3%">
@@ -67,6 +68,9 @@
 			</div>
 		</div>
 	</div>
+
+	<!-- <h3>Datos del Tutor</h3> -->
+	{% if postulante.tutor %}
 	<div class="col-xs-12 col-md-6">
 		<div class="card card-inverse card-danger box-shadow--6dp" style="margin-top: 3%">
 			<div class="card-block">
@@ -81,6 +85,9 @@
 			</div>
 		</div>
 	</div>
+	<!-- <h3>Datos del Tutor</h3> -->
+	{% endif %}
+
 	<div class="col-xs-12 col-md-6">
 		<div class="card card-inverse card-danger box-shadow--6dp" style="margin-top: 3%">
 			<div class="card-block">
