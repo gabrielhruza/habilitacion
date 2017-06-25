@@ -365,6 +365,28 @@ def admin_preinscripcion(request, pid):
           }
   )
 
+
+@login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
+def admin_sorteo(request):
+
+  pcs  = PostulanteConfirmado.objects.all();
+
+  pcms = []
+  pcfs = []
+  
+  for pc in pcs:
+    if pc.postulante.genero == 'MASCULINO':
+      pcms.append(pc)
+    else:
+      pcfs.append(pc)
+  
+  return render(request, 'admin/sorteo.html', { 
+    'pcms' : pcms,
+    'pcfs' : pcfs,
+    })
+
+
 ## operaciones relacionadas con el rol gestionciclolectivo
 #dar de alta ciclo lectivo
 @login_required(login_url='/accounts/login/')

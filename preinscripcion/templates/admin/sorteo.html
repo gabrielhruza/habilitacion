@@ -1,0 +1,79 @@
+{% extends "admin.html" %}
+
+{% block content %}
+
+<style type="text/css" media="print">
+  @page { size: landscape; }
+</style>
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista para sorteo</h3>
+        <button type="button" class="btn btn-default btn-sm pull-right" onClick="window.print()" style="margin-top: -23px">
+  			<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+		</button>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px;">
+        <h5><i>Si el niño/a tiene hermanos de la misma edad, en la columna "Tiene Hermanos" aparecerán los números de sorteo de los mismos.</i></h5>
+        
+    <table class="table table-bordered table-striped table-hover" id="">
+        <thead>
+            <tr>
+                <th>Postulante</th>
+                <th>DNI</th>
+                <th>Genero</th>
+                <th>Numero de sorteo</th>
+                <th>Tiene hermanos</th>
+                <th>Papá</th>
+                <th>Mamá</th>
+                <th>Tutor</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pc in pcms %}
+            <tr>
+            	<td>{{ pc.postulante.apellido }} {{ pc.postulante.nombre }}</td>
+                <td>{{ pc.postulante.dni }}</td>
+                <td>{{ pc.postulante.genero }}</td>
+                <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>
+                <td>
+                {% if pc.postulante.hermanos.all %}
+                {% for hno in pc.postulante.hermanos.all %}
+                {{ hno.preinscripcion.nro_de_sorteo }}
+                {% endfor %}
+                {% endif %}
+                </td>
+                <td>{{ pc.postulante.padre.apellido }} {{ pc.postulante.padre.nombre }}</td>
+                <td>{{ pc.postulante.madre.apellido }} {{ pc.postulante.madre.nombre }}</td>
+                <td>{{ pc.postulante.tutor.apellido }} {{ pc.postulante.tutor.nombre }}</td>
+            </tr>
+        {% endfor %}
+        {% for pc in pcfs %}
+            <tr>
+            	<td>{{ pc.postulante.apellido }} {{ pc.postulante.nombre }}</td>
+                <td>{{ pc.postulante.dni }}</td>
+                <td>{{ pc.postulante.genero }}</td>
+                <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>
+                <td>
+                {% if pc.postulante.hermanos.all %}
+                {% for hno in pc.postulante.hermanos.all %}
+                {{ hno.preinscripcion.nro_de_sorteo }}
+                {% endfor %}
+                {% endif %}
+                </td>
+                <td>{{ pc.postulante.padre.apellido }} {{ pc.postulante.padre.nombre }}</td>
+                <td>{{ pc.postulante.madre.apellido }} {{ pc.postulante.madre.nombre }}</td>
+                <td>{{ pc.postulante.tutor.apellido }} {{ pc.postulante.tutor.nombre }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+
+
+</div>
+{% endblock %}

@@ -1,5 +1,9 @@
 body {
 	background-image: url('../images/fondo-admin.jpg');
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+	background-size: cover;
 }
 
 .navbar-default{
