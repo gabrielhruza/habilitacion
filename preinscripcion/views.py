@@ -40,6 +40,12 @@ def logout_mio(request):
 
 
 #vista para anonimos
+def landing_page(request):
+
+  return render(request, 'home/landingpage.html')
+
+
+
 def preinscripcion4_new(request):
 
   padre_context = ResponsableForm(prefix='padre')

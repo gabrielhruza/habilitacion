@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     
     url(r'^preinscripcion4/new/$', views.preinscripcion4_new, name='preinscripcion4_new'),
+    url(r'^home/$', views.landing_page, name='landing_page'),
     #url(r'^preinscripcion4/imprimir/$', views.preinscripcion4_imprimir, name='preinscripcion4_imprimir'),
 
     url(r'^accounts/login/$', views.login_mio, name='login_mio'),
