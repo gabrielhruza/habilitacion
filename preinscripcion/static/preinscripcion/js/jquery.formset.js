@@ -268,7 +268,7 @@
                 row_new_fn = '#id_'+options.prefix+'-'+formCount+'-fecha_nacimiento';
                 row_new_ap = '#id_'+options.prefix+'-'+formCount+'-apellido';
                 row_new_dm = '#id_'+options.prefix+'-'+formCount+'-domicilio';
-                
+
                 $(row_new_fn).val(row_original_fn);
                 $(row_new_ap).val(row_original_ap);
                 $(row_new_dm).val(row_original_dm);

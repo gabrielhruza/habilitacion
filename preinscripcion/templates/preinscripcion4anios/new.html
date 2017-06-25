@@ -286,6 +286,24 @@
         $dst_mail.val($src_mail.val());
         });
 
+
+        //para el formulario 0 de hnos
+        //fn
+        $("#id_postulante-fecha_nacimiento").keyup(function () {
+        var value = $(this).val();
+        $("#id_hno-0-fecha_nacimiento").val(value);
+        });
+
+        $("#id_postulante-apellido").keyup(function () {
+            var value = $(this).val();
+            $("#id_hno-0-apellido").val(value);
+        });
+
+        $("#id_postulante-domicilio").keyup(function () {
+            var value = $(this).val();
+            $("#id_hno-0-domicilio").val(value);
+        });
+
     });
 
     //habilitar el boton submit cdo "Acepta los terminos y condiciones"
