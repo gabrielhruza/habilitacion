@@ -40,12 +40,8 @@
                 <td>{{ pl.postulante.tutor.id }}</td>
                 <td>{{ pl.postulante.vive_con_id }}</td>                
                 <td>
-                <a href="">
+                <a href="{% url 'admin_preinscripcion' pl.postulante.preinscripcion.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                </a>
-                | 
-                <a href="">
-                    <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                 </a>
                 </td>
             </tr>

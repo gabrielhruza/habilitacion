@@ -23,7 +23,9 @@
 <body style="background-image: url({% static 'preinscripcion/images/otro.jpg' %});">
     <div id="content" class="container">
     <div class="img-logo">
+    <a href="{% url 'landing_page' %}">
     <img src="{% static 'preinscripcion/images/logo.png' %}">
+    </a>
     </div>
     {% block content %}{% endblock %}
     </div>

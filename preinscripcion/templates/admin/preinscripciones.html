@@ -23,35 +23,35 @@
     <table class="table table-bordered table-striped table-hover" id="tabla">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Fecha</th>
                 <th>Numero</th>
                 <th>Ciclo Lectivo</th>
                 <th>Apellido y Nombre</th>
+                <th>Edad</th>
                 <th>DNI</th>
+                <th>Padre</th>
+                <th>Madre</th>
                 <th>Estado</th>
-                <th>Numero de sorteo</th>
+                <th>Numero <br> de sorteo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
         <tbody>
         {% for postulante in postulantes %}
             <tr>
-                <td><a href="">{{ postulante.preinscripcion.id }}</a></td>
                 <td>{{ postulante.preinscripcion.fecha }} {{ postulante.preinscripcion.hora }} hs.</td>
                 <td>{{ postulante.preinscripcion.nro_de_preinscripto }}</td>
                 <td>{{ postulante.preinscripcion.cicloLectivo.fecha_apertura_ciclo.year }}</td>
                 <td>{{ postulante.apellido }} {{ postulante.nombre }}</td>
+                <td>{{ postulante.edad }}</td>
                 <td>{{ postulante.dni }}</td>
+                <td>{{ postulante.padre.apellido }} {{ postulante.padre.nombre }}</td>
+                <td>{{ postulante.madre.apellido }} {{ postulante.madre.nombre }}</td>
                 <td>{{ postulante.preinscripcion.estado }}</td>
                 <td>{{ postulante.preinscripcion.nro_de_sorteo }}</td>           
                 <td>
                 <a href="{% url 'admin_preinscripcion' postulante.preinscripcion.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-                </a>
-                | 
-                <a href="{% url 'admin_desconfirmar' postulante.preinscripcion.id %}">
-                    <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                 </a>
                 </td>
             </tr>
