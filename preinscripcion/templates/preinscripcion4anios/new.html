@@ -45,7 +45,7 @@
                 </div>
 
                 <div class="col-md-12 col-xs-12 individual-form" id="hnos">
-                <h4>¿Tiene hermanos de la misma edad? <small>Si no los tiene, por favor haga click en 'Borrar'.</small></h4>
+                <h5><i>Si tiene hermanos de la misma edad haga click en "Agregar Hermano".</i></h5>
 
                 {{ hermanosFormSet.management_form }}
                 {% for formh in hermanosFormSet %}
@@ -261,7 +261,7 @@
 <script src="{% static 'preinscripcion/js/jquery.formset.js' %}" type="text/javascript"> </script>
 <script type="text/javascript">
     $('.individual-form').formset();
-    //$('.dynamic-form').remove();
+    $('.btn-danger').click();
 
     //nancy tunning // si relleno en padre tmb rellena en madre
     $(function () {

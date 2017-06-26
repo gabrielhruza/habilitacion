@@ -55,7 +55,7 @@ def preinscripcion4_new(request):
   postulante_context = PostulanteForm(prefix='postulante')
   p4anios_context = Preinscripcion4AniosForm(prefix='preinscripcion')
 
-  HermanosFormSet         = formset_factory(PostulanteForm, max_num=4)
+  HermanosFormSet         = formset_factory(PostulanteForm, max_num=3)
   hermanosFormSet_context = HermanosFormSet(prefix='hno')
     
   if request.method == "POST":

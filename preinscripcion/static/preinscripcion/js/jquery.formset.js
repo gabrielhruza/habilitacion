@@ -308,9 +308,9 @@
             onRemove: null,              // Function called each time an existing form is deleted.
             postInitialize: null,        // Function called when the formset has been initialized.
         },
-        keepFieldValues: '',             // jQuery selector for fields whose values should be kept when the form is cloned
+        keepFieldValues: '',            // jQuery selector for fields whose values should be kept when the form is cloned
         uiText: {
-            addPrompt: 'Agregar',         // Text used on the 'add a new form' control.
+            addPrompt: 'Agregar Hermano',         // Text used on the 'add a new form' control.
             removePrompt: 'Borrar',        // Text used on the 'delete this existing form' control.
         },
     };
