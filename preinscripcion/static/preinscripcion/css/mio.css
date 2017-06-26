@@ -10,10 +10,9 @@ body {
 .container {
 	background: white;
 	border-bottom: 1px solid #F2F2F2;
-	#box-shadow: 0 2px 6px rgba(100, 100, 100, 0.3);
-	-webkit-box-shadow: -2px 2px 24px -5px rgba(0,0,0,0.91);
--moz-box-shadow: -2px 2px 24px -5px rgba(0,0,0,0.91);
-box-shadow: -2px 2px 24px -5px rgba(0,0,0,0.91);
+	-webkit-box-shadow: -2px 2px 24px -5px rgba(66, 65, 66, 0.18);
+-moz-box-shadow: -2px 2px 24px -5px rgba(66, 65, 66, 0.18);
+box-shadow: -2px 2px 24px -5px rgba(66, 65, 66, 0.18);
 }
 
 .img-logo{

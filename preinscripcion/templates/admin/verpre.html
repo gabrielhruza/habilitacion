@@ -28,13 +28,19 @@
   <div class="col-xs-12 col-md-6">
   <div class="panel panel-info">
   <div class="panel-body">
+    <div class="row">
+    <div class="col-xs-12 col-md-6">
   	<h4>Fecha: <b>{{ p.fecha }} {{ p.hora }} hs.</b></h4>
   	<h4>Nro de Preinscripto: <b>{{ p.nro_de_preinscripto }}</b></h4>
   	<h4>Nro de Sorteo: <b>{{ p.nro_de_sorteo }}</b></h4>
   	<h4>Estado: <b>{{ p.estado }}</b></h4>
   	<h4>Ciclo Lectivo: <b>{{ p.cicloLectivo.fecha_apertura_ciclo.year }}</b></h4>
   	<h4>Fecha de Sorteo: <b>{{ p.cicloLectivo.fecha_dia_sorteo }}</b></h4>
+    </div>
+    <div class="col-xs-12 col-md-6">
   	<h4>Motivo:</h4><h5><b>{{ p.motivo }}</b></h5>
+    </div>
+    </div>
   </div>
   </div>
 
