@@ -24,8 +24,8 @@
 <div class="panel-body">
 
   <div class="row">
-  <div class="col-xs-12 col-md-6">
 
+  <div class="col-xs-12 col-md-6">
   <div class="panel panel-info">
   <div class="panel-body">
   	<h4>Fecha: <b>{{ p.fecha }} {{ p.hora }} hs.</b></h4>
@@ -41,7 +41,6 @@
   </div>
 
   <div class="col-xs-12 col-md-6">
-
   <div class="panel panel-info">
   <div class="panel-body">
     <p><h5>Datos del postulante</h5></p><hr>
@@ -52,8 +51,65 @@
     <h5>Género: <b>{{ postulante.genero }}</b></h5>
   </div>
   </div>
+  </div>
 
   </div>
+
+  <div class="row">
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del Padre</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.padre.apellido }} <span></span> {{ postulante.padre.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.padre.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.padre.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.padre.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.padre.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos de la Madre</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.madre.apellido }} <span></span> {{ postulante.madre.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.madre.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.madre.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.madre.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.madre.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del Responsable con quien vive</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.vive_con.apellido }} <span></span> {{ postulante.vive_con.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.vive_con.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.vive_con.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.vive_con.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.vive_con.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del Tutor</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.tutor.apellido }} <span></span> {{ postulante.tutor.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.tutor.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.tutor.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.tutor.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.tutor.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+
   </div>
 
 

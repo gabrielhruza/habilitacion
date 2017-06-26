@@ -6,6 +6,12 @@ body {
 	background-size: cover;
 }
 
+.panel-info{
+-webkit-box-shadow: 0px 0px 20px -4px rgba(66,65,66,0.48);
+-moz-box-shadow: 0px 0px 20px -4px rgba(66,65,66,0.48);
+box-shadow: 0px 0px 20px -4px rgba(66,65,66,0.48);
+}
+
 .navbar-default{
 	background-color: #015bb5;
 	border-color: #015bb5;
