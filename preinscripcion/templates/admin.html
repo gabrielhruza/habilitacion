@@ -8,12 +8,18 @@
   <link rel="icon" href="{% static 'preinscripcion/images/ico.png' %}" sizes="32x32">
 	<link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/bootstrap.min.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/jquery.dataTables.min.css' %}" />
+  <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/buttons.dataTables.min.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/admin.css' %}" />
   <link rel="stylesheet" type="text/css"  media='print' href="{% static 'preinscripcion/css/print.css' %}" />
 
 	<script src="{% static 'preinscripcion/js/jquery.min.js' %}"></script>
 	<script src="{% static 'preinscripcion/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'preinscripcion/js/jquery.dataTables.min.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/dataTables.buttons.min.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/pdfmake.min.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/buttons.html5.min.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/vfs_fonts.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/jszip.min.js' %}"></script>
 
     <title>{% block title %}Administracion{% endblock %}</title>
 </head>
@@ -116,10 +122,19 @@
 <script type="text/javascript">
 	$(document).ready(function(){
     $('#tabla').DataTable(
-      {
+      { 
+        stateSave: true,
         language: {
             url: "{% static 'preinscripcion/js/spanish.json' %}"
-        }
+        },
+        dom: 'Bfrtip',
+        buttons: [
+          'excel',
+          {extend: 'pdfHtml5', download: 'open', orientation: 'landscape', exportOptions: {
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                }
+          }
+        ]
       }
 
       );
