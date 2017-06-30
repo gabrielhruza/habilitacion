@@ -1,5 +1,22 @@
 {% extends "admin.html" %}
 
+{% block filtros %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <strong> Datos Generales:</strong>
+        <button class="btn btn-primary" type="">
+            Preinscriptos <span class="badge">{{cp}}</span>
+        </button>
+        <button class="btn btn-success" type="">
+            Confirmados <span class="badge">{{cpc}}</span>
+        </button>
+    </div>
+
+</div>
+
+
+{% endblock %}
+
 {% block content %}
 
 {% if messages %}

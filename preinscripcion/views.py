@@ -217,8 +217,13 @@ def admin_preinscripciones(request):
 
   postulantes = Postulante.objects.all()
 
+  cp  = Postulante.objects.all().count();
+  cpc = PostulanteConfirmado.objects.all().count();
+
   return render(request, 'admin/preinscripciones.html',{
-          'postulantes': postulantes 
+          'postulantes' : postulantes,
+          'cp'          : cp,
+          'cpc'         : cpc
           }
           )
 
