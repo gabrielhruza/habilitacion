@@ -184,7 +184,6 @@ def preinscripcion4_new(request):
         'postulante'  : formpostulante
         })
 
-
   return render(request, 'preinscripcion4anios/new.html',{
     'formpadre'   : padre_context,
     'formmadre'   : madre_context,

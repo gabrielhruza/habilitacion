@@ -4,18 +4,75 @@
 
 {% block content %}
 
+       
+
 <div class="text-center"><h2>Preinscripción Nivel Inicial <small>(Sala de 4 años)</small></h2></div>
 <hr>
         <div class="row">
         <div class="col-xs-12 col-md-10 col-md-offset-1" style="">
 
-        {% if messages %}
-        <div class="alert alert-success" role="alert">
-            {% for message in messages %}
-        <p><b>{{ message }}</b></p>
-        {% endfor %}
-        </div>
-        {% endif %}
+<div class="row">
+<div class="col-xs-12 col-md-6">
+{% if formpostulante.errors %}
+<div class="alert alert-danger" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+<b>Tiene errores en los siguientes campos del Postulante</b>
+{% for error in formpostulante.errors %}
+ <p>{{ error }}</p>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+
+<div class="col-xs-12 col-md-6">
+{% if formpadre.errors %}
+<div class="alert alert-danger" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+<b>Tiene errores en los siguientes campos de Padre</b>
+{% for error in formpadre.errors %}
+ <p>{{ error }}</p>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+
+<div class="col-xs-12 col-md-6">
+{% if formmadre.errors %}
+<div class="alert alert-danger" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+<b>Tiene errores en los siguientes campos Madre</b>
+{% for error in formmadre.errors %}
+ <p>{{ error }}</p>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+
+<div class="col-xs-12 col-md-6">
+{% if formtutor.errors %}
+<div class="alert alert-danger" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+<b>Tiene errores en los siguientes campos de Tutor</b>
+{% for error in formtutor.errors %}
+ <p>{{ error }}</p>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+
+<div class="col-xs-12 col-md-6">
+{% if formvivecon.errors %}
+<div class="alert alert-danger" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+<b>Tiene errores en los siguientes campos de "Vive con"</b>
+{% for error in formvivecon.errors %}
+ <p>{{ error }}</p>
+{% endfor %}
+</div>
+{% endif %}
+</div>
+</div>
+
 
        <div id='progress'><div id='progress-complete'></div></div>
 

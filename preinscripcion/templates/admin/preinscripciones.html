@@ -42,10 +42,10 @@
             <tr>
                 <th>Fecha</th>
                 <th>Numero</th>
-                <th>Ciclo Lectivo</th>
                 <th>Apellido y Nombre</th>
                 <th>Edad</th>
                 <th>DNI</th>
+                <th>Genero</th>
                 <th>Padre</th>
                 <th>Madre</th>
                 <th>Estado</th>
@@ -58,10 +58,10 @@
             <tr>
                 <td>{{ postulante.preinscripcion.fecha }} {{ postulante.preinscripcion.hora }} hs.</td>
                 <td>{{ postulante.preinscripcion.nro_de_preinscripto }}</td>
-                <td>{{ postulante.preinscripcion.cicloLectivo.fecha_apertura_ciclo.year }}</td>
                 <td>{{ postulante.apellido }} {{ postulante.nombre }}</td>
                 <td>{{ postulante.edad }}</td>
                 <td>{{ postulante.dni }}</td>
+                <td>{{ postulante.genero }}</td>
                 <td>{{ postulante.padre.apellido }} {{ postulante.padre.nombre }}</td>
                 <td>{{ postulante.madre.apellido }} {{ postulante.madre.nombre }}</td>
                 <td>{{ postulante.preinscripcion.estado }}</td>
