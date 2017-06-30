@@ -33,6 +33,12 @@ box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
 	#width: 95%;
 }
 
+.logo-admin{
+	width: 30%;
+    height: 30%;
+    margin-left: 30%;
+}
+
 .glyphicon-eye-open {
 	font-size: 18px !important;
 }
