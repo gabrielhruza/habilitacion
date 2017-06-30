@@ -124,7 +124,6 @@
 	$(document).ready(function(){
     $('#tabla').DataTable(
       { 
-        //info : false,
         stateSave: true,
         language: {
             url: "{% static 'preinscripcion/js/spanish.json' %}"
@@ -133,7 +132,7 @@
         buttons: [
           'excel',
           {extend: 'pdfHtml5', download: 'open', orientation: 'landscape', exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], title: 'Lista de Sorteo'
                 }
           }
         ]
