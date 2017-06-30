@@ -75,6 +75,18 @@ class Postulante(models.Model):
     hermanos			= models.ManyToManyField('self', blank=True, null=True)
     preinscripcion      = models.ForeignKey(Preinscripcion4Anios, null=True)
 
+    def rhermanos(self):
+        hnos = []        
+
+        if self.hermanos.all():
+            for hno in self.hermanos.all():
+                hnos.append(hno)
+                for hno2 in hno.hermanos.all():
+                    if not hno2 == self:
+                        hnos.append(hno2)
+
+        return hnos
+
 
 class PostulanteConfirmado(models.Model):
     dni                 = models.CharField(max_length=8, unique=True)

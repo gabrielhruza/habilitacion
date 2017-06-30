@@ -39,8 +39,8 @@
                 <td>{{ pc.postulante.genero }}</td>
                 <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>
                 <td>
-                {% if pc.postulante.hermanos.all %}
-                {% for hno in pc.postulante.hermanos.all %}
+                {% if pc.postulante.rhermanos %}
+                {% for hno in pc.postulante.rhermanos %}
                 {{ hno.preinscripcion.nro_de_sorteo }}
                 {% endfor %}
                 {% endif %}
@@ -57,8 +57,8 @@
                 <td>{{ pc.postulante.genero }}</td>
                 <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>
                 <td>
-                {% if pc.postulante.hermanos.all %}
-                {% for hno in pc.postulante.hermanos.all %}
+                {% if pc.postulante.rhermanos %}
+                {% for hno in pc.postulante.rhermanos %}
                 {{ hno.preinscripcion.nro_de_sorteo }}
                 {% endfor %}
                 {% endif %}

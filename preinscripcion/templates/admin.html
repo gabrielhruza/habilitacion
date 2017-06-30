@@ -124,11 +124,12 @@
 	$(document).ready(function(){
     $('#tabla').DataTable(
       { 
+        //info : false,
         stateSave: true,
         language: {
             url: "{% static 'preinscripcion/js/spanish.json' %}"
         },
-        dom: 'Bfrtip',
+        dom: '<"pull-right"B><"pull-left"f>rtp',
         buttons: [
           'excel',
           {extend: 'pdfHtml5', download: 'open', orientation: 'landscape', exportOptions: {

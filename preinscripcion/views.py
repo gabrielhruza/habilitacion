@@ -329,14 +329,14 @@ def admin_desconfirmar(request, pid):
 
   if preinscripcion.confirmado == True :
 
-    ciclo_lectivo  = CicloLectivo.objects.get(pk=preinscripcion.cicloLectivo_id)
+    #ciclo_lectivo  = CicloLectivo.objects.get(pk=preinscripcion.cicloLectivo_id)
 
-    nro_sorteo = ciclo_lectivo.ultimo_nro_sorteo
+    #nro_sorteo = ciclo_lectivo.ultimo_nro_sorteo
 
-    nro_sorteo = nro_sorteo - 1
+    #nro_sorteo = nro_sorteo - 1
 
-    ciclo_lectivo.ultimo_nro_sorteo   = nro_sorteo
-    ciclo_lectivo.save()
+    #ciclo_lectivo.ultimo_nro_sorteo   = nro_sorteo
+    #ciclo_lectivo.save()
 
     p   = Postulante.objects.get(preinscripcion=pid)
     pl  = PostulanteConfirmado.objects.get(postulante=p.id)
@@ -359,15 +359,9 @@ def admin_preinscripcion(request, pid):
   p  = Preinscripcion4Anios.objects.get(pk=pid)
 
   #obtengo el postulante de esa preinscripcion
-  postulante = Postulante.objects.get(preinscripcion = p)
+  postulante  = Postulante.objects.get(preinscripcion = p)
 
-  hnos = []
-  if postulante.hermanos.all():
-    for hno in postulante.hermanos.all():
-      hnos.append(hno)
-      for hno2 in hno.hermanos.all():
-        if not hno2 == postulante:
-          hnos.append(hno2)
+  hnos        = postulante.rhermanos();
 
   return render(request, 'admin/verpre.html',{
           'p': p,
