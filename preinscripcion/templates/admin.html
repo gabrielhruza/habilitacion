@@ -122,13 +122,13 @@
 
 <script type="text/javascript">
 	$(document).ready(function(){
-    $('#tabla').DataTable(
+    tabla = $('#tabla').DataTable(
       { 
         stateSave: true,
         language: {
             url: "{% static 'preinscripcion/js/spanish.json' %}"
         },
-        dom: '<"pull-right"B><"pull-left"f>rtp',
+        dom: '<"pull-right"B><"pull-left"f><"info-text"i>rtp',
         buttons: [
           'excel',
           {extend: 'pdfHtml5', download: 'open', orientation: 'landscape', exportOptions: {
