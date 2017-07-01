@@ -219,7 +219,7 @@ def admin_preinscripciones(request):
   cp  = Postulante.objects.all().count();
   cpc = PostulanteConfirmado.objects.all().count();
 
-  return render(request, 'admin/preinscripciones.html',{
+  return render(request, 'admin/p4anios/preinscripciones.html',{
           'postulantes' : postulantes,
           'cp'          : cp,
           'cpc'         : cpc
@@ -239,7 +239,7 @@ def admin_p_cl(request, year):
     if postulante.preinscripcion.cicloLectivo.fecha_apertura_ciclo.year == int(year):
       resultado.append(postulante)  
 
-  return render(request, 'admin/preinscripciones.html',{
+  return render(request, 'admin/p4anios/preinscripciones.html',{
           'postulantes': resultado,
           }
           )
@@ -252,7 +252,7 @@ def admin_postulantes(request):
 
   postulantes = Postulante.objects.all()
 
-  return render(request, 'admin/postulantes.html',{
+  return render(request, 'admin/p4anios/postulantes.html',{
           'postulantes': postulantes 
           }
           )
@@ -263,7 +263,7 @@ def admin_postulantes_confirmados(request):
 
   pls = PostulanteConfirmado.objects.all()
 
-  return render(request, 'admin/postulantes-confirmados.html',{
+  return render(request, 'admin/p4anios/postulantes-confirmados.html',{
           'pls': pls 
           }
           )
@@ -362,7 +362,7 @@ def admin_preinscripcion(request, pid):
 
   hnos        = postulante.rhermanos();
 
-  return render(request, 'admin/verpre.html',{
+  return render(request, 'admin/p4anios/verpre.html',{
           'p': p,
           'postulante' : postulante,
           'hermanos'  : hnos
@@ -385,7 +385,7 @@ def admin_sorteo(request):
     else:
       pcfs.append(pc)
   
-  return render(request, 'admin/sorteo.html', { 
+  return render(request, 'admin/p4anios/sorteo.html', { 
     'pcms' : pcms,
     'pcfs' : pcfs,
     })
