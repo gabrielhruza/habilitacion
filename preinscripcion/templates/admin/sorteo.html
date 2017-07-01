@@ -24,6 +24,7 @@
                 <th>Postulante</th>
                 <th>DNI</th>
                 <th>Genero</th>
+                <th>Nro. de Preinscripto</th>
                 <th>Numero de sorteo</th>
                 <th>Tiene hermanos</th>
                 <th>Papá</th>
@@ -37,6 +38,7 @@
             	<td>{{ pc.postulante.apellido }} {{ pc.postulante.nombre }}</td>
                 <td>{{ pc.postulante.dni }}</td>
                 <td>{{ pc.postulante.genero }}</td>
+                <td>{{ pc.postulante.preinscripcion.nro_de_preinscripto }}</td>
                 <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>
                 <td>
                 {% if pc.postulante.rhermanos %}
@@ -55,6 +57,7 @@
             	<td>{{ pc.postulante.apellido }} {{ pc.postulante.nombre }}</td>
                 <td>{{ pc.postulante.dni }}</td>
                 <td>{{ pc.postulante.genero }}</td>
+                <td>{{ pc.postulante.preinscripcion.nro_de_preinscripto }}</td>
                 <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>
                 <td>
                 {% if pc.postulante.rhermanos %}
