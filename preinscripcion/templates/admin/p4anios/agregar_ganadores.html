@@ -1,0 +1,65 @@
+{% extends "admin.html" %}
+
+{% block content %}
+
+{% if messages %}
+<div class="alert alert-success alert-dismissable alert-link" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+    {% for message in messages %}
+    <p><b>{{ message }}</b></p>
+    {% endfor %}
+</div>
+{% endif %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Agregar los ganadores</h3>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px;">        
+    <table class="table table-bordered table-striped table-hover" id="tabla">
+        <thead>
+            <tr>
+                <th>Numero de sorteo</th>
+                <th>Nro. de Preinscripto</th>
+                <th>Postulante</th>
+                <th>DNI</th>
+                <th>Genero</th>                
+                <th>Papá</th>
+                <th>Mamá</th>
+                <th>Tutor</th>
+                <th>Seleccione ganador</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pc in pcs %}
+            <tr>
+                <td>{{ pc.postulante.preinscripcion.nro_de_sorteo }}</td>            
+                <td>{{ pc.postulante.preinscripcion.nro_de_preinscripto }}</td>
+                <td>{{ pc.postulante.apellido }}, {{ pc.postulante.nombre }}</td>
+                <td>{{ pc.postulante.dni }}</td>
+                <td>{{ pc.postulante.genero }}</td>
+                <td>{{ pc.postulante.padre.apellido }}, {{ pc.postulante.padre.nombre }}</td>
+                <td>{{ pc.postulante.madre.apellido }}, {{ pc.postulante.madre.nombre }}</td>
+                <td>
+                {% if pc.postulante.tutor %}
+                {{ pc.postulante.tutor.apellido }}, {{ pc.postulante.tutor.nombre }}
+                {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'admin_agregar_ganador' pc.postulante.preinscripcion.id %}">
+                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+                </a>                    
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+
+
+</div>
+{% endblock %}

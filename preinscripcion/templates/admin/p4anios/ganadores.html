@@ -1,0 +1,73 @@
+{% extends "admin.html" %}
+
+{% block content %}
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista de ganadores</h3>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px;">        
+    <table class="table table-bordered table-striped table-hover" id="ganadores">
+        <thead>
+            <tr>
+                <th>Numero de sorteo</th>
+                <th>Nro. de Preinscripto</th>
+                <th>Postulante</th>
+                <th>DNI</th>
+                <th>Genero</th>                
+                <th>Papá</th>
+                <th>Mamá</th>
+                <th>Tutor</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pg in pgs %}
+            <tr>
+                <td>{{ pg.postulante.preinscripcion.nro_de_sorteo }}</td>            
+                <td>{{ pg.postulante.preinscripcion.nro_de_preinscripto }}</td>
+                <td>{{ pg.postulante.apellido }}, {{ pg.postulante.nombre }}</td>
+                <td>{{ pg.postulante.dni }}</td>
+                <td>{{ pg.postulante.genero }}</td>
+                <td>{{ pg.postulante.padre.apellido }}, {{ pg.postulante.padre.nombre }}</td>
+                <td>{{ pg.postulante.madre.apellido }}, {{ pg.postulante.madre.nombre }}</td>
+                <td>
+                {% if pg.postulante.tutor %}
+                {{ pg.postulante.tutor.apellido }}, {{ pg.postulante.tutor.nombre }}
+                {% endif %}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+
+
+</div>
+
+
+{% load static %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    table = $('#ganadores').DataTable(
+      { 
+        bSort: false,
+        language: {
+            url: "{% static 'preinscripcion/js/spanish.json' %}"
+        },
+        dom: '<"pull-right"B>rtp',
+        buttons: [
+          'excel',
+          {extend: 'pdfHtml5', download: 'open', orientation: 'landscape',
+          }
+        ]
+
+      }
+
+      );
+  });
+</script>
+{% endblock %}

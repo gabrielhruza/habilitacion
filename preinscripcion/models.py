@@ -41,6 +41,10 @@ class Preinscripcion4Anios(models.Model):
     cicloLectivo        = models.ForeignKey(CicloLectivo, null=True)
     fecha_confirmado    = models.DateField(null=True)
 
+    def set_estado_alumno(self):
+        self.estado = 'ALUMNO'
+        return self
+        
 
 class Responsable(models.Model):  
     apellido 			= models.CharField(max_length=50)

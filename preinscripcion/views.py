@@ -369,7 +369,7 @@ def admin_preinscripcion(request, pid):
           }
   )
 
-
+#listado para sorteo
 @login_required(login_url='/accounts/login/')
 @group_required('gestionpreinscripciones')
 def admin_sorteo(request):
@@ -388,6 +388,56 @@ def admin_sorteo(request):
   return render(request, 'admin/p4anios/sorteo.html', { 
     'pcms' : pcms,
     'pcfs' : pcfs,
+    })
+
+
+#listado para agregar los ganadores del sorteo
+@login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
+def admin_agregar_ganadores(request):
+
+  lpcs  = PostulanteConfirmado.objects.all();
+
+  pcs = []
+  
+  for pc in lpcs:
+    if pc.postulante.preinscripcion.estado == 'CONFIRMADO':
+      pcs.append(pc)
+  
+  return render(request, 'admin/p4anios/agregar_ganadores.html', { 
+    'pcs' : pcs
+    })
+
+
+#cambiar estado = ALUMNO a la preinscripcion que viene por parámetro
+@login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
+def admin_agregar_ganador(request, pid):
+
+  preinscripcion = Preinscripcion4Anios.objects.get(pk=pid)
+  p =  preinscripcion.set_estado_alumno() 
+  p.save()
+
+  messages.success(request, "Agregado como ganador correctamente. :)")  
+  
+  return admin_agregar_ganadores(request)
+
+
+#lsitado de ganadores
+@login_required(login_url='/accounts/login/')
+@group_required('gestionpreinscripciones')
+def admin_postulantes_ganadores(request):
+
+  lpcs  = PostulanteConfirmado.objects.all();
+
+  pgs = []
+  
+  for pc in lpcs:
+    if pc.postulante.preinscripcion.estado == 'ALUMNO':
+      pgs.append(pc)
+  
+  return render(request, 'admin/p4anios/ganadores.html', { 
+    'pgs' : pgs
     })
 
 

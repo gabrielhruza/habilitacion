@@ -55,6 +55,11 @@ box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
 	font-size: 18px !important;
 }
 
+.glyphicon-ok {
+	font-size: 18px !important;
+}
+
+
 .glyphicon-remove {
 	color: #a94442;
 }

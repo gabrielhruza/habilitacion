@@ -19,6 +19,9 @@ urlpatterns = [
     url(r'^administrador/postulantes/$', views.admin_postulantes, name='admin_postulantes'),
     url(r'^administrador/post-confirmados/$', views.admin_postulantes_confirmados, name='admin_postulantes_confirmados'),
     url(r'^administrador/sorteo/$', views.admin_sorteo, name='admin_sorteo'),
+    url(r'^administrador/agregarganadores/$', views.admin_agregar_ganadores, name='admin_agregar_ganadores'),
+    url(r'^administrador/agregarganador/(?P<pid>[0-9]+)/$', views.admin_agregar_ganador, name='admin_agregar_ganador'),
+    url(r'^administrador/ganadores/$', views.admin_postulantes_ganadores, name='admin_postulantes_ganadores'),
 
     url(r'^administrador/preinscripciones/confirmar/(?P<pid>[0-9]+)/$', views.admin_confirmar, name='admin_confirmar'),
     url(r'^administrador/preinscripciones/desconfirmar/(?P<pid>[0-9]+)/$', views.admin_desconfirmar, name='admin_desconfirmar'),
