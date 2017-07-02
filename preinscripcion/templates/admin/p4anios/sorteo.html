@@ -49,7 +49,11 @@
                 </td>
                 <td>{{ pc.postulante.padre.apellido }}, {{ pc.postulante.padre.nombre }}</td>
                 <td>{{ pc.postulante.madre.apellido }}, {{ pc.postulante.madre.nombre }}</td>
-                <td>{{ pc.postulante.tutor.apellido }}, {{ pc.postulante.tutor.nombre }}</td>
+                <td>
+                {% if pc.postulante.tutor %}
+                {{ pc.postulante.tutor.apellido }}, {{ pc.postulante.tutor.nombre }}
+                {% endif %}
+                </td>
             </tr>
         {% endfor %}
         {% for pc in pcfs %}
@@ -68,7 +72,11 @@
                 </td>
                 <td>{{ pc.postulante.padre.apellido }}, {{ pc.postulante.padre.nombre }}</td>
                 <td>{{ pc.postulante.madre.apellido }}, {{ pc.postulante.madre.nombre }}</td>
-                <td>{{ pc.postulante.tutor.apellido }}, {{ pc.postulante.tutor.nombre }}</td>
+                <td>
+                {% if pc.postulante.tutor %}
+                {{ pc.postulante.tutor.apellido }}, {{ pc.postulante.tutor.nombre }}
+                {% endif %}
+                </td>
             </tr>
         {% endfor %}
         </tbody>
