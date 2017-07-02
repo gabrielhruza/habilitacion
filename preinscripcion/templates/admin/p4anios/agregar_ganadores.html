@@ -18,7 +18,7 @@
 <div class="panel-body">
 
     <div style="max-height: 570px;">        
-    <table class="table table-bordered table-striped table-hover" id="tabla">
+    <table class="table table-bordered table-striped table-hover" id="agregar_ganadores">
         <thead>
             <tr>
                 <th>Numero de sorteo</th>
@@ -48,7 +48,7 @@
                 {% endif %}
                 </td>
                 <td>
-                    <a href="{% url 'admin_agregar_ganador' pc.postulante.preinscripcion.id %}">
+                    <a onclick="modal('{% url 'admin_agregar_ganador' pc.postulante.preinscripcion.id %}')" href="#">
                     <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </a>                    
                 </td>
@@ -62,4 +62,59 @@
 
 
 </div>
+
+{% load static %}
+
+<script type="text/javascript">
+    $(document).ready(function(){
+    table = $('#agregar_ganadores').DataTable(
+      { 
+        bSort: false,
+        language: {
+            url: "{% static 'preinscripcion/js/spanish.json' %}"
+        },
+        dom: '<"pull-right"B>rtp',
+        buttons: [
+          'excel',
+          {extend: 'pdfHtml5', download: 'open', orientation: 'landscape',
+          }
+        ]
+
+      }
+
+      );
+  });
+</script>
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Agregar ganador</h4>
+      </div>
+      <div class="modal-body">
+        ¿Desea agregar el postulante a la lista de ganadores?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <a href="#" class="btn btn-primary confirmar">Agregar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function modal($url){
+    //console.log($url);
+    $modal  = $('#myModal').modal();
+    $link   = $('.confirmar')[0];
+    $link.href = $url;
+}
+</script>
+
+<!-- ./Modal -->
+
 {% endblock %}
