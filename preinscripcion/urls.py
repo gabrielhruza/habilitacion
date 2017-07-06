@@ -6,7 +6,8 @@ urlpatterns = [
     
     url(r'^preinscripcion4/new/$', views.preinscripcion4_new, name='preinscripcion4_new'),
     url(r'^home/$', views.landing_page, name='landing_page'),
-    #url(r'^preinscripcion4/imprimir/$', views.preinscripcion4_imprimir, name='preinscripcion4_imprimir'),
+    url(r'^preinscripcion4/new/comprobante/(?P<nrop>[0-9]+)/$', views.generatePdf, name='generatePdf'),
+
 
     url(r'^accounts/login/$', views.login_mio, name='login_mio'),
     url(r'^accounts/logout/$', views.logout_mio, name='logout_mio'),
@@ -24,6 +25,7 @@ urlpatterns = [
     url(r'^administrador/ganadores/$', views.admin_postulantes_ganadores, name='admin_postulantes_ganadores'),
 
     url(r'^administrador/preinscripciones/confirmar/(?P<pid>[0-9]+)/$', views.admin_confirmar, name='admin_confirmar'),
+    url(r'^administrador/preinscripciones/cc/(?P<nrop>[0-9]+)/$', views.admin_cc, name='admin_cc'),
     url(r'^administrador/preinscripciones/desconfirmar/(?P<pid>[0-9]+)/$', views.admin_desconfirmar, name='admin_desconfirmar'),
 
     url(r'^administrador/ciclolectivo/new/$', views.admin_alta_ciclolectivo, name='admin_alta_ciclolectivo'),

@@ -275,7 +275,9 @@
             </div>
             <div class="checkbox">
                 <label>
-                <input id="terms" type="checkbox"> Acepto los términos y condiciones presentados en este link.
+                {% load static %}
+                <input id="terms" type="checkbox"> Acepto los términos y condiciones presentados en este 
+                <a href="{% static 'preinscripcion/pdf/tyc.pdf' %}" target="_blank">link.</a> 
                 </label>
             </div>
             </fieldset>

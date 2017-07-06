@@ -14,6 +14,49 @@ from .models import Preinscripcion4Anios, Postulante, PostulanteConfirmado, Cicl
 from .decorators import group_required
 import datetime
 
+#generar pdf
+from django.http import HttpResponse
+from django.views.generic import View
+from habilitacion.utils import render_to_pdf
+from django.template.loader import get_template
+#from datetime import datetime
+#
+
+  ##generar pdf
+def generatePdf(request, nrop):
+
+  if not request.session['nropreinscripto'] == nrop:
+    return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
+
+  template = get_template('preinscripcion4anios/comprobante.html')
+
+  #html = template.render(pibe)
+
+  postulantes  = Postulante.objects.all()
+
+  #buscar el postulante con el nro de preinscripto igual al que viene por parametro
+  for postulante in postulantes:
+    if postulante.preinscripcion.nro_de_preinscripto == nrop:
+      pibe = postulante
+
+  contexto = {'postulante' : pibe }
+  pdf = render_to_pdf('preinscripcion4anios/comprobante.html', contexto)
+
+  if pdf:
+    response = HttpResponse(pdf, content_type='application/pdf')
+    filename = "Comprobante_Preinscripcion"
+    content = "inline; filename='%s'" % (filename)
+    #download = request.GET.get("download")
+    #return response
+    #if download:
+     # content = "attachment; filename='%s'" % (filename)
+      #response['Content-Disposition'] = content
+    return response
+  
+  return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
+
+####
+
 
 # Create your views here.
 #login y demases 
@@ -170,7 +213,7 @@ def preinscripcion4_new(request):
           if tutor_cambio:
             hno.tutor   = formtutor
 
-          print 'jola'
+          
           hno_preinsc         = Preinscripcion4Anios()
           hno_preinsc.motivo  = formp4anios.motivo
           hno_preinsc.cicloLectivo = ciclo_lectivo
@@ -179,9 +222,13 @@ def preinscripcion4_new(request):
           hno.save()
           formpostulante.hermanos.add(hno)
 
-      
+      #contexto = {'postulante'  : formpostulante}
+      #return (GeneratePdf(request, contexto))
+
+      request.session["nropreinscripto"] = formpostulante.preinscripcion.nro_de_preinscripto
+
       return render(request, 'preinscripcion4anios/exito.html', {
-        'postulante'  : formpostulante
+       'postulante'  : formpostulante
         })
 
   return render(request, 'preinscripcion4anios/new.html',{
@@ -218,11 +265,13 @@ def admin_preinscripciones(request):
 
   cp  = Postulante.objects.all().count();
   cpc = PostulanteConfirmado.objects.all().count();
+  cpg = Preinscripcion4Anios.objects.filter(estado='ALUMNO').count()
 
   return render(request, 'admin/p4anios/preinscripciones.html',{
           'postulantes' : postulantes,
           'cp'          : cp,
-          'cpc'         : cpc
+          'cpc'         : cpc,
+          'cpg'         : cpg
           }
           )
 
@@ -318,6 +367,34 @@ def admin_confirmar(request, pid):
 
   return admin_preinscripcion(request, preinscripcion.id)
 
+
+##generar pdf comprobante confirmacion
+ ##generar pdf
+@group_required('gestionpreinscripciones')
+def admin_cc(request, nrop):
+  template = get_template('admin/p4anios/comprobante_confirmado.html')
+
+  preinscripcion = Preinscripcion4Anios.objects.get(nro_de_preinscripto=nrop)
+
+  user = request.user
+
+  contexto = {'preinscripcion' : preinscripcion, 'user': user }
+  pdf = render_to_pdf('admin/p4anios/comprobante_confirmado.html', contexto)
+
+  if pdf:
+    response = HttpResponse(pdf, content_type='application/pdf')
+    filename = "Comprobante_Preinscripcion"
+    content = "inline; filename='%s'" % (filename)
+    #download = request.GET.get("download")
+    #return response
+    #if download:
+     # content = "attachment; filename='%s'" % (filename)
+      #response['Content-Disposition'] = content
+    return response
+  
+  return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
+
+####
 
 #desconfirmar la preinscripcion seleccionada
 @login_required(login_url='/accounts/login/')

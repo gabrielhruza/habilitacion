@@ -110,7 +110,7 @@
 		    	<blockquote class="card-blockquote">
 					<h3>Hermanos</h3>
 					<hr>	
-					{% for hno in postulante.hermanos.all %}
+					{% for hno in postulante.rhermanos %}
 						<h4>Apellido y Nombre: <b>{{ hno.apellido }} <span></span> {{ hno.nombre }}</b></h4>
 						<h4>DNI: <b>{{ hno.dni }} </b></h4>
 						<h4>Genero: <b>{{ hno.genero }} </b></h4>
@@ -125,9 +125,10 @@
 	</div>
 	</div><!-- ./well-->
 
-	<button type="button" class="btn btn-default pull-right" onClick="window.print()">
-	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
-	</button>
+	<a href="{% url 'generatePdf' postulante.preinscripcion.nro_de_preinscripto %}" 
+	download="comprobante_{{ postulante.preinscripcion.nro_de_preinscripto }}" class="btn btn-default pull-right">
+	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Descargar Comprobante
+	</a>
 
 	</div>
 
