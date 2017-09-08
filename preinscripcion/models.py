@@ -2,6 +2,7 @@
 from __future__ import unicode_literals
 
 from django.db import models
+from django.contrib.auth.models import User
 
 import datetime, string, random
 
@@ -20,8 +21,7 @@ class CicloLectivo(models.Model):
     fecha_dia_sorteo        = models.DateField() #agregar en modelo
 
 
-class Preinscripcion4Anios(models.Model):
-
+class Preinscripcion(models.Model):
     ESTADOPREINSCRIPCION = (
         ('PREINSCRIPTO', 'Preinscripto'),
         ('CONFIRMADO', 'Confirmado'),
@@ -31,20 +31,54 @@ class Preinscripcion4Anios(models.Model):
         ('ALUMNO', 'Alumno'),
     )
 
-    fecha               = models.DateField(auto_now_add=True)
-    hora                = models.TimeField(auto_now_add=True)
-    nro_de_preinscripto = models.CharField(max_length=10, unique=True, default=id_generator)
-    nro_de_sorteo       = models.PositiveIntegerField(default=0)
-    estado              = models.CharField(max_length=20, choices=ESTADOPREINSCRIPCION, default='PREINSCRIPTO')
-    motivo              = models.TextField(default='No contesta')
-    confirmado          = models.BooleanField(default=False)
-    cicloLectivo        = models.ForeignKey(CicloLectivo, null=True)
-    fecha_confirmado    = models.DateField(null=True)
+    fecha = models.DateField(auto_now_add=True)
+    hora = models.TimeField(auto_now_add=True)
+    nro_de_preinscripto = models.CharField(
+        max_length=10, unique=True, default=id_generator)
+    estado = models.CharField(
+        max_length=20, choices=ESTADOPREINSCRIPCION, default='PREINSCRIPTO')
+    cicloLectivo = models.ForeignKey(CicloLectivo, null=True)
+    fecha_confirmado = models.DateField(blank=True, null=True)
+    confirmado = models.BooleanField(default=False)
+    # este no me acuerdo para que se usaba
+    usuarioqueconfirma = models.OneToOneField(User, null=True)
+    # tablas de usuarios del sistema
+    responsablequeconfirma = models.CharField(max_length=20, null=True)
+    # puede ser un padre,pariente o motomandado
+    motivo = models.TextField(default='No contesta')
+
+    class Meta:
+        abstract = True
+
+
+class Preinscripcion4Anios(Preinscripcion):
+
+    nro_de_sorteo = models.PositiveIntegerField(default=0)
 
     def set_estado_alumno(self):
         self.estado = 'ALUMNO'
         return self
-        
+
+
+class PreinscripcionGeneral(Preinscripcion):
+
+    NIVEL = (
+            ('INICIAL', 'Inicial'),
+            ('PRIMARIO', 'Primario'),
+            ('SECUNDARIO', 'Secundario')
+    )
+
+    GRADO = (
+            ('1', '1'), ('2', '2'),
+            ('3', '3'), ('4', '4'),
+            ('5', '5'), ('6', '6'),
+            ('7', '7'),
+    )
+
+    nivel = models.CharField(max_length=10, choices=NIVEL, default='INICIAL')
+    grado = models.CharField(max_length=1, choices=GRADO, default='1')
+    cubrio_vacante = models.BooleanField(default=False)             
+
 
 class Responsable(models.Model):  
     apellido 			= models.CharField(max_length=50)
@@ -78,6 +112,7 @@ class Postulante(models.Model):
     tutor				= models.ForeignKey(Responsable, related_name='tutor', null=True) 
     hermanos			= models.ManyToManyField('self', blank=True, null=True)
     preinscripcion      = models.ForeignKey(Preinscripcion4Anios, null=True)
+    pg                  = models.ForeignKey(PreinscripcionGeneral, null=True)
 
     def rhermanos(self):
         hnos = []        
@@ -96,22 +131,3 @@ class PostulanteConfirmado(models.Model):
     dni                 = models.CharField(max_length=8, unique=True)
     postulante          = models.ForeignKey(Postulante, null=True)
 
-
-
-class PreinscripcionGeneral(models.Model):
-
-	NIVEL = (
-		('INICIAL', 'Inicial'),
-		('PRIMARIO', 'Primario'),
-		('SECUNDARIO', 'Secundario')
-	)
-
-	fecha 				= models.DateField(auto_now_add=True)
-	hora 				= models.TimeField(auto_now_add=True)
-	nro_de_preinscripto = models.CharField(max_length=10,unique=True)
-	nivel 				= models.CharField(max_length=20,choices=NIVEL, default='INICIAL')
-	grado 				= models.PositiveIntegerField() #arreglar esto
-	confirmado         	= models.BooleanField(default=False)
-	cubrio_vacante		= models.BooleanField(default=False) #agregar en modelo
-	postulante			= models.ForeignKey(Postulante)
-	cicloLectivo 		= models.ForeignKey(CicloLectivo)

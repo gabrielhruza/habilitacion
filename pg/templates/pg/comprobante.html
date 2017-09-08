@@ -1,0 +1,108 @@
+ <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+ <html>
+     <head>
+         <title>Comprobante de Preinscripcion</title>
+         <style type="text/css">
+             body {
+                 font-weight: 200;
+                 font-size: 14px;
+             }
+             .header {
+                 font-size: 20px;
+                 font-weight: 100;
+                 text-align: center;
+                 color: #007cae;
+             }
+             .title {
+                 font-size: 26px;
+                 font-weight: 100;
+                /* text-align: right;*/
+                padding: 10px 20px 0px 20px;  
+             }
+             .title span {
+                 color: #007cae;
+             }
+             .details {
+                 padding: 10px 20px 0px 20px;
+                 text-align: left !important;
+                 /*margin-left: 40%;*/
+             }
+             .hrItem {
+                 border: none;
+                 height: 1px;
+                 /* Set the hr color */
+                 color: #333; /* old IE */
+                 background-color: #fff; /* Modern Browsers */
+             }
+             h4.borde {
+                border-style: ridge;
+             }
+         </style>
+     </head>
+     <body>
+
+<img src="http://localhost:8000/static/preinscripcion/images/logo.png" style="width: 1000px">
+<p>Av italia 350 Tel: 0362-427311 - 3500 - Resistencia, Chaco</p>
+<hr>
+
+
+                 <div class='header'>
+                 <p> 
+                 <h4 class='borde'>Comprobante de preinscripción - Ciclo Lectivo: 
+                 {{ postulante.pg.cicloLectivo.fecha_apertura_ciclo.year }}</h4> 
+                 </p>
+                 </div>
+
+         <div class='details'>
+            <ul style="list-style-type:disc">
+                <li><b>Número de Preinscripción:</b> {{ postulante.pg.nro_de_preinscripto }}</li>
+                <li><b>Fecha:</b> {{ postulante.pg.fecha }} {{ postulante.pg.hora }} hs.</li>
+            </ul>
+
+            <div class='header'>
+                 <p> <h4 class='borde'>Datos del postulante</h4> </p>
+             </div>
+            
+            <ul style="list-style-type:disc">
+              <li><b>Apellido y Nombre:</b> {{ postulante.apellido }},{{ postulante.nombre }}</li>
+              <li><b>DNI:</b> {{ postulante.dni }}</li>
+              <li><b>Fecha de Nacimiento:</b> {{ postulante.fecha_nacimiento }}</li>
+              <li><b>Edad:</b> {{ postulante.edad }}</li>
+            </ul>
+            <!-- <hr class='hrItem' /> -->
+            <div class='header'><p> <h4 class='borde'>Datos de los responsables</h4> </p></div>
+            
+            <h3>Datos de la madre</h3>
+            <ul style="list-style-type:disc">
+                <li><b>Apellido y Nombre:</b>{{ postulante.madre.apellido }},{{ postulante.madre.nombre }}</li>
+                <li><b>DNI:</b> {{ postulante.madre.dni }}</li>
+                <li><b>Telefono:</b> {{ postulante.madre.telefonoPersonal }}</li>
+                <li><b>Email:</b> {{ postulante.madre.email }}</li>
+            </ul>            
+
+            <h3>Datos del padre</h3>
+            <ul style="list-style-type:disc">
+                <li><b>Apellido y Nombre:</b>{{ postulante.padre.apellido }},{{ postulante.padre.nombre }}</li>
+                <li><b>DNI:</b> {{ postulante.padre.dni }}</li>
+                <li><b>Telefono:</b> {{ postulante.padre.telefonoPersonal }}</li>
+                <li><b>Email:</b> {{ postulante.padre.email }}</li>
+            </ul>
+        </div>
+     </div>
+
+<br>
+<br>          
+<br>          
+<br>          
+     Aclaración: <br>
+Declaramos conocer que la <b>U.E.P Nro 19 "Don Bosco" es Colegio Católico y Salesiano público de Gestión Privada, por el cual tiene la facultad de reservarse el derecho de admisión y permanencia en el mismo.</b> <br>
+Con nuestra <b>firma manifestamos bajo juramento</b>, que todas los datos son verídicos. <br>
+<br>
+<b>Firma del padre,madre, o tutor solicitante :</b> <br>
+<b>Aclaración:</b> <br>
+<b>D.N.I:</b>
+
+     </body>
+ </html>
+
+

@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'preinscripcion',
+    'pg',
     'bootstrap3',
     'dynamic_formsets',
 ]
