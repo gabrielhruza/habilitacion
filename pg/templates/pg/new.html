@@ -98,6 +98,9 @@
     <div class="col-md-7 col-xs-12">
     {% bootstrap_field formpostulante.domicilio %}
     </div>
+    <div class="col-md-12 col-xs-12">
+        {% bootstrap_form formpg %}
+    </div>
  </div>
  </div>
 </fieldset>  
@@ -235,21 +238,15 @@
                 </div>
             </div>
             </div>
-            </fieldset> 
 
-<fieldset id="motivo">
-    <legend>Escriba motivos por los cuales quiere inscribir a su hijo/a</legend>
-    <div class="well">
-        {% bootstrap_form formpg %}
-    </div>
-    <div class="checkbox">
-        <label>
-        {% load static %}
-        <input id="terms" type="checkbox"> Acepto los términos y condiciones presentados en este 
-        <a href="{% static 'preinscripcion/pdf/tyc.pdf' %}" target="_blank">link.</a> 
-        </label>
-    </div>
-</fieldset>
+            <div class="checkbox">
+            <label>
+            {% load static %}
+            <input id="terms" type="checkbox"> Acepto los términos y condiciones presentados en este 
+            <a href="{% static 'preinscripcion/pdf/tyc.pdf' %}" target="_blank">link.</a> 
+            </label>
+            </div>
+            </fieldset> 
 
 <button type="submit" class="btn btn-success pull-right" id="preinscribirse">Preinscribirse</button>
 

@@ -111,8 +111,9 @@
 	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Descargar Comprobante
 	</a>
 
-	<a href="{% url 'pg_new' %}" class="btn btn-default pull-right"  id="io" disabled>
-	<span class="glyphicon glyphicon-add" aria-hidden="true"></span> Inscribir otro
+	<a href="{% url 'pg_new' %}" class="btn btn-primary pull-right"  id="io" 
+	style="visibility: hidden;">
+	<span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Inscribir otro
 	</a>
 
 	</div>
@@ -122,7 +123,7 @@
 <script type="text/javascript">
 //habilitar el boton submit cdo "Acepta los terminos y condiciones"
 $("#dc").click(function () {   
-	$('#io').attr('disabled', false);
+	$('#io').css('visibility', 'visible')
 })
 </script>
 {% endblock %}
