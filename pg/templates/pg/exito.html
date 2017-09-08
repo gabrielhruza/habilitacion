@@ -107,11 +107,22 @@
 	</div><!-- ./well-->
 
 	<a href="{% url 'pdfPG' postulante.pg.nro_de_preinscripto %}" 
-	download="comprobante_{{ postulante.pg.nro_de_preinscripto }}" class="btn btn-default pull-right">
+	download="comprobante_{{ postulante.pg.nro_de_preinscripto }}" class="btn btn-default" id="dc">
 	<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Descargar Comprobante
+	</a>
+
+	<a href="{% url 'pg_new' %}" class="btn btn-default pull-right"  id="io" disabled>
+	<span class="glyphicon glyphicon-add" aria-hidden="true"></span> Inscribir otro
 	</a>
 
 	</div>
 
 </div>
+
+<script type="text/javascript">
+//habilitar el boton submit cdo "Acepta los terminos y condiciones"
+$("#dc").click(function () {   
+	$('#io').attr('disabled', false);
+})
+</script>
 {% endblock %}

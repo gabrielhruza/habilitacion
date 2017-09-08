@@ -15,16 +15,18 @@ import datetime
 from habilitacion.utils import render_to_pdf
 from django.template.loader import get_template
 
-# Create your views here.
-def new(request):
 
-  padre_context = ResponsableForm(prefix='padre')
-  madre_context = ResponsableForm(prefix='madre')
-  tutor_context = ResponsableForm(prefix='tutor')
-  vivecon_context = ResponsableForm(prefix='vivecon')
+
+# Create your views here.
+def pg_new(request):
+
+  padre_context = ResponsableForm(prefix='padre', initial=request.session.get('data_padre'))
+  madre_context = ResponsableForm(prefix='madre', initial=request.session.get('data_madre'))
+  tutor_context = ResponsableForm(prefix='tutor', initial=request.session.get('data_tutor'))
+  vivecon_context = ResponsableForm(prefix='vivecon', initial=request.session.get('data_vivecon'))
   postulante_context = PostulanteForm(prefix='postulante')
   pg_context = PgForm(prefix='pg')
-    
+  
   if request.method == "POST":
 
     cdor        = 0
@@ -38,12 +40,14 @@ def new(request):
     #comienzo validaciones para cada uno
     if formpadre.is_valid(): 
       padre_context = formpadre
+      request.session['data_padre'] = formpadre.cleaned_data
       cdor += 1
     else:
       padre_context = formpadre
 
     if formmadre.is_valid():
       madre_context = formmadre
+      request.session['data_madre'] = formmadre.cleaned_data
       cdor += 1
     else:
       madre_context = formmadre
@@ -53,12 +57,14 @@ def new(request):
       switch_tutor = True
       if formtutor.is_valid(): 
         tutor_context = formtutor
+        request.session['data_tutor'] = formtutor.cleaned_data
         switch_tutor = False
       else:
         tutor_context = formtutor
 
     if formvivecon.is_valid(): 
       vivecon_context = formvivecon
+      request.session['data_vivecon'] = formvivecon.cleaned_data
       cdor += 1     
     else:
       vivecon_context = formvivecon
