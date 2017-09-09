@@ -9,6 +9,7 @@ from .forms import PgForm
 
 from preinscripcion.forms 	import PostulanteForm, ResponsableForm, CicloLectivoForm
 from preinscripcion.models 	import Postulante, CicloLectivo
+from preinscripcion.decorators import group_required
 
 import datetime
 
@@ -148,3 +149,22 @@ def pdfPG(request, nrop):
   return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
 
 ####
+
+## operaciones relacionadas con el rol gestionpreinscripciones
+#listado de todas las preinscripciones
+@group_required('gestion_pg')
+def admin_pg_index(request):
+
+  postulantes = Postulante.objects.all().exclude(preinscripcion__isnull = False)
+
+  cp  = Postulante.objects.all().count();
+  cpc = PostulanteConfirmado.objects.all().count();
+  cpg = Preinscripcion4Anios.objects.filter(estado='ALUMNO').count()
+
+  return render(request, 'admin/p4anios/preinscripciones.html',{
+          'postulantes' : postulantes,
+          'cp'          : cp,
+          'cpc'         : cpc,
+          'cpg'         : cpg
+          }
+          )

@@ -261,7 +261,7 @@ def admin_mio(request):
 @group_required('gestionpreinscripciones')
 def admin_preinscripciones(request):
 
-  postulantes = Postulante.objects.all()
+  postulantes = Postulante.objects.all().exclude(preinscripcion__isnull = False)
 
   cp  = Postulante.objects.all().count();
   cpc = PostulanteConfirmado.objects.all().count();
