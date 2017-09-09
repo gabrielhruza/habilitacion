@@ -1,0 +1,28 @@
+
+
+{
+	"sFilterInput": 	"form-control",
+	"searchPlaceholder":  "Puede filtrar por Apellido, Nombre, Dni, Estado, etc",
+	"sProcessing":     "Procesando...",
+	"sLengthMenu":     "Mostrar _MENU_ Preinscripciones",
+	"sZeroRecords":    "No se encontraron resultados",
+	"sEmptyTable":     "Ningún dato disponible en esta tabla",
+	"sInfo":           "_TOTAL_ Preinscripciones",
+	"sInfoEmpty":      "Mostrando Preinscripciones del 0 al 0 de un total de 0 Preinscripciones",
+	"sInfoFiltered":   "",
+	"sInfoPostFix":    "",
+	"sSearch":         "Filtrar:",
+	"sUrl":            "",
+	"sInfoThousands":  ".",
+	"sLoadingRecords": "Cargando...",
+	"oPaginate": {
+		"sFirst":    "Primero",
+		"sLast":     "Último",
+		"sNext":     "Siguiente",
+		"sPrevious": "Anterior"
+	},
+	"oAria": {
+		"sSortAscending":  ": Activar para ordenar la columna de manera ascendente",
+		"sSortDescending": ": Activar para ordenar la columna de manera descendente"
+	}
+}

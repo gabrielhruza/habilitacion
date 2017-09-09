@@ -1,0 +1,73 @@
+body {
+	background-image: url('../images/fondo-admin.jpg');
+	-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+	background-size: cover;
+}
+
+.panel-info{
+-webkit-box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
+-moz-box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
+box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
+}
+
+.navbar-default{
+	background-color: #015bb5;
+	border-color: #015bb5;
+	border-radius: 0px;
+	margin-bottom: 3%;
+	font-weight: bold;
+}
+
+.navbar-default .navbar-nav>li>a , .navbar-default .navbar-brand{
+	color: white;
+}
+
+.navbar-default .navbar-nav>li>a:hover, .navbar-default .navbar-brand:hover{
+	color: white;
+	#text-shadow: 1px 1px black;
+}
+
+.container-fluid{
+	#width: 95%;
+}
+
+.logo-admin{
+	width: 30%;
+    height: 30%;
+    margin-left: 30%;
+}
+
+.logo-admin-navbar{
+	width: 100px;
+    height: 70px;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+}
+
+.logo-navbrand{
+	padding-left: 100px;
+}
+
+.glyphicon-eye-open {
+	font-size: 18px !important;
+}
+
+.glyphicon-ok {
+	font-size: 18px !important;
+}
+
+
+.glyphicon-remove {
+	color: #a94442;
+}
+
+.info-text{
+	float: left!important;
+	font-size: 1em !important;
+	font-weight: bold !important;
+	margin-top: -0.5em !important;
+	margin-left: 1em !important;
+}
