@@ -2,13 +2,13 @@
 from __future__ import unicode_literals
 
 from django.shortcuts import render
-
+from django.contrib import messages
 from django.http import HttpResponse
 
 from .forms import PgForm
 
-from preinscripcion.forms 	import PostulanteForm, ResponsableForm, CicloLectivoForm
-from preinscripcion.models 	import Postulante, CicloLectivo
+from preinscripcion.forms 	import PostulanteForm, ResponsableForm
+from preinscripcion.models 	import Postulante, CicloLectivo, PreinscripcionGeneral
 from preinscripcion.decorators import group_required
 
 import datetime
@@ -39,6 +39,11 @@ def pg_new(request):
     formpg = PgForm(request.POST, prefix='pg') # Bound form
 
     #comienzo validaciones para cada uno
+    if formpg.is_valid(): 
+      pg_context = formpg
+    else:
+      pg_context = formpg
+
     if formpadre.is_valid(): 
       padre_context = formpadre
       request.session['data_padre'] = formpadre.cleaned_data
@@ -105,11 +110,11 @@ def pg_new(request):
 
       request.session["nropreinscripto"] = formpg.nro_de_preinscripto
 
-      return render(request, 'pg/exito.html', {
+      return render(request, 'pg/pg/exito.html', {
          'postulante' : formpostulante,	
           })
 
-  return render(request, 'pg/new.html', {
+  return render(request, 'pg/pg/new.html', {
   	'formpg'  		: pg_context,
     'formpadre'   	: padre_context,
     'formmadre'   	: madre_context,
@@ -126,7 +131,7 @@ def pdfPG(request, nrop):
   if not request.session['nropreinscripto'] == nrop:
     return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
 
-  template = get_template('pg/comprobante.html')
+  template = get_template('pg/pg/comprobante.html')
 
   #html = template.render(pibe)
 
@@ -138,7 +143,7 @@ def pdfPG(request, nrop):
       pibe = postulante
 
   contexto = {'postulante' : pibe }
-  pdf = render_to_pdf('pg/comprobante.html', contexto)
+  pdf = render_to_pdf('pg/pg/comprobante.html', contexto)
 
   if pdf:
     response = HttpResponse(pdf, content_type='application/pdf')
@@ -155,16 +160,105 @@ def pdfPG(request, nrop):
 @group_required('gestion_pg')
 def admin_pg_index(request):
 
-  postulantes = Postulante.objects.all().exclude(preinscripcion__isnull = False)
+  postulantes = Postulante.objects.all().exclude(pg__isnull=True)
 
-  cp  = Postulante.objects.all().count();
-  cpc = PostulanteConfirmado.objects.all().count();
-  cpg = Preinscripcion4Anios.objects.filter(estado='ALUMNO').count()
+  cp  = postulantes.count();
 
-  return render(request, 'admin/p4anios/preinscripciones.html',{
+  #cpg = PreinscripcionGeneral.objects.filter(estado='ALUMNO').count()
+
+  return render(request, 'pg/adminpg/index.html',{
           'postulantes' : postulantes,
-          'cp'          : cp,
-          'cpc'         : cpc,
-          'cpg'         : cpg
+          'cp'          : cp
           }
           )
+
+
+#ver una preinscripcion en particular
+@group_required('gestion_pg')
+def admin_pg_show(request, pid):
+
+  #obtengo la preinscripcion con ese pid
+  p  = PreinscripcionGeneral.objects.get(pk=pid)
+
+  #obtengo el postulante de esa preinscripcion
+  postulante  = Postulante.objects.get(pg = p)
+
+  hnos        = postulante.rhermanos();
+
+  return render(request, 'pg/adminpg/show.html',{
+          'p': p,
+          'postulante' : postulante,
+          'hermanos'  : hnos
+          }
+  )
+
+  #confirmar formulario seleccionado
+@group_required('gestion_pg')
+def admin_pg_confirmar(request, pid):
+
+  preinscripcion  = PreinscripcionGeneral.objects.get(pk=pid)
+
+  #obtengo postulante a confirmar
+  p = Postulante.objects.get(pg=preinscripcion.id)
+  
+  ##verificar si esta confirmado para el ciclo de la pg
+
+
+  #sino existe lo doy de alta, sino envio errores
+  #ple = False
+  
+  #if ple == False:
+   #   pl.postulante     = p
+    #  pl.save()
+  #else:
+   # messages.error(request, "Ya existe un formulario confirmado con el DNI que quiere ingresar.")
+    #return admin_preinscripciones(request)
+
+  #ver si el formulario  no esta confirmado y si no existe un dni duplicado
+  if preinscripcion.confirmado == False :
+
+    preinscripcion.set_estado_confirmar()
+    preinscripcion.fecha_confirmado = datetime.date.today()
+    preinscripcion.usuarioqueconfirma = request.user
+
+    preinscripcion.save()
+
+    messages.success(request, 'Preinscripción CONFIRMADA. Puede imprimir el comprobante.')
+
+    #mensaje por si tiene hermanos
+    if p.hermanos.all():
+      messages.info(request, "El postulante tiene hermanos de la misma edad, advertir de que el responsable deberá realizar el mismo procedimiento con las demás preinscripciones.")  
+
+  else:
+    messages.error(request, "El formulario ya se encuentra CONFIRMADO.")
+
+  return admin_pg_show(request, preinscripcion.id)
+
+
+#generar pdf comprobante confirmacion
+##generar pdf
+@group_required('gestion_pg')
+def admin_pg_cc(request, nrop):
+  template = get_template('pg/adminpg/comprobante_confirmado.html')
+
+  preinscripcion = PreinscripcionGeneral.objects.get(nro_de_preinscripto=nrop)
+
+  user = preinscripcion.usuarioqueconfirma
+
+  contexto = {'preinscripcion' : preinscripcion, 'user': user }
+  pdf = render_to_pdf('pg/adminpg/comprobante_confirmado.html', contexto)
+
+  if pdf:
+    response = HttpResponse(pdf, content_type='application/pdf')
+    filename = "Comprobante_Preinscripcion"
+    content = "inline; filename='%s'" % (filename)
+    #download = request.GET.get("download")
+    #return response
+    #if download:
+     # content = "attachment; filename='%s'" % (filename)
+      #response['Content-Disposition'] = content
+    return response
+  
+  return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
+
+####

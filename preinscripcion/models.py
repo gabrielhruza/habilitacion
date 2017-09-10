@@ -41,11 +41,16 @@ class Preinscripcion(models.Model):
     fecha_confirmado = models.DateField(blank=True, null=True)
     confirmado = models.BooleanField(default=False)
     # este no me acuerdo para que se usaba
-    usuarioqueconfirma = models.OneToOneField(User, null=True)
+    usuarioqueconfirma = models.ForeignKey(User, null=True, unique=False)
     # tablas de usuarios del sistema
     responsablequeconfirma = models.CharField(max_length=20, null=True)
     # puede ser un padre,pariente o motomandado
     motivo = models.TextField(default='No contesta')
+
+    def set_estado_confirmar(self):
+        self.estado = 'CONFIRMADO'
+        self.confirmado = True
+        return self
 
     class Meta:
         abstract = True

@@ -1,0 +1,86 @@
+{% extends "admin.html" %}
+
+{% block filtros %}
+<div class="panel panel-default">
+    <div class="panel-body">
+        <strong> Datos Generales:</strong>
+        <button class="btn btn-primary" type="">
+            Preinscriptos <span class="badge">{{cp}}</span>
+        </button>
+        <!--<button class="btn btn-success" type="">
+            Confirmados <span class="badge">{{cpc}}</span>
+        </button>
+         <button class="btn btn-info" type="">
+            Ganadores <span class="badge">{{cpg}}</span>
+        </button>
+        -->
+    </div>
+
+</div>
+
+
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="alert alert-danger alert-dismissable alert-link" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+    {% for message in messages %}
+    <p><b>{{ message }}</b></p>
+    {% endfor %}
+    
+</div>
+{% endif %}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Lista de Preinscripciones</h3>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px; overflow-y: scroll;">
+    <table class="table table-bordered table-striped table-hover" id="tabla">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Numero</th>
+                <th>Apellido y Nombre</th>
+                <th>Edad</th>
+                <th>DNI</th>
+                <th>Genero</th>
+                <th>Curso</th>
+                <th>Padre</th>
+                <th>Madre</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for postulante in postulantes %}
+            <tr>
+                <td>{{ postulante.pg.fecha }} {{ postulante.pg.hora }} hs.</td>
+                <td>{{ postulante.pg.nro_de_preinscripto }}</td>
+                <td>{{ postulante.apellido }}, {{ postulante.nombre }}</td>
+                <td>{{ postulante.edad }}</td>
+                <td>{{ postulante.dni }}</td>
+                <td>{{ postulante.genero }}</td>
+                <td>{{ postulante.pg.nivel }} -- {{ postulante.pg.grado }}</td>
+                <td>{{ postulante.padre.apellido }}, {{ postulante.padre.nombre }}</td>
+                <td>{{ postulante.madre.apellido }}, {{ postulante.madre.nombre }}</td>
+                <td>{{ postulante.pg.estado }}</td>
+                <td>
+                <a href="{% url 'admin_pg_show' postulante.pg.id %}">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+</div>
+{% endblock %}

@@ -14,7 +14,7 @@ import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+from django.contrib.messages import constants as messages
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.11/howto/deployment/checklist/
@@ -73,6 +73,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'habilitacion.wsgi.application'
 
+# Messages tags
+MESSAGE_TAGS = {
+    messages.ERROR: 'danger'
+}
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases

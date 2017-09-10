@@ -1,0 +1,187 @@
+{% extends 'admin.html' %}
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-{{ message.tags }} alert-dismissable alert-link" role="alert">    
+  <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+    <p><b>{{ message }}</b></p>
+  </div>
+  {% endfor %}
+{% endif %}
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">Preinscripción</h3>
+        <a class="btn btn-default btn-sm pull-right" style="margin-top: -23px" href="{% url 'admin_pg_cc' p.nro_de_preinscripto %}" target="_blank">
+  			<span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+		  </a>
+    </div>
+<div class="panel-body">
+
+  <div class="row">
+
+  <div class="col-xs-12 col-md-6">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <div class="row">
+    <div class="col-xs-12 col-md-6">
+  	<h4>Fecha: <b>{{ p.fecha }} {{ p.hora }} hs.</b></h4>
+  	<h4>Nro de Preinscripto: <b>{{ p.nro_de_preinscripto }}</b></h4>
+  	<h4>Nro de Sorteo: <b>{{ p.nro_de_sorteo }}</b></h4>
+  	<h4>Estado: <b>{{ p.estado }}</b></h4>
+    <h4>Nivel: <b>{{ p.nivel }}</b></h4>
+    <h4>Grado: <b>{{ p.grado }}</b></h4>
+    <h4>Fecha de confirmado: <b>{{ p.fecha_confirmado }}</b></h4>
+  	<h4>Ciclo Lectivo: <b>{{ p.cicloLectivo.fecha_apertura_ciclo.year }}</b></h4>
+  	<h4>Fecha de Sorteo: <b>{{ p.cicloLectivo.fecha_dia_sorteo }}</b></h4>
+    </div>
+    <div class="col-xs-12 col-md-6">
+  	<h4>Motivo:</h4><note>{{ p.motivo }}</note>
+    </div>
+    </div>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del postulante</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.apellido }} <span></span> {{ postulante.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.dni }}</b></h5>
+    <h5>Fecha de Nacimiento: <b>{{ postulante.fecha_nacimiento }}</b></h5>
+    <h5>Edad: <b>{{ postulante.edad }}</b></h5>
+    <h5>Género: <b>{{ postulante.genero }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  </div>
+
+  <div class="row">
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del Padre</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.padre.apellido }} <span></span> {{ postulante.padre.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.padre.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.padre.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.padre.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.padre.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos de la Madre</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.madre.apellido }} <span></span> {{ postulante.madre.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.madre.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.madre.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.madre.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.madre.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del Responsable con quien vive</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.vive_con.apellido }} <span></span> {{ postulante.vive_con.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.vive_con.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.vive_con.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.vive_con.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.vive_con.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+
+  {% if postulante.tutor %}
+  <div class="col-xs-12 col-md-3">
+  <div class="panel panel-info">
+  <div class="panel-body">
+    <p><h5>Datos del Tutor</h5></p><hr>
+    <h5>Apellido y Nombre: <b>{{ postulante.tutor.apellido }} <span></span> {{ postulante.tutor.nombre }}</b></h5>
+    <h5>DNI: <b>{{ postulante.tutor.dni }}</b></h5>
+    <h5>Teléfono: <b>{{ postulante.tutor.telefonoPersonal }}</b></h5>
+    <h5>Email: <b>{{ postulante.tutor.email }}</b></h5>
+    <h5>Domicilio: <b>{{ postulante.tutor.domicilio }}</b></h5>
+  </div>
+  </div>
+  </div>
+  {% endif %}
+
+  </div>
+
+
+  {% if hermanos %}
+    <div class="panel panel-info">
+    <div class="panel-body">
+    <p><h5>Hermanos de la misma edad</h5></p><hr>
+    
+    <div class="row">
+    {% for hno in hermanos %}
+    <div class="col-xs-12 col-md-4">
+      <blockquote>
+        <h5>Apellido y Nombre: <b>{{ hno.apellido }} {{ hno.nombre }}</b></h5>
+        <h5>Nro de preinscripción: <b>{{ hno.preinscripcion.nro_de_preinscripto }}</b></h5>
+        <h5>Género: <b>{{ hno.genero }}</b></h5>
+      </blockquote>
+    </div>
+    {% endfor %}
+    </div>
+
+    </div>
+    </div>
+  {% endif %}
+
+	<hr>
+  <a  href="{% url 'admin_pg_index' %}" class="btn btn-default">Cancelar</a>
+	<a onclick="modal('{% url 'admin_pg_confirmar' p.id %}')" href="#" class="btn btn-primary">
+	Confirmar</a>
+</div>
+
+</div>
+
+
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Confirmar Preinscripción</h4>
+      </div>
+      <div class="modal-body">
+        ¿Desea confirmar la preinscripción?
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+        <a href="#" class="btn btn-primary confirmar">Confirmar</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function modal($url){
+    //console.log($url);
+    $modal  = $('#myModal').modal();
+    $link   = $('.confirmar')[0];
+    $link.href = $url;
+}
+</script>
+
+<!-- ./Modal -->
+{% endblock %}
