@@ -261,9 +261,9 @@ def admin_mio(request):
 @group_required('gestionpreinscripciones')
 def admin_preinscripciones(request):
 
-  postulantes = Postulante.objects.all().exclude(preinscripcion__isnull = False)
+  postulantes = Postulante.objects.all().exclude(preinscripcion__isnull = True)
 
-  cp  = Postulante.objects.all().count();
+  cp  = postulantes.count();
   cpc = PostulanteConfirmado.objects.all().count();
   cpg = Preinscripcion4Anios.objects.filter(estado='ALUMNO').count()
 
@@ -299,7 +299,7 @@ def admin_p_cl(request, year):
 @group_required('gestionpreinscripciones')
 def admin_postulantes(request):
 
-  postulantes = Postulante.objects.all()
+  postulantes = Postulante.objects.all().exclude(preinscripcion__isnull = True)
 
   return render(request, 'admin/p4anios/postulantes.html',{
           'postulantes': postulantes 

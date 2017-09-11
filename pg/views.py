@@ -163,12 +163,12 @@ def admin_pg_index(request):
   postulantes = Postulante.objects.all().exclude(pg__isnull=True)
 
   cp  = postulantes.count();
-
-  #cpg = PreinscripcionGeneral.objects.filter(estado='ALUMNO').count()
+  cpc = PreinscripcionGeneral.objects.filter(estado='CONFIRMADO').count()
 
   return render(request, 'pg/adminpg/index.html',{
           'postulantes' : postulantes,
-          'cp'          : cp
+          'cp'          : cp,
+          'cpc'          : cpc,
           }
           )
 
