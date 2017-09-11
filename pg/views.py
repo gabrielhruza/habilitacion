@@ -91,10 +91,7 @@ def pg_new(request):
       formmadre   = formmadre.save()
       formvivecon = formvivecon.save()
 
-      ciclo_lectivo  = CicloLectivo.objects.get(pk=1)
       formpg		= formpg.save()
-      formpg.cicloLectivo = ciclo_lectivo
-      formpg.save()
 
       formpostulante.padre  	= formpadre
       formpostulante.madre  	= formmadre

@@ -43,9 +43,6 @@ class PostulanteForm(forms.ModelForm):
 
         if not dni.isdigit():
             raise forms.ValidationError("Ingrese solamente numeros")
-        else:
-            if int(dni) < 40000000:
-                raise forms.ValidationError("Ingrese un dni valido")
         return dni
 
     def clean_fecha_nacimiento(self):

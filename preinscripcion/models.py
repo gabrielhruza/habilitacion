@@ -20,6 +20,9 @@ class CicloLectivo(models.Model):
     ultimo_nro_sorteo       = models.PositiveIntegerField(default=0)
     fecha_dia_sorteo        = models.DateField() #agregar en modelo
 
+    def __str__(self):
+     return str(self.fecha_apertura_ciclo.year)
+
 
 class Preinscripcion(models.Model):
     ESTADOPREINSCRIPCION = (
@@ -81,7 +84,8 @@ class PreinscripcionGeneral(Preinscripcion):
     )
 
     nivel = models.CharField(max_length=10, choices=NIVEL, default='INICIAL')
-    grado = models.CharField(max_length=1, choices=GRADO, default='1')
+    anio = models.CharField(max_length=1, choices=GRADO, default='1')
+    institucion_anterior = models.CharField(max_length=200, default='Escuela anterior')
     cubrio_vacante = models.BooleanField(default=False)             
 
 

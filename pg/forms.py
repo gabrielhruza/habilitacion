@@ -5,10 +5,9 @@ from datetime import date
 class PgForm(forms.ModelForm):
     class Meta:
         model = PreinscripcionGeneral
-        fields = ['nivel', 'grado', 'motivo']
-        exclude = ['nro_de_preinscripto',
-                   'estado', 'postulante', 
-                   'cicloLectivo', 'confirmado', 'fecha_confirmado']
+        fields = ['nivel', 'anio','cicloLectivo', 'institucion_anterior','motivo']
+        exclude = ['nro_de_preinscripto', 'estado', 'postulante', 'confirmado', 
+            'fecha_confirmado']
 
     def clean_motivo(self):
         caja = self.cleaned_data.get('motivo')
