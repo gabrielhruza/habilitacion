@@ -146,8 +146,11 @@
 
 	<hr>
   <a  href="{% url 'admin_pg_index' %}" class="btn btn-default">Cancelar</a>
-	<a onclick="modal('{% url 'admin_pg_confirmar' p.id %}')" href="#" class="btn btn-primary">
+  
+  {% if not confirmado and not alumno %}	
+  <a onclick="modal('{% url 'admin_pg_confirmar' p.id %}')" href="#" class="btn btn-primary">
 	Confirmar</a>
+  {% endif %}
 
   {% if alumno %}
   <a  href="{% url 'admin_pg_asignarvacante' p.id %}" class="btn btn-warning">Asignar Vacante</a>

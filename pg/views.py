@@ -168,11 +168,13 @@ def admin_pg_index(request):
   postulantes = Postulante.objects.filter(pg__nivel=user_nivel)
   cp          = PreinscripcionGeneral.objects.filter(nivel=user_nivel).count()
   cpc         = PreinscripcionGeneral.objects.filter(nivel=user_nivel,estado='CONFIRMADO').count()
+  cpa         = PreinscripcionGeneral.objects.filter(nivel=user_nivel,estado='ALUMNO').count()
 
   return render(request, 'pg/adminpg/index.html',{
           'postulantes' : postulantes,
           'cp'          : cp,
           'cpc'         : cpc,
+          'cpa'         : cpa,
           'clvs'        : clvs
           }
           )
@@ -187,9 +189,8 @@ def admin_pg_show(request, pid):
   #obtengo la preinscripcion con ese pid
   p  = PreinscripcionGeneral.objects.get(pk=pid)
 
-  alumno = False
-  if p.is_alumno():
-    alumno = True
+  confirmado = p.is_confirmado()
+  alumno     = p.is_alumno()
 
   #obtengo el postulante de esa preinscripcion
   postulante  = Postulante.objects.get(pg = p)
@@ -200,6 +201,7 @@ def admin_pg_show(request, pid):
           'p': p,
           'postulante'  : postulante,
           'hermanos'    : hnos,
+          'confirmado'  : confirmado,
           'alumno'      : alumno
           }
   )
