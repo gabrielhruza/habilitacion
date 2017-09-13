@@ -11,5 +11,6 @@ urlpatterns = [
     url(r'^show/(?P<pid>[0-9]+)/$', views.admin_pg_show, name='admin_pg_show'),
 
     url(r'^confirmar/(?P<pid>[0-9]+)/$', views.admin_pg_confirmar, name='admin_pg_confirmar'),
-	url(r'^cc/(?P<nrop>[0-9]+)/$', views.admin_pg_cc, name='admin_pg_cc')
+	url(r'^cc/(?P<nrop>[0-9]+)/$', views.admin_pg_cc, name='admin_pg_cc'),
+	url(r'^asignarvacante/(?P<pid>[0-9]+)/$', views.admin_pg_asignarvacante, name='admin_pg_asignarvacante'),
 ]

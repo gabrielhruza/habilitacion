@@ -55,6 +55,18 @@ class Preinscripcion(models.Model):
         self.confirmado = True
         return self
 
+    def set_estado_asignarvacante(self):
+        self.estado = 'ALUMNO'
+        return self
+
+    def is_alumno(self):
+        alumno = False
+
+        if self.estado == 'CONFIRMADO':
+            alumno = True
+
+        return alumno
+
     class Meta:
         abstract = True
 

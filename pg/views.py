@@ -187,7 +187,10 @@ def admin_pg_show(request, pid):
   #obtengo la preinscripcion con ese pid
   p  = PreinscripcionGeneral.objects.get(pk=pid)
 
-  print(p)
+  alumno = False
+  if p.is_alumno():
+    alumno = True
+
   #obtengo el postulante de esa preinscripcion
   postulante  = Postulante.objects.get(pg = p)
 
@@ -195,12 +198,13 @@ def admin_pg_show(request, pid):
 
   return render(request, 'pg/adminpg/show.html',{
           'p': p,
-          'postulante' : postulante,
-          'hermanos'  : hnos
+          'postulante'  : postulante,
+          'hermanos'    : hnos,
+          'alumno'      : alumno
           }
   )
 
-  #confirmar formulario seleccionado
+#confirmar formulario seleccionado
 @group_required('gestion_pg')
 def admin_pg_confirmar(request, pid):
 
@@ -239,6 +243,34 @@ def admin_pg_confirmar(request, pid):
 
   else:
     messages.error(request, "El formulario ya se encuentra CONFIRMADO.")
+
+  return admin_pg_show(request, preinscripcion.id)
+
+
+#asignar vacante formulario seleccionado
+@group_required('gestion_pg')
+def admin_pg_asignarvacante(request, pid):
+
+  preinscripcion  = PreinscripcionGeneral.objects.get(pk=pid)
+
+  #obtengo postulante a confirmar
+  p = Postulante.objects.get(pg=preinscripcion.id)
+
+  #ver si el formulario  no esta confirmado y si no existe un dni duplicado
+  if preinscripcion.confirmado == True :
+
+    preinscripcion.set_estado_asignarvacante()
+
+    preinscripcion.save()
+
+    messages.success(request, 'Exito!')
+
+    #mensaje por si tiene hermanos
+    if p.hermanos.all():
+      messages.info(request, "El postulante tiene hermanos de la misma edad, advertir de que el responsable deberá realizar el mismo procedimiento con las demás preinscripciones.")  
+
+  else:
+    messages.error(request, "Error, ya está asignado.")
 
   return admin_pg_show(request, preinscripcion.id)
 
