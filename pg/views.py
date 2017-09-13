@@ -4,12 +4,14 @@ from __future__ import unicode_literals
 from django.shortcuts import render
 from django.contrib import messages
 from django.http import HttpResponse
+from django.http import HttpResponseNotAllowed
 
 from .forms import PgForm
 
 from preinscripcion.forms 	import PostulanteForm, ResponsableForm
 from preinscripcion.models 	import Postulante, CicloLectivo, PreinscripcionGeneral
 from preinscripcion.decorators import group_required
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 import datetime
 
@@ -153,19 +155,25 @@ def pdfPG(request, nrop):
 ####
 
 ## operaciones relacionadas con el rol gestionpreinscripciones
+
 #listado de todas las preinscripciones
 @group_required('gestion_pg')
 def admin_pg_index(request):
 
-  postulantes = Postulante.objects.all().exclude(pg__isnull=True)
+  user_nivel  = request.user.profile.nivel
 
-  cp  = postulantes.count();
-  cpc = PreinscripcionGeneral.objects.filter(estado='CONFIRMADO').count()
+  #ciclos lectivos
+  clvs        = CicloLectivo.objects.all()
+
+  postulantes = Postulante.objects.filter(pg__nivel=user_nivel)
+  cp          = PreinscripcionGeneral.objects.filter(nivel=user_nivel).count()
+  cpc         = PreinscripcionGeneral.objects.filter(nivel=user_nivel,estado='CONFIRMADO').count()
 
   return render(request, 'pg/adminpg/index.html',{
           'postulantes' : postulantes,
           'cp'          : cp,
-          'cpc'          : cpc,
+          'cpc'         : cpc,
+          'clvs'        : clvs
           }
           )
 
@@ -174,9 +182,12 @@ def admin_pg_index(request):
 @group_required('gestion_pg')
 def admin_pg_show(request, pid):
 
+  user_nivel  = request.user.profile.nivel
+
   #obtengo la preinscripcion con ese pid
   p  = PreinscripcionGeneral.objects.get(pk=pid)
 
+  print(p)
   #obtengo el postulante de esa preinscripcion
   postulante  = Postulante.objects.get(pg = p)
 

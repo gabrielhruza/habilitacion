@@ -1,6 +1,23 @@
 {% extends "admin.html" %}
 
 {% block filtros %}
+<div class="row">
+<div class="col-md-3 col-xs-12">
+<div class="panel panel-default">
+    <div class="panel-body" style="height: 64px;">
+        <div class="form-inline"> 
+          <strong> Ciclo lectivo:</strong>
+          <select class="form-control input-sm" id="sel">
+            {% for clv in clvs %}
+            <option>{{ clv.fecha_apertura_ciclo.year }}</option>
+            {% endfor %}
+          </select>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="col-md-9 col-xs-12">
 <div class="panel panel-default">
     <div class="panel-body">
         <strong> Datos Generales:</strong>
@@ -15,10 +32,10 @@
         </button>
         -->
     </div>
-
+</div>
 </div>
 
-
+</div>
 {% endblock %}
 
 {% block content %}
@@ -66,7 +83,7 @@
                 <td>{{ postulante.edad }}</td>
                 <td>{{ postulante.dni }}</td>
                 <td>{{ postulante.genero }}</td>
-                <td>{{ postulante.pg.nivel }} -- {{ postulante.pg.grado }}</td>
+                <td>{{ postulante.pg.anio }}</td>
                 <td>{{ postulante.padre.apellido }}, {{ postulante.padre.nombre }}</td>
                 <td>{{ postulante.madre.apellido }}, {{ postulante.madre.nombre }}</td>
                 <td>{{ postulante.pg.estado }}</td>
