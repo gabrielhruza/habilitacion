@@ -1,23 +1,46 @@
 {% extends "admin.html" %}
 
+{% load bootstrap3 %}
+
 {% block filtros %}
 <div class="row">
-<div class="col-md-3 col-xs-12">
+<div class="col-md-4 col-xs-12">
 <div class="panel panel-default">
     <div class="panel-body" style="height: 64px;">
-        <div class="form-inline"> 
-          <strong> Ciclo lectivo:</strong>
-          <select class="form-control input-sm" id="sel">
-            {% for clv in clvs %}
-            <option>{{ clv.fecha_apertura_ciclo.year }}</option>
-            {% endfor %}
-          </select>
-        </div>
+        <form class="form-inline" method="post">{% csrf_token %}
+            <div class="form-group">
+              <strong> Ciclo lectivo</strong>
+              <select class="form-control input-sm" id="cl" name="cl">
+                {% for clv in clvs %}
+
+                {% if clv.fecha_apertura_ciclo.year == cl %}
+                <option selected value="{{ clv.fecha_apertura_ciclo.year }}">
+                    {{ clv.fecha_apertura_ciclo.year }}
+                </option>
+                {% else %}
+                <option value="{{ clv.fecha_apertura_ciclo.year }}">
+                    {{ clv.fecha_apertura_ciclo.year }}
+                </option>
+                {% endif %}
+
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <strong> Anio</strong>
+              <select class="form-control input-sm" id="anio" name="anio">
+                {% for i in "1234567" %}
+                <option value="{{ i }}" {% if i == anio %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+              </select>
+            </div>
+           <button type="submit" class="btn btn-default btn-sm">Filtrar</button>
+        </form>
     </div>
 </div>
 </div>
 
-<div class="col-md-9 col-xs-12">
+<div class="col-md-8 col-xs-12">
 <div class="panel panel-default">
     <div class="panel-body">
         <strong> Datos Generales:</strong>
