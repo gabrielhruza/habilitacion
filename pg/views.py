@@ -174,7 +174,7 @@ def admin_pg_index(request):
   clvs        = CicloLectivo.objects.all()
 
   postulantes = Postulante.objects.filter(pg__nivel=user_nivel, pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl)
-  cp          = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio).count()
+  cp          = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl).count()
   cpc         = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl, estado='CONFIRMADO').count()
   cpa         = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl, estado='ALUMNO').count()
      
