@@ -218,6 +218,42 @@ def admin_pg_show(request, pid):
           }
   )
 
+#listado de todas las preinscripciones confirmadas
+@group_required('gestion_pg')
+def admin_pg_confirmados(request):
+
+  user_nivel  = request.user.profile.nivel
+
+  cl    = 2017
+  anio  = 1
+  anios = 7
+
+  if request.method == 'POST':
+    cl    = int(request.POST.get('cl', ''))
+    anio  = request.POST.get('anio', '')
+
+  #ciclos lectivos
+  clvs        = CicloLectivo.objects.all()
+
+  postulantes = Postulante.objects.filter(pg__nivel=user_nivel, pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__confirmado=True)
+  cp          = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl, confirmado=True).count()
+  cpc         = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl, estado='CONFIRMADO').count()
+  cpa         = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl, estado='ALUMNO').count()
+     
+
+  return render(request, 'pg/adminpg/index.html',{
+          'postulantes' : postulantes,
+          'cp'          : cp,
+          'cpc'         : cpc,
+          'cpa'         : cpa,
+          'clvs'        : clvs,
+          'cl'          : cl,
+          'anio'        : anio,
+          'anios'       : anios
+          }
+          )
+
+
 #confirmar formulario seleccionado
 @group_required('gestion_pg')
 def admin_pg_confirmar(request, pid):
