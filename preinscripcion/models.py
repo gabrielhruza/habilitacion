@@ -98,8 +98,8 @@ class PreinscripcionGeneral(Preinscripcion):
     )
 
     nivel = models.CharField(max_length=10, choices=NIVEL, default='INICIAL')
-    anio = models.CharField(max_length=1, choices=GRADO, default='1')
-    institucion_anterior = models.CharField(max_length=200, default='Escuela anterior')
+    anio = models.CharField(max_length=1, choices=GRADO, default='1', verbose_name='Curso')
+    institucion_anterior = models.CharField(max_length=200, default='Escuela actual', verbose_name='Institucion actual')
     cubrio_vacante = models.BooleanField(default=False)             
 
 

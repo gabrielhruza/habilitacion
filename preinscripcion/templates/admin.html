@@ -90,6 +90,7 @@
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
+      <li><a href="#">Nivel: {{ user.profile.nivel }} </a></li>
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.get_username }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -138,8 +139,19 @@
 
 {% load static %}
 
-<script type="text/javascript">
+<script>
 	$(document).ready(function(){
+
+    var user          = "{{ user.get_username }}";
+    var ciclolectivo  = $('#cl').val(); 
+    var curso         = $('#anio').val();
+    
+    var fc  = new Date();
+    var dia = fc.getDate();
+    var mes = fc.getMonth() + 1;
+    var ani = fc.getFullYear();
+    var fecha = dia + '-' + mes + '-' + ani;
+    
     tabla = $('#tabla').DataTable(
       { 
         stateSave: true,
@@ -149,8 +161,12 @@
         dom: '<"pull-right"B><"pull-left"f><"info-text"i>rtp',
         buttons: [
           'excel',
-          {extend: 'pdfHtml5', download: 'open', orientation: 'landscape', exportOptions: {
-                    columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], title: 'Lista de Sorteo'
+          { extend: 'pdfHtml5', 
+            download: 'open', 
+            orientation: 'landscape', 
+            message: 'Ciclo Lectivo: '+ ciclolectivo + ' Nivel: '+ ' Año: '+ curso + ' Filtrado por: ' + 'Emitido por: ' + user +' Fecha emisión: ' + fecha,
+            exportOptions: {
+                  columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
                 }
           }
         ]
