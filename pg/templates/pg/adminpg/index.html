@@ -93,6 +93,7 @@
                 <th>Padre</th>
                 <th>Madre</th>
                 <th>Estado</th>
+                <th style="display: none;">Motivo</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -109,6 +110,7 @@
                 <td>{{ postulante.padre.apellido }}, {{ postulante.padre.nombre }}</td>
                 <td>{{ postulante.madre.apellido }}, {{ postulante.madre.nombre }}</td>
                 <td>{{ postulante.pg.estado }}</td>
+                <td style="display: none;">{{ postulante.pg.motivo }}</td>
                 <td>
                 <a href="{% url 'admin_pg_show' postulante.pg.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

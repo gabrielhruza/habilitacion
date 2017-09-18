@@ -151,7 +151,7 @@
     var mes = fc.getMonth() + 1;
     var ani = fc.getFullYear();
     var fecha = dia + '-' + mes + '-' + ani;
-    
+
     tabla = $('#tabla').DataTable(
       { 
         stateSave: true,
@@ -160,7 +160,13 @@
         },
         dom: '<"pull-right"B><"pull-left"f><"info-text"i>rtp',
         buttons: [
-          'excel',
+          {
+            extend: 'excelHtml5',
+            exportOptions: {
+              columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
+              }
+          },
+
           { extend: 'pdfHtml5', 
             download: 'open', 
             orientation: 'landscape', 
