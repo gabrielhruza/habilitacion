@@ -152,6 +152,10 @@
     var ani = fc.getFullYear();
     var fecha = dia + '-' + mes + '-' + ani;
 
+    titulo = '{{ titulo_plantilla }}';
+
+    mensaje = 'Ciclo Lectivo: '+ ciclolectivo + ' Nivel: '+ ' Año: '+ curso + ' Filtrado por: ' + 'Emitido por: ' + user +' Fecha emisión: ' + fecha;
+
     tabla = $('#tabla').DataTable(
       { 
         stateSave: true,
@@ -162,6 +166,8 @@
         buttons: [
           {
             extend: 'excelHtml5',
+            title: titulo,
+            message: mensaje,
             exportOptions: {
               columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
               }
@@ -170,7 +176,8 @@
           { extend: 'pdfHtml5', 
             download: 'open', 
             orientation: 'landscape', 
-            message: 'Ciclo Lectivo: '+ ciclolectivo + ' Nivel: '+ ' Año: '+ curso + ' Filtrado por: ' + 'Emitido por: ' + user +' Fecha emisión: ' + fecha,
+            title: titulo,
+            message: mensaje,
             exportOptions: {
                   columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
                 }
