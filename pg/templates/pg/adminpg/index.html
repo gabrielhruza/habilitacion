@@ -124,4 +124,21 @@
 
 </div>
 </div>
+
+<script type="text/javascript">
+nivel = '{{ user.profile.nivel }}';
+
+if (nivel == 'SECUNDARIO') {
+    $('#anio').find('option[value="6"]').remove(); 
+    $('#anio').find('option[value="7"]').remove(); 
+}
+
+if (nivel == 'INICIAL') {
+    $('#anio').find('option[value="3"]').remove(); 
+    $('#anio').find('option[value="4"]').remove(); 
+    $('#anio').find('option[value="5"]').remove(); 
+    $('#anio').find('option[value="6"]').remove(); 
+    $('#anio').find('option[value="7"]').remove(); 
+}
+</script>
 {% endblock %}
