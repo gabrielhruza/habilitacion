@@ -1,27 +1,57 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Inicio</title>
 
-{% block content %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#222">
 
-<div style="height: 500px;">
+    <link rel="icon" sizes="192x192" href="{% static 'preinscripcion/images/ico.png' %}">
+    <link rel="icon" href="{% static 'preinscripcion/images/ico.png' %}" sizes="32x32">
+    <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/home.css' %}" />
+</head>
+<body>
 
-<div class="text-center landing-page"><h1>Preinscribirse a Nivel Inicial - Sala de 4 Años</h1></div>
-
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<div style="width: 50%; margin-left: 25%">
-<a href="{% url 'preinscripcion4_new' %}" class="btn btn-success btn-lg btn-block">Preinscribirse a Nivel Inicial</a>
+<div class="portada">
+<img src="{% static 'preinscripcion/images/home/computer-933100_1280.jpg' %}" class="img-responsive" alt="portada">
 </div>
 
-<br>
-<br>
-<div style="width: 50%; margin-left: 25%">
-<a href="{% url 'pg_new' %}" class="btn btn-success btn-lg btn-block">Preinscripción</a>
-</div>
+<div class="container">
+<div class="row">
+	
+	<div class="col-md-6 col-sm-6 col-xs-12">	
+	<div class="panel panel-default">
+  	<div class="panel-body">
+    <h4>Preinscripción a Nivel Inicial</h4>
+
+    <p></p>
+
+   	<img src="{% static 'preinscripcion/images/home/boton-pre-inscripcion-pni.png' %}" class="
+    img-responsive btn-p">
+
+  	</div>
+  	</div>
+  	</div>
+
+  	<div class="col-md-6 col-sm-6 col-xs-12">	
+  	<div class="panel panel-default">
+  	<div class="panel-body">
+    <h4>Preinscripción general</h4>
+
+    <p></p>
+    
+    <img src="{% static 'preinscripcion/images/home/boton-pre-inscripcion-pg.png' %}" class="
+    img-responsive btn-p">
+
+  	</div>
+	</div>
+	</div>
 
 </div>
+</div>
 
-{% endblock %}
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+{% load static %}
+body {
+	background: #f7f7f7;
+}
+
+.portada img{
+	width: 100%;
+	height: 50vh;
+	margin-bottom: 1em;
+}
+
+.btn-p{
+	display: block;
+	width: 100%;
+	height: 5em;
+}
