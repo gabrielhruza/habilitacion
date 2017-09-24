@@ -397,10 +397,50 @@ $('#id_pg-nivel').change( function(){
     $('#id_pg-anio').empty().append($curso);
 });
 
-
 //realizo un change inicial
 $('#id_pg-nivel').change();
 });
 </script>
+
+
+<script type="text/javascript">
+//select dependientes para provincia y localidad
+$(document).ready(function() {
+
+//cuando cambia el select de nivel, seteo la variable $nivel
+$('#id_pg-provincia').change( function(){
+    $provincia = $('#id_pg-provincia').val();
+    $localidades = []; 
+
+    switch ($provincia) {
+        case 'CHACO': 
+            $localidades.push('Charata');
+            break;
+        case 'SANTA FE':
+            $localidades.push('Rosario', 'Reconquista');
+            break;
+        case 'BUENOS AIRES':
+            $localidades.push('La Plata');
+            break;
+    };
+
+    $localidad = '';
+    $long = $localidades.length;
+    for ($i = 0; $i < $long; $i++) { 
+        $loc    = $localidades[$i];
+        $locUP  = $loc.toUpperCase();
+        $localidad = $localidad + '<option value="'+$locUP+'" selected="">'+$loc+'</option>';
+    }
+
+    $('#id_pg-localidad').empty().append($localidad);
+
+});   
+
+//realizo un change inicial
+$('#id_pg-provincia').change();
+});
+</script>
+
+
 
 {% endblock %}
