@@ -166,7 +166,7 @@
         dom: '<"pull-right"B><"pull-left"f><"info-text"i>rtp',
         buttons: [
           {
-            extend: 'excel',
+            extend: 'excelHtml5',
             title: titulo,
             message: function ( dt ) {
               return mensaje + tabla.search();
@@ -176,14 +176,15 @@
               }
           },
           { 
-            extend: 'pdf', 
+            extend: 'pdf',
             download: 'open', 
             orientation: 'landscape', 
             title: titulo,
-            message: function ( dt ) {
-              mensaje += tabla.search();
-              mensaje += '\n Total: ' + tabla.page.info().end;
-              return mensaje;
+            message: function(){
+              mensaje2 = mensaje;
+              mensaje2 += tabla.search().toUpperCase();
+              mensaje2 += '\n Total: ' + tabla.page.info().end;
+              return mensaje2;
             },
             exportOptions: {
                   columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
