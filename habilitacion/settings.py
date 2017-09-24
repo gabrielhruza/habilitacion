@@ -89,6 +89,11 @@ DATABASES = {
         'PASSWORD': 'root',
         'HOST': 'localhost',   # Or an IP Address that your DB is hosted on
         'PORT': '3306',
+
+        #'NAME': 'sispmes$habilitacion',
+        #'USER': 'sispmes',
+        #'PASSWORD': 'rootroot',
+        #'HOST': 'sispmes.mysql.pythonanywhere-services.com',
     }
 }
 
@@ -134,6 +139,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
+#STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATIC_URL = '/static/'
 
