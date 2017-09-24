@@ -84,6 +84,19 @@ class Preinscripcion4Anios(Preinscripcion):
 
 class PreinscripcionGeneral(Preinscripcion):
 
+    PROVINCIA = (
+        ('CHACO','Chaco'),
+        ('SANTA FE', 'Santa Fe'),
+        ('BUENOS AIRES', 'Buenos Aires')
+    )
+
+    LOCALIDAD = (
+        ('CHARATA','Charata'),
+        ('ROSARIO','Rosario'),
+        ('LA PLATA','La Plata'),
+        ('RECONQUISTA','Reconquista')
+    )
+
     NIVEL = (
             ('INICIAL', 'Inicial'),
             ('PRIMARIO', 'Primario'),
@@ -99,7 +112,10 @@ class PreinscripcionGeneral(Preinscripcion):
 
     nivel = models.CharField(max_length=10, choices=NIVEL, default='INICIAL')
     anio = models.CharField(max_length=1, choices=GRADO, default='1', verbose_name='Curso')
-    institucion_anterior = models.CharField(max_length=200, default='Escuela actual', verbose_name='Institucion actual')
+    institucion_anterior = models.CharField(max_length=200, default='Escuela actual', verbose_name='Nombre')
+    localidad = models.CharField(max_length=200, choices=LOCALIDAD, default='CHARATA')
+    provincia = models.CharField(max_length=100, choices=PROVINCIA, default='SANTA FE')
+    telefono  = models.CharField(max_length=100, default='262626262')  
     cubrio_vacante = models.BooleanField(default=False)             
 
 

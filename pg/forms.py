@@ -5,7 +5,8 @@ from datetime import date
 class PgForm(forms.ModelForm):
     class Meta:
         model = PreinscripcionGeneral
-        fields = ['nivel', 'anio','cicloLectivo', 'institucion_anterior','motivo']
+        fields = ['nivel', 'anio','cicloLectivo', 'institucion_anterior',
+            'telefono','localidad','provincia','motivo']
         exclude = ['nro_de_preinscripto', 'estado', 'postulante', 'confirmado', 
             'fecha_confirmado']
 

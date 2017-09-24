@@ -98,17 +98,28 @@
     <div class="col-md-7 col-xs-12">
     {% bootstrap_field formpostulante.domicilio %}
     </div>
-    <div class="col-md-4 col-xs-6">
+    <div class="col-md-4 col-xs-4">
         {% bootstrap_field formpg.nivel %}
     </div>
-    <div class="col-md-4 col-xs-6">
+    <div class="col-md-4 col-xs-4">
         {% bootstrap_field formpg.anio %}
     </div>
-    <div class="col-md-4 col-xs-6">
+    <div class="col-md-4 col-xs-4">
         {% bootstrap_field formpg.cicloLectivo %}
     </div>
-    <div class="col-md-6 col-xs-12">
+
+    <h5 style="margin-left: 1em;"><i>Datos de la Institución Actual</i></h5>
+    <div class="col-md-3 col-xs-12">
         {% bootstrap_field formpg.institucion_anterior %}
+    </div>
+    <div class="col-md-3 col-xs-12">
+        {% bootstrap_field formpg.telefono %}
+    </div>
+    <div class="col-md-3 col-xs-12">
+        {% bootstrap_field formpg.provincia %}
+    </div>
+        <div class="col-md-3 col-xs-12">
+        {% bootstrap_field formpg.localidad %}
     </div>
     <div class="col-md-12 col-xs-12">
         {% bootstrap_field formpg.motivo %}
@@ -356,5 +367,40 @@
 
 </script>
 
+<script type="text/javascript">
+
+//select dependientes para nivel y anio
+$(document).ready(function() {
+
+//cuando cambia el select de nivel, seteo la variable $nivel
+$('#id_pg-nivel').change( function(){
+    $nivel = $('#id_pg-nivel').val();
+    $cdor = 0;
+
+    switch ($nivel) {
+        case 'INICIAL': 
+            $cdor = 2;
+            break;
+        case 'PRIMARIO':
+            $cdor = 7;
+            break;
+        case 'SECUNDARIO':
+            $cdor = 5;
+            break;
+    }
+
+    $curso = '';
+    for ($i = 1; $i < $cdor + 1; $i++) { 
+        $curso = $curso + '<option value="'+$i+'" selected="">'+$i+'</option>';
+    }
+
+    $('#id_pg-anio').empty().append($curso);
+});
+
+
+//realizo un change inicial
+$('#id_pg-nivel').change();
+});
+</script>
 
 {% endblock %}
