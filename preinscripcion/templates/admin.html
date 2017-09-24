@@ -155,34 +155,37 @@
 
     titulo = '{{ titulo_plantilla }}';
 
-    mensaje = 'Emitido por:' +  user  +' Fecha emisión: ' + fecha + '\n Ciclo Lectivo: '+ ciclolectivo + ' Nivel: '+ nivel + ' Curso: '+ curso + ' Filtrado por: ' +
-      '\n Total: ';
+    mensaje = 'Emitido por: ' +  user  +' Fecha emisión: ' + fecha + '\n Ciclo Lectivo: '+ ciclolectivo + ' Nivel: '+ nivel + ' Curso: '+ curso + ' Filtrado por: ';
 
     tabla = $('#tabla').DataTable(
       { 
         stateSave: true,
         language: {
             url: "{% static 'preinscripcion/js/spanish.json' %}"
-        },
+          },
         dom: '<"pull-right"B><"pull-left"f><"info-text"i>rtp',
         buttons: [
           {
-            extend: 'excelHtml5',
+            extend: 'excel',
             title: titulo,
-            message: mensaje,
+            message: function ( dt ) {
+              return mensaje + tabla.search();
+            },
             exportOptions: {
               columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
               }
           },
-
-          { extend: 'pdfHtml5', 
+          { 
+            extend: 'pdf', 
             download: 'open', 
             orientation: 'landscape', 
             title: titulo,
-            message: mensaje,
+            message: function ( dt ) {
+              return mensaje + tabla.search();
+            },
             exportOptions: {
                   columns: [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9], 
-                }
+                },
           }
         ]
       }
@@ -194,7 +197,7 @@
   $(document).ready(function() {
   $('li.active').removeClass('active');
   $('a[href="' + location.pathname + '"]').closest('li').addClass('active'); 
-});
+  });
 </script>
 </body>
 </html>
