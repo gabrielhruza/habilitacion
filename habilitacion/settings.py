@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'preinscripcion',
     'pg',
+    'mes',
     'bootstrap3',
     'dynamic_formsets',
 ]

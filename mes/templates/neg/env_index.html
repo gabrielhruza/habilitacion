@@ -1,0 +1,46 @@
+{% extends 'admin.html' %}
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+<div class="container">
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ titulo_plantilla }}</h3>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px; overflow-y: scroll;">
+    <table class="table table-bordered table-striped table-hover" id="">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Emisor</th>
+                <th>Receptor</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for neg in negs %}
+            <tr>
+                <td>{{ neg.fecha_emision }}</td>
+                <td>{{ neg.emisor }}</td>
+                <td>{{ neg.receptor }}</td>
+                <td>{{ neg.estado }}</td>
+                <td>
+                <a href="{% url 'neg_show' neg.id %}">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+</div>
+</div>
+{% endblock %}

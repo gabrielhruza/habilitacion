@@ -95,11 +95,18 @@
       <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Nivel: {{ user.profile.nivel }} </a></li>
       <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Notas<span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="{% url 'neg_rec_index' %}">Recibidas</a></li>
+            <li><a href="{% url 'neg_env_index' %}">Enviadas</a></li>
+          </ul>
+      </li>
+      <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.get_username }}<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'logout_mio' %}">Salir</a></li>
           </ul>
-        </li>
+      </li>
       </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
@@ -222,7 +229,7 @@
       source: availableTags
     });
   
-  ;}, 3000);
+  ;}, 1500);
   });
   </script>
 </body>

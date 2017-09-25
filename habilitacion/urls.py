@@ -20,4 +20,5 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('preinscripcion.urls')),
     url(r'^pg/', include('pg.urls')),
+    url(r'^mes/', include('mes.urls')),
 ]
