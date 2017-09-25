@@ -16,7 +16,7 @@ from .forms 	import NegForm
 @group_required('mes')
 def neg_new(request):
   
-  titulo_plantilla = 'Nota de Entrada General'
+  titulo_plantilla = 'Crear Nota de Entrada General'
 
   context = NegForm(prefix='neg')
 
@@ -83,3 +83,25 @@ def neg_show(request, pid):
 		'titulo_plantilla' : titulo_plantilla,
 		'neg' : neg
 		})
+
+
+#nota entrada general => marcar como leida
+@group_required('mes')
+def neg_leida(request, pid):
+
+	neg = Nota.objects.get(pk=pid)
+	neg.setEstadoLeida()
+	neg.save()
+
+	return neg_show(request, neg.id)
+
+
+#nota entrada general => rechazar
+@group_required('mes')
+def neg_rechazar(request, pid):
+
+	neg = Nota.objects.get(pk=pid)
+	neg.setEstadoRechazada()
+	neg.save()
+
+	return neg_show(request, neg.id)
