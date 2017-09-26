@@ -28,11 +28,12 @@
   <div class="panel panel-info">
   <div class="panel-body">
 
-  	<h4>Fecha: <b> {{ neg.fecha_emision }}</b></h4>
-    <h4>N° de tracking: <b> {{ neg.nro_de_tracking }}</b></h4>
-  	<h4>Emisor:<b> {{ neg.emisor }}</b></h4>
-  	<h4>Receptor:<b> {{ neg.receptor }}</b></h4>
-    <h4>Estado:<b> {{ neg.estado }}</b></h4>
+  	<h4>Fecha: <b> {{ ne.fecha_emision }}</b></h4>
+    <h4>N° de tracking: <b> {{ ne.nro_de_tracking }}</b></h4>
+  	<h4>Emisor:<b> {{ ne.emisor }}</b></h4>
+  	<h4>Receptor:<b> {{ ne.receptor }}</b></h4>
+    <h4>Estado:<b> {{ ne.estado }}</b></h4>
+    <h4>Motivo:<b> {{ ne.motivo }}</b></h4>
 
   </div>
   </div>
@@ -41,9 +42,9 @@
 
 	<hr>
   <a onClick="javascript:history.go(-1);" class="btn btn-default">Volver</a>
-  <a onclick="modal('{% url 'neg_leida' neg.id %}', 'Marcar como leida')" href="#" class="btn btn-primary">Leída</a>
+  <a onclick="modal('{% url 'ne_leida' ne.id %}', 'Marcar como leida')" href="#" class="btn btn-primary">Leída</a>
   <a href="#" class="btn btn-warning">Derivar</a>
-  <a onclick="modal('{% url 'neg_rechazar' neg.id %}', 'Marcar como rechazada')" href="#" class="btn btn-danger">Rechazar</a>
+  <a onclick="modal('{% url 'ne_rechazar' ne.id %}', 'Marcar como rechazada')" href="#" class="btn btn-danger">Rechazar</a>
 
 </div>
 

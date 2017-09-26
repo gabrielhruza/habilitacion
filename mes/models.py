@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.db import models
 from django.contrib.auth.models import User
+from preinscripcion.models import PreinscripcionGeneral, Preinscripcion4Anios
 
 import string, random
 
@@ -39,3 +40,12 @@ class Nota(models.Model):
 	def setEstadoRechazada(self):
 		self.estado = 'RECHAZADA'
 		return self
+
+
+class NotaP(Nota):
+	p4 	= models.ForeignKey(Preinscripcion4Anios, null=True)
+	pg  = models.ForeignKey(PreinscripcionGeneral, null=True)
+
+
+class NotaG(Nota):
+	motivo = models.CharField(max_length=200, default='No me acuerdo')	

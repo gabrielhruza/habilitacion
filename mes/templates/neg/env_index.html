@@ -18,6 +18,7 @@
                 <th>Fecha</th>
                 <th>Emisor</th>
                 <th>Receptor</th>
+                <th>Motivo</th>
                 <th>N° de tracking</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -29,10 +30,11 @@
                 <td>{{ neg.fecha_emision }}</td>
                 <td>{{ neg.emisor }}</td>
                 <td>{{ neg.receptor }}</td>
+                <td>{{ neg.motivo }}</td>
                 <td>{{ neg.nro_de_tracking }}</td>
                 <td>{{ neg.estado }}</td>
                 <td>
-                <a href="{% url 'neg_show' neg.id %}">
+                <a href="{% url 'ne_show' neg.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
                 </td>

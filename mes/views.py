@@ -6,7 +6,7 @@ from preinscripcion.decorators import group_required
 from django.contrib import messages
 
 from .models 	import Nota 
-from .forms 	import NegForm
+from .forms 	import NegForm, NepForm
 
 # Create your views here.
 
@@ -71,37 +71,66 @@ def neg_rec_index(request):
 		})
 
 
+#dar de alta nota de entrada general
+@group_required('mes')
+def nep_new(request):
+  
+  titulo_plantilla = 'Crear Nota de Entrada Asociada a Preinscripcion'
+
+  context = NepForm(prefix='nep')
+
+  if request.method == "POST":
+
+    nep = NepForm(request.POST, prefix='nep')
+
+    if nep.is_valid():
+
+    	nep = nep.save(commit=False)
+    	nep.setEmisor(request.user)
+    	messages.success(request, 'Nota creada correctamente')
+    	nep.save()
+
+    else:
+      	context = nep
+
+
+  return render(request, 'neg/new.html', { 
+  	'neg' : context, 
+  	'titulo_plantilla' : titulo_plantilla
+  	 })
+
+
 #ver una nota de entrada general
 @group_required('mes')
-def neg_show(request, pid):
+def ne_show(request, pid):
 
 	titulo_plantilla = 'Nota entrada general'
 
-	neg = Nota.objects.get(pk=pid)
+	ne = Nota.objects.get(pk=pid)
 
 	return render(request, 'neg/show.html', { 
 		'titulo_plantilla' : titulo_plantilla,
-		'neg' : neg
+		'ne' : ne
 		})
 
 
 #nota entrada general => marcar como leida
 @group_required('mes')
-def neg_leida(request, pid):
+def ne_leida(request, pid):
 
-	neg = Nota.objects.get(pk=pid)
-	neg.setEstadoLeida()
-	neg.save()
+	ne = Nota.objects.get(pk=pid)
+	ne.setEstadoLeida()
+	ne.save()
 
-	return neg_show(request, neg.id)
+	return ne_show(request, ne.id)
 
 
 #nota entrada general => rechazar
 @group_required('mes')
-def neg_rechazar(request, pid):
+def ne_rechazar(request, pid):
 
-	neg = Nota.objects.get(pk=pid)
-	neg.setEstadoRechazada()
-	neg.save()
+	ne = Nota.objects.get(pk=pid)
+	ne.setEstadoRechazada()
+	ne.save()
 
-	return neg_show(request, neg.id)
+	return ne_show(request, ne.id)
