@@ -71,7 +71,7 @@ def neg_rec_index(request):
 		})
 
 
-#dar de alta nota de entrada general
+#dar de alta nota de entrada asociada a póstulante
 @group_required('mes')
 def nep_new(request):
   
@@ -100,7 +100,7 @@ def nep_new(request):
   	 })
 
 
-#ver una nota de entrada general
+#ver una nota de entrada
 @group_required('mes')
 def ne_show(request, pid):
 
@@ -108,13 +108,20 @@ def ne_show(request, pid):
 
 	ne = Nota.objects.get(pk=pid)
 
+	if ne.motivo == '':
+		titulo_plantilla = 'Nota asociada a POSTULANTE'
+		return render(request, 'neP/show.html', { 
+		'titulo_plantilla' : titulo_plantilla,
+		'ne' : ne
+		})	
+
 	return render(request, 'neg/show.html', { 
 		'titulo_plantilla' : titulo_plantilla,
 		'ne' : ne
 		})
 
 
-#nota entrada general => marcar como leida
+#nota entrada => marcar como leida
 @group_required('mes')
 def ne_leida(request, pid):
 
@@ -125,7 +132,7 @@ def ne_leida(request, pid):
 	return ne_show(request, ne.id)
 
 
-#nota entrada general => rechazar
+#nota entrada => rechazar
 @group_required('mes')
 def ne_rechazar(request, pid):
 
