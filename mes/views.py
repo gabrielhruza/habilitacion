@@ -3,10 +3,11 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from preinscripcion.decorators import group_required
+from preinscripcion.models import PreinscripcionGeneral
 from django.contrib import messages
 
 from .models 	import Nota 
-from .forms 	import NegForm, NepForm
+from .forms 	import NeForm, NegForm, NepForm
 
 # Create your views here.
 
@@ -73,7 +74,7 @@ def neg_rec_index(request):
 
 #dar de alta nota de entrada asociada a póstulante
 @group_required('mes')
-def nep_new(request):
+def nep_new(request, pgid):
   
   titulo_plantilla = 'Crear Nota de Entrada Asociada a Preinscripcion'
 
@@ -85,8 +86,11 @@ def nep_new(request):
 
     if nep.is_valid():
 
+    	pg 	= PreinscripcionGeneral.objects.get(pk=pgid)
+
     	nep = nep.save(commit=False)
     	nep.setEmisor(request.user)
+    	nep.setPG(pg)
     	messages.success(request, 'Nota creada correctamente')
     	nep.save()
 
@@ -106,14 +110,7 @@ def ne_show(request, pid):
 
 	titulo_plantilla = 'Nota entrada general'
 
-	ne = Nota.objects.get(pk=pid)
-
-	if ne.motivo == '':
-		titulo_plantilla = 'Nota asociada a POSTULANTE'
-		return render(request, 'neP/show.html', { 
-		'titulo_plantilla' : titulo_plantilla,
-		'ne' : ne
-		})	
+	ne = Nota.objects.get(pk=pid)	
 
 	return render(request, 'neg/show.html', { 
 		'titulo_plantilla' : titulo_plantilla,
@@ -141,3 +138,37 @@ def ne_rechazar(request, pid):
 	ne.save()
 
 	return ne_show(request, ne.id)
+
+
+#nota entrada => derivar (edito la fecha y el destinatario)
+@group_required('mes')
+def ne_derivar(request, pid):
+  
+  titulo_plantilla = 'Realizar DERIVACION de Nota'
+
+  context = NeForm(prefix='ne')
+
+  if request.method == "POST":
+
+    ne = NeForm(request.POST, prefix='ne')
+
+    if ne.is_valid():
+
+    	neo = Nota.objects.get(pk=pid)
+
+    	ne = ne.save(commit=False)
+
+    	ne.setEmisor(request.user)
+    	ne.save()
+    	ne.nro_de_tracking  = neo.nro_de_tracking
+    	ne.save()
+    	messages.success(request, 'Acción realizada correctamente')
+
+    else:
+      	context = ne
+
+
+  return render(request, 'neg/new.html', { 
+  	'neg' : context, 
+  	'titulo_plantilla' : titulo_plantilla
+  	 })

@@ -43,7 +43,7 @@
 	<hr>
   <a onClick="javascript:history.go(-1);" class="btn btn-default">Volver</a>
   <a onclick="modal('{% url 'ne_leida' ne.id %}', 'Marcar como leida')" href="#" class="btn btn-primary">Leída</a>
-  <a href="#" class="btn btn-warning">Derivar</a>
+  <a href="{% url 'ne_derivar' ne.id %}" class="btn btn-warning">Derivar</a>
   <a onclick="modal('{% url 'ne_rechazar' ne.id %}', 'Marcar como rechazada')" href="#" class="btn btn-danger">Rechazar</a>
 
 </div>

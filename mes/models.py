@@ -25,9 +25,10 @@ class Nota(models.Model):
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)
 	receptor		= models.ForeignKey(User, related_name='receptor', unique=False)
+	remitente  	= models.CharField(max_length=200, default='Don Pedro')
 	fecha_emision 	= models.DateField(auto_now_add=True)
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
-	nro_de_tracking = models.CharField(max_length=10, unique=True, default=id_generator)
+	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 
 	def setEmisor(self, user):
 		self.emisor = user
@@ -43,8 +44,11 @@ class Nota(models.Model):
 
 
 class NotaP(Nota):
-	p4 	= models.ForeignKey(Preinscripcion4Anios, null=True)
 	pg  = models.ForeignKey(PreinscripcionGeneral, null=True)
+
+	def setPG(self, pg):
+		self.pg = pg
+		return self
 
 
 class NotaG(Nota):

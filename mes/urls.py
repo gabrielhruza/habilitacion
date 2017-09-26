@@ -10,11 +10,13 @@ urlpatterns = [
 	url(r'^neg/rec/$', views.neg_rec_index, name='neg_rec_index'),
 
 	#nep
-	url(r'^nep/new/$', views.nep_new, name='nep_new'),
+	url(r'^nep/new/(?P<pgid>[0-9]+)/$', views.nep_new, name='nep_new'),
 
 	#ne
 	url(r'^ne/show/(?P<pid>[0-9]+)/$', views.ne_show, name='ne_show'),
 	url(r'^ne/leida/(?P<pid>[0-9]+)/$', views.ne_leida, name='ne_leida'),
 	url(r'^ne/rechazar/(?P<pid>[0-9]+)/$', views.ne_rechazar, name='ne_rechazar'),
-   
+	url(r'^ne/derivar/(?P<pid>[0-9]+)/$', views.ne_derivar, name='ne_derivar'),
+	
+
 ]
