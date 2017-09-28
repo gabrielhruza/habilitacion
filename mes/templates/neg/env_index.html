@@ -55,7 +55,7 @@
 <!-- Button trigger modal -->
 <!-- Modal -->
 <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
+  <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -63,7 +63,6 @@
       </div>
       <div class="modal-body">
         
-        <div style="max-height: 470px; overflow-y: scroll;">
         <table class="table table-bordered table-striped table-hover" id="tracking">
         <thead>
             <tr>
@@ -78,7 +77,6 @@
         <tbody>      
         </tbody>
         </table>
-        </div>
 
       </div>
       <div class="modal-footer">
@@ -101,9 +99,9 @@ function modal($url, $titulo){
         success: function (data) {
           
             var trHTML = '';
-            $.each(JSON.parse(data), function (i, item) {
+            $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
 
-                var date=new Date(item.fields.fecha_emision);
+                var date=new Date(item.fecha_emision);
 
                 fecha_emision = date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
 
@@ -111,11 +109,11 @@ function modal($url, $titulo){
                 trHTML += 
 
                 '<tr><td>'  + fecha_emision + 
-                '</td><td>' + item.fields.emisor + 
-                '</td><td>' + item.fields.receptor +
-                '</td><td>' + item.fields.motivo +
-                '</td><td>' + item.fields.nro_de_tracking +
-                '</td><td>' + item.fields.estado +
+                '</td><td>' + item.emisor + 
+                '</td><td>' + item.receptor +
+                '</td><td>' + item.motivo +
+                '</td><td>' + item.nro_de_tracking +
+                '</td><td>' + item.estado +
 
                 '</td></tr>';
             });
