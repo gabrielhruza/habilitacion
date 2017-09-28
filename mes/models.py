@@ -29,6 +29,7 @@ class Nota(models.Model):
 	fecha_emision 	= models.DateField(auto_now_add=True)
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
+	notificar 	= models.BooleanField(default=True)
 
 	def setEmisor(self, user):
 		self.emisor = user
@@ -40,6 +41,10 @@ class Nota(models.Model):
 
 	def setEstadoRechazada(self):
 		self.estado = 'RECHAZADA'
+		return self
+
+	def desactivarNotificacion(self):
+		self.notificar = False
 		return self
 
 

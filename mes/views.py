@@ -205,13 +205,13 @@ def ne_tracking(request, ndt):
 
 
 
-  #nota entrada => tracking
+#nota entrada => notificacion
 @group_required('mes')
 def ne_notificacion(request):
 
   user_logueado = request.user.username
 
-  notas = Nota.objects.filter(receptor__username=user_logueado, estado='NUEVA').order_by('fecha_emision')
+  notas = Nota.objects.filter(receptor__username=user_logueado, estado='NUEVA', notificar=True).order_by('fecha_emision')
 
   data = []
 
@@ -222,7 +222,24 @@ def ne_notificacion(request):
     data.append({'fecha_emision': nota.fecha_emision,
                   'emisor':emisor,
                   'receptor': receptor,
-                  'estado': nota.estado
+                  'estado': nota.estado,
+                  'id' : nota.id
     })
+    
+  return JsonResponse(data, safe=False)
+
+
+
+#nota entrada => desactivar notificacion
+@group_required('mes')
+def ne_desactivar_notif(request):
+
+  pid = request.GET.get('pid', None)
+
+  nota = Nota.objects.get(pk=pid)
+  nota.desactivarNotificacion()
+  nota.save()
+
+  data = []
     
   return JsonResponse(data, safe=False)
