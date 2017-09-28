@@ -245,7 +245,7 @@
     body: $body,
     icon: "{% static 'preinscripcion/images/logo-navbar.png' %}",
     timeout: 10000,
-    onClick: function () {
+    onClose: function () {
         window.focus();
         this.close();
         
@@ -260,7 +260,7 @@
 
   };
 
-  //setInterval(function(){
+  setInterval(function(){
       $.ajax({
             url: "{% url 'ne_notificacion' %}",
             dataType: 'json',
@@ -279,7 +279,7 @@
                 }
             }
       });
-  //}, 10000);
+  }, 5000);
 
 </script>
 <!-- ./push notifications -->
