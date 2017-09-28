@@ -18,6 +18,8 @@ urlpatterns = [
 	url(r'^ne/rechazar/(?P<pid>[0-9]+)/$', views.ne_rechazar, name='ne_rechazar'),
 	url(r'^ne/derivar/(?P<pid>[0-9]+)/$', views.ne_derivar, name='ne_derivar'),
 	url(r'^ne/tracking/(?P<ndt>[0-9]+)/$', views.ne_tracking, name='ne_tracking'),
+	url(r'^ne/ne_notificacion/$', views.ne_notificacion, name='ne_notificacion'),
+
 	
 
 ]

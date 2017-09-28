@@ -23,6 +23,7 @@
   <script src="{% static 'preinscripcion/js/vfs_fonts.js' %}"></script>
   <script src="{% static 'preinscripcion/js/jszip.min.js' %}"></script>
   <script src="{% static 'preinscripcion/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/push.min.js' %}"></script>
 
     <title>{% block title %}Administracion{% endblock %}</title>
 </head>
@@ -95,7 +96,7 @@
       <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Nivel: {{ user.profile.nivel }} </a></li>
       <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Buzón<span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="notif" class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Buzón<span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="{% url 'neg_rec_index' %}">Notas Recibidas</a></li>
             <li><a href="{% url 'neg_env_index' %}">Notas Enviadas</a></li>
@@ -234,5 +235,45 @@
   ;}, 1500);
   });
   </script>
+
+  <!-- push notifications -->
+<script type="text/javascript">
+
+  function push($title, $body){
+
+    Push.create($title, {
+    body: $body,
+    icon: "{% static 'preinscripcion/images/logo-navbar.png' %}",
+    timeout: 10000,
+    onClick: function () {
+        window.focus();
+        this.close();
+    }
+    });
+
+  };
+
+  //setInterval(function(){
+      $.ajax({
+            url: "{% url 'ne_notificacion' %}",
+            dataType: 'json',
+            success: function (data) {
+                //console.log(data.length);
+                if(data.length > 0){
+                  $('#notif').addClass('text-red');
+                  $('#notif').html("<span class='badge'>"+data.length+"</span>");
+                  //$.each(JSON.parse(JSON.stringify((data))), function (i, item) {
+
+                    //var body = item.fecha_emision + '\n' + item.estado;
+                    //push(item.emisor, body);
+
+                  //});
+                }
+            }
+      });
+  //}, 10000);
+
+</script>
+<!-- ./push notifications -->
 </body>
 </html>

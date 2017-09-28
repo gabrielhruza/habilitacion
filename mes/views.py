@@ -202,3 +202,27 @@ def ne_tracking(request, ndt):
     })
     
   return JsonResponse(data, safe=False)
+
+
+
+  #nota entrada => tracking
+@group_required('mes')
+def ne_notificacion(request):
+
+  user_logueado = request.user.username
+
+  notas = Nota.objects.filter(receptor__username=user_logueado, estado='NUEVA').order_by('fecha_emision')
+
+  data = []
+
+  for nota in notas:
+    emisor = nota.emisor.username
+    receptor = nota.receptor.username
+
+    data.append({'fecha_emision': nota.fecha_emision,
+                  'emisor':emisor,
+                  'receptor': receptor,
+                  'estado': nota.estado
+    })
+    
+  return JsonResponse(data, safe=False)

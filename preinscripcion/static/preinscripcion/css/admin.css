@@ -63,6 +63,10 @@ box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
 	color: #a94442;
 }
 
+.text-red{
+	color: red;
+}
+
 .info-text{
 	float: left!important;
 	font-size: 1em !important;
