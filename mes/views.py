@@ -5,6 +5,8 @@ from django.shortcuts import render
 from preinscripcion.decorators import group_required
 from preinscripcion.models import PreinscripcionGeneral
 from django.contrib import messages
+from django.http import JsonResponse
+from django.core import serializers
 
 from .models 	import Nota 
 from .forms 	import NeForm, NegForm, NepForm
@@ -172,3 +174,14 @@ def ne_derivar(request, pid):
   	'neg' : context, 
   	'titulo_plantilla' : titulo_plantilla
   	 })
+
+
+#nota entrada => tracking
+@group_required('mes')
+def ne_tracking(request, ndt):
+
+  notas = Nota.objects.filter(nro_de_tracking=ndt).order_by('fecha_emision')
+
+  data = serializers.serialize("json", notas)
+  
+  return JsonResponse(data, safe=False)

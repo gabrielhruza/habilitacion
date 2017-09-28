@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-09-2017 a las 21:42:58
+-- Tiempo de generación: 26-09-2017 a las 17:48:49
 -- Versión del servidor: 5.5.55-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.21
 
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `auth_permission` (
   `codename` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=43 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=49 ;
 
 --
 -- Volcado de datos para la tabla `auth_permission`
@@ -136,7 +136,13 @@ INSERT INTO `auth_permission` (`id`, `name`, `content_type_id`, `codename`) VALU
 (39, 'Can delete profile', 13, 'delete_profile'),
 (40, 'Can add nota', 14, 'add_nota'),
 (41, 'Can change nota', 14, 'change_nota'),
-(42, 'Can delete nota', 14, 'delete_nota');
+(42, 'Can delete nota', 14, 'delete_nota'),
+(43, 'Can add nota p', 15, 'add_notap'),
+(44, 'Can change nota p', 15, 'change_notap'),
+(45, 'Can delete nota p', 15, 'delete_notap'),
+(46, 'Can add nota g', 16, 'add_notag'),
+(47, 'Can change nota g', 16, 'change_notag'),
+(48, 'Can delete nota g', 16, 'delete_notag');
 
 -- --------------------------------------------------------
 
@@ -168,8 +174,8 @@ INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `userna
 (1, 'pbkdf2_sha256$36000$cJBUE4zcZsiu$PYBNBaoxA7+hiUm46VEF8VwIJeiIYwr2SkPiI4UCmqk=', '2017-09-26 00:36:56', 1, 'Habilitacion', '', '', 'habilitacion@gmail.com', 1, 1, '2017-06-26 13:29:58'),
 (2, 'pbkdf2_sha256$36000$lfpRUDGP3YKt$vOmCy7mA/lB9Oopf900hkvpZluD3LPXQnEsfUkVmd2w=', '2017-09-11 16:13:40', 0, 'DirectoraNI', '', '', '', 0, 1, '2017-06-26 13:30:58'),
 (3, 'pbkdf2_sha256$36000$g54hm3OVBcco$tXTKgncRX/xdxxnL/XzKty35zsNsgbThHAO46yY8fVM=', '2017-09-11 23:16:49', 0, 'Director', '', '', '', 0, 1, '2017-06-26 13:31:23'),
-(4, 'pbkdf2_sha256$36000$oKybHiHbYTDu$MqUSeSsJ9FCSN0DZuQIEggmPtawOc26VM5bClZx9sAg=', '2017-09-14 03:05:44', 0, 'DirectoraGNI', '', '', '', 0, 1, '2017-09-09 00:39:08'),
-(6, 'pbkdf2_sha256$36000$w031KsMzZhDE$VUuHONBdYiVIMEBeQIYJTsp66uiU5Hwu40VgIJfRdyk=', '2017-09-26 00:38:45', 0, 'DirectoraGNP', '', '', '', 0, 1, '2017-09-12 23:08:25'),
+(4, 'pbkdf2_sha256$36000$oKybHiHbYTDu$MqUSeSsJ9FCSN0DZuQIEggmPtawOc26VM5bClZx9sAg=', '2017-09-26 00:54:54', 0, 'DirectoraGNI', '', '', '', 0, 1, '2017-09-09 00:39:08'),
+(6, 'pbkdf2_sha256$36000$w031KsMzZhDE$VUuHONBdYiVIMEBeQIYJTsp66uiU5Hwu40VgIJfRdyk=', '2017-09-26 20:44:07', 0, 'DirectoraGNP', '', '', '', 0, 1, '2017-09-12 23:08:25'),
 (7, 'pbkdf2_sha256$36000$ULvU6sfKnlzM$VaWaRg3CDbwuf9aj2EHAMJT3rUd9Xypqt5xxfErQTis=', '2017-09-14 02:44:43', 0, 'DirectoraGNS', '', '', '', 0, 1, '2017-09-12 23:09:37');
 
 -- --------------------------------------------------------
@@ -280,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `django_content_type` (
   `model` varchar(100) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
 
 --
 -- Volcado de datos para la tabla `django_content_type`
@@ -293,6 +299,8 @@ INSERT INTO `django_content_type` (`id`, `app_label`, `model`) VALUES
 (4, 'auth', 'user'),
 (5, 'contenttypes', 'contenttype'),
 (14, 'mes', 'nota'),
+(16, 'mes', 'notag'),
+(15, 'mes', 'notap'),
 (13, 'pg', 'profile'),
 (8, 'preinscripcion', 'ciclolectivo'),
 (9, 'preinscripcion', 'postulante'),
@@ -314,7 +322,7 @@ CREATE TABLE IF NOT EXISTS `django_migrations` (
   `name` varchar(255) NOT NULL,
   `applied` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=20 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
 
 --
 -- Volcado de datos para la tabla `django_migrations`
@@ -339,7 +347,11 @@ INSERT INTO `django_migrations` (`id`, `app`, `name`, `applied`) VALUES
 (16, 'mes', '0004_auto_20170925_1928', '2017-09-26 00:32:17'),
 (17, 'pg', '0001_initial', '2017-09-26 00:32:18'),
 (18, 'preinscripcion', '0001_initial', '2017-09-26 00:32:24'),
-(19, 'sessions', '0001_initial', '2017-09-26 00:32:24');
+(19, 'sessions', '0001_initial', '2017-09-26 00:32:24'),
+(20, 'mes', '0005_notap', '2017-09-26 00:47:47'),
+(21, 'mes', '0006_notag', '2017-09-26 00:49:16'),
+(22, 'mes', '0007_auto_20170925_2253', '2017-09-26 01:53:46'),
+(23, 'mes', '0008_auto_20170925_2318', '2017-09-26 02:18:23');
 
 -- --------------------------------------------------------
 
@@ -360,6 +372,7 @@ CREATE TABLE IF NOT EXISTS `django_session` (
 --
 
 INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALUES
+('00cfcx36xouwhhf8uoa8vnball1y3t0g', 'YTcyMjc2NzRiNGQ5NjRiMzg0YTJjNTk3OTRkMzFlYWEzODE1MmZhMDp7Il9hdXRoX3VzZXJfaGFzaCI6IjQ5ZjQyMzMzYmYxYTI3NTdhNGZkNmViNWVmNGEzMzM4MzIyNWNlZTgiLCJfYXV0aF91c2VyX2lkIjoiNiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2017-10-10 20:44:07'),
 ('07k6bw8n7v4gxbtp6k9izdw2ggyz6vrp', 'MzI3OWYxMGY0YzBjMTE0Yjc1ZTc4NWQ5Y2E1Yzk4YWQ4NDhiNGU0ZDp7Il9hdXRoX3VzZXJfaGFzaCI6ImU0NmQ5NzU3ZmVjY2FhOWEzMjhmYjljYjhkMzg2YzM2MDFhMDFhZDkiLCJfYXV0aF91c2VyX2lkIjoiMiIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2017-07-14 02:07:20'),
 ('11vadhsbesa2w9cei4ukxtpa5kl9tn9w', 'YThhNWI2ZWRhZGQ5NWE5MGJkZjJhNTRiMTk1YTMyNDViZjNiZjQ1MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImU0NmQ5NzU3ZmVjY2FhOWEzMjhmYjljYjhkMzg2YzM2MDFhMDFhZDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=', '2017-07-15 15:18:41'),
 ('3xo895ke9acobhnnzj585esjg5n9413i', 'ZjE3ZTFjMWU5MGE2ZDM5NWQyMGIwZDg1MWM4YzI5M2Y4ZWUxY2Y4NDp7Il9hdXRoX3VzZXJfaGFzaCI6IjQ5ZjQyMzMzYmYxYTI3NTdhNGZkNmViNWVmNGEzMzM4MzIyNWNlZTgiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI2In0=', '2017-10-10 00:38:45'),
@@ -370,7 +383,6 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('hphmkfax0n5nywprn7gby71wxqajc0jv', 'N2JlMDRkZTgzNmU5NDk5OWQwYWI2YzcyZTkxYWUzOTUyOGI5ZTc0Yjp7ImRhdGFfbWFkcmUiOnsidGVsZWZvbm9QZXJzb25hbCI6IjU1MzQ1MzQ1MzQ1IiwiYXBlbGxpZG8iOiJWYXN0aWsiLCJkbmkiOiIxNjYzNjIxMiIsIm5vbWJyZSI6Ik1hcnRhIiwibmFjaW9uYWxpZGFkIjoiQXJnZW50aW5vIiwiZW1haWwiOiJjYWZzZGZzZGZAc2QuY29tIiwiZG9taWNpbGlvIjoic2Rmc2ZkZnZ4Y3ZjdiJ9LCJkYXRhX3ZpdmVjb24iOnsidGVsZWZvbm9QZXJzb25hbCI6IjU1MzQ1MzQ1MzQ1IiwiYXBlbGxpZG8iOiJQZXJlemllbmUiLCJkbmkiOiIzNDM0MzQzNCIsIm5vbWJyZSI6ImRkZnNkZiIsIm5hY2lvbmFsaWRhZCI6InNkZnNkZnNkZmYiLCJlbWFpbCI6ImNhZnNkZnNkZkBzZC5jb20iLCJkb21pY2lsaW8iOiJzZGZzZmRmdnhjdmN2In0sIm5yb3ByZWluc2NyaXB0byI6IjkxOTU4NTM2IiwiZGF0YV9wYWRyZSI6eyJ0ZWxlZm9ub1BlcnNvbmFsIjoiNTUzNDUzNDUzNDUiLCJhcGVsbGlkbyI6IlBlcmV6aWVuZSIsImRuaSI6IjM0MzQzNDM0Iiwibm9tYnJlIjoiZGRmc2RmIiwibmFjaW9uYWxpZGFkIjoic2Rmc2Rmc2RmZiIsImVtYWlsIjoiY2Fmc2Rmc2RmQHNkLmNvbSIsImRvbWljaWxpbyI6InNkZnNmZGZ2eGN2Y3YifX0=', '2017-09-25 19:46:33'),
 ('o830s8dpuxd8fitmp7fcqvf5tyupo1qk', 'MTIyYzU0NmYwYzE0NmFkMDIzZGZiYzNjYTYxYjE1ZjJkMDQ5MTgxNDp7ImRhdGFfbWFkcmUiOnsidGVsZWZvbm9QZXJzb25hbCI6IjU1MzQ1MzQ1MzQ1IiwiYXBlbGxpZG8iOiJWYXN0aWsiLCJkbmkiOiIxNjYzNjIxMiIsIm5vbWJyZSI6Ik1hcnRhIiwibmFjaW9uYWxpZGFkIjoiQXJnZW50aW5vIiwiZW1haWwiOiJjYWZzZGZzZGZAc2QuY29tIiwiZG9taWNpbGlvIjoic2Rmc2ZkZnZ4Y3ZjdiJ9LCJkYXRhX3ZpdmVjb24iOnsidGVsZWZvbm9QZXJzb25hbCI6IjU1MzQ1MzQ1MzQ1IiwiYXBlbGxpZG8iOiJQZXJlemllbmUiLCJkbmkiOiIyMzIzMjMyMyIsIm5vbWJyZSI6ImRkZnNkZiIsIm5hY2lvbmFsaWRhZCI6InNkZnNkZnNkZmYiLCJlbWFpbCI6ImNhZnNkZnNkZkBzZC5jb20iLCJkb21pY2lsaW8iOiJzZGZzZmRmdnhjdmN2In0sIm5yb3ByZWluc2NyaXB0byI6IjUwMTk3MTgzIiwiZGF0YV9wYWRyZSI6eyJ0ZWxlZm9ub1BlcnNvbmFsIjoiNTUzNDUzNDUzNDUiLCJhcGVsbGlkbyI6IlBlcmV6aWVuZSIsImRuaSI6IjIzMjMyMzIzIiwibm9tYnJlIjoiZGRmc2RmIiwibmFjaW9uYWxpZGFkIjoic2Rmc2Rmc2RmZiIsImVtYWlsIjoiY2Fmc2Rmc2RmQHNkLmNvbSIsImRvbWljaWxpbyI6InNkZnNmZGZ2eGN2Y3YifX0=', '2017-09-24 23:40:43'),
 ('otab6rmx19duuuvv852e1eknxtkac877', 'ZjdlMWM0MTNjNDc2Mjk3NjRlMDkyNjkzY2UwMjQ2YjI2NTI5MjdmNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImUwNzUyZWY5Mzc4ZjliNTAxMTFlN2M4M2QwN2NiZWM5MTc1ODI0YzkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=', '2017-09-24 23:31:41'),
-('q35eqdl2a84seebe7xb49x5yem6cbwkl', 'ZDNjNzljMDg3MGUyNmRjODE3Nzk3YTg5NGI0MTc1MjM5YTU3NzNjNDp7ImRhdGFfbWFkcmUiOnsidGVsZWZvbm9QZXJzb25hbCI6IjM2MjQzNDU0NDU0NSIsImFwZWxsaWRvIjoiVmFzdGlrIiwiZG5pIjoiMTY2MzYyMTIiLCJub21icmUiOiJNYXJ0YSIsIm5hY2lvbmFsaWRhZCI6IkFyZ2VudGlubyIsImVtYWlsIjoiY2Fmc2Rmc2RmQHNkLmNvbSIsImRvbWljaWxpbyI6InNkZnNmZGZ2eGN2Y3YifSwiZGF0YV92aXZlY29uIjp7InRlbGVmb25vUGVyc29uYWwiOiIzNjI0MzQ1NDQ1NDUiLCJhcGVsbGlkbyI6IlBlcmV6aWVuZSIsImRuaSI6IjIzMjMyMzIzIiwibm9tYnJlIjoiZGRmc2RmIiwibmFjaW9uYWxpZGFkIjoic2Rmc2Rmc2RmZiIsImVtYWlsIjoiY2Fmc2Rmc2RmQHNkLmNvbSIsImRvbWljaWxpbyI6InNkZnNmZGZ2eGN2Y3YifSwibnJvcHJlaW5zY3JpcHRvIjoiMzM2NDI4NDIiLCJkYXRhX3BhZHJlIjp7InRlbGVmb25vUGVyc29uYWwiOiIzNjI0MzQ1NDQ1NDUiLCJhcGVsbGlkbyI6IlBlcmV6aWVuZSIsImRuaSI6IjIzMjMyMzIzIiwibm9tYnJlIjoiZGRmc2RmIiwibmFjaW9uYWxpZGFkIjoic2Rmc2Rmc2RmZiIsImVtYWlsIjoiY2Fmc2Rmc2RmQHNkLmNvbSIsImRvbWljaWxpbyI6InNkZnNmZGZ2eGN2Y3YifX0=', '2017-10-10 00:41:58'),
 ('qv7tejf644woct19zag0v2tizf85tu8t', 'NjQ1OTI5MDdmYzMxOGU5MTAxNGIyNDJkNjEyMWY0ZDQzZDQyYjZmOTp7Il9hdXRoX3VzZXJfaGFzaCI6ImJlODBiNzFiYTkzYzA5MWM3YWYxZTU3YzE3ZTY5MzVjNDhhYjhmNTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2017-09-26 22:51:28'),
 ('qya759jjos0phvg2vlnix28vy6chbuat', 'YThhNWI2ZWRhZGQ5NWE5MGJkZjJhNTRiMTk1YTMyNDViZjNiZjQ1MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImU0NmQ5NzU3ZmVjY2FhOWEzMjhmYjljYjhkMzg2YzM2MDFhMDFhZDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=', '2017-07-10 18:26:38'),
 ('viz544ra2i4jp1xtbk8ir6wu5u8sqg4g', 'YThhNWI2ZWRhZGQ5NWE5MGJkZjJhNTRiMTk1YTMyNDViZjNiZjQ1MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImU0NmQ5NzU3ZmVjY2FhOWEzMjhmYjljYjhkMzg2YzM2MDFhMDFhZDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=', '2017-07-14 21:11:27');
@@ -388,11 +400,36 @@ CREATE TABLE IF NOT EXISTS `mes_nota` (
   `emisor_id` int(11) NOT NULL,
   `receptor_id` int(11) NOT NULL,
   `nro_de_tracking` varchar(10) NOT NULL,
+  `remitente` varchar(200) NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `nro_de_tracking` (`nro_de_tracking`),
   KEY `mes_nota_emisor_id_9f4303de` (`emisor_id`),
   KEY `mes_nota_receptor_id_3294eaad` (`receptor_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=33 ;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mes_notag`
+--
+
+CREATE TABLE IF NOT EXISTS `mes_notag` (
+  `nota_ptr_id` int(11) NOT NULL,
+  `motivo` varchar(200) NOT NULL,
+  PRIMARY KEY (`nota_ptr_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `mes_notap`
+--
+
+CREATE TABLE IF NOT EXISTS `mes_notap` (
+  `nota_ptr_id` int(11) NOT NULL,
+  `pg_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`nota_ptr_id`),
+  KEY `mes_notap_pg_id_91e2381b_fk_preinscri` (`pg_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -472,14 +509,6 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_postulante` (
   KEY `preinscripcion_postu_tutor_id_5da4810b_fk_preinscri` (`tutor_id`),
   KEY `preinscripcion_postu_vive_con_id_9425090a_fk_preinscri` (`vive_con_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
-
---
--- Volcado de datos para la tabla `preinscripcion_postulante`
---
-
-INSERT INTO `preinscripcion_postulante` (`id`, `apellido`, `nombre`, `fecha_nacimiento`, `edad`, `dni`, `genero`, `domicilio`, `madre_id`, `padre_id`, `pg_id`, `preinscripcion_id`, `tutor_id`, `vive_con_id`) VALUES
-(1, 'Perez', 'Jose', '1900-03-12', 117, '45789987', 'MASCULINO', 'French 414', 353, 352, 98, NULL, NULL, 354),
-(2, 'Perez', 'Jose luis', '2014-09-03', 3, '45789987', 'MASCULINO', 'French 414', 356, 355, 99, NULL, NULL, 357);
 
 -- --------------------------------------------------------
 
@@ -567,31 +596,6 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_preinscripciongeneral` (
   KEY `preinscripcion_prein_usuarioqueconfirma_i_bfe0d098_fk_auth_user` (`usuarioqueconfirma_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=100 ;
 
---
--- Volcado de datos para la tabla `preinscripcion_preinscripciongeneral`
---
-
-INSERT INTO `preinscripcion_preinscripciongeneral` (`id`, `fecha`, `hora`, `nro_de_preinscripto`, `estado`, `fecha_confirmado`, `confirmado`, `responsablequeconfirma`, `motivo`, `nivel`, `anio`, `institucion_anterior`, `localidad`, `provincia`, `telefono`, `cubrio_vacante`, `cicloLectivo_id`, `usuarioqueconfirma_id`) VALUES
-(81, '2017-09-09', '21:54:46', '51750727', 'CONFIRMADO', '2017-09-10', 1, NULL, 'No contesta', 'PRIMARIO', '3', 'Escuela anterior', '', '', '', 0, 1, 4),
-(82, '2017-09-10', '19:09:27', '71930657', 'CONFIRMADO', '2017-09-10', 1, NULL, 'No contesta', 'PRIMARIO', '1', 'Escuela anterior', '', '', '', 0, 1, 4),
-(83, '2017-09-10', '20:31:15', '29984668', 'ALUMNO', '2017-09-10', 1, NULL, 'No contesta', 'INICIAL', '1', 'Escuela anterior', '', '', '', 0, 1, 4),
-(84, '2017-09-10', '20:35:47', '84023632', 'ALUMNO', '2017-09-12', 1, NULL, 'No contesta', 'SECUNDARIO', '4', 'Escuela anterior', '', '', '', 0, 1, 7),
-(85, '2017-09-10', '20:40:42', '50197183', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '3', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(86, '2017-09-11', '12:18:37', '84694684', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '3', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(87, '2017-09-11', '12:57:11', '17042019', 'CONFIRMADO', '2017-09-11', 1, NULL, 'Los tiempos han cambiado, vivimos una cultura dinámica donde los conocimientos tienen gran movilidad. En la actualidad diez años equivalen a un siglo de otros tiempos. La actitud generalizada de nuestro tiempo es la de seguir aprendiendo en un proceso de continuo aprendizaje y continua revisión de los conocimientos.', 'PRIMARIO', '3', 'Escuela anterior', '', '', '', 0, 1, 4),
-(88, '2017-09-11', '12:58:15', '56753124', 'PREINSCRIPTO', NULL, 0, NULL, 'Los tiempos han cambiado, vivimos una cultura dinámica donde los conocimientos tienen gran movilidad. En la actualidad diez años equivalen a un siglo de otros tiempos. La actitud generalizada de nuestro tiempo es la de seguir aprendiendo en un proceso de continuo aprendizaje y continua revisión de los conocimientos.', 'PRIMARIO', '3', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(89, '2017-09-11', '13:31:14', '28818929', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'SECUNDARIO', '4', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(90, '2017-09-11', '13:31:39', '69085682', 'ALUMNO', '2017-09-12', 1, NULL, 'No contesta', 'INICIAL', '6', 'Escuela anterior', '', '', '', 0, 1, 4),
-(91, '2017-09-11', '13:31:48', '68231671', 'ALUMNO', '2017-09-12', 1, NULL, 'No contesta', 'INICIAL', '6', 'Escuela anterior', '', '', '', 0, 1, 4),
-(92, '2017-09-11', '13:32:13', '96038429', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'SECUNDARIO', '6', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(93, '2017-09-11', '16:45:32', '23852447', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '4', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(94, '2017-09-11', '16:46:33', '91958536', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'INICIAL', '1', 'Escuela anterior', '', '', '', 0, 1, NULL),
-(95, '2017-09-11', '20:24:34', '93079590', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '2', 'Escuela', '', '', '', 0, 1, NULL),
-(96, '2017-09-11', '20:29:55', '54956848', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '3', 'Escuela anterior', '', '', '', 0, 2, NULL),
-(97, '2017-09-11', '20:32:28', '51948871', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '2', 'Escuela anterior', '', '', '', 0, 2, NULL),
-(98, '2017-09-25', '21:40:19', '89623979', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '3', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, NULL),
-(99, '2017-09-25', '21:41:58', '33642842', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'PRIMARIO', '7', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, NULL);
-
 -- --------------------------------------------------------
 
 --
@@ -611,81 +615,6 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_responsable` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=358 ;
 
 --
--- Volcado de datos para la tabla `preinscripcion_responsable`
---
-
-INSERT INTO `preinscripcion_responsable` (`id`, `apellido`, `nombre`, `dni`, `email`, `domicilio`, `nacionalidad`, `telefonoPersonal`) VALUES
-(289, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(290, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(291, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(292, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(293, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(294, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(295, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(296, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(297, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(298, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(299, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(300, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(301, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(302, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(303, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(304, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(305, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(306, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(307, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(308, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(309, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(310, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(311, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(312, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(313, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(314, 'Vastik Asdddd', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(315, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(316, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(317, 'Vastik Asdddd', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(318, 'Carlos', 'Carlos', '21111111', 'carlos@gmail.com', 'Rivadavia 243', 'Argentino', '362428973733'),
-(319, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(320, 'Vastik Asdddd', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(321, 'Carlos', 'Carlos', '21111111', 'carlos@gmail.com', 'Rivadavia 243', 'Argentino', '362428973733'),
-(322, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(323, 'Vastik Asdddd', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(324, 'Carlos', 'Carlos', '21111111', 'carlos@gmail.com', 'Rivadavia 243', 'Argentino', '362428973733'),
-(325, 'Pereziene', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(326, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(327, 'Pereziene', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(328, 'Pereziene', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(329, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(330, 'Pereziene', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(331, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(332, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(333, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(334, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(335, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(336, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(337, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(338, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(339, 'Pereziene', 'Javier', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(340, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(341, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(342, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(343, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(344, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(345, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(346, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(347, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(348, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(349, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '55345345345'),
-(350, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(351, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '55345345345'),
-(352, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '362434544545'),
-(353, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '362434544545'),
-(354, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '362434544545'),
-(355, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '362434544545'),
-(356, 'Vastik', 'Marta', '16636212', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'Argentino', '362434544545'),
-(357, 'Pereziene', 'ddfsdf', '23232323', 'cafsdfsdf@sd.com', 'sdfsfdfvxcvcv', 'sdfsdfsdff', '362434544545');
-
---
 -- Restricciones para tablas volcadas
 --
 
@@ -693,8 +622,8 @@ INSERT INTO `preinscripcion_responsable` (`id`, `apellido`, `nombre`, `dni`, `em
 -- Filtros para la tabla `auth_group_permissions`
 --
 ALTER TABLE `auth_group_permissions`
-  ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
+  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`);
 
 --
 -- Filtros para la tabla `auth_permission`
@@ -713,15 +642,15 @@ ALTER TABLE `auth_user_groups`
 -- Filtros para la tabla `auth_user_user_permissions`
 --
 ALTER TABLE `auth_user_user_permissions`
-  ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
+  ADD CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
+  ADD CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`);
 
 --
 -- Filtros para la tabla `django_admin_log`
 --
 ALTER TABLE `django_admin_log`
-  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`),
-  ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`);
+  ADD CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  ADD CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `mes_nota`
@@ -729,6 +658,19 @@ ALTER TABLE `django_admin_log`
 ALTER TABLE `mes_nota`
   ADD CONSTRAINT `mes_nota_emisor_id_9f4303de_fk_auth_user_id` FOREIGN KEY (`emisor_id`) REFERENCES `auth_user` (`id`),
   ADD CONSTRAINT `mes_nota_receptor_id_3294eaad_fk_auth_user_id` FOREIGN KEY (`receptor_id`) REFERENCES `auth_user` (`id`);
+
+--
+-- Filtros para la tabla `mes_notag`
+--
+ALTER TABLE `mes_notag`
+  ADD CONSTRAINT `mes_notag_nota_ptr_id_1ac04fe0_fk_mes_nota_id` FOREIGN KEY (`nota_ptr_id`) REFERENCES `mes_nota` (`id`);
+
+--
+-- Filtros para la tabla `mes_notap`
+--
+ALTER TABLE `mes_notap`
+  ADD CONSTRAINT `mes_notap_nota_ptr_id_501d0b80_fk_mes_nota_id` FOREIGN KEY (`nota_ptr_id`) REFERENCES `mes_nota` (`id`),
+  ADD CONSTRAINT `mes_notap_pg_id_91e2381b_fk_preinscri` FOREIGN KEY (`pg_id`) REFERENCES `preinscripcion_preinscripciongeneral` (`id`);
 
 --
 -- Filtros para la tabla `pg_profile`
@@ -740,12 +682,12 @@ ALTER TABLE `pg_profile`
 -- Filtros para la tabla `preinscripcion_postulante`
 --
 ALTER TABLE `preinscripcion_postulante`
-  ADD CONSTRAINT `preinscripcion_postu_vive_con_id_9425090a_fk_preinscri` FOREIGN KEY (`vive_con_id`) REFERENCES `preinscripcion_responsable` (`id`),
   ADD CONSTRAINT `preinscripcion_postu_madre_id_00826143_fk_preinscri` FOREIGN KEY (`madre_id`) REFERENCES `preinscripcion_responsable` (`id`),
   ADD CONSTRAINT `preinscripcion_postu_padre_id_dcc6a93c_fk_preinscri` FOREIGN KEY (`padre_id`) REFERENCES `preinscripcion_responsable` (`id`),
   ADD CONSTRAINT `preinscripcion_postu_pg_id_6c4950e6_fk_preinscri` FOREIGN KEY (`pg_id`) REFERENCES `preinscripcion_preinscripciongeneral` (`id`),
   ADD CONSTRAINT `preinscripcion_postu_preinscripcion_id_3926d06c_fk_preinscri` FOREIGN KEY (`preinscripcion_id`) REFERENCES `preinscripcion_preinscripcion4anios` (`id`),
-  ADD CONSTRAINT `preinscripcion_postu_tutor_id_5da4810b_fk_preinscri` FOREIGN KEY (`tutor_id`) REFERENCES `preinscripcion_responsable` (`id`);
+  ADD CONSTRAINT `preinscripcion_postu_tutor_id_5da4810b_fk_preinscri` FOREIGN KEY (`tutor_id`) REFERENCES `preinscripcion_responsable` (`id`),
+  ADD CONSTRAINT `preinscripcion_postu_vive_con_id_9425090a_fk_preinscri` FOREIGN KEY (`vive_con_id`) REFERENCES `preinscripcion_responsable` (`id`);
 
 --
 -- Filtros para la tabla `preinscripcion_postulanteconfirmado`
@@ -757,22 +699,22 @@ ALTER TABLE `preinscripcion_postulanteconfirmado`
 -- Filtros para la tabla `preinscripcion_postulante_hermanos`
 --
 ALTER TABLE `preinscripcion_postulante_hermanos`
-  ADD CONSTRAINT `preinscripcion_postu_to_postulante_id_ed788078_fk_preinscri` FOREIGN KEY (`to_postulante_id`) REFERENCES `preinscripcion_postulante` (`id`),
-  ADD CONSTRAINT `preinscripcion_postu_from_postulante_id_fbe3c8f8_fk_preinscri` FOREIGN KEY (`from_postulante_id`) REFERENCES `preinscripcion_postulante` (`id`);
+  ADD CONSTRAINT `preinscripcion_postu_from_postulante_id_fbe3c8f8_fk_preinscri` FOREIGN KEY (`from_postulante_id`) REFERENCES `preinscripcion_postulante` (`id`),
+  ADD CONSTRAINT `preinscripcion_postu_to_postulante_id_ed788078_fk_preinscri` FOREIGN KEY (`to_postulante_id`) REFERENCES `preinscripcion_postulante` (`id`);
 
 --
 -- Filtros para la tabla `preinscripcion_preinscripcion4anios`
 --
 ALTER TABLE `preinscripcion_preinscripcion4anios`
-  ADD CONSTRAINT `preinscripcion_prein_usuarioqueconfirma_i_d4b60181_fk_auth_user` FOREIGN KEY (`usuarioqueconfirma_id`) REFERENCES `auth_user` (`id`),
-  ADD CONSTRAINT `preinscripcion_prein_cicloLectivo_id_3d0da2a0_fk_preinscri` FOREIGN KEY (`cicloLectivo_id`) REFERENCES `preinscripcion_ciclolectivo` (`id`);
+  ADD CONSTRAINT `preinscripcion_prein_cicloLectivo_id_3d0da2a0_fk_preinscri` FOREIGN KEY (`cicloLectivo_id`) REFERENCES `preinscripcion_ciclolectivo` (`id`),
+  ADD CONSTRAINT `preinscripcion_prein_usuarioqueconfirma_i_d4b60181_fk_auth_user` FOREIGN KEY (`usuarioqueconfirma_id`) REFERENCES `auth_user` (`id`);
 
 --
 -- Filtros para la tabla `preinscripcion_preinscripciongeneral`
 --
 ALTER TABLE `preinscripcion_preinscripciongeneral`
-  ADD CONSTRAINT `preinscripcion_prein_usuarioqueconfirma_i_bfe0d098_fk_auth_user` FOREIGN KEY (`usuarioqueconfirma_id`) REFERENCES `auth_user` (`id`),
-  ADD CONSTRAINT `preinscripcion_prein_cicloLectivo_id_5a790dec_fk_preinscri` FOREIGN KEY (`cicloLectivo_id`) REFERENCES `preinscripcion_ciclolectivo` (`id`);
+  ADD CONSTRAINT `preinscripcion_prein_cicloLectivo_id_5a790dec_fk_preinscri` FOREIGN KEY (`cicloLectivo_id`) REFERENCES `preinscripcion_ciclolectivo` (`id`),
+  ADD CONSTRAINT `preinscripcion_prein_usuarioqueconfirma_i_bfe0d098_fk_auth_user` FOREIGN KEY (`usuarioqueconfirma_id`) REFERENCES `auth_user` (`id`);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

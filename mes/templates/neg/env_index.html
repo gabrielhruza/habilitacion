@@ -37,6 +37,10 @@
                 <a href="{% url 'ne_show' neg.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
+                |
+                <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Ver tracking')">
+                    <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                </a>
                 </td>
             </tr>
         {% endfor %}
@@ -47,4 +51,82 @@
 </div>
 </div>
 </div>
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><!-- titulo modal--></h4>
+      </div>
+      <div class="modal-body">
+        
+        <div style="max-height: 470px; overflow-y: scroll;">
+        <table class="table table-bordered table-striped table-hover" id="tracking">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Emisor</th>
+                <th>Receptor</th>
+                <th>Motivo</th>
+                <th>N° de tracking</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>      
+        </tbody>
+        </table>
+        </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function modal($url, $titulo){
+
+    $modal  = $('#myModal').modal();
+    $modal_title = $('.modal-title')[0];
+    $modal_title.innerText = $titulo;
+
+     $.ajax({
+        url: $url,
+        dataType: 'json',
+        success: function (data) {
+          
+            var trHTML = '';
+            $.each(JSON.parse(data), function (i, item) {
+
+                var date=new Date(item.fields.fecha_emision);
+
+                fecha_emision = date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+
+
+                trHTML += 
+
+                '<tr><td>'  + fecha_emision + 
+                '</td><td>' + item.fields.emisor + 
+                '</td><td>' + item.fields.receptor +
+                '</td><td>' + item.fields.motivo +
+                '</td><td>' + item.fields.nro_de_tracking +
+                '</td><td>' + item.fields.estado +
+
+                '</td></tr>';
+            });
+
+        $('#tracking tbody').html(trHTML);
+
+        }
+      });
+
+}
+</script>
+<!-- ./Modal -->
+
 {% endblock %}
