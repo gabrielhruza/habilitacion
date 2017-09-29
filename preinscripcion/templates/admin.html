@@ -125,28 +125,7 @@
 
 <div id="content" class="container-fluid">
 
-{% comment %}
-{# block ciclo #}
-<div class="row">
-  <div class="col-sm-12 col-md-4 form-horizontal">
-    <div class="form-group">
-    <label for="ciclolectivo" class="col-sm-4 control-label" style="color: white">Ciclo Lectivo:</label>
-    <div class="col-sm-4">
-      <select class="form-control" id="ciclolectivo">
-      {% for cl in request.session.cles %}
-        {% if cl.fecha_apertura_ciclo.year == request.session.cl %}
-        <option selected="true"> {{ request.session.cl }}</option>
-        {% else %}
-        <option> {{ request.session.cl }}</option>
-        {% endif%}
-      {% endfor %}
-      </select>    
-    </div>
-   </div>
-  </div>
-</div>  
-{# endblock #}
-{% endcomment %}
+
 
     <div class="col-md-12">
       {% block filtros %}{% endblock %}

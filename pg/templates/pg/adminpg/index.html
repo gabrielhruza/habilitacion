@@ -1,5 +1,6 @@
 {% extends "admin.html" %}
 
+{% load auth_extras %}
 {% load bootstrap3 %}
 
 {% block filtros %}
@@ -40,6 +41,7 @@
 </div>
 </div>
 
+{% if not request.user|has_group:'recepcion' %} 
 <div class="col-md-8 col-xs-12">
 <div class="panel panel-default">
     <div class="panel-body">
@@ -56,6 +58,7 @@
     </div>
 </div>
 </div>
+{% endif %}
 
 </div>
 {% endblock %}
