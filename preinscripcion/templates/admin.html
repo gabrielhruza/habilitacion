@@ -24,6 +24,7 @@
   <script src="{% static 'preinscripcion/js/jszip.min.js' %}"></script>
   <script src="{% static 'preinscripcion/js/jquery-ui.js' %}"></script>
   <script src="{% static 'preinscripcion/js/push.min.js' %}"></script>
+  <script src="{% static 'preinscripcion/js/serviceWorker.min.js' %}"></script>
 
     <title>{% block title %}Administracion{% endblock %}</title>
 </head>
@@ -244,7 +245,7 @@
     $push = Push.create($title, {
     body: $body,
     icon: "{% static 'preinscripcion/images/logo-navbar.png' %}",
-    timeout: 10000,
+    timeout: 4000,
     onClose: function () {
         window.focus();
         this.close();
@@ -260,7 +261,7 @@
 
   };
 
-  setInterval(function(){
+  //setInterval(function(){
       $.ajax({
             url: "{% url 'ne_notificacion' %}",
             dataType: 'json',
@@ -279,7 +280,7 @@
                 }
             }
       });
-  }, 5000);
+  //}, 5000);
 
 </script>
 <!-- ./push notifications -->
