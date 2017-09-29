@@ -10,7 +10,8 @@ class Profile(models.Model):
 	NIVEL = (
 	    ('INICIAL', 'Inicial'),
 	    ('PRIMARIO', 'Primario'),
-	    ('SECUNDARIO', 'Secundario')
+	    ('SECUNDARIO', 'Secundario'),
+	    ('TODOS', 'Todos')
     )
 
 	user 	= models.OneToOneField(User, on_delete=models.CASCADE)

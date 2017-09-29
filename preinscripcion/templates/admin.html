@@ -80,7 +80,7 @@
       <!-- ./rol -->
 
       <!-- Solo accesible para usuarios con rol gestion_pg -->
-        {% if request.user|has_group:'gestion_pg' %} 
+        {% if request.user|has_group:'gestion_pg' and not request.user|has_group:'recepcion' %} 
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Listado<span class="caret"></span></a>
           <ul class="dropdown-menu">
@@ -90,7 +90,13 @@
         </li>
         <li><a href="{% url 'admin_pg_confirmados' %}">Asignar vacante</a></li>
         {% endif %}
-        <!-- ./rol -->
+      <!-- ./rol -->
+
+      <!-- Solo accesible para usuarios con rol recepcion -->
+        {% if request.user|has_group:'recepcion' %} 
+        <li><a href="{% url 'admin_pg_index_recepcion' %}">Preinscripciones Confirmadas</a></li>
+        {% endif %}
+      <!-- ./rol -->
 
       </ul>
 
