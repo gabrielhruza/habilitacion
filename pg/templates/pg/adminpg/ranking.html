@@ -63,12 +63,11 @@
 <div class="panel-body">
 
     <div style="max-height: 570px; overflow-y: scroll;">
-    <table class="table table-bordered table-striped table-hover" id="">
+    <table class="table table-bordered table-striped table-hover" id="table">
         <thead>
             <tr>
                 <th>Numero</th>
                 <th>Estado</th>
-                <th>Cant. Notas</th>
                 <th>Motivo</th>
                 <th>Acciones</th>
             </tr>
@@ -78,7 +77,6 @@
             <tr>
                 <td>{{ pg.nro_de_preinscripto }}</td>
                 <td>{{ pg.estado }}</td>
-                <td>{{ pg.cant_notas }}</td>
                 <td>{{ pg.motivo }}</td>
                 <td>
                 <a href="{% url 'admin_pg_show' pg.id %}">
@@ -93,6 +91,25 @@
 
 </div>
 </div>
+
+<script>
+  $(document).ready(function() {
+  setTimeout(function(){
+    var availableTags = [
+      "ALUMNO",
+      "CONFIRMADO",
+      "FEMENINO",
+      "MASCULINO",
+      "PREINSCRIPTO"
+    ];
+
+    $("#table_filter :input").autocomplete({
+      source: availableTags
+    });
+  
+  ;}, 1500);
+  });
+</script>
 
 <script type="text/javascript">
 nivel = '{{ user.profile.nivel }}';
@@ -109,5 +126,68 @@ if (nivel == 'INICIAL') {
     $('#anio').find('option[value="6"]').remove(); 
     $('#anio').find('option[value="7"]').remove(); 
 }
+</script>
+
+
+{% load static %}
+
+<script>
+    $(document).ready(function(){
+
+    var user          = "{{ user.get_username }}";
+    var ciclolectivo  = $('#cl').val(); 
+    var curso         = $('#anio').val();
+    var nivel         = '{{ user.profile.nivel }}';
+    
+    var fc  = new Date();
+    var dia = fc.getDate();
+    var mes = fc.getMonth() + 1;
+    var ani = fc.getFullYear();
+    var fecha = dia + '-' + mes + '-' + ani;
+
+    titulo = '{{ titulo_plantilla }}';
+
+    mensaje = 'Emitido por: ' +  user  +' Fecha emisión: ' + fecha + '\n Ciclo Lectivo: '+ ciclolectivo + ' Nivel: '+ nivel + ' Curso: '+ curso + ' Filtrado por: ';
+
+    table = $('#table').DataTable(
+      { 
+        //stateSave: true,
+        language: {
+            url: "{% static 'preinscripcion/js/spanish.json' %}"
+          },
+        dom: '<"pull-right"B><"pull-left"f><"info-text"i>rtp',
+        buttons: [
+          {
+            extend: 'excelHtml5',
+            title: titulo,
+            header: true,
+            sheetName: titulo,
+            message: function ( dt ) {
+              return mensaje + table.search();
+            },
+            exportOptions: {
+              columns: [ 0, 1, 2], 
+              }
+          },
+          { 
+            extend: 'pdfHtml5',
+            download: 'open', 
+            orientation: 'landscape', 
+            title: titulo,
+            message: function(){
+              mensaje2 = mensaje;
+              mensaje2 += table.search().toUpperCase();
+              mensaje2 += '\n Total: ' + table.page.info().end;
+              return mensaje2;
+            },
+            exportOptions: {
+                  columns: [ 0, 1, 2], 
+                },
+          }
+        ]
+      }
+
+      );
+  });
 </script>
 {% endblock %}
