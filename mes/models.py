@@ -6,6 +6,8 @@ from django.contrib.auth.models import User
 from preinscripcion.models import PreinscripcionGeneral, Preinscripcion4Anios
 
 import string, random
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 #metodos 
 def id_generator(size=8, chars=string.digits):
@@ -61,3 +63,10 @@ class NotaP(Nota):
 	def setPG(self, pg):
 		self.pg = pg
 		return self
+
+
+# method for updating
+@receiver(post_save, sender=NotaP, dispatch_uid="update_pg_notas_count")
+def update_stock(sender, instance, **kwargs):
+     instance.pg.cant_notas += 1
+     instance.pg.save()
