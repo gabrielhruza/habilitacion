@@ -48,7 +48,7 @@ def neg_new(request):
 @group_required('mes')
 def neg_env_index(request):
 	
-	titulo_plantilla = 'Notas generales enviadas'
+	titulo_plantilla = 'Notas enviadas'
 	user = request.user
 
 	negs = Nota.objects.filter(emisor=user)
@@ -63,7 +63,7 @@ def neg_env_index(request):
 @group_required('mes')
 def neg_rec_index(request):
 	
-	titulo_plantilla = 'Notas generales recibidas'
+	titulo_plantilla = 'Notas recibidas'
 	user = request.user
 
 	negs = Nota.objects.filter(receptor=user)

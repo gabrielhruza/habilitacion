@@ -21,6 +21,7 @@
                 <th>Emisor</th>
                 <th>Receptor</th>
                 <th>Motivo</th>
+                <th>Preinscripcion</th>
                 <th>N° de tracking</th>
                 <th>Estado</th>
                 <th>Acciones</th>
@@ -37,6 +38,7 @@
                 <td>{{ neg.emisor }}</td>
                 <td>{{ neg.receptor }}</td>
                 <td>{{ neg.motivo }}</td>
+                <td>{{ neg.notap.pg.nro_de_preinscripto }}</td>
                 <td>{{ neg.nro_de_tracking }}</td>
                 <td>{{ neg.estado }}</td>
                 <td>
@@ -69,7 +71,7 @@
       </div>
       <div class="modal-body">
         
-        <table class="table table-bordered table-striped table-hover table-condensed" id="tracking">
+        <table class="table table-striped table-hover table-condensed" id="tracking">
         <thead>
             <tr>
                 <th>Fecha</th>
