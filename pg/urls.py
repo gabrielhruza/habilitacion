@@ -13,6 +13,7 @@ urlpatterns = [
     url(r'^index/$', views.admin_pg_index, name='admin_pg_index'), 
     url(r'^show/(?P<pid>[0-9]+)/$', views.admin_pg_show, name='admin_pg_show'),
     url(r'^confirmados/$', views.admin_pg_confirmados, name='admin_pg_confirmados'), 
+    url(r'^ranking/$', views.admin_pg_ranking, name='admin_pg_ranking'), 
 
 
     url(r'^confirmar/(?P<pid>[0-9]+)/$', views.admin_pg_confirmar, name='admin_pg_confirmar'),

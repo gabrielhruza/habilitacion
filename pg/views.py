@@ -10,6 +10,7 @@ from .forms import PgForm
 
 from preinscripcion.forms 	import PostulanteForm, ResponsableForm
 from preinscripcion.models 	import Postulante, CicloLectivo, PreinscripcionGeneral
+from mes.models             import NotaP
 from preinscripcion.decorators import group_required
 from django.views.decorators.csrf import ensure_csrf_cookie
 
@@ -365,6 +366,43 @@ def admin_pg_asignarvacante(request, pid):
   return admin_pg_show(request, preinscripcion.id)
 
 
+#Ranking por notas asociadas
+@group_required('gestion_pg')
+def admin_pg_ranking(request):
+  titulo_plantilla = 'Ranking por nota asociadas'
+
+  user_nivel  = request.user.profile.nivel
+
+  cl    = 2017
+  anio  = 1
+  anios = 7
+
+  if request.method == 'POST':
+    cl    = int(request.POST.get('cl', ''))
+    anio  = request.POST.get('anio', '')
+
+  #ciclos lectivos
+  clvs        = CicloLectivo.objects.all()
+
+  pgs = PreinscripcionGeneral.objects.filter(nivel=user_nivel, anio=anio, cicloLectivo__fecha_apertura_ciclo__year=cl, estado='CONFIRMADO')[:10]
+
+  for pg in pgs:
+    cant_notas = NotaP.objects.filter(pg=pg).count()
+    pg.cant_notas = cant_notas
+    pg.save()
+    
+  return render(request, 'pg/adminpg/ranking.html',{
+          'titulo_plantilla' : titulo_plantilla,
+          'pgs'   : pgs,
+          'clvs'  : clvs,
+          'cl'    : cl,
+          'anio'  : anio,
+          'anios' : anios
+          }
+          )
+
+
+
 #generar pdf comprobante confirmacion
 ##generar pdf
 @group_required('gestion_pg')
@@ -390,5 +428,6 @@ def admin_pg_cc(request, nrop):
     return response
   
   return HttpResponse("ERROR AL GENERAR EL COMPROBANTE")
+
 
 ####

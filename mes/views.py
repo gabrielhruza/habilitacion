@@ -33,7 +33,7 @@ def neg_new(request):
     	neg.setEmisor(request.user)
     	messages.success(request, 'Nota creada correctamente')
     	neg.save()
-
+      
     else:
       	context = neg
 

@@ -1,0 +1,113 @@
+{% extends "admin.html" %}
+
+{% load auth_extras %}
+{% load bootstrap3 %}
+
+{% block filtros %}
+<div class="row">
+<div class="col-md-4 col-xs-12">
+<div class="panel panel-default">
+    <div class="panel-body" style="height: 64px;">
+        <form class="form-inline" method="post">{% csrf_token %}
+            <div class="form-group">
+              <strong> Ciclo lectivo</strong>
+              <select class="form-control input-sm" id="cl" name="cl">
+                {% for clv in clvs %}
+
+                {% if clv.fecha_apertura_ciclo.year == cl %}
+                <option selected value="{{ clv.fecha_apertura_ciclo.year }}">
+                    {{ clv.fecha_apertura_ciclo.year }}
+                </option>
+                {% else %}
+                <option value="{{ clv.fecha_apertura_ciclo.year }}">
+                    {{ clv.fecha_apertura_ciclo.year }}
+                </option>
+                {% endif %}
+
+                {% endfor %}
+              </select>
+            </div>
+            <div class="form-group">
+              <strong>Curso</strong>
+              <select class="form-control input-sm" id="anio" name="anio">
+                {% for i in "1234567" %}
+                <option value="{{ i }}" {% if i == anio %}selected{% endif %}>{{ i }}</option>
+                {% endfor %}
+              </select>
+            </div>
+           <button type="submit" class="btn btn-default btn-sm">Filtrar</button>
+        </form>
+    </div>
+</div>
+</div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+{% if messages %}
+<div class="alert alert-danger alert-dismissable alert-link" role="alert">
+<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+    {% for message in messages %}
+    <p><b>{{ message }}</b></p>
+    {% endfor %}
+    
+</div>
+{% endif %}
+
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ titulo_plantilla }}</h3>
+    </div>
+<div class="panel-body">
+
+    <div style="max-height: 570px; overflow-y: scroll;">
+    <table class="table table-bordered table-striped table-hover" id="">
+        <thead>
+            <tr>
+                <th>Numero</th>
+                <th>Estado</th>
+                <th>Cant. Notas</th>
+                <th>Motivo</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for pg in pgs %}
+            <tr>
+                <td>{{ pg.nro_de_preinscripto }}</td>
+                <td>{{ pg.estado }}</td>
+                <td>{{ pg.cant_notas }}</td>
+                <td>{{ pg.motivo }}</td>
+                <td>
+                <a href="{% url 'admin_pg_show' pg.id %}">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+</div>
+
+<script type="text/javascript">
+nivel = '{{ user.profile.nivel }}';
+
+if (nivel == 'SECUNDARIO') {
+    $('#anio').find('option[value="6"]').remove(); 
+    $('#anio').find('option[value="7"]').remove(); 
+}
+
+if (nivel == 'INICIAL') {
+    $('#anio').find('option[value="3"]').remove(); 
+    $('#anio').find('option[value="4"]').remove(); 
+    $('#anio').find('option[value="5"]').remove(); 
+    $('#anio').find('option[value="6"]').remove(); 
+    $('#anio').find('option[value="7"]').remove(); 
+}
+</script>
+{% endblock %}

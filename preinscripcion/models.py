@@ -111,6 +111,7 @@ class PreinscripcionGeneral(Preinscripcion):
     provincia = models.CharField(max_length=100, choices=PROVINCIA, default='SANTA FE')
     telefono  = models.CharField(max_length=100, default='262626262')  
     cubrio_vacante = models.BooleanField(default=False)             
+    cant_notas = models.PositiveIntegerField(default=0)
 
 
 class Responsable(models.Model):  
