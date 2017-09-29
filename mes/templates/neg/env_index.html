@@ -14,7 +14,7 @@
 <div class="panel-body">
 
     <div style="max-height: 470px; overflow-y: scroll;">
-    <table class="table table-bordered table-striped table-hover table-condensed" id="">
+    <table class="table table-bordered table-condensed" id="">
         <thead>
             <tr>
                 <th>Fecha</th>
@@ -28,7 +28,11 @@
         </thead>
         <tbody>
         {% for neg in negs %}
-            <tr>
+            {% if neg.estado == 'NUEVA' %}
+                <tr class="warning">
+            {% else %}       
+                <tr>
+            {% endif %}
                 <td>{{ neg.fecha_emision }}</td>
                 <td>{{ neg.emisor }}</td>
                 <td>{{ neg.receptor }}</td>

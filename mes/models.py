@@ -47,6 +47,12 @@ class Nota(models.Model):
 	def desactivarNotificacion(self):
 		self.notificar = False
 		return self
+	
+	def checkEmisorDistRecep(self):
+		if self.emisor == self.receptor:
+			return True
+		else:
+			return False
 
 
 class NotaP(Nota):

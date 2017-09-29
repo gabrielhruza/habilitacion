@@ -5,7 +5,7 @@ class NegForm(forms.ModelForm):
 	class Meta:
 		model 	= Nota
 		fields 	= ['remitente','receptor', 'motivo']
-	
+
 
 class NepForm(forms.ModelForm):
 	class Meta:

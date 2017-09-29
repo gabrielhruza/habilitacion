@@ -124,22 +124,34 @@ def ne_show(request, pid):
 @group_required('mes')
 def ne_leida(request, pid):
 
-	ne = Nota.objects.get(pk=pid)
-	ne.setEstadoLeida()
-	ne.save()
+  userlogueado = request.user
+  ne = Nota.objects.get(pk=pid)
 
-	return ne_show(request, ne.id)
+  if ne.emisor == userlogueado:
+    messages.error(request, "Error, no puede marcar como LEIDA.")
+    return ne_show(request, ne.id)
+  else:
+    ne.setEstadoLeida()
+    ne.save()
+    messages.success(request, 'Acción realizada correctamente')
+  return ne_show(request, ne.id)
 
 
 #nota entrada => rechazar
 @group_required('mes')
 def ne_rechazar(request, pid):
+  
+  userlogueado = request.user  
+  ne = Nota.objects.get(pk=pid)
 
-	ne = Nota.objects.get(pk=pid)
-	ne.setEstadoRechazada()
-	ne.save()
-
-	return ne_show(request, ne.id)
+  if ne.emisor == userlogueado:
+    messages.error(request, "Error, no es posible RECHAZAR.")
+    return ne_show(request, ne.id)
+  else:
+    ne.setEstadoRechazada()
+    ne.save()
+  
+  return ne_show(request, ne.id)
 
 
 #nota entrada => derivar (edito la fecha y el destinatario)
