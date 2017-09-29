@@ -1,9 +1,9 @@
 from django import forms
-from .models import Nota, NotaG, NotaP
+from .models import Nota, NotaP
 
 class NegForm(forms.ModelForm):
 	class Meta:
-		model 	= NotaG
+		model 	= Nota
 		fields 	= ['remitente','receptor', 'motivo']
 	
 

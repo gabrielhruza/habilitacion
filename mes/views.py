@@ -180,23 +180,19 @@ def ne_derivar(request, pid):
 @group_required('mes')
 def ne_tracking(request, ndt):
 
-  #notas = Nota.objects.filter(nro_de_tracking=ndt).order_by('fecha_emision')
-
   notas = Nota.objects.filter(nro_de_tracking=ndt).order_by('fecha_emision')  
-
-  #data = serializers.serialize("json", notas)
 
   data = []
 
   for nota in notas:
     emisor = nota.emisor.username
     receptor = nota.receptor.username
-    #motivo = nota.notag.motivo
+    motivo = nota.motivo
 
     data.append({'fecha_emision': nota.fecha_emision,
                   'emisor':emisor,
                   'receptor': receptor,
-                  #'motivo': motivo,
+                  'motivo': motivo,
                   'nro_de_tracking': nota.nro_de_tracking,
                   'estado': nota.estado
     })
@@ -222,6 +218,7 @@ def ne_notificacion(request):
     data.append({'fecha_emision': nota.fecha_emision,
                   'emisor':emisor,
                   'receptor': receptor,
+                  'motivo': nota.motivo,
                   'estado': nota.estado,
                   'id' : nota.id
     })

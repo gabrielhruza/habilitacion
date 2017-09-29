@@ -272,7 +272,7 @@
                   $('#notif').html("<span class='badge'>"+data.length+"</span>");
                   $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
 
-                    var body = item.fecha_emision + '\n' + item.estado;
+                    var body = item.fecha_emision + '\n' + item.estado +'\n'+ item.motivo;
                     var id = item.id;
                     push(item.emisor, body, id );
 

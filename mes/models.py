@@ -30,6 +30,7 @@ class Nota(models.Model):
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 	notificar 	= models.BooleanField(default=True)
+	motivo = models.CharField(max_length=200, default='No me acuerdo')	
 
 	def setEmisor(self, user):
 		self.emisor = user
@@ -54,7 +55,3 @@ class NotaP(Nota):
 	def setPG(self, pg):
 		self.pg = pg
 		return self
-
-
-class NotaG(Nota):
-	motivo = models.CharField(max_length=200, default='No me acuerdo')	

@@ -14,7 +14,7 @@
 <div class="panel-body">
 
     <div style="max-height: 470px; overflow-y: scroll;">
-    <table class="table table-bordered table-striped table-hover" id="">
+    <table class="table table-bordered table-striped table-hover table-condensed" id="">
         <thead>
             <tr>
                 <th>Fecha</th>
@@ -32,7 +32,7 @@
                 <td>{{ neg.fecha_emision }}</td>
                 <td>{{ neg.emisor }}</td>
                 <td>{{ neg.receptor }}</td>
-                <td>{{ neg.notag.motivo }}</td>
+                <td>{{ neg.motivo }}</td>
                 <td>{{ neg.nro_de_tracking }}</td>
                 <td>{{ neg.estado }}</td>
                 <td>
@@ -40,7 +40,7 @@
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
                 |
-                <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Ver tracking')">
+                <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Ver Movimientos de Nota')">
                     <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                 </a>
                 </td>
@@ -65,7 +65,7 @@
       </div>
       <div class="modal-body">
         
-        <table class="table table-bordered table-striped table-hover" id="tracking">
+        <table class="table table-bordered table-striped table-hover table-condensed" id="tracking">
         <thead>
             <tr>
                 <th>Fecha</th>
