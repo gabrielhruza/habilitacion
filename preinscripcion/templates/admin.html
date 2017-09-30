@@ -107,8 +107,10 @@
           <ul class="dropdown-menu">
             <li><a href="{% url 'neg_rec_index' %}">Notas Recibidas</a></li>
             <li><a href="{% url 'neg_env_index' %}">Notas Enviadas</a></li>
+            {% if request.user|has_group:'recepcion' %} 
             <li><a href="{% url 'neg_new' %}">Redactar NG</a></li>
             <li><a href="{% url 'admin_pg_confirmados' %}">Redactar NAP</a></li>
+            {% endif %}
           </ul>
       </li>
       <li class="dropdown">
