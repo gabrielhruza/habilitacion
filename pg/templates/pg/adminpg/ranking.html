@@ -66,6 +66,7 @@
     <table class="table table-bordered table-striped table-hover" id="table">
         <thead>
             <tr>
+                <th>Apellido y Nombre</th>
                 <th>Numero</th>
                 <th>Estado</th>
                 <th>Notas</th>
@@ -74,14 +75,15 @@
             </tr>
         </thead>
         <tbody>
-        {% for pg in pgs %}
+        {% for postulante in postulantes %}
             <tr>
-                <td>{{ pg.nro_de_preinscripto }}</td>
-                <td>{{ pg.estado }}</td>
-                <td>{{ pg.cant_notas }}</td>
-                <td>{{ pg.motivo }}</td>
+                <td>{{ postulante.apellido }}, {{ postulante.nombre }}</td>
+                <td>{{ postulante.pg.nro_de_preinscripto }}</td>
+                <td>{{ postulante.pg.estado }}</td>
+                <td>{{ postulante.pg.cant_notas }}</td>
+                <td>{{ postulante.pg.motivo }}</td>
                 <td>
-                <a href="{% url 'admin_pg_show' pg.id %}">
+                <a href="{% url 'admin_pg_show' postulante.pg.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
                 </td>
