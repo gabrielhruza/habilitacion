@@ -176,7 +176,7 @@ def admin_pg_index_recepcion(request):
   clvs        = CicloLectivo.objects.all()
   
   if user_nivel == 'TODOS':
-    postulantes = Postulante.objects.filter(pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__estado='CONFIRMADO')
+    postulantes = Postulante.objects.filter(pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl)
      
 
   return render(request, 'pg/adminpg/index.html',{

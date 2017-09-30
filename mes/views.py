@@ -110,7 +110,7 @@ def nep_new(request, pgid):
 @group_required('mes')
 def ne_show(request, pid):
 
-	titulo_plantilla = 'Nota entrada general'
+	titulo_plantilla = 'Nota entrada'
 
 	ne = Nota.objects.get(pk=pid)	
 

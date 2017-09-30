@@ -25,7 +25,7 @@ SECRET_KEY = 'uwjt=&!bvan(@6j8(f&ds#zqv91thie(=0p)b*-we)qb@&ndvi'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['sispmes.pythonanywhere.com', '127.0.0.1', 'localhost', '192.168.1.111', '10.13.24.202']
+ALLOWED_HOSTS = ['sispmes.pythonanywhere.com', '127.0.0.1', 'localhost', '192.168.1.111', '10.13.24.246']
 
 
 # Application definition
