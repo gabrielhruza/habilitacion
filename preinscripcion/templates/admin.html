@@ -259,9 +259,10 @@
                   $('#notif').html("<span class='badge'>"+data.length+"</span>");
                   $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
 
-                    var body = item.fecha_emision + '\n' + item.estado +'\n'+ item.motivo;
+                    var title = item.emisor + ' ' + item.fecha_emision
+                    var body = item.estado +'\n'+ item.motivo;
                     var id = item.id;
-                    push(item.emisor, body, id );
+                    push(title, body, id );
 
                   });
                 }
