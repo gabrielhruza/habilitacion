@@ -14,7 +14,7 @@ urlpatterns = [
 
 	#ne
 	url(r'^ne/show/(?P<pid>[0-9]+)/$', views.ne_show, name='ne_show'),
-	url(r'^ne/leida/(?P<pid>[0-9]+)/$', views.ne_leida, name='ne_leida'),
+	url(r'^ne/recibida/(?P<pid>[0-9]+)/$', views.ne_recibida, name='ne_recibida'),
 	url(r'^ne/rechazar/(?P<pid>[0-9]+)/$', views.ne_rechazar, name='ne_rechazar'),
 	url(r'^ne/derivar/(?P<pid>[0-9]+)/$', views.ne_derivar, name='ne_derivar'),
 	url(r'^ne/tracking/(?P<ndt>[0-9]+)/$', views.ne_tracking, name='ne_tracking'),

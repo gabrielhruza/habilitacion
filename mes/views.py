@@ -120,18 +120,18 @@ def ne_show(request, pid):
 		})
 
 
-#nota entrada => marcar como leida
+#nota entrada => marcar como recibida
 @group_required('mes')
-def ne_leida(request, pid):
+def ne_recibida(request, pid):
 
   userlogueado = request.user
   ne = Nota.objects.get(pk=pid)
 
   if ne.emisor == userlogueado:
-    messages.error(request, "Error, no puede marcar como LEIDA.")
+    messages.error(request, "Error, no puede marcar como RECIBIDA.")
     return ne_show(request, ne.id)
   else:
-    ne.setEstadoLeida()
+    ne.setEstadoRecibida()
     ne.save()
     messages.success(request, 'Acción realizada correctamente')
   return ne_show(request, ne.id)

@@ -19,7 +19,6 @@ class Nota(models.Model):
 	ESTADO = (
 		('NUEVA', 'Nueva'),
 		('RECIBIDA', 'Recibida'),
-		('LEIDA', 'Leida'),
 		('DERIVADA', 'Derivada'),
 		('RECHAZADA', 'Rechazada')
 
@@ -38,8 +37,8 @@ class Nota(models.Model):
 		self.emisor = user
 		return self
 
-	def setEstadoLeida(self):
-		self.estado = 'LEIDA'
+	def setEstadoRecibida(self):
+		self.estado = 'RECIBIDA'
 		return self
 
 	def setEstadoRechazada(self):
