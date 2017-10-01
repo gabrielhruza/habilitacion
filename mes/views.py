@@ -53,7 +53,7 @@ def neg_env_index(request):
 
 	negs = Nota.objects.filter(emisor=user)
 
-	return render(request, 'neg/env_index.html', { 
+	return render(request, 'neg/index.html', { 
 		'negs' : negs,
 		'titulo_plantilla' : titulo_plantilla
 		})
@@ -68,7 +68,7 @@ def neg_rec_index(request):
 
 	negs = Nota.objects.filter(receptor=user)
 
-	return render(request, 'neg/env_index.html', { 
+	return render(request, 'neg/index.html', { 
 		'negs' : negs,
 		'titulo_plantilla' : titulo_plantilla
 		})
