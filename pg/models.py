@@ -11,10 +11,11 @@ class Profile(models.Model):
 	    ('INICIAL', 'Inicial'),
 	    ('PRIMARIO', 'Primario'),
 	    ('SECUNDARIO', 'Secundario'),
+		('GENERAL','General'),	    
 	    ('TODOS', 'Todos')
     )
 
 	user 	= models.OneToOneField(User, on_delete=models.CASCADE)
 	nivel 	= models.CharField(max_length=10, choices=NIVEL, default='INICIAL')
-
+	#perfil	= models.CharField(max_length=10, choices=NIVEL, default='INICIAL')
 	

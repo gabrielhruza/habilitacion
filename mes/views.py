@@ -11,6 +11,8 @@ from django.core import serializers
 from .models 	import Nota 
 from .forms 	import NeForm, NegForm, NepForm
 
+from pg.models import Profile
+
 # Create your views here.
 
 ## operaciones relacionadas con el rol mes
@@ -79,31 +81,31 @@ def neg_rec_index(request):
 def nep_new(request, pgid):
   
   titulo_plantilla = 'Crear Nota de Entrada Asociada a Preinscripcion'
-
   context = NepForm(prefix='nep')
-
+  
   if request.method == "POST":
-
     nep = NepForm(request.POST, prefix='nep')
-
+    
     if nep.is_valid():
+      pg 	= PreinscripcionGeneral.objects.get(pk=pgid)
 
-    	pg 	= PreinscripcionGeneral.objects.get(pk=pgid)
+      emisor = request.user
+      nivel = pg.nivel
+      receptor = Profile.objects.select_related('user').get(nivel=nivel)
 
-    	nep = nep.save(commit=False)
-    	nep.setEmisor(request.user)
-    	nep.setPG(pg)
-    	messages.success(request, 'Nota creada correctamente')
-    	nep.save()
-
+      nep = nep.save(commit=False)
+      nep.setEmisor(emisor)
+      nep.setReceptor(receptor.user)
+      nep.setPG(pg)
+      messages.success(request, 'Nota creada correctamente')
+      nep.save()
     else:
-      	context = nep
-
+      context = nep
 
   return render(request, 'neg/new.html', { 
-  	'neg' : context, 
-  	'titulo_plantilla' : titulo_plantilla
-  	 })
+    'neg' : context, 
+    'titulo_plantilla' : titulo_plantilla
+    })
 
 
 #ver una nota de entrada

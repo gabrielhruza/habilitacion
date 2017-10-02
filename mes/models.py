@@ -37,6 +37,10 @@ class Nota(models.Model):
 		self.emisor = user
 		return self
 
+	def setReceptor(self, user):
+		self.receptor = user
+		return self
+
 	def setEstadoRecibida(self):
 		self.estado = 'RECIBIDA'
 		return self
