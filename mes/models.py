@@ -26,7 +26,7 @@ class Nota(models.Model):
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)
 	receptor		= models.ForeignKey(User, related_name='receptor', unique=False)
-	remitente  	= models.CharField(max_length=200, default='Don Pedro')
+	remitente  		= models.CharField(max_length=200, default='Don Pedro')
 	fecha_emision 	= models.DateField(auto_now_add=True)
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)

@@ -199,16 +199,19 @@ def ne_tracking(request, ndt):
   data = []
 
   for nota in notas:
-    emisor = nota.emisor.username
-    receptor = nota.receptor.username
-    motivo = nota.motivo
+
+    remitente = nota.remitente
+    emisor    = nota.emisor.username
+    receptor  = nota.receptor.username
+    motivo    = nota.motivo
 
     data.append({'fecha_emision': nota.fecha_emision,
-                  'emisor':emisor,
-                  'receptor': receptor,
-                  'motivo': motivo,
+                  'remitente'   : remitente,
+                  'emisor'      : emisor,
+                  'receptor'    : receptor,
+                  'motivo'      : motivo,
                   'nro_de_tracking': nota.nro_de_tracking,
-                  'estado': nota.estado
+                  'estado'      : nota.estado
     })
     
   return JsonResponse(data, safe=False)

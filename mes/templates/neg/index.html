@@ -52,7 +52,7 @@
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
                 |
-                <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Ver Movimientos de Nota')">
+                <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Movimientos de Nota')">
                     <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
                 </a>
                 </td>
@@ -76,15 +76,17 @@
         <h4 class="modal-title" id="myModalLabel"><!-- titulo modal--></h4>
       </div>
       <div class="modal-body">
-        
+
+        <div id="detalle">
+        </div>
+        <hr>
+
         <table class="table table-striped table-hover table-condensed" id="tracking">
         <thead>
             <tr>
                 <th>Fecha</th>
                 <th>Emisor</th>
                 <th>Receptor</th>
-                <th>Motivo</th>
-                <th>N° de tracking</th>
                 <th>Estado</th>
             </tr>
         </thead>
@@ -111,7 +113,15 @@ function modal($url, $titulo){
         url: $url,
         dataType: 'json',
         success: function (data) {
-          
+            
+            var detalle = '<b>N° de Tracking:</b> ' + data[0].nro_de_tracking +
+                '<b> Fecha de inicio: </b>' + data[0].fecha_emision + 
+                '<b> Remitente: </b>' + data[0].remitente +
+                '<b> Estado actual: </b>' + data[0].estado 
+                ;
+
+            $('#detalle').html(detalle);
+
             var trHTML = '';
             $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
 
@@ -122,11 +132,9 @@ function modal($url, $titulo){
 
                 trHTML += 
 
-                '<tr><td>'  + fecha_emision + 
+                '<tr><td>'  + fecha_emision +
                 '</td><td>' + item.emisor + 
                 '</td><td>' + item.receptor +
-                '</td><td>' + item.motivo +
-                '</td><td>' + item.nro_de_tracking +
                 '</td><td>' + item.estado +
 
                 '</td></tr>';
