@@ -156,6 +156,23 @@ def ne_rechazar(request, pid):
   return ne_show(request, ne.id)
 
 
+#nota entrada => en tramite
+@group_required('mes')
+def ne_tramite(request, pid):
+  
+  userlogueado = request.user  
+  ne = Nota.objects.get(pk=pid)
+
+  if ne.emisor == userlogueado:
+    messages.error(request, "Error, no es posible realizar la acción.")
+    return ne_show(request, ne.id)
+  else:
+    ne.setEstadoEnTramite()
+    ne.save()
+  
+  return ne_show(request, ne.id)
+
+
 #nota entrada => derivar (edito la fecha y el destinatario)
 @group_required('mes')
 def ne_derivar(request, pid):

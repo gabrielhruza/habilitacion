@@ -19,6 +19,7 @@ class Nota(models.Model):
 	ESTADO = (
 		('NUEVA', 'Nueva'),
 		('RECIBIDA', 'Recibida'),
+		('EN TRÁMITE','En tramite'),
 		('DERIVADA', 'Derivada'),
 		('RECHAZADA', 'Rechazada')
 
@@ -43,6 +44,10 @@ class Nota(models.Model):
 
 	def setEstadoRecibida(self):
 		self.estado = 'RECIBIDA'
+		return self
+
+	def setEstadoEnTramite(self):
+		self.estado = 'EN TRÁMITE'
 		return self
 
 	def setEstadoRechazada(self):
