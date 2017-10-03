@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models
 from django.contrib.auth.models import User
 from preinscripcion.models import PreinscripcionGeneral, Preinscripcion4Anios
+from pg.models import Perfil
 
 import string, random
 from django.db.models.signals import post_save
@@ -26,13 +27,13 @@ class Nota(models.Model):
 	)
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)
-	receptor		= models.ForeignKey(User, related_name='receptor', unique=False)
+	receptor		= models.ForeignKey(Perfil, related_name='receptor', unique=False)
 	remitente  		= models.CharField(max_length=200, default='Don Pedro')
 	fecha_emision 	= models.DateField(auto_now_add=True)
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 	notificar 		= models.BooleanField(default=True)
-	motivo 			= models.CharField(max_length=200, default='No me acuerdo')	
+	motivo 			= models.CharField(max_length=200, default='Consulta')	
 	motivo_derivar	= models.CharField(max_length=200, default='')	
 
 	def setEmisor(self, user):

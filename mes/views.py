@@ -64,16 +64,15 @@ def neg_env_index(request):
 #index de notas de entrada generales recibidas
 @group_required('mes')
 def neg_rec_index(request):
-	
-	titulo_plantilla = 'Notas recibidas'
-	user = request.user
-
-	negs = Nota.objects.filter(receptor=user)
-
-	return render(request, 'neg/index.html', { 
-		'negs' : negs,
-		'titulo_plantilla' : titulo_plantilla
-		})
+  
+  titulo_plantilla = 'Notas recibidas'
+  user = request.user
+  negs = Nota.objects.filter(receptor=user.profile.perfil.all())
+  
+  return render(request, 'neg/index.html', { 
+    'negs' : negs,
+    'titulo_plantilla' : titulo_plantilla
+  })
 
 
 #dar de alta nota de entrada asociada a póstulante
@@ -95,7 +94,7 @@ def nep_new(request, pgid):
 
       nep = nep.save(commit=False)
       nep.setEmisor(emisor)
-      nep.setReceptor(receptor.user)
+      nep.setReceptor(receptor.perfil.all()[0])
       nep.setPG(pg)
       messages.success(request, 'Nota creada correctamente')
       nep.save()
@@ -233,7 +232,7 @@ def ne_tracking(request, ndt):
 
     remitente = nota.remitente
     emisor    = nota.emisor.username
-    receptor  = nota.receptor.username
+    receptor  = nota.receptor.perfil
     motivo    = nota.motivo
 
     data.append({'fecha_emision': nota.fecha_emision,
@@ -254,19 +253,21 @@ def ne_tracking(request, ndt):
 @group_required('mes')
 def ne_notificacion(request):
 
-  user_logueado = request.user.username
+  user_logueado = request.user.profile.perfil
 
-  notas = Nota.objects.filter(receptor__username=user_logueado, estado='NUEVA', notificar=True).order_by('fecha_emision')
+  notas = Nota.objects.filter(receptor=user_logueado.all(), estado='NUEVA', notificar=True).order_by('fecha_emision')
 
   data = []
 
+     #nep.setReceptor(receptor.perfil.all()[0])
+
   for nota in notas:
     emisor = nota.emisor.username
-    receptor = nota.receptor.username
+    #receptor = nota.receptor
 
     data.append({'fecha_emision': nota.fecha_emision,
                   'emisor':emisor,
-                  'receptor': receptor,
+                  #'receptor': receptor,
                   'motivo': nota.motivo,
                   'estado': nota.estado,
                   'id' : nota.id
