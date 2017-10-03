@@ -87,6 +87,7 @@
                 <th>Fecha</th>
                 <th>Emisor</th>
                 <th>Receptor</th>
+                <th>Motivo derivacion</th>
                 <th>Estado</th>
             </tr>
         </thead>
@@ -135,8 +136,8 @@ function modal($url, $titulo){
                 '<tr><td>'  + fecha_emision +
                 '</td><td>' + item.emisor + 
                 '</td><td>' + item.receptor +
+                '</td><td>' + item.motivo_derivar +
                 '</td><td>' + item.estado +
-
                 '</td></tr>';
             });
 

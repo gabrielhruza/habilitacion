@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.core import serializers
 
 from .models 	import Nota, NotaP
-from .forms 	import NeForm, NegForm, NepForm
+from .forms 	import NeForm, NeDerivarForm, NegForm, NepForm
 
 from pg.models import Profile
 
@@ -193,11 +193,11 @@ def ne_derivar(request, pid):
   
   titulo_plantilla = 'Realizar DERIVACION de Nota'
 
-  context = NeForm(prefix='ne')
+  context = NeDerivarForm(prefix='ne')
 
   if request.method == "POST":
 
-    ne = NeForm(request.POST, prefix='ne')
+    ne = NeDerivarForm(request.POST, prefix='ne')
 
     if ne.is_valid():
 
@@ -242,6 +242,7 @@ def ne_tracking(request, ndt):
                   'receptor'    : receptor,
                   'motivo'      : motivo,
                   'nro_de_tracking': nota.nro_de_tracking,
+                  'motivo_derivar' : nota.motivo_derivar,
                   'estado'      : nota.estado
     })
     

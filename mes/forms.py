@@ -17,3 +17,9 @@ class NeForm(forms.ModelForm):
 	class Meta:
 		model 	= Nota
 		fields 	= ['receptor']
+
+
+class NeDerivarForm(forms.ModelForm):
+	class Meta:
+		model 	= Nota
+		fields 	= ['receptor', 'motivo_derivar']
