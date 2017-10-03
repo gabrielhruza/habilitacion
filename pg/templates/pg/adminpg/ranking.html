@@ -67,6 +67,7 @@
         <thead>
             <tr>
                 <th>Apellido y Nombre</th>
+                <th>Dni</th>
                 <th>Numero</th>
                 <th>Estado</th>
                 <th>Notas</th>
@@ -78,6 +79,7 @@
         {% for postulante in postulantes %}
             <tr>
                 <td>{{ postulante.apellido }}, {{ postulante.nombre }}</td>
+                <td>{{ postulante.dni }}</td>
                 <td>{{ postulante.pg.nro_de_preinscripto }}</td>
                 <td>{{ postulante.pg.estado }}</td>
                 <td>{{ postulante.pg.cant_notas }}</td>

@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
 
-from .models 	import Nota 
+from .models 	import Nota, NotaP
 from .forms 	import NeForm, NegForm, NepForm
 
 from pg.models import Profile
@@ -104,6 +104,20 @@ def nep_new(request, pgid):
 
   return render(request, 'neg/new.html', { 
     'neg' : context, 
+    'titulo_plantilla' : titulo_plantilla
+    })
+
+
+#ver notas asociadas a preinscripcion
+@group_required('mes')
+def nep_pre_asociada(request, pgid):
+
+  titulo_plantilla = 'Notas asociadas'
+  
+  negs = NotaP.objects.filter(pg__id=pgid)
+
+  return render(request, 'neg/index.html', { 
+    'negs' : negs,
     'titulo_plantilla' : titulo_plantilla
     })
 

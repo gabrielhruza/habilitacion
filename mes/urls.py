@@ -11,6 +11,7 @@ urlpatterns = [
 
 	#nep
 	url(r'^nep/new/(?P<pgid>[0-9]+)/$', views.nep_new, name='nep_new'),
+	url(r'^nep/asociada/(?P<pgid>[0-9]+)/$', views.nep_pre_asociada, name='nep_pre_asociada'),
 
 	#ne
 	url(r'^ne/show/(?P<pid>[0-9]+)/$', views.ne_show, name='ne_show'),

@@ -142,10 +142,9 @@
     </div>
     </div>
   {% endif %}
-
 	<hr>
-  <a  href="{% url 'admin_pg_index' %}" class="btn btn-default">Cancelar</a>
 
+  <a  href="{% url 'admin_pg_index' %}" class="btn btn-default">Cancelar</a>
   {% if not request.user|has_group:'recepcion' %}
   {% if not confirmado and not alumno %}	
   <a onclick="modal('{% url 'admin_pg_confirmar' p.id %}')" href="#" class="btn btn-primary">
@@ -158,6 +157,7 @@
   {% endif %}
 
   {% if alumno %}
+  <a  href="{% url 'nep_pre_asociada' p.id %}" class="btn btn-primary">Ver notas asociadas</a>
   <a  href="{% url 'nep_new' p.id %}" class="btn btn-info">Asociar Nota</a>
   {% endif %}
 
