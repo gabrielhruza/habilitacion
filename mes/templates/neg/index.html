@@ -116,11 +116,11 @@ function modal($url, $titulo){
         success: function (data) {
             
             var detalle = 
-                '<p><b>Motivo:</b> ' + data[0].motivo + '</p>' +
-                '<p><b>N° de Tracking:</b> ' + data[0].nro_de_tracking + '</p>' +
-                '<p><b> Fecha de inicio: </b>' + data[0].fecha_emision + '</p>' +
-                '<p><b> Remitente: </b>' + data[0].remitente + '</p>' +
-                '<b> Estado actual: </b>' + data[0].estado 
+                '<p><b>Motivo:</b> ' + data[0].motivo +
+                '  <b>N° de Tracking:</b> ' + data[0].nro_de_tracking + '</p>' +
+                '  <p><b> Fecha de inicio: </b>' + data[0].fecha_emision + '</p>' +
+                '<p><b> Remitente: </b>' + data[0].remitente + 
+                '<b> Estado actual: </b>' + data[0].estado + '</p>'
                 ;
 
             $('#detalle').html(detalle);
