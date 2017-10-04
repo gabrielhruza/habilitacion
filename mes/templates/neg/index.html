@@ -115,9 +115,11 @@ function modal($url, $titulo){
         dataType: 'json',
         success: function (data) {
             
-            var detalle = '<b>N° de Tracking:</b> ' + data[0].nro_de_tracking +
-                '<b> Fecha de inicio: </b>' + data[0].fecha_emision + 
-                '<b> Remitente: </b>' + data[0].remitente +
+            var detalle = 
+                '<p><b>Motivo:</b> ' + data[0].motivo + '</p>' +
+                '<p><b>N° de Tracking:</b> ' + data[0].nro_de_tracking + '</p>' +
+                '<p><b> Fecha de inicio: </b>' + data[0].fecha_emision + '</p>' +
+                '<p><b> Remitente: </b>' + data[0].remitente + '</p>' +
                 '<b> Estado actual: </b>' + data[0].estado 
                 ;
 
@@ -128,7 +130,7 @@ function modal($url, $titulo){
 
                 var date=new Date(item.fecha_emision);
 
-                fecha_emision = date.getDate() + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+                fecha_emision = (date.getDate()+1) + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
 
 
                 trHTML += 
