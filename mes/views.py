@@ -67,7 +67,7 @@ def neg_rec_index(request):
   
   titulo_plantilla = 'Notas recibidas'
   user = request.user
-  negs = Nota.objects.filter(receptor=user.profile.perfil.all())
+  negs = Nota.objects.filter(receptor__in=user.profile.perfil.all())
   
   return render(request, 'neg/index.html', { 
     'negs' : negs,
@@ -92,9 +92,13 @@ def nep_new(request, pgid):
       nivel = pg.nivel
       receptor = Profile.objects.select_related('user').get(nivel=nivel)
 
+      print receptor
+
+      perfil_receptor = receptor.perfil.all().get(perfil=nivel)
+
       nep = nep.save(commit=False)
       nep.setEmisor(emisor)
-      nep.setReceptor(receptor.perfil.all()[0])
+      nep.setReceptor(perfil_receptor)
       nep.setPG(pg)
       messages.success(request, 'Nota creada correctamente')
       nep.save()
@@ -255,7 +259,7 @@ def ne_notificacion(request):
 
   user_logueado = request.user.profile.perfil
 
-  notas = Nota.objects.filter(receptor=user_logueado.all(), estado='NUEVA', notificar=True).order_by('fecha_emision')
+  notas = Nota.objects.filter(receptor__in=user_logueado.all(), estado='NUEVA', notificar=True).order_by('fecha_emision')
 
   data = []
 

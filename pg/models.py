@@ -17,8 +17,8 @@ class Perfil(models.Model):
 	    ('MESA DE ENTRADA','Mesa de entrada'),
 	    ('ESCUELA','Escuela'),
 	    ('INICIAL', 'Inicial'),
-	    ('PRIMARIA', 'Primaria'),
-	    ('SECUNDARIA', 'Secundaria'),
+	    ('PRIMARIO', 'Primario'),
+	    ('SECUNDARIO', 'Secundario'),
 	    ('BIBLIOTECA', 'Biblioteca'),
 	    ('PARROQUIA', 'Parroquia')
     )
