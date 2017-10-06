@@ -23,7 +23,6 @@ class Nota(models.Model):
 		('EN TRAMITE','En trámite'),
 		('DERIVADA', 'Derivada'),
 		('RECHAZADA', 'Rechazada')
-
 	)
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)
@@ -34,7 +33,8 @@ class Nota(models.Model):
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 	notificar 		= models.BooleanField(default=True)
 	motivo 			= models.CharField(max_length=200, default='Consulta')	
-	motivo_derivar	= models.CharField(max_length=200, default='')	
+	motivo_derivar	= models.CharField(max_length=200, default='')
+	accion_por 		= models.ForeignKey(User, related_name='accion_por', unique=False, null=True)
 
 	def setEmisor(self, user):
 		self.emisor = user
@@ -44,16 +44,19 @@ class Nota(models.Model):
 		self.receptor = user
 		return self
 
-	def setEstadoRecibida(self):
+	def setEstadoRecibida(self, user):
 		self.estado = 'RECIBIDA'
+		self.accion_por = user
 		return self
 
-	def setEstadoEnTramite(self):
+	def setEstadoEnTramite(self, user):
 		self.estado = 'EN TRÁMITE'
+		self.accion_por = user
 		return self
 
-	def setEstadoRechazada(self):
+	def setEstadoRechazada(self, user):
 		self.estado = 'RECHAZADA'
+		self.accion_por = user
 		return self
 
 	def desactivarNotificacion(self):

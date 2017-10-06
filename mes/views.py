@@ -9,9 +9,9 @@ from django.http import JsonResponse
 from django.core import serializers
 
 from .models 	import Nota, NotaP
-from .forms 	import NeForm, NeDerivarForm, NegForm, NepForm
+from .forms 	import NeForm, NeDerivarForm, NegForm, NegInternaForm, NepForm
 
-from pg.models import Profile
+from pg.models import Profile, Perfil
 
 # Create your views here.
 
@@ -44,6 +44,42 @@ def neg_new(request):
   	'neg' : context, 
   	'titulo_plantilla' : titulo_plantilla
   	 })
+
+
+#dar de alta nota de entrada interna general
+#no hay notas internas asociadas a postulantes
+@group_required('mes')
+def neg_int_new(request):
+  
+  titulo_plantilla = 'Enviar Nota Interna'
+
+  context = NegInternaForm(prefix='neg')
+
+  if request.method == "POST":
+
+    neg = NegInternaForm(request.POST, prefix='neg')
+
+    if neg.is_valid():
+
+      neg = neg.save(commit=False)
+      neg.setEmisor(request.user)
+      #todas las notas internas pasan por mesa de entrada 
+      #enviar nota a perfil = "MESA DE ENTRADA"
+      perfil = Perfil.objects.get(perfil='MESA DE ENTRADA')
+
+      neg.setReceptor(perfil)
+      messages.success(request, 'Nota creada correctamente')
+      neg.save()
+      
+    else:
+        context = neg
+
+
+  return render(request, 'neg/new.html', { 
+    'neg' : context, 
+    'titulo_plantilla' : titulo_plantilla
+     })
+
 
 
 #index de notas de entrada generales enviadas
@@ -150,7 +186,7 @@ def ne_recibida(request, pid):
     messages.error(request, "Error, no puede marcar como RECIBIDA.")
     return ne_show(request, ne.id)
   else:
-    ne.setEstadoRecibida()
+    ne.setEstadoRecibida(userlogueado)
     ne.save()
     messages.success(request, 'Acción realizada correctamente')
   return ne_show(request, ne.id)
@@ -167,9 +203,9 @@ def ne_rechazar(request, pid):
     messages.error(request, "Error, no es posible RECHAZAR.")
     return ne_show(request, ne.id)
   else:
-    ne.setEstadoRechazada()
+    ne.setEstadoRechazada(userlogueado)
     ne.save()
-  
+    messages.success(request, 'Acción realizada correctamente')  
   return ne_show(request, ne.id)
 
 
@@ -184,8 +220,9 @@ def ne_tramite(request, pid):
     messages.error(request, "Error, no es posible realizar la acción.")
     return ne_show(request, ne.id)
   else:
-    ne.setEstadoEnTramite()
+    ne.setEstadoEnTramite(userlogueado)
     ne.save()
+    messages.success(request, 'Acción realizada correctamente')
   
   return ne_show(request, ne.id)
 

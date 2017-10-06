@@ -6,6 +6,7 @@ urlpatterns = [
 	
 	#neg
 	url(r'^neg/new/$', views.neg_new, name='neg_new'),
+	url(r'^neg/int/new/$', views.neg_int_new, name='neg_int_new'),
 	url(r'^neg/env/$', views.neg_env_index, name='neg_env_index'),
 	url(r'^neg/rec/$', views.neg_rec_index, name='neg_rec_index'),
 

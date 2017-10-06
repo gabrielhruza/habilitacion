@@ -7,10 +7,16 @@ class NegForm(forms.ModelForm):
 		fields 	= ['remitente','receptor', 'motivo']
 
 
+class  NegInternaForm(forms.ModelForm):
+	class Meta:
+		model 	= Nota
+		fields 	= ['motivo']
+
+
 class NepForm(forms.ModelForm):
 	class Meta:
 		model 	= NotaP
-		fields 	= ['remitente', 'motivo']
+		fields 	= ['emisor','remitente', 'motivo']
 
 
 class NeForm(forms.ModelForm):
