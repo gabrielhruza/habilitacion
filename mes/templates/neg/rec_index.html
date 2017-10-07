@@ -7,28 +7,25 @@
 {% load static %}
 
 <div class="container">
+
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">{{ titulo_plantilla }}</h3>
     </div>
 <div class="panel-body">
+    
+    Seleccionar perfil:
+    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="" 
+        style="margin-bottom: 1%">
+      {% for nxp in nxps %}  
+      <button type="button" class="btn btn-default" onclick="filtro(window.event)">{{ nxp.0 }}
+        <span class="badge">{{ nxp.1 }}</span>
+      </button>
+      {% endfor %}
+    </div>
 
     <div style="max-height: 470px; overflow-y: scroll;">
-
-    <div class="row">
-    <div class="col-md-4 col-xs-12 col-sm-12">
-        Seleccione perfil 
-    <div class="list-group">
-      <button type="button" class="list-group-item">Cras justo odio<span class="badge">14</span></button>
-      <button type="button" class="list-group-item">Dapibus ac facilisis in<span class="badge">14</span></button>
-      <button type="button" class="list-group-item">Morbi leo risus<span class="badge">14</span></button>
-      <button type="button" class="list-group-item">Porta ac consectetur ac</button>
-      <button type="button" class="list-group-item">Vestibulum at eros</button>
-    </div>
-    </div>
-    </div>
-
-    <table class="table table-condensed table-bordered" id="">
+    <table class="table table-condensed table-bordered" id="table-rec">
         <thead>
             <tr>
                 <th>Fecha</th>
@@ -165,4 +162,26 @@ function modal($url, $titulo){
 }
 </script>
 <!-- ./Modal -->
+
+
+<script>
+function filtro(e){
+
+  perfil = e.toElement.innerText;
+  perfil = perfil.toUpperCase();
+  table = document.getElementById("table-rec");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[3];
+    if (td) {
+      if (perfil.indexOf(td.innerText) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+
+}
+</script>
 {% endblock %}

@@ -16,7 +16,7 @@ class  NegInternaForm(forms.ModelForm):
 class NepForm(forms.ModelForm):
 	class Meta:
 		model 	= NotaP
-		fields 	= ['emisor','remitente', 'motivo']
+		fields 	= ['remitente', 'motivo']
 
 
 class NeForm(forms.ModelForm):

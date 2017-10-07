@@ -91,7 +91,7 @@ def neg_env_index(request):
 
 	negs = Nota.objects.filter(emisor=user)
 
-	return render(request, 'neg/index.html', { 
+	return render(request, 'neg/env_index.html', { 
 		'negs' : negs,
 		'titulo_plantilla' : titulo_plantilla
 		})
@@ -103,10 +103,24 @@ def neg_rec_index(request):
   
   titulo_plantilla = 'Notas recibidas'
   user = request.user
+
+  user_perfiles = user.profile.perfil.all()
+
+  #notas por perfil con estado = NUEVA
+  nxps = []
+
+  for up in user_perfiles:
+    nxp = []
+    nxp.append(up.perfil)
+    nxp.append(Nota.objects.filter(receptor=up, estado='NUEVA').count())
+    nxps.append(nxp)
+
+  print nxps
   negs = Nota.objects.filter(receptor__in=user.profile.perfil.all())
   
-  return render(request, 'neg/index.html', { 
-    'negs' : negs,
+  return render(request, 'neg/rec_index.html', { 
+    'negs'  : negs,
+    'nxps'  : nxps,
     'titulo_plantilla' : titulo_plantilla
   })
 
