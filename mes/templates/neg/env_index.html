@@ -13,6 +13,16 @@
     </div>
 <div class="panel-body">
 
+    Seleccionar perfil:
+    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="">
+      {% for nxp in nxps %}  
+      <button type="button" class="btn btn-default" onclick="filtro(window.event)">{{ nxp.0 }}
+        <span class="badge">{{ nxp.1 }}</span>
+      </button>
+      {% endfor %}
+    </div>
+    <hr>
+
     <div style="max-height: 470px; overflow-y: scroll;">
 
     <table class="table table-condensed table-bordered" id="">
@@ -21,6 +31,7 @@
                 <th>Fecha</th>
                 <th>Remitente</th>
                 <th>Emisor</th>
+                <th>Perfil Emisor</th>
                 <th>Receptor</th>
                 <th>Motivo</th>
                 <th colspan="3">Preinscripcion</th>
@@ -39,6 +50,7 @@
                 <td>{{ neg.fecha_emision }}</td>
                 <td>{{ neg.remitente }}</td>
                 <td>{{ neg.emisor }}</td>
+                <td>{{ neg.emisor_perfil }}</td>
                 <td>{{ neg.receptor }}</td>
                 <td>{{ neg.motivo }}</td>
 

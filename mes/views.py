@@ -89,13 +89,22 @@ def neg_env_index(request):
   titulo_plantilla = 'Notas enviadas'
   user = request.user
 
-  #user_perfiles = user.profile.perfil.all()
+  user_perfiles = user.profile.perfil.all()
+  
+  #notas por perfil con estado = 'NUEVA'
+  nxps = []
 
+  for up in user_perfiles:
+    nxp = []
+    nxp.append(up.perfil)
+    nxp.append(Nota.objects.filter(emisor= user, emisor_perfil=up, estado='NUEVA').count())
+    nxps.append(nxp)
 
   negs = Nota.objects.filter(emisor=user)
   
   return render(request, 'neg/env_index.html', { 
     'negs' : negs,
+    'nxps'  : nxps,
     'titulo_plantilla' : titulo_plantilla
   })
 
