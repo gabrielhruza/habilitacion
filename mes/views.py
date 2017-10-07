@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
 
-from .models 	import Nota, NotaP
+from .models 	import Nota, NotaP, NotaI
 from .forms 	import NeForm, NeDerivarForm, NegForm, NegInternaForm, NepForm
 
 from pg.models import Profile, Perfil
@@ -136,6 +136,34 @@ def neg_rec_index(request):
   })
 
 
+
+#index de notas internas de entrada generales recibidas por perfil MESA DE ENTRADA
+@group_required('mes')
+def negi_rec_index(request):
+  
+  titulo_plantilla = 'Notas internas recibidas'
+  user = request.user
+
+  user_perfiles = user.profile.perfil.all()
+
+  #notas por perfil con estado = NUEVA
+  nxps = []
+
+  for up in user_perfiles:
+    nxp = []
+    nxp.append(up.perfil)
+    nxp.append(NotaI.objects.filter(receptor=up, estado='NUEVA').count())
+    nxps.append(nxp)
+
+  negs = NotaI.objects.filter(receptor__in=user.profile.perfil.all())
+  
+  return render(request, 'neg/negi_rec_index.html', { 
+    'negs'  : negs,
+    'nxps'  : nxps,
+    'titulo_plantilla' : titulo_plantilla
+  })
+
+
 #dar de alta nota de entrada asociada a póstulante
 @group_required('mes')
 def nep_new(request, pgid):
@@ -257,33 +285,28 @@ def ne_tramite(request, pid):
 def ne_derivar(request, pid):
   
   titulo_plantilla = 'Realizar DERIVACION de Nota'
-
   context = NeDerivarForm(prefix='ne')
-
+  
   if request.method == "POST":
-
+    
     ne = NeDerivarForm(request.POST, prefix='ne')
-
+    
     if ne.is_valid():
-
-    	neo = Nota.objects.get(pk=pid)
-
-    	ne = ne.save(commit=False)
-
-    	ne.setEmisor(request.user)
-    	ne.save()
-    	ne.nro_de_tracking  = neo.nro_de_tracking
-    	ne.save()
-    	messages.success(request, 'Acción realizada correctamente')
-
+      neo = Nota.objects.get(pk=pid)
+      ne = ne.save(commit=False)
+      ne.setEmisor(request.user)
+      ne.save()
+      ne.nro_de_tracking  = neo.nro_de_tracking
+      ne.emisor_perfil    = neo.emisor_perfil
+      ne.save()
+      messages.success(request, 'Acción realizada correctamente')
     else:
-      	context = ne
-
-
+      context = ne
+  
   return render(request, 'neg/new.html', { 
-  	'neg' : context, 
-  	'titulo_plantilla' : titulo_plantilla
-  	 })
+    'neg' : context, 
+    'titulo_plantilla' : titulo_plantilla
+})
 
 
 #nota entrada => tracking

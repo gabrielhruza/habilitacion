@@ -10,6 +10,9 @@ urlpatterns = [
 	url(r'^neg/env/$', views.neg_env_index, name='neg_env_index'),
 	url(r'^neg/rec/$', views.neg_rec_index, name='neg_rec_index'),
 
+	#negi
+	url(r'^negi/rec/$', views.negi_rec_index, name='negi_rec_index'),
+
 	#nep
 	url(r'^nep/new/(?P<pgid>[0-9]+)/$', views.nep_new, name='nep_new'),
 	url(r'^nep/asociada/(?P<pgid>[0-9]+)/$', views.nep_pre_asociada, name='nep_pre_asociada'),

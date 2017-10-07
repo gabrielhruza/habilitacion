@@ -79,6 +79,10 @@ class NotaP(Nota):
 		return self
 
 
+class NotaI(Nota):
+	enviar_a = models.ForeignKey(Perfil, null=True)
+	
+
 # method for updating
 @receiver(post_save, sender=NotaP, dispatch_uid="update_pg_notas_count")
 def update_stock(sender, instance, **kwargs):
