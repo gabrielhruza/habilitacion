@@ -157,7 +157,8 @@ def nep_new(request, pgid):
 
       nep = nep.save(commit=False)
       nep.setEmisor(emisor)
-      nep.emisor_perfil = emisor.profile.perfil.all().get(perfil=nivel)
+      #nep.emisor_perfil = emisor.profile.perfil.all().get(perfil=nivel)
+      nep.emisor_perfil = emisor.profile.perfil.all()[0]
       nep.setReceptor(perfil_receptor)
       nep.setPG(pg)
       messages.success(request, 'Nota creada correctamente')
