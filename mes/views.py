@@ -53,11 +53,11 @@ def neg_int_new(request):
   
   titulo_plantilla = 'Enviar Nota Interna'
 
-  context = NegInternaForm(prefix='neg')
+  context = NegInternaForm(prefix='neg', user=request.user)
 
   if request.method == "POST":
 
-    neg = NegInternaForm(request.POST, prefix='neg')
+    neg = NegInternaForm(request.POST, prefix='neg', user=request.user)
 
     if neg.is_valid():
 
@@ -85,16 +85,19 @@ def neg_int_new(request):
 #index de notas de entrada generales enviadas
 @group_required('mes')
 def neg_env_index(request):
-	
-	titulo_plantilla = 'Notas enviadas'
-	user = request.user
 
-	negs = Nota.objects.filter(emisor=user)
+  titulo_plantilla = 'Notas enviadas'
+  user = request.user
 
-	return render(request, 'neg/env_index.html', { 
-		'negs' : negs,
-		'titulo_plantilla' : titulo_plantilla
-		})
+  #user_perfiles = user.profile.perfil.all()
+
+
+  negs = Nota.objects.filter(emisor=user)
+  
+  return render(request, 'neg/env_index.html', { 
+    'negs' : negs,
+    'titulo_plantilla' : titulo_plantilla
+  })
 
 
 #index de notas de entrada generales recibidas
@@ -115,7 +118,6 @@ def neg_rec_index(request):
     nxp.append(Nota.objects.filter(receptor=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  print nxps
   negs = Nota.objects.filter(receptor__in=user.profile.perfil.all())
   
   return render(request, 'neg/rec_index.html', { 

@@ -26,6 +26,7 @@ class Nota(models.Model):
 	)
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)
+	emisor_perfil	= models.ForeignKey(Perfil, unique=False, null=True, verbose_name='Seleccione Perfil')
 	receptor		= models.ForeignKey(Perfil, related_name='receptor', unique=False)
 	remitente  		= models.CharField(max_length=200, default='Don Pedro')
 	fecha_emision 	= models.DateField(auto_now_add=True)
@@ -38,10 +39,11 @@ class Nota(models.Model):
 
 	def setEmisor(self, user):
 		self.emisor = user
+		#self.emisor_perfil = user.profile.perfil
 		return self
 
-	def setReceptor(self, user):
-		self.receptor = user
+	def setReceptor(self, perfil):
+		self.receptor = perfil
 		return self
 
 	def setEstadoRecibida(self, user):

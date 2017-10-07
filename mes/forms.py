@@ -1,5 +1,5 @@
 from django import forms
-from .models import Nota, NotaP
+from .models import Nota, NotaP, Perfil
 
 class NegForm(forms.ModelForm):
 	class Meta:
@@ -10,7 +10,12 @@ class NegForm(forms.ModelForm):
 class  NegInternaForm(forms.ModelForm):
 	class Meta:
 		model 	= Nota
-		fields 	= ['motivo']
+		fields 	= ['motivo', 'emisor_perfil']
+
+	def __init__(self, *args, **kwargs):
+		user = kwargs.pop('user')
+		super(NegInternaForm, self).__init__(*args, **kwargs)
+		self.fields['emisor_perfil'] = forms.ModelChoiceField(queryset=user.profile.perfil)
 
 
 class NepForm(forms.ModelForm):
