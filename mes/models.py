@@ -39,7 +39,6 @@ class Nota(models.Model):
 
 	def setEmisor(self, user):
 		self.emisor = user
-		#self.emisor_perfil = user.profile.perfil
 		return self
 
 	def setReceptor(self, perfil):

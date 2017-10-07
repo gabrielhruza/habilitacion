@@ -18,6 +18,7 @@ class  NegInternaForm(forms.ModelForm):
 		self.fields['emisor_perfil'] = forms.ModelChoiceField(queryset=user.profile.perfil)
 		self.fields['emisor_perfil'].label = 'Seleccione Perfil'
 
+
 class NepForm(forms.ModelForm):
 	class Meta:
 		model 	= NotaP

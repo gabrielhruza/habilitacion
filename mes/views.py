@@ -153,12 +153,11 @@ def nep_new(request, pgid):
       nivel = pg.nivel
       receptor = Profile.objects.select_related('user').get(nivel=nivel)
 
-      print receptor
-
       perfil_receptor = receptor.perfil.all().get(perfil=nivel)
 
       nep = nep.save(commit=False)
       nep.setEmisor(emisor)
+      nep.emisor_perfil = emisor.profile.perfil.all().get(perfil=nivel)
       nep.setReceptor(perfil_receptor)
       nep.setPG(pg)
       messages.success(request, 'Nota creada correctamente')
