@@ -8,7 +8,7 @@ from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
 
-from .models 	import Nota, NotaP, NotaI
+from .models 	import Nota, NotaP, NotaI, Movimiento
 from .forms 	import NeForm, NeDerivarForm, NegForm, NegInternaForm, NepForm
 
 from pg.models import Profile, Perfil
@@ -20,30 +20,27 @@ from pg.models import Profile, Perfil
 #dar de alta nota de entrada general
 @group_required('mes')
 def neg_new(request):
-  
-  titulo_plantilla = 'Crear Nota de Entrada General'
 
-  context = NegForm(prefix='neg')
+  titulo_plantilla = 'Crear Nota de Entrada General'
+  context = NegForm(prefix='neg', user=request.user)
 
   if request.method == "POST":
-
-    neg = NegForm(request.POST, prefix='neg')
-
+    neg = NegForm(request.POST, prefix='neg', user=request.user)
+    
     if neg.is_valid():
+    
+      neg = neg.save(commit=False)
+      neg.setEmisor(request.user)
+      messages.success(request, 'Nota creada correctamente')
+      neg.save()
 
-    	neg = neg.save(commit=False)
-    	neg.setEmisor(request.user)
-    	messages.success(request, 'Nota creada correctamente')
-    	neg.save()
-      
     else:
-      	context = neg
-
+      context = neg
 
   return render(request, 'neg/new.html', { 
-  	'neg' : context, 
-  	'titulo_plantilla' : titulo_plantilla
-  	 })
+    'neg' : context, 
+    'titulo_plantilla' : titulo_plantilla
+  })
 
 
 #dar de alta nota de entrada interna general
@@ -124,10 +121,10 @@ def neg_rec_index(request):
   for up in user_perfiles:
     nxp = []
     nxp.append(up.perfil)
-    nxp.append(Nota.objects.filter(receptor=up, estado='NUEVA').count())
+    nxp.append(Nota.objects.filter(destino=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = Nota.objects.filter(receptor__in=user.profile.perfil.all())
+  negs = Nota.objects.filter(destino__in=user.profile.perfil.all())
   
   return render(request, 'neg/rec_index.html', { 
     'negs'  : negs,
@@ -169,25 +166,24 @@ def negi_rec_index(request):
 def nep_new(request, pgid):
   
   titulo_plantilla = 'Crear Nota de Entrada Asociada a Preinscripcion'
-  context = NepForm(prefix='nep')
+  context = NepForm(prefix='nep', user=request.user)
   
   if request.method == "POST":
-    nep = NepForm(request.POST, prefix='nep')
+    nep = NepForm(request.POST, prefix='nep', user=request.user)
     
     if nep.is_valid():
       pg 	= PreinscripcionGeneral.objects.get(pk=pgid)
 
       emisor = request.user
       nivel = pg.nivel
-      receptor = Profile.objects.select_related('user').get(nivel=nivel)
+      destino = Profile.objects.select_related('user').get(nivel=nivel)
 
-      perfil_receptor = receptor.perfil.all().get(perfil=nivel)
+      perfil_destino = destino.perfil.all().get(perfil=nivel)
 
       nep = nep.save(commit=False)
       nep.setEmisor(emisor)
-      #nep.emisor_perfil = emisor.profile.perfil.all().get(perfil=nivel)
-      nep.emisor_perfil = emisor.profile.perfil.all()[0]
-      nep.setReceptor(perfil_receptor)
+      #nep.emisor_perfil = emisor.profile.perfil.all()[0]
+      nep.setDestino(perfil_destino)
       nep.setPG(pg)
       messages.success(request, 'Nota creada correctamente')
       nep.save()
@@ -280,7 +276,7 @@ def ne_tramite(request, pid):
   return ne_show(request, ne.id)
 
 
-#nota entrada => derivar (edito la fecha y el destinatario)
+#nota entrada => derivar 
 @group_required('mes')
 def ne_derivar(request, pid):
   
@@ -292,13 +288,17 @@ def ne_derivar(request, pid):
     ne = NeDerivarForm(request.POST, prefix='ne')
     
     if ne.is_valid():
-      neo = Nota.objects.get(pk=pid)
+      nota = Nota.objects.get(pk=pid)
       ne = ne.save(commit=False)
-      ne.setEmisor(request.user)
+      ne.nota   = nota
+      ne.emisor = request.user
+      ne.emisor_perfil = nota.emisor_perfil
+      ne.estado = 'DERIVADA'
       ne.save()
-      ne.nro_de_tracking  = neo.nro_de_tracking
-      ne.emisor_perfil    = neo.emisor_perfil
-      ne.save()
+
+      nota.destino = ne.destino
+      nota.save()
+      
       messages.success(request, 'Acción realizada correctamente')
     else:
       context = ne
@@ -313,27 +313,35 @@ def ne_derivar(request, pid):
 @group_required('mes')
 def ne_tracking(request, ndt):
 
-  notas = Nota.objects.filter(nro_de_tracking=ndt).order_by('fecha_emision')  
+  movs = Movimiento.objects.filter(nota__nro_de_tracking=ndt).order_by('fecha')  
+  nota = Nota.objects.get(nro_de_tracking=ndt)
 
-  data = []
+  data = {}
 
-  for nota in notas:
+  nota_json = {
+    'fecha_emision' : nota.fecha_emision,
+    'emisor_perfil' : nota.emisor_perfil.perfil,
+    'nro_de_tracking' : nota.nro_de_tracking,
+    'estado'        : nota.estado,
+    'motivo'        : nota.motivo,
+    'remitente'     : nota.remitente
+      }
 
-    remitente = nota.remitente
-    emisor    = nota.emisor.username
-    receptor  = nota.receptor.perfil
-    motivo    = nota.motivo
+  data.update({'nota' : nota_json})
 
-    data.append({'fecha_emision': nota.fecha_emision,
-                  'remitente'   : remitente,
-                  'emisor'      : emisor,
-                  'receptor'    : receptor,
-                  'motivo'      : motivo,
-                  'nro_de_tracking': nota.nro_de_tracking,
-                  'motivo_derivar' : nota.motivo_derivar,
-                  'estado'      : nota.estado
+  movs_json = []
+
+  for mov in movs:
+
+    movs_json.append({
+                  'fecha'   : mov.fecha,
+                  'emisor_perfil'  : mov.emisor_perfil.perfil,       
+                  'destino' : mov.destino.perfil,
+                  'motivo_derivar' : mov.motivo_derivar,
     })
-    
+  
+  data.update({'movs' : movs_json})
+
   return JsonResponse(data, safe=False)
 
 
@@ -342,21 +350,18 @@ def ne_tracking(request, ndt):
 @group_required('mes')
 def ne_notificacion(request):
 
-  user_logueado = request.user.profile.perfil
+  user_logueado = request.user.profile.perfil.all()
 
-  notas = Nota.objects.filter(receptor__in=user_logueado.all(), estado='NUEVA', notificar=True).order_by('fecha_emision')
-
+  notas = Nota.objects.filter(destino__in=user_logueado, estado='NUEVA', notificar=True).order_by('fecha_emision')
+  
   data = []
 
-     #nep.setReceptor(receptor.perfil.all()[0])
-
   for nota in notas:
-    emisor = nota.emisor.username
-    #receptor = nota.receptor
+    
+    emisor = nota.emisor_perfil.perfil
 
     data.append({'fecha_emision': nota.fecha_emision,
                   'emisor':emisor,
-                  #'receptor': receptor,
                   'motivo': nota.motivo,
                   'estado': nota.estado,
                   'id' : nota.id

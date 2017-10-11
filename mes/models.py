@@ -27,22 +27,21 @@ class Nota(models.Model):
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)
 	emisor_perfil	= models.ForeignKey(Perfil, unique=False, null=True)
-	receptor		= models.ForeignKey(Perfil, related_name='receptor', unique=False)
+	destino			= models.ForeignKey(Perfil, related_name='receptor', unique=False)
 	remitente  		= models.CharField(max_length=200, default='Andres Garcia')
 	fecha_emision 	= models.DateField(auto_now_add=True)
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 	notificar 		= models.BooleanField(default=True)
 	motivo 			= models.CharField(max_length=200, default='Consulta')	
-	motivo_derivar	= models.CharField(max_length=200, default='')
 	accion_por 		= models.ForeignKey(User, related_name='accion_por', unique=False, null=True)
 
 	def setEmisor(self, user):
 		self.emisor = user
 		return self
 
-	def setReceptor(self, perfil):
-		self.receptor = perfil
+	def setDestino(self, perfil):
+		self.destino = perfil
 		return self
 
 	def setEstadoRecibida(self, user):
@@ -83,8 +82,17 @@ class NotaI(Nota):
 	enviar_a = models.ForeignKey(Perfil, null=True)
 	
 
+class Movimiento(models.Model):
+	motivo_derivar	= models.CharField(max_length=200, default='')
+	fecha 			= models.DateField(auto_now_add=True)
+	destino 	 	= models.ForeignKey(Perfil, related_name='destino', unique=False)
+	emisor	      	= models.ForeignKey(User, related_name='emisor_der', unique=False, null=True)
+	emisor_perfil  	= models.ForeignKey(Perfil, related_name='emisorper_der', unique=False, null=True)
+	nota 			= models.ForeignKey(Nota, related_name='nota', unique=False)	
+
+
 # method for updating
-@receiver(post_save, sender=NotaP, dispatch_uid="update_pg_notas_count")
-def update_stock(sender, instance, **kwargs):
-     instance.pg.cant_notas += 1
-     instance.pg.save()
+#@receiver(post_save, sender=NotaP, dispatch_uid="update_pg_notas_count")
+#def update_stock(sender, instance, **kwargs):
+ #    instance.pg.cant_notas += 1
+  #   instance.pg.save()
