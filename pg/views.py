@@ -133,16 +133,9 @@ def pdfPG(request, nrop):
 
   template = get_template('pg/pg/comprobante.html')
 
-  #html = template.render(pibe)
+  postulante  = Postulante.objects.get(pg__nro_de_preinscripto=nrop)
 
-  postulantes  = Postulante.objects.all()
-
-  #buscar el postulante con el nro de preinscripto igual al que viene por parametro
-  for postulante in postulantes:
-    if postulante.pg.nro_de_preinscripto == nrop:
-      pibe = postulante
-
-  contexto = {'postulante' : pibe }
+  contexto = {'postulante' : postulante }
   pdf = render_to_pdf('pg/pg/comprobante.html', contexto)
 
   if pdf:

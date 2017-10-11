@@ -42,7 +42,6 @@
      <body>
 
 <img src="http://localhost:8000/static/preinscripcion/images/logo.png" style="width: 1000px">
-<p>Av italia 350 Tel: 0362-427311 - 3500 - Resistencia, Chaco</p>
 <hr>
 
 
@@ -87,6 +86,24 @@
                 <li><b>DNI:</b> {{ postulante.padre.dni }}</li>
                 <li><b>Telefono:</b> {{ postulante.padre.telefonoPersonal }}</li>
                 <li><b>Email:</b> {{ postulante.padre.email }}</li>
+            </ul>
+
+            {% if postulante.tutor %}
+            <h3>Datos del tutor</h3>
+            <ul style="list-style-type:disc">
+                <li><b>Apellido y Nombre:</b>{{ postulante.tutor.apellido }},{{ postulante.tutor.nombre }}</li>
+                <li><b>DNI:</b> {{ postulante.tutor.dni }}</li>
+                <li><b>Telefono:</b> {{ postulante.tutor.telefonoPersonal }}</li>
+                <li><b>Email:</b> {{ postulante.tutor.email }}</li>
+            </ul>
+            {% endif %}
+
+            <h3>Datos de la persona con quien vive actualmente</h3>
+            <ul style="list-style-type:disc">
+                <li><b>Apellido y Nombre:</b>{{ postulante.vive_con.apellido }},{{ postulante.vive_con.nombre }}</li>
+                <li><b>DNI:</b> {{ postulante.vive_con.dni }}</li>
+                <li><b>Telefono:</b> {{ postulante.vive_con.telefonoPersonal }}</li>
+                <li><b>Email:</b> {{ postulante.vive_con.email }}</li>
             </ul>
 
             {% if postulante.hermanos.all|length > 0 %}

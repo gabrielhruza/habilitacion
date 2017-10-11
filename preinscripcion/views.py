@@ -30,16 +30,9 @@ def generatePdf(request, nrop):
 
   template = get_template('preinscripcion4anios/comprobante.html')
 
-  #html = template.render(pibe)
+  postulante  = Postulante.objects.get(preinscripcion__nro_de_preinscripto=nrop)
 
-  postulantes  = Postulante.objects.all()
-
-  #buscar el postulante con el nro de preinscripto igual al que viene por parametro
-  for postulante in postulantes:
-    if postulante.preinscripcion.nro_de_preinscripto == nrop:
-      pibe = postulante
-
-  contexto = {'postulante' : pibe }
+  contexto = {'postulante' : postulante }
   pdf = render_to_pdf('preinscripcion4anios/comprobante.html', contexto)
 
   if pdf:
