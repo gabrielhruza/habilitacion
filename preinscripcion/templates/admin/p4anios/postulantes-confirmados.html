@@ -35,10 +35,10 @@
                 <td>{{ pl.postulante.edad }}</td>
                 <td>{{ pl.postulante.dni }}</td>
                 <td>{{ pl.postulante.genero }}</td>
-                <td>{{ pl.postulante.padre.id }}</td>
-                <td>{{ pl.postulante.madre.id }}</td>
-                <td>{{ pl.postulante.tutor.id }}</td>
-                <td>{{ pl.postulante.vive_con_id }}</td>                
+                <td>{{ pl.postulante.padre.apellido }}, {{ pl.postulante.padre.nombre }}</td>
+                <td>{{ pl.postulante.madre.apellido }}, {{ pl.postulante.madre.nombre }}</td>
+                <td>{{ pl.postulante.tutor.apellido }}, {{ pl.postulante.tutor.nombre }}</td>
+                <td>{{ pl.postulante.vive_con.apellido }}, {{ pl.postulante.vive_con.nombre }}</td>                
                 <td>
                 <a href="{% url 'admin_preinscripcion' pl.postulante.preinscripcion.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>

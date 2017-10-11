@@ -38,10 +38,10 @@
                 <td>{{ postulante.edad }}</td>
                 <td>{{ postulante.dni }}</td>
                 <td>{{ postulante.genero }}</td>
-                <td>{{ postulante.padre.id }}</td>
-                <td>{{ postulante.madre.id }}</td>
-                <td>{{ postulante.tutor.id }}</td>
-                <td>{{ postulante.vive_con_id }}</td>                
+                <td>{{ postulante.padre.apellido }}, {{ postulante.padre.nombre }}</td>
+                <td>{{ postulante.madre.apellido }}, {{ postulante.madre.nombre }}</td>
+                <td>{{ postulante.tutor.apellido }}, {{ postulante.tutor.nombre }}</td>
+                <td>{{ postulante.vive_con.apellido }}, {{ postulante.vive_con.nombre }}</td>
                 <td>{{ postulante.preinscripcion.id }}</td>  
                 <td>
                 <a href="{% url 'admin_preinscripcion' postulante.preinscripcion.id %}">
