@@ -89,10 +89,9 @@ def ni_me(request, pid):
   ni.notificar = True
   ni.save()
 
-  messages.success(request, 'Acción realizada correctamente')
+  #messages.success(request, 'Acción realizada correctamente')
   
   return ni_rec_index(request)
-
 
 
 #index de notas de entrada generales enviadas
@@ -165,7 +164,7 @@ def ni_rec_index(request):
   for up in user_perfiles:
     nxp = []
     nxp.append(up.perfil)
-    nxp.append(NotaI.objects.filter(enviar_a=up, estado='NUEVA').count())
+    nxp.append(NotaI.objects.filter(destino=up, estado='NUEVA').count())
     nxps.append(nxp)
 
   negs = NotaI.objects.filter(destino__in=user.profile.perfil.all())

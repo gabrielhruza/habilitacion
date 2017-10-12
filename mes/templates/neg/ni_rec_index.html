@@ -180,7 +180,7 @@ function filtro(e){
   table = document.getElementById("table-rec");
   tr = table.getElementsByTagName("tr");
   for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[4];
+    td = tr[i].getElementsByTagName("td")[3];
     if (td) {
       if (perfil.indexOf(td.innerText) > -1) {
         tr[i].style.display = "";
