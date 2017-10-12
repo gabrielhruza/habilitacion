@@ -25,7 +25,7 @@
 <h6 class="text-center titulo-logo">COLEGIO DON BOSCO  UEPGP N° 19</h6>
 </div>
 
-<div class="container">
+<div class="container-fluid" style="width: 90%">
 <div class="row">
 	
 	<div class="col-md-6 col-sm-6 col-xs-12">	
@@ -35,20 +35,28 @@
 	    <hr>
 
 	    <p>
-	    	La preinscripción se realiza un solo día, este año será el 1º de Agosto de 8 a 16 horas.
+	    	La preinscripción se realizará desde <strong>desde el 8 de Julio de 2017 hasta 8 de Agosto de 2017.</strong>
 	    </p>
 	    <p>
-	    	Para acceder a las vacantes disponibles los padres deben pre-inscribir a sus hijos para que participen del sorteo de los lugares disponibles.
-	    </p>
-	    <p>
-	    	El sorteo de las vacantes se realizará el jueves 24 de agosto, con la presencia de un Escribano Público y las autoridades de la Obra, el cual se realiza en las instalaciones del Salón Teatro de la Institución.
-	    </p>
-
+	    	El primer paso es completar el siguiente formulario de preinscripción que estará disponible online durante las fechas mencionadas.
+		</p>
+		<p>
+			Luego, debe imprimir el formulario y acercarse al colegio con el formulario y el dni del niño/a antes de finalizado el período de preinscripción.
+		</p>
+		<p>
+			Una vez verificados los datos de la preinscripción con el dni, se puede confirmar la misma y asignarle un numero para el sorteo. 
+			A partir de ese momento el niño/a es considerado como un postulante para el sorteo de vacantes.
+		</p>
+		<p>
+			Todos los pasos anteriores son obligatorios para poder participar el día del sorteo.
+		</p>
 	    <p>
 	    	La Obra garantiza la confidencialidad de la Información ingresada.
 	    </p>
-
-	    <div class="espacio"></div>
+	    
+	    <p>
+    	<a href="{% static 'preinscripcion/pdf/tyc.pdf' %}" target="_blank">Términos y condiciones.</a> 
+    	</p>
 
 	    <a href="{% url 'preinscripcion4_new' %}">
 	   	<img src="{% static 'preinscripcion/images/home/boton-pre-inscripcion-pni.png' %}" class="img-responsive btn-p">
@@ -65,11 +73,13 @@
     <hr>
 
     <p>
-    	Todos los datos aquí ingresados, tienen carácter de declaración jurada. Por lo tanto la falsedad, omisión o error en los mismos, provocara la pérdida de validez de la postulación.    	
-    </p>
-
+    	Completar el siguiente formulario le permite postularse a un grado/curso del corriente ciclo o para el ciclo del año siguiente, al momento de generarse una vacante.
+	</p>
+	<p>
+		Es obligatorio completar el formulario y su posterior confirmación para presentar notas relacionadas con la vacante en el colegio.
+	</p>
     <p>
-    	Puede completar este formulario las veces que desea, pero sólo se tendrá en cuenta por la Institución el que se haya confirmado y será válido solamente para el ciclo lectivo ingresado.
+    	Todos los datos aquí ingresados, tienen carácter de declaración jurada. Por lo tanto la falsedad, omisión o error en los mismos, provocará la pérdida de validez de la postulación.    	
     </p>
     <p>
 		Una vez impreso, no puede realizarse cambios sobre el comprobante por lo que deberá volver a completarlo en caso de error u omisión de algún dato. 
@@ -79,6 +89,10 @@
     	La Obra garantiza la confidencialidad de la Información ingresada.
     </p>
 
+    <p>
+    	<a href="{% static 'preinscripcion/pdf/tycg.pdf' %}" target="_blank">Términos y condiciones.</a> 
+    </p>
+    <br>
     <a href="{% url 'pg_new' %}">
     <img src="{% static 'preinscripcion/images/home/boton-pre-inscripcion-pg.png' %}" class="img-responsive btn-p">
 	</a>
