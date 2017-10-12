@@ -1,0 +1,188 @@
+{% extends 'admin.html' %}
+
+{% load auth_extras %}
+
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container-fluid">
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ titulo_plantilla }}</h3>
+    </div>
+<div class="panel-body">
+    
+    Seleccionar perfil:
+    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="">
+      {% for nxp in nxps %}  
+      <button type="button" class="btn btn-default" onclick="filtro(window.event)">{{ nxp.0 }}
+        <span class="badge">{{ nxp.1 }}</span>
+      </button>
+      {% endfor %}
+    </div>
+    <hr>
+
+    <div style="max-height: 470px; overflow-y: scroll;">
+    <table class="table table-condensed table-bordered" id="table-rec">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Emisor</th>
+                <th>Perfil Emisor</th>
+                {% if request.user|has_group:'recepcion' %} 
+                <th>Enviar a</th>
+                {% endif %}
+                <th>Motivo</th>
+                <th>N° de tracking</th>
+                <th>Estado</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for neg in negs %}
+            {% if neg.estado == 'NUEVA' %}
+                <tr class="warning">
+            {% else %}       
+                <tr>
+            {% endif %}
+                <td>{{ neg.fecha_emision }}</td>
+                <td>{{ neg.emisor }}</td>
+                <td>{{ neg.emisor_perfil }}</td>
+                {% if request.user|has_group:'recepcion' %} 
+                <td>{{ neg.enviar_a }}</td>
+                {% endif %}
+                <td>{{ neg.motivo }}</td>
+                <td>{{ neg.nro_de_tracking }}</td>
+                <td>{{ neg.estado }} [{{ neg.accion_por }}]</td>
+                <td>
+                <a href="{% url 'ne_show' neg.id %}">
+                    <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                </a>
+                |
+                <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Movimientos de Nota')">
+                    <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
+                </a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    </div>
+
+</div>
+</div>
+</div>
+
+<!-- Button trigger modal -->
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel"><!-- titulo modal--></h4>
+      </div>
+      <div class="modal-body">
+
+        <div id="detalle">
+        </div>
+        <hr>
+
+        <table class="table table-striped table-hover table-condensed" id="tracking">
+        <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Emisor</th>
+                <th>Receptor</th>
+                <th>Motivo derivacion</th>
+                <th>Estado</th>
+            </tr>
+        </thead>
+        <tbody>      
+        </tbody>
+        </table>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Ok</button>   
+      </div>
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+function modal($url, $titulo){
+
+    $modal  = $('#myModal').modal();
+    $modal_title = $('.modal-title')[0];
+    $modal_title.innerText = $titulo;
+
+     $.ajax({
+        url: $url,
+        dataType: 'json',
+        success: function (data) {
+            
+            var detalle = 
+                '<p><b>Motivo:</b> ' + data[0].motivo +
+                '  <b>N° de Tracking:</b> ' + data[0].nro_de_tracking + '</p>' +
+                '  <p><b> Fecha de inicio: </b>' + data[0].fecha_emision + '</p>' +
+                '<p><b> Remitente: </b>' + data[0].remitente + 
+                '<b> Estado actual: </b>' + data[0].estado + '</p>'
+                ;
+
+            $('#detalle').html(detalle);
+
+            var trHTML = '';
+            $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
+
+                var date=new Date(item.fecha_emision);
+
+                fecha_emision = (date.getDate()+1) + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
+
+
+                trHTML += 
+
+                '<tr><td>'  + fecha_emision +
+                '</td><td>' + item.emisor + 
+                '</td><td>' + item.receptor +
+                '</td><td>' + item.motivo_derivar +
+                '</td><td>' + item.estado +
+                '</td></tr>';
+            });
+
+        $('#tracking tbody').html(trHTML);
+
+        }
+      });
+
+}
+</script>
+<!-- ./Modal -->
+
+
+<script>
+function filtro(e){
+
+  perfil = e.toElement.innerText;
+  perfil = perfil.toUpperCase();
+  table = document.getElementById("table-rec");
+  tr = table.getElementsByTagName("tr");
+  for (i = 1; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[2];
+    if (td) {
+      if (perfil.indexOf(td.innerText) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }       
+  }
+
+}
+</script>
+{% endblock %}

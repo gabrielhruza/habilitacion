@@ -106,14 +106,26 @@
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="notif" class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Buzón <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <li><a href="{% url 'neg_rec_index' %}">Notas Recibidas</a></li>
-            <li><a href="{% url 'neg_env_index' %}">Notas Enviadas</a></li>
-            {% if request.user|has_group:'recepcion' %} 
-            <li><a href="{% url 'neg_new' %}">Redactar NG</a></li>
+            
+            <li class="dropdown-header">Notas</li>
+            <li><a href="{% url 'neg_rec_index' %}">Recibidas</a></li>
+            <li><a href="{% url 'neg_env_index' %}">Enviadas</a></li>
+            <li><a href="{% url 'neg_new' %}">Redactar</a></li>
+            <li role="separator" class="divider"></li>
+
+            <li class="dropdown-header">Notas Internas</li>
+            <li><a href="{% url 'ni_rec_index' %}">Recibidas</a></li>
+            <li><a href="{% url 'ni_env_index' %}">Enviadas</a></li>
+            <li><a href="{% url 'ni_new' %}">Redactar</a></li>
+            <li role="separator" class="divider"></li>
+
+            <li class="dropdown-header">Notas con Postulante</li>
+            {% if request.user|has_group:'recepcion' %}             
+            <li><a href="{% url 'admin_pg_index_recepcion' %}">Redactar</a></li>
             {% else %}
-           
+            <li><a href="{% url 'admin_pg_confirmados' %}">Redactar</a></li>
             {% endif %}
-            <li><a href="{% url 'admin_pg_confirmados' %}">Redactar NAP</a></li>
+
           </ul>
       </li>
       <li class="dropdown">
@@ -251,29 +263,25 @@
 
   };
 
-  //setInterval(function(){
-      $.ajax({
-            url: "{% url 'ne_notificacion' %}",
-            dataType: 'json',
-            success: function (data) {
-                //console.log(data.length);
-                if(data.length > 0){
-                  $('#notif').addClass('text-red');
-                  $('#notif').html("<span class='badge'>"+data.length+"</span>");
-                  $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
-
-                    var title = item.emisor + ' ' + item.fecha_emision
-                    var body = item.estado +'\n'+ item.motivo;
-                    var id = item.id;
-                    push(title, body, id );
-
-                  });
-                }
-            }
+$.ajax({
+  url: "{% url 'ne_notificacion' %}",
+  dataType: 'json',
+  success: function (data) {
+    if(data.length > 0){
+      $('#notif').addClass('text-red');
+      $('#notif').html("<span class='badge'>"+data.length+"</span>");
+      
+      $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
+        var title = item.emisor + ' ' + item.fecha_emision
+        var body = item.estado +'\n'+ item.motivo;
+        var id = item.id;
+        push(title, body, id );
       });
-  //}, 5000);
+    }
+  }
+});
 
 </script>
-<!-- ./push notifications -->
+
 </body>
 </html>

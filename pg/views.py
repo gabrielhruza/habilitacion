@@ -374,7 +374,7 @@ def admin_pg_ranking(request):
   #ciclos lectivos
   clvs        = CicloLectivo.objects.all()
 
-  postulantes = Postulante.objects.filter(pg__nivel=user_nivel, pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__estado='CONFIRMADO').order_by('pg__cant_notas')[:10]
+  postulantes = Postulante.objects.filter(pg__nivel=user_nivel, pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__estado='CONFIRMADO')
 
   return render(request, 'pg/adminpg/ranking.html',{
           'titulo_plantilla' : titulo_plantilla,

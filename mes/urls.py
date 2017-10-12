@@ -6,12 +6,14 @@ urlpatterns = [
 	
 	#neg
 	url(r'^neg/new/$', views.neg_new, name='neg_new'),
-	url(r'^neg/int/new/$', views.neg_int_new, name='neg_int_new'),
 	url(r'^neg/env/$', views.neg_env_index, name='neg_env_index'),
 	url(r'^neg/rec/$', views.neg_rec_index, name='neg_rec_index'),
 
-	#negi
-	url(r'^negi/rec/$', views.negi_rec_index, name='negi_rec_index'),
+	#ni
+	url(r'^ni/new/$', views.ni_new, name='ni_new'),
+	url(r'^ni/me/(?P<pid>[0-9]+)/$', views.ni_me, name='ni_me'),
+	url(r'^ni/rec/$', views.ni_rec_index, name='ni_rec_index'),
+	url(r'^ni/env/$', views.ni_env_index, name='ni_env_index'),
 
 	#nep
 	url(r'^nep/new/(?P<pgid>[0-9]+)/$', views.nep_new, name='nep_new'),

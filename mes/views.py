@@ -9,7 +9,7 @@ from django.http import JsonResponse
 from django.core import serializers
 
 from .models 	import Nota, NotaP, NotaI, Movimiento
-from .forms 	import NeForm, NeDerivarForm, NegForm, NegInternaForm, NepForm
+from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm
 
 from pg.models import Profile, Perfil
 
@@ -46,15 +46,15 @@ def neg_new(request):
 #dar de alta nota de entrada interna general
 #no hay notas internas asociadas a postulantes
 @group_required('mes')
-def neg_int_new(request):
+def ni_new(request):
   
   titulo_plantilla = 'Enviar Nota Interna'
 
-  context = NegInternaForm(prefix='neg', user=request.user)
+  context = NIForm(prefix='neg', user=request.user)
 
   if request.method == "POST":
 
-    neg = NegInternaForm(request.POST, prefix='neg', user=request.user)
+    neg = NIForm(request.POST, prefix='neg', user=request.user)
 
     if neg.is_valid():
 
@@ -64,7 +64,8 @@ def neg_int_new(request):
       #enviar nota a perfil = "MESA DE ENTRADA"
       perfil = Perfil.objects.get(perfil='MESA DE ENTRADA')
 
-      neg.setReceptor(perfil)
+      neg.setDestino(perfil)
+
       messages.success(request, 'Nota creada correctamente')
       neg.save()
       
@@ -76,6 +77,21 @@ def neg_int_new(request):
     'neg' : context, 
     'titulo_plantilla' : titulo_plantilla
      })
+
+
+#enviar nota interna recibida en MESA DE ENTRADA
+@group_required('mes')
+def ni_me(request, pid):
+
+  ni = NotaI.objects.get(pk=pid)
+
+  ni.destino = ni.enviar_a
+  ni.notificar = True
+  ni.save()
+
+  messages.success(request, 'Acción realizada correctamente')
+  
+  return ni_rec_index(request)
 
 
 
@@ -94,10 +110,10 @@ def neg_env_index(request):
   for up in user_perfiles:
     nxp = []
     nxp.append(up.perfil)
-    nxp.append(Nota.objects.filter(emisor= user, emisor_perfil=up, estado='NUEVA').count())
+    nxp.append(Nota.objects.exclude(remitente=None).filter(emisor= user, emisor_perfil=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = Nota.objects.filter(emisor=user)
+  negs = Nota.objects.filter(emisor=user).exclude(remitente=None)
   
   return render(request, 'neg/env_index.html', { 
     'negs' : negs,
@@ -121,10 +137,10 @@ def neg_rec_index(request):
   for up in user_perfiles:
     nxp = []
     nxp.append(up.perfil)
-    nxp.append(Nota.objects.filter(destino=up, estado='NUEVA').count())
+    nxp.append(Nota.objects.exclude(remitente=None).filter(destino=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = Nota.objects.filter(destino__in=user.profile.perfil.all())
+  negs = Nota.objects.filter(destino__in=user.profile.perfil.all()).exclude(remitente=None)
   
   return render(request, 'neg/rec_index.html', { 
     'negs'  : negs,
@@ -134,9 +150,9 @@ def neg_rec_index(request):
 
 
 
-#index de notas internas de entrada generales recibidas por perfil MESA DE ENTRADA
+#index de notas recibidas internas
 @group_required('mes')
-def negi_rec_index(request):
+def ni_rec_index(request):
   
   titulo_plantilla = 'Notas internas recibidas'
   user = request.user
@@ -149,12 +165,39 @@ def negi_rec_index(request):
   for up in user_perfiles:
     nxp = []
     nxp.append(up.perfil)
-    nxp.append(NotaI.objects.filter(receptor=up, estado='NUEVA').count())
+    nxp.append(NotaI.objects.filter(enviar_a=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = NotaI.objects.filter(receptor__in=user.profile.perfil.all())
+  negs = NotaI.objects.filter(destino__in=user.profile.perfil.all())
   
-  return render(request, 'neg/negi_rec_index.html', { 
+  return render(request, 'neg/ni_rec_index.html', { 
+    'negs'  : negs,
+    'nxps'  : nxps,
+    'titulo_plantilla' : titulo_plantilla
+  })
+
+
+#index de notas enviadas internas
+@group_required('mes')
+def ni_env_index(request):
+  
+  titulo_plantilla = 'Notas internas enviadas'
+  
+  user = request.user
+  user_perfiles = user.profile.perfil.all()
+
+  #notas por perfil con estado = NUEVA
+  nxps = []
+
+  for up in user_perfiles:
+    nxp = []
+    nxp.append(up.perfil)
+    nxp.append(NotaI.objects.filter(emisor=user, emisor_perfil=up , estado='NUEVA').count())
+    nxps.append(nxp)
+
+  negs = NotaI.objects.filter(emisor=user)
+  
+  return render(request, 'neg/ni_env_index.html', { 
     'negs'  : negs,
     'nxps'  : nxps,
     'titulo_plantilla' : titulo_plantilla
@@ -289,16 +332,20 @@ def ne_derivar(request, pid):
     
     if ne.is_valid():
       nota = Nota.objects.get(pk=pid)
+
       ne = ne.save(commit=False)
       ne.nota   = nota
       ne.emisor = request.user
       ne.emisor_perfil = nota.emisor_perfil
-      ne.estado = 'DERIVADA'
       ne.save()
 
+      nota.estado = 'NUEVA'
+      nota.notificar = True
       nota.destino = ne.destino
       nota.save()
       
+
+
       messages.success(request, 'Acción realizada correctamente')
     else:
       context = ne
