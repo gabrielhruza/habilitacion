@@ -31,7 +31,7 @@ def neg_new(request):
     
       neg = neg.save(commit=False)
       neg.setEmisor(request.user)
-      messages.success(request, 'Nota creada correctamente')
+      messages.success(request, 'Nota creada correctamente.')
       neg.save()
 
     else:
@@ -66,7 +66,7 @@ def ni_new(request):
 
       neg.setDestino(perfil)
 
-      messages.success(request, 'Nota creada correctamente')
+      messages.success(request, 'Nota creada correctamente.')
       neg.save()
       
     else:
@@ -85,11 +85,15 @@ def ni_me(request, pid):
 
   ni = NotaI.objects.get(pk=pid)
 
-  ni.destino = ni.enviar_a
-  ni.notificar = True
+  ni.destino    = ni.enviar_a
+  ni.notificar  = True
+  ni.estado     = 'DESPACHADA'
+
+  
+
   ni.save()
 
-  messages.success(request, 'Acción realizada correctamente')
+  messages.success(request, 'Acción realizada correctamente.')
   
   return ni_rec_index(request)
 
@@ -227,7 +231,7 @@ def nep_new(request, pgid):
       #nep.emisor_perfil = emisor.profile.perfil.all()[0]
       nep.setDestino(perfil_destino)
       nep.setPG(pg)
-      messages.success(request, 'Nota creada correctamente')
+      messages.success(request, 'Nota creada correctamente.')
       nep.save()
     else:
       context = nep
@@ -279,7 +283,7 @@ def ne_recibida(request, pid):
   else:
     ne.setEstadoRecibida(userlogueado)
     ne.save()
-    messages.success(request, 'Acción realizada correctamente')
+    messages.success(request, 'Acción realizada correctamente.')
   return ne_show(request, ne.id)
 
 
@@ -296,7 +300,7 @@ def ne_rechazar(request, pid):
   else:
     ne.setEstadoRechazada(userlogueado)
     ne.save()
-    messages.success(request, 'Acción realizada correctamente')  
+    messages.success(request, 'Acción realizada correctamente.')  
   return ne_show(request, ne.id)
 
 
@@ -313,7 +317,7 @@ def ne_tramite(request, pid):
   else:
     ne.setEstadoEnTramite(userlogueado)
     ne.save()
-    messages.success(request, 'Acción realizada correctamente')
+    messages.success(request, 'Acción realizada correctamente.')
   
   return ne_show(request, ne.id)
 
@@ -345,7 +349,7 @@ def ne_derivar(request, pid):
       
 
 
-      messages.success(request, 'Acción realizada correctamente')
+      messages.success(request, 'Acción realizada correctamente.')
     else:
       context = ne
   

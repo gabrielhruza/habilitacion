@@ -109,9 +109,8 @@
             <tr>
                 <th>Fecha</th>
                 <th>Emisor</th>
-                <th>Receptor</th>
+                <th>Destino</th>
                 <th>Motivo derivacion</th>
-                <th>Estado</th>
             </tr>
         </thead>
         <tbody>      
@@ -137,21 +136,22 @@ function modal($url, $titulo){
         url: $url,
         dataType: 'json',
         success: function (data) {
-            
+            var nota = data.nota;
+
             var detalle = 
-                '<p><b>Motivo:</b> ' + data[0].motivo +
-                '  <b>N° de Tracking:</b> ' + data[0].nro_de_tracking + '</p>' +
-                '  <p><b> Fecha de inicio: </b>' + data[0].fecha_emision + '</p>' +
-                '<p><b> Remitente: </b>' + data[0].remitente + 
-                '<b> Estado actual: </b>' + data[0].estado + '</p>'
+                '<p><b>Motivo:</b> ' + nota.motivo +
+                '  <b>N° de Tracking:</b> ' + nota.nro_de_tracking + '</p>' +
+                '  <p><b> Fecha de inicio: </b>' + nota.fecha_emision + '</p>' +
+                '<p><b> Remitente: </b>' + nota.remitente + 
+                '<b> Estado actual: </b>' + nota.estado + '</p>'
                 ;
 
             $('#detalle').html(detalle);
 
             var trHTML = '';
-            $.each(JSON.parse(JSON.stringify((data))), function (i, item) {
+            $.each(JSON.parse(JSON.stringify((data.movs))), function (i, item) {
 
-                var date=new Date(item.fecha_emision);
+                var date=new Date(item.fecha);
 
                 fecha_emision = (date.getDate()+1) + '/' + (date.getMonth() + 1) + '/' +  date.getFullYear();
 
@@ -159,10 +159,9 @@ function modal($url, $titulo){
                 trHTML += 
 
                 '<tr><td>'  + fecha_emision +
-                '</td><td>' + item.emisor + 
-                '</td><td>' + item.receptor +
+                '</td><td>' + item.emisor_perfil + 
+                '</td><td>' + item.destino +
                 '</td><td>' + item.motivo_derivar +
-                '</td><td>' + item.estado +
                 '</td></tr>';
             });
 
