@@ -13,15 +13,10 @@
     </div>
 <div class="panel-body">
 
-    Seleccionar perfil:
-    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="">
-      {% for nxp in nxps %}  
-      <button type="button" class="btn btn-default" onclick="filtro(window.event)">{{ nxp.0 }}
-        <span class="badge">{{ nxp.1 }}</span>
-      </button>
-      {% endfor %}
-    </div>
-    <hr>
+{% block filtro %}
+{% include './filtro.html' %}
+{% endblock filtro %}
+<hr>
 
     <div style="max-height: 470px; overflow-y: scroll;">
 

@@ -103,8 +103,10 @@ def neg_env_index(request):
 
   titulo_plantilla = 'Notas enviadas'
   user = request.user
-
   user_perfiles = user.profile.perfil.all()
+
+  page = request.GET.get('page', 1)
+
   
   #notas por perfil con estado = 'NUEVA'
   nxps = []
@@ -126,7 +128,7 @@ def neg_env_index(request):
     negs = paginator.page(1)
   except EmptyPage:
     negs = paginator.page(paginator.num_pages)
-    
+
 
   return render(request, 'neg/env_index.html', { 
     'negs' : negs,
@@ -141,8 +143,9 @@ def neg_rec_index(request):
   
   titulo_plantilla = 'Notas recibidas'
   user = request.user
-
   user_perfiles = user.profile.perfil.all()
+  
+  page = request.GET.get('page', 1)
 
   #notas por perfil con estado = NUEVA
   nxps = []
@@ -235,7 +238,7 @@ def ni_env_index(request):
   
   
   #paginator
-  paginator = Paginator(negs, 15)
+  paginator = Paginator(negs, 10)
   try:
     negs = paginator.page(page)
   except PageNotAnInteger:
