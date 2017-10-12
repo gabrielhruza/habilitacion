@@ -89,7 +89,7 @@ def ni_me(request, pid):
   ni.notificar = True
   ni.save()
 
-  #messages.success(request, 'Acción realizada correctamente')
+  messages.success(request, 'Acción realizada correctamente')
   
   return ni_rec_index(request)
 
