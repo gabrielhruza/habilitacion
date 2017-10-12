@@ -22,7 +22,8 @@ class Nota(models.Model):
 		('RECIBIDA', 'Recibida'),
 		('EN TRAMITE','En trámite'),
 		('DERIVADA', 'Derivada'),
-		('RECHAZADA', 'Rechazada')
+		('RECHAZADA', 'Rechazada'),
+		('DESPACHADA', 'Despachada')
 	)
 
 	emisor			= models.ForeignKey(User, related_name='emisor', unique=False)

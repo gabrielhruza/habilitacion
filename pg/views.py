@@ -157,24 +157,29 @@ def admin_pg_index_recepcion(request):
 
   cl    = 2017
   anio  = 1
+  nivel = 'INICIAL'
   anios = 7
 
   if request.method == 'POST':
     cl    = int(request.POST.get('cl', ''))
     anio  = request.POST.get('anio', '')
-
+    nivel = request.POST.get('nivel', '')
+    
+    
   #ciclos lectivos
   clvs        = CicloLectivo.objects.all()
+  niveles     = ['INICIAL', 'PRIMARIO', 'SECUNDARIO']
   
-  postulantes = Postulante.objects.filter(pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl)
+  postulantes = Postulante.objects.filter(pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__nivel=nivel)
 
-
-  return render(request, 'pg/adminpg/index.html',{
+  return render(request, 'pg/adminpg/recep_index.html',{
           'titulo_plantilla' : titulo_plantilla,
           'postulantes' : postulantes,
           'clvs'        : clvs,
+          'niveles'     : niveles,
           'cl'          : cl,
           'anio'        : anio,
+          'nivel'       : nivel,
           'anios'       : anios
           }
           )
