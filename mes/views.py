@@ -7,6 +7,7 @@ from preinscripcion.models import PreinscripcionGeneral
 from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
 from .models 	import Nota, NotaP, NotaI, Movimiento
 from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm
@@ -89,8 +90,6 @@ def ni_me(request, pid):
   ni.notificar  = True
   ni.estado     = 'DESPACHADA'
 
-  
-
   ni.save()
 
   messages.success(request, 'Acción realizada correctamente.')
@@ -118,6 +117,17 @@ def neg_env_index(request):
 
   negs = Nota.objects.filter(emisor=user).exclude(remitente=None)
   
+
+  #paginator
+  paginator = Paginator(negs, 15)
+  try:
+    negs = paginator.page(page)
+  except PageNotAnInteger:
+    negs = paginator.page(1)
+  except EmptyPage:
+    negs = paginator.page(paginator.num_pages)
+    
+
   return render(request, 'neg/env_index.html', { 
     'negs' : negs,
     'nxps'  : nxps,
@@ -145,6 +155,17 @@ def neg_rec_index(request):
 
   negs = Nota.objects.filter(destino__in=user.profile.perfil.all()).exclude(remitente=None)
   
+  
+  #paginator
+  paginator = Paginator(negs, 15)
+  try:
+    negs = paginator.page(page)
+  except PageNotAnInteger:
+    negs = paginator.page(1)
+  except EmptyPage:
+    negs = paginator.page(paginator.num_pages)
+
+
   return render(request, 'neg/rec_index.html', { 
     'negs'  : negs,
     'nxps'  : nxps,
@@ -159,6 +180,7 @@ def ni_rec_index(request):
   
   titulo_plantilla = 'Notas internas recibidas'
   user = request.user
+  page = request.GET.get('page', 1)
 
   user_perfiles = user.profile.perfil.all()
 
@@ -172,6 +194,16 @@ def ni_rec_index(request):
     nxps.append(nxp)
 
   negs = NotaI.objects.filter(destino__in=user.profile.perfil.all())
+
+
+  #paginator
+  paginator = Paginator(negs, 15)
+  try:
+    negs = paginator.page(page)
+  except PageNotAnInteger:
+    negs = paginator.page(1)
+  except EmptyPage:
+    negs = paginator.page(paginator.num_pages)
   
   return render(request, 'neg/ni_rec_index.html', { 
     'negs'  : negs,
@@ -188,6 +220,7 @@ def ni_env_index(request):
   
   user = request.user
   user_perfiles = user.profile.perfil.all()
+  page = request.GET.get('page', 1)
 
   #notas por perfil con estado = NUEVA
   nxps = []
@@ -200,6 +233,17 @@ def ni_env_index(request):
 
   negs = NotaI.objects.filter(emisor=user)
   
+  
+  #paginator
+  paginator = Paginator(negs, 15)
+  try:
+    negs = paginator.page(page)
+  except PageNotAnInteger:
+    negs = paginator.page(1)
+  except EmptyPage:
+    negs = paginator.page(paginator.num_pages)
+
+
   return render(request, 'neg/ni_env_index.html', { 
     'negs'  : negs,
     'nxps'  : nxps,
