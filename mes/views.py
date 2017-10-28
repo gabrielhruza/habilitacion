@@ -61,9 +61,17 @@ def ni_new(request):
 
       neg = neg.save(commit=False)
       neg.setEmisor(request.user)
-      #todas las notas internas pasan por mesa de entrada 
-      #enviar nota a perfil = "MESA DE ENTRADA"
-      perfil = Perfil.objects.get(perfil='MESA DE ENTRADA')
+
+      if neg.nota_fisica:
+
+        #todas las notas internas con nota fisic asociada pasan por mesa de entrada 
+        #enviar nota a perfil = "MESA DE ENTRADA"
+        perfil = Perfil.objects.get(perfil='MESA DE ENTRADA')
+
+      else:
+
+        #si no tiene nota fisica asociada no pasa por MESA DE ENTRADA
+        perfil = neg.enviar_a
 
       neg.setDestino(perfil)
 
