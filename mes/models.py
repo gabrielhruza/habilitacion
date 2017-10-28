@@ -34,7 +34,7 @@ class Nota(models.Model):
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 	notificar 		= models.BooleanField(default=True)
-	motivo 			= models.CharField(max_length=200, default='Consulta')	
+	motivo 			= models.TextField(max_length=400, default='Consulta')	
 	accion_por 		= models.ForeignKey(User, related_name='accion_por', unique=False, null=True)
 
 	def setEmisor(self, user):
@@ -81,6 +81,7 @@ class NotaP(Nota):
 
 class NotaI(Nota):
 	enviar_a = models.ForeignKey(Perfil, null=True)
+	nota_fisica = models.BooleanField(default=False)
 	
 
 class Movimiento(models.Model):

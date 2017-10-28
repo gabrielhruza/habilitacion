@@ -17,13 +17,11 @@ class NegForm(forms.ModelForm):
 class  NIForm(forms.ModelForm):
 	class Meta:
 		model 	= NotaI
-		fields 	= ['motivo', 'emisor_perfil', 'enviar_a']
+		fields 	= ['motivo', 'enviar_a' ,'nota_fisica']
 
 	def __init__(self, *args, **kwargs):
 		user = kwargs.pop('user')
 		super(NIForm, self).__init__(*args, **kwargs)
-		self.fields['emisor_perfil'] = forms.ModelChoiceField(queryset=user.profile.perfil)
-		self.fields['emisor_perfil'].label = 'Seleccione Perfil'
 		self.fields['enviar_a'] = forms.ModelChoiceField(queryset=Perfil.objects.all())
 
 
