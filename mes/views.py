@@ -23,10 +23,10 @@ from pg.models import Profile, Perfil
 def neg_new(request):
 
   titulo_plantilla = 'Crear Nota de Entrada General'
-  context = NegForm(prefix='neg', user=request.user)
+  context = NegForm(prefix='neg')
 
   if request.method == "POST":
-    neg = NegForm(request.POST, prefix='neg', user=request.user)
+    neg = NegForm(request.POST, prefix='neg')
     
     if neg.is_valid():
     
@@ -51,11 +51,11 @@ def ni_new(request):
   
   titulo_plantilla = 'Enviar Nota Interna'
 
-  context = NIForm(prefix='neg', user=request.user)
+  context = NIForm(prefix='neg')
 
   if request.method == "POST":
 
-    neg = NIForm(request.POST, prefix='neg', user=request.user)
+    neg = NIForm(request.POST, prefix='neg')
 
     if neg.is_valid():
 
@@ -259,10 +259,10 @@ def ni_env_index(request):
 def nep_new(request, pgid):
   
   titulo_plantilla = 'Crear Nota de Entrada Asociada a Preinscripcion'
-  context = NepForm(prefix='nep', user=request.user)
+  context = NepForm(prefix='nep')
   
   if request.method == "POST":
-    nep = NepForm(request.POST, prefix='nep', user=request.user)
+    nep = NepForm(request.POST, prefix='nep')
     
     if nep.is_valid():
       pg 	= PreinscripcionGeneral.objects.get(pk=pgid)

@@ -4,14 +4,7 @@ from .models import Nota, NotaP, NotaI, Perfil, Movimiento
 class NegForm(forms.ModelForm):
 	class Meta:
 		model 	= Nota
-		fields 	= ['remitente','emisor_perfil','destino', 'motivo']
-
-	def __init__(self, *args, **kwargs):
-		user = kwargs.pop('user')
-		super(NegForm, self).__init__(*args, **kwargs)
-		self.fields['emisor_perfil'] = forms.ModelChoiceField(queryset=user.profile.perfil)
-		self.fields['emisor_perfil'].label = 'Seleccione Perfil'
-
+		fields 	= ['remitente', 'destino', 'motivo']
 
 
 class  NIForm(forms.ModelForm):
@@ -20,7 +13,6 @@ class  NIForm(forms.ModelForm):
 		fields 	= ['motivo', 'enviar_a' ,'nota_fisica']
 
 	def __init__(self, *args, **kwargs):
-		user = kwargs.pop('user')
 		super(NIForm, self).__init__(*args, **kwargs)
 		self.fields['enviar_a'] = forms.ModelChoiceField(queryset=Perfil.objects.all())
 
@@ -29,14 +21,7 @@ class  NIForm(forms.ModelForm):
 class NepForm(forms.ModelForm):
 	class Meta:
 		model 	= NotaP
-		fields 	= ['remitente', 'emisor_perfil', 'motivo']
-
-	def __init__(self, *args, **kwargs):
-		user = kwargs.pop('user')
-		super(NepForm, self).__init__(*args, **kwargs)
-		self.fields['emisor_perfil'] = forms.ModelChoiceField(queryset=user.profile.perfil)
-		self.fields['emisor_perfil'].label = 'Seleccione Perfil'
-
+		fields 	= ['remitente', 'motivo']
 
 
 class NeForm(forms.ModelForm):
