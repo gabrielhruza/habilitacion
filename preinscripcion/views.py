@@ -2,7 +2,7 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login, logout
 
@@ -61,13 +61,38 @@ def login_mio(request):
     
     if user is not None:
       login(request, user)
-      return admin_mio(request)
+      messages.success(request, '¡Se ha logueado correctamente! Ahora seleccione el perfil con el cual quiere interactuar dentro del sistema. ')
+      messages.success(request, 'Defina sistema -.-')
+      return redirect ('select_perfil')
     
     else:
       messages.error(request, "Usuario y/o contraseña incorrectos.")
       return render(request, 'accounts/login.html')
   else:
     return render(request, 'accounts/login.html')
+
+
+#seleccionar perfil una vez logueado
+@group_required('mes')
+def select_perfil(request):
+
+  user_logueado = request.user
+
+  user_perfiles = user_logueado.profile.perfil.all()
+
+
+  if request.method == 'POST':
+
+    perfil_selec    = request.POST.get('selec_perfil', '')
+    print perfil_selec
+    request.session['perfil_selec'] = perfil_selec
+
+    return admin_mio(request)
+
+  return render(request, 'accounts/select_perfil.html', {
+      'user_logueado'   : user_logueado,
+      'user_perfiles'   : user_perfiles
+    })
 
 
 def logout_mio(request):
@@ -242,10 +267,7 @@ def preinscripcion4_new(request):
 #pagina de inicio de admin
 @login_required(login_url='/accounts/login/')
 def admin_mio(request):
-    
-  #request.session["cles"] = CicloLectivo.objects.all() 
-  #request.session["cl"] = datetime.date.today().year + 1
-
+  
   return render(request, 'admin.html')
 
 

@@ -14,7 +14,6 @@ from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm
 
 from pg.models import Profile, Perfil
 
-# Create your views here.
 
 ## operaciones relacionadas con el rol mes
 

@@ -1,0 +1,59 @@
+{% extends 'admin.html' %}
+
+{% block menu %}
+{% endblock %}
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+<div class="row">
+<div class="col-sm-12 col-md-6 col-md-offset-3">
+
+{% load static %}
+<img src="{% static 'preinscripcion/images/logo-obra.png' %}" class='logo-admin text-center img-responsive'>
+
+
+<div style="" class="panel panel-info" >
+	<div class="panel-heading">
+    	<div class="panel-title">Seleccione Perfil</div>
+        	<div style="float:right; font-size: 80%; position: relative; top:-10px">
+            </div>
+    </div>     
+
+    <div style="padding-top:30px" class="panel-body" >
+    	
+    	{% if messages %}
+       	<div class="alert alert-success" role="alert">
+        	<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+        	{% for message in messages %}
+            	<p><b>{{ message }}</b></p>
+            {% endfor %}
+        </div>
+		{% endif %}
+                            
+        
+        <form action="" method="post" accept-charset="utf-8" class="form-horizontal">
+        	{% csrf_token %}
+            
+            {% for up in user_perfiles %}
+            <div class="radio">
+	  			<label>
+	    		<input type="radio" name="selec_perfil" value="{{ up }}">
+	    			{{ up.perfil }}
+	  			</label>
+			</div>
+			{% endfor %}
+
+     		<div style="margin-top:10px" class="form-group">
+            	<div class="col-sm-12 controls">
+                	<input type="submit" class="btn btn-success" value="Seleccionar">
+                </div>                
+            </div>
+        </form>     
+	</div>                     
+</div>  
+
+</div>
+</div>
+{% endblock %}

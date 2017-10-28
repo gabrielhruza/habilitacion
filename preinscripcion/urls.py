@@ -9,8 +9,12 @@ urlpatterns = [
     url(r'^preinscripcion4/new/comprobante/(?P<nrop>[0-9]+)/$', views.generatePdf, name='generatePdf'),
 
 
+    #login
     url(r'^accounts/login/$', views.login_mio, name='login_mio'),
     url(r'^accounts/logout/$', views.logout_mio, name='logout_mio'),
+
+    #seleccionar perfil luego de loguearse
+    url(r'^accounts/selectperfil/$', views.select_perfil, name='select_perfil'),
 
     #operaciones de administrador
     url(r'^administrador/$', views.admin_mio, name='admin_mio'),

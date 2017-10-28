@@ -3,7 +3,7 @@ from django.conf.urls import url
 from . import views
 
 urlpatterns = [
-	
+
 	#neg
 	url(r'^neg/new/$', views.neg_new, name='neg_new'),
 	url(r'^neg/env/$', views.neg_env_index, name='neg_env_index'),
