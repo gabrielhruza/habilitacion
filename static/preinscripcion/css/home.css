@@ -1,0 +1,75 @@
+{% load static %}
+
+/* Extra small devices (phones, less than 768px) */
+/* No media query since this is the default in Bootstrap */
+
+/* Small devices (tablets, 768px and up) */
+@media (max-width: 768px) {
+
+.descripcion{
+	margin-top: 0 !important;
+}
+
+.portada-logo{
+  	position: absolute; 
+	left: 0; 
+	right: 0; 
+	margin-left: auto; 
+	margin-right: auto; 
+	width: 100px; /* Need a specific value to work */
+}
+
+}
+
+body {
+	background: #f7f7f7;
+}
+
+.portada img{
+	width: 100%;
+	height: 50vh;
+	margin-bottom: 1em;
+}
+
+.portada-logo{
+	width: 10em;
+	height: 10em;
+	position: absolute;
+	top: 5%;
+	left: 5%;
+}
+
+.titulo-logo{
+	font-weight: bold;
+	color: white;
+}
+
+.descripcion{
+	margin-top: -5em;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.descripcion h4{
+	font-weight: bold;
+}
+
+.espacio{
+	height: 0.8em;
+}
+
+.btn-p{
+	display: block;
+	width: 100%;
+	height: 5em;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    height: 4em;
+    background: #fff;
+    border-top: 1px #e0e2e5 solid;
+}
+

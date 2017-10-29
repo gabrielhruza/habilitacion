@@ -1,19 +1,13 @@
 <div class="row">
   
-<div class="col-md-4 col-sm-12 col-xs-12">
-    Seleccionar perfil:
-    <div class="btn-group btn-group-sm mb-5" role="group" aria-label="">
-      {% for nxp in nxps %}  
-      <button type="button" class="btn btn-default" onclick="filtro(window.event)">{{ nxp.0 }}
-        <span class="badge">{{ nxp.1 }}</span>
-      </button>
-      {% endfor %}
-    </div>
+<div class="col-md-1 col-sm-12 col-xs-12">
+  
 </div>
 
 
 <div class="col-md-8 col-sm-12 col-xs-12">
 <form class="form-inline">
+  Filtros:
   <div class="form-group form-group-sm">
     <label class="sr-only" for="desde">Desde</label>
     <input type="date" class="form-control" id="desde" placeholder="Desde" min="2015-01-01" max="2020-04-30">
