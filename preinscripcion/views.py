@@ -84,7 +84,6 @@ def select_perfil(request):
   if request.method == 'POST':
 
     perfil_selec    = request.POST.get('selec_perfil', '')
-    print perfil_selec
     request.session['perfil_selec'] = perfil_selec
 
     return admin_mio(request)

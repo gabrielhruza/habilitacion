@@ -31,6 +31,10 @@ def neg_new(request):
     
       neg = neg.save(commit=False)
       neg.setEmisor(request.user)
+
+      #selecciono perfil de session
+      neg.emisor_perfil = Perfil.objects.get(perfil=request.session['perfil_selec'])
+
       messages.success(request, 'Nota creada correctamente.')
       neg.save()
 
@@ -60,6 +64,9 @@ def ni_new(request):
 
       neg = neg.save(commit=False)
       neg.setEmisor(request.user)
+
+      #selecciono perfil de session
+      neg.emisor_perfil = Perfil.objects.get(perfil=request.session['perfil_selec'])
 
       if neg.nota_fisica:
 
@@ -104,7 +111,7 @@ def ni_me(request, pid):
   return ni_rec_index(request)
 
 
-#index de notas de entrada generales enviadas
+#index de notas de entrada generales registradas
 @group_required('mes')
 def neg_env_index(request):
 
@@ -163,7 +170,10 @@ def neg_rec_index(request):
     nxp.append(Nota.objects.exclude(remitente=None).filter(destino=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = Nota.objects.filter(destino__in=user.profile.perfil.all()).exclude(remitente=None)
+  #selecciono perfil de session
+  perfil_selec = Perfil.objects.get(perfil=request.session['perfil_selec'])
+
+  negs = Nota.objects.filter(destino=perfil_selec).exclude(remitente=None)
   
   
   #paginator
@@ -203,7 +213,10 @@ def ni_rec_index(request):
     nxp.append(NotaI.objects.filter(destino=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = NotaI.objects.filter(destino__in=user.profile.perfil.all())
+  #selecciono perfil de session
+  perfil_selec = Perfil.objects.get(perfil=request.session['perfil_selec'])
+
+  negs = NotaI.objects.filter(destino=perfil_selec)
 
 
   #paginator
