@@ -115,7 +115,7 @@ def ni_me(request, pid):
 @group_required('mes')
 def neg_env_index(request):
 
-  titulo_plantilla = 'Notas enviadas'
+  titulo_plantilla = 'Notas generales enviadas'
   user = request.user
   user_perfiles = user.profile.perfil.all()
 
@@ -155,7 +155,7 @@ def neg_env_index(request):
 @group_required('mes')
 def neg_rec_index(request):
   
-  titulo_plantilla = 'Notas recibidas'
+  titulo_plantilla = 'Notas generales recibidas'
   user = request.user
   user_perfiles = user.profile.perfil.all()
   

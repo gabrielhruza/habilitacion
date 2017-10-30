@@ -10,7 +10,7 @@ class NegForm(forms.ModelForm):
 class  NIForm(forms.ModelForm):
 	class Meta:
 		model 	= NotaI
-		fields 	= ['motivo', 'enviar_a' ,'nota_fisica']
+		fields 	= ['asunto', 'motivo', 'enviar_a' ,'nota_fisica']
 
 	def __init__(self, *args, **kwargs):
 		super(NIForm, self).__init__(*args, **kwargs)

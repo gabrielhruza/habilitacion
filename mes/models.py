@@ -83,7 +83,8 @@ class NotaP(Nota):
 
 
 class NotaI(Nota):
-	enviar_a = models.ForeignKey(Perfil, null=True)
+	enviar_a 	= models.ForeignKey(Perfil, null=True)
+	asunto 		= models.CharField(max_length=100, default='Asunto.')
 	nota_fisica = models.BooleanField(default=False)
 	
 

@@ -150,13 +150,13 @@ CKEDITOR_CONFIGS = {
     'default': {
        'toolbar': 'Custom',
         'toolbar_Custom': [
-            ['Bold', 'Italic', 'Underline'],
+            ['Font', 'FontSize', 'Bold', 'Italic', 'Underline'],
             ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
             ['Image', 'Table', 'Preview'],
             ['Link', 'Unlink'],
-            ['RemoveFormat', 'Source']
+            ['RemoveFormat']
         ],
-        'width': 700
+        'width': 785
     },
 }
 

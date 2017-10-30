@@ -13,8 +13,6 @@
   <link rel="stylesheet" type="text/css"  media='print' href="{% static 'preinscripcion/css/print.css' %}" />
   <link rel="stylesheet" type="text/css" href="{% static 'preinscripcion/css/jquery-ui-autocomplete.css' %}" />
 
-  <link rel="stylesheet" type="text/css" href="{% static 'mes/css/jquery-te-1.4.0.css' %}" />
-
 	<script src="{% static 'preinscripcion/js/jquery.min.js' %}"></script>
 	<script src="{% static 'preinscripcion/js/bootstrap.min.js' %}"></script>
   <script src="{% static 'preinscripcion/js/jquery.dataTables.min.js' %}"></script>
@@ -26,7 +24,6 @@
   <script src="{% static 'preinscripcion/js/jquery-ui.js' %}"></script>
   <script src="{% static 'preinscripcion/js/push.min.js' %}"></script>
   <script src="{% static 'preinscripcion/js/serviceWorker.min.js' %}"></script>
-  <script src="{% static 'mes/js/jquery-te-1.4.0.min.js' %}"></script>
 
   
     <title>{% block title %}Administracion{% endblock %}</title>
@@ -136,11 +133,11 @@
             <li class="dropdown-header">Notas Internas</li>
             <li><a href="{% url 'ni_rec_index' %}">Recibidas</a></li>
             <li><a href="{% url 'ni_env_index' %}">Enviadas</a></li>
-            <li><a href="{% url 'ni_new' %}">Registrar</a></li>
+            <li><a href="{% url 'ni_new' %}">Registrar Nueva</a></li>
             <li role="separator" class="divider"></li>
 
             <li class="dropdown-header">Notas con Postulante</li>
-            <li><a href="{% url 'admin_pg_confirmados' %}">Registrar</a></li>
+            <li><a href="{% url 'admin_pg_confirmados' %}">Asociar a Postulante</a></li>
             {% endif %}
 
 
@@ -149,6 +146,7 @@
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.get_username }} <span class="caret"></span></a>
           <ul class="dropdown-menu">
+            <li><a href="{% url 'select_perfil' %}">Cambiar Perfil</a></li>
             <li><a href="{% url 'logout_mio' %}">Salir</a></li>
           </ul>
       </li>
