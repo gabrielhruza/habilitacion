@@ -10,6 +10,9 @@ import string, random
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
+#ckeditor wisiwig
+from ckeditor.fields import RichTextField
+
 #metodos 
 def id_generator(size=8, chars=string.digits):
   return ''.join(random.choice(chars) for _ in range(size))
@@ -34,7 +37,7 @@ class Nota(models.Model):
 	estado 			= models.CharField(max_length=100, choices=ESTADO, default='NUEVA')
 	nro_de_tracking = models.CharField(max_length=10, default=id_generator)
 	notificar 		= models.BooleanField(default=True)
-	motivo 			= models.TextField(max_length=400, default='Consulta')	
+	motivo 			= RichTextField()	
 	accion_por 		= models.ForeignKey(User, related_name='accion_por', unique=False, null=True)
 
 	def setEmisor(self, user):

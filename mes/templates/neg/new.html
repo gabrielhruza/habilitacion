@@ -33,8 +33,11 @@
 
 </div>
 
+{% load static %}
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor-init.js' %}"></script>
+<script type="text/javascript" src="{% static 'ckeditor/ckeditor/ckeditor.js' %}"></script>
 <script type="text/javascript">
-	$("#id_neg-motivo").jqte();	
+	//$("#id_neg-motivo").jqte();	
 </script>
 
 {% endblock %}

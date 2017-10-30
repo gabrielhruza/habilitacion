@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'mes',
     'bootstrap3',
     'dynamic_formsets',
+    'ckeditor',
 ]
 
 MIDDLEWARE_CLASSES= [
@@ -140,10 +141,26 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-#STATIC_ROOT = os.path.join(BASE_DIR, "static")
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
 STATIC_URL = '/static/'
 
+
+CKEDITOR_CONFIGS = {
+    'default': {
+       'toolbar': 'Custom',
+        'toolbar_Custom': [
+            ['Bold', 'Italic', 'Underline'],
+            ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+            ['Image', 'Table', 'Preview'],
+            ['Link', 'Unlink'],
+            ['RemoveFormat', 'Source']
+        ],
+        'width': 700
+    },
+}
+
+
 #pdf
 #WKHTMLTOPDF_CMD = '/home/mint/tmp/habilitacion/habilitacion/lib/python2.7/site-packages/wkhtmltopdf/'
-STATIC_ROOT = '/static/pdfs/'
+#STATIC_ROOT = '/static/pdfs/'

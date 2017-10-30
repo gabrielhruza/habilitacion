@@ -62,7 +62,6 @@ def login_mio(request):
     if user is not None:
       login(request, user)
       messages.success(request, '¡Se ha logueado correctamente! Ahora seleccione el perfil con el cual quiere interactuar dentro del sistema. ')
-      messages.success(request, 'Defina sistema -.-')
       return redirect ('select_perfil')
     
     else:
@@ -79,7 +78,6 @@ def select_perfil(request):
   user_logueado = request.user
 
   user_perfiles = user_logueado.profile.perfil.all()
-
 
   if request.method == 'POST':
 

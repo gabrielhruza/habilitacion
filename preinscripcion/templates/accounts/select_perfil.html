@@ -37,12 +37,14 @@
         	{% csrf_token %}
             
             {% for up in user_perfiles %}
-            <div class="radio">
-	  			<label>
-	    		<input type="radio" name="selec_perfil" value="{{ up }}">
-	    			{{ up.perfil }}
-	  			</label>
-			</div>
+            
+            <div class="funkyradio">
+            <div class="funkyradio-primary">
+            <input type="radio" id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
+            <label for="radio-{{ up }}">{{ up.perfil }} </label>
+            </div>
+            </div>
+
 			{% endfor %}
 
      		<div style="margin-top:10px" class="form-group">
