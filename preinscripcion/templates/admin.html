@@ -103,46 +103,44 @@
 
       <ul class="nav navbar-nav navbar-right">
       <li><a href="#">Perfil: {{ request.session.perfil_selec }} </a></li>
+      
       <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span id="notif" class="glyphicon glyphicon-envelope" aria-hidden="true"></span> Buzón <span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            
-            {% if request.user|has_group:'recepcion' %} 
-
-            <li class="dropdown-header">Notas Generales</li>
+      <a id="dLabel" role="button" data-toggle="dropdown" data-target="#">
+        <span id="notif" class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+        Buzón
+        <span class="caret"></span>
+      </a>
+      
+      <ul class="dropdown-menu multi-level" role="menu" aria-labelledby="dropdownMenu">
+        
+        <li class="dropdown-submenu">
+        <a tabindex="-1" href="#">Notas Generales</a>
+        <ul class="dropdown-menu">
+          {% if request.user|has_group:'recepcion' %} 
             <li><a href="{% url 'neg_rec_index' %}">Ingresadas por Mesa de Entrada</a></li>
             <li><a href="{% url 'neg_env_index' %}">Registradas</a></li>
             <li><a href="{% url 'neg_new' %}">Registrar</a></li>
-            <li role="separator" class="divider"></li>
+            <li><a href="{% url 'admin_pg_index_recepcion' %}">Asociar Nota a Postulante</a></li>
+          {% else %}
+            <li><a href="{% url 'neg_new' %}">Registrar</a></li>
+            <li><a href="{% url 'admin_pg_confirmados' %}">Asociar Nota a Postulante</a></li>
+            <li><a href="{% url 'admin_pg_index_recepcion' %}">Asociar Nota a Postulante</a>
+          {% endif %}
+        </ul>
+        </li>  
 
-            <li class="dropdown-header">Notas Internas</li>
-            <li><a href="{% url 'ni_rec_index' %}">Recibidas</a></li>
-            <li><a href="{% url 'ni_env_index' %}">Enviadas</a></li>
-            <li><a href="{% url 'ni_new' %}">Registrar Nueva</a></li>
-            <li role="separator" class="divider"></li>
-
-            <li class="dropdown-header">Notas con Postulante</li>            
-            <li><a href="{% url 'admin_pg_index_recepcion' %}">Registrar</a></li>
-
-            {% else %}
-
-            <li class="dropdown-header">Notas Generales</li>
-            <li><a href="{% url 'neg_rec_index' %}">Ingresadas por Mesa de Entrada</a></li>
-            <li role="separator" class="divider"></li>
-
-            <li class="dropdown-header">Notas Internas</li>
-            <li><a href="{% url 'ni_rec_index' %}">Recibidas</a></li>
-            <li><a href="{% url 'ni_env_index' %}">Enviadas</a></li>
-            <li><a href="{% url 'ni_new' %}">Registrar Nueva</a></li>
-            <li role="separator" class="divider"></li>
-
-            <li class="dropdown-header">Notas con Postulante</li>
-            <li><a href="{% url 'admin_pg_confirmados' %}">Asociar a Postulante</a></li>
-            {% endif %}
-
-
-          </ul>
+        <li class="dropdown-submenu">
+        <a tabindex="-1" href="#">Notas Internas</a>
+        <ul class="dropdown-menu">
+          <li><a href="{% url 'ni_rec_index' %}">Recibidas</a></li>
+          <li><a href="{% url 'ni_env_index' %}">Enviadas</a></li>
+          <li><a href="{% url 'ni_new' %}">Registrar Nueva</a></li>
+        </ul>
+        </li>
+      </ul>
       </li>
+
+
       <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span> {{ user.get_username }} <span class="caret"></span></a>
           <ul class="dropdown-menu">

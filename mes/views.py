@@ -155,7 +155,7 @@ def neg_env_index(request):
 @group_required('mes')
 def neg_rec_index(request):
   
-  titulo_plantilla = 'Notas generales recibidas'
+  titulo_plantilla = 'Notas ingresadas por mesa de entrada'
   user = request.user
   user_perfiles = user.profile.perfil.all()
   
