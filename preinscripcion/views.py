@@ -61,7 +61,7 @@ def login_mio(request):
     
     if user is not None:
       login(request, user)
-      messages.success(request, '¡Se ha logueado correctamente! Ahora seleccione el perfil con el cual quiere interactuar dentro del sistema. ')
+
       return redirect ('select_perfil')
     
     else:
@@ -79,13 +79,24 @@ def select_perfil(request):
 
   user_perfiles = user_logueado.profile.perfil.all()
 
-  if request.method == 'POST':
+  if user_perfiles.count() == 1:    
 
-    perfil_selec    = request.POST.get('selec_perfil', '')
-    request.session['perfil_selec'] = perfil_selec
+    up = user_perfiles.get()
+    request.session['perfil_selec'] = up.perfil
 
     return admin_mio(request)
 
+  else:
+
+    print 'hola'
+    if request.method == 'POST':
+
+      perfil_selec    = request.POST.get('selec_perfil', '')
+      request.session['perfil_selec'] = perfil_selec
+      
+      return admin_mio(request)
+
+      
   return render(request, 'accounts/select_perfil.html', {
       'user_logueado'   : user_logueado,
       'user_perfiles'   : user_perfiles

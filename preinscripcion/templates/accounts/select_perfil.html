@@ -23,29 +23,28 @@
 
     <div style="padding-top:30px" class="panel-body" >
     	
-    	{% if messages %}
        	<div class="alert alert-success" role="alert">
-        	<button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
-        	{% for message in messages %}
-            	<p><b>{{ message }}</b></p>
-            {% endfor %}
-        </div>
-		{% endif %}
-                            
+        <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+        <p>
+            <b>¡Se ha logueado correctamente! Ahora seleccione el perfil con el cual quiere interactuar dentro del sistema.
+            </b>
+        </p>
+        </div>                            
         
         <form action="" method="post" accept-charset="utf-8" class="form-horizontal">
         	{% csrf_token %}
             
-            {% for up in user_perfiles %}
-            
             <div class="funkyradio">
+
+            {% for up in user_perfiles %}
+        
             <div class="funkyradio-primary">
-            <input type="radio" id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
+            <input type="radio" checked id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
             <label for="radio-{{ up }}">{{ up.perfil }} </label>
-            </div>
             </div>
 
 			{% endfor %}
+            </div>
 
      		<div style="margin-top:10px" class="form-group">
             	<div class="col-sm-12 controls">
