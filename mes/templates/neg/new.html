@@ -6,7 +6,7 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container-fluid">
 
 {% if messages %}
 <div class="alert alert-success" role="alert">
@@ -16,13 +16,15 @@
 </div>
 {% endif %}
 
+{% include './menu_buzon.html' %}
+
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">{{ titulo_plantilla }}</h3>
     </div>
 <div class="panel-body">
 
-	<div class="col-sm-12 col-md-9 col-md-offset-1 well">
+	<div class="col-sm-12 col-md-8 col-md-offset-2 well">
 	<form method="POST" class="" id="" novalidate>{% csrf_token %}
 	{% bootstrap_form neg %}
 	<button type="submit" class="btn btn-primary" id="">Registrar</button>
