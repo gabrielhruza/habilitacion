@@ -35,8 +35,9 @@ def neg_new(request):
       #selecciono perfil de session
       neg.emisor_perfil = Perfil.objects.get(perfil=request.session['perfil_selec'])
 
-      messages.success(request, 'Nota creada correctamente.')
       neg.save()
+      messages.success(request, 'Nota creada correctamente.')
+      messages.success(request, 'N°: ' + neg.nro_de_tracking)
 
     else:
       context = neg
@@ -81,8 +82,9 @@ def ni_new(request):
 
       neg.setDestino(perfil)
 
-      messages.success(request, 'Nota creada correctamente.')
       neg.save()
+      messages.success(request, 'Nota creada correctamente.')
+      messages.success(request, 'N°: ' + neg.nro_de_tracking)
       
     else:
         context = neg
@@ -298,8 +300,9 @@ def nep_new(request, pgid):
       #nep.emisor_perfil = emisor.profile.perfil.all()[0]
       nep.setDestino(perfil_destino)
       nep.setPG(pg)
-      messages.success(request, 'Nota creada correctamente.')
       nep.save()
+      messages.success(request, 'Nota creada correctamente.')
+      messages.success(request, 'N°: ' + nep.nro_de_tracking)
     else:
       context = nep
 
@@ -327,7 +330,7 @@ def nep_pre_asociada(request, pgid):
 @group_required('mes')
 def ne_show(request, pid):
 
-	titulo_plantilla = 'Nota entrada'
+	titulo_plantilla = 'Detalle Nota'
 
 	ne = Nota.objects.get(pk=pid)	
 
@@ -440,7 +443,7 @@ def ne_tracking(request, ndt):
     'emisor_perfil' : nota.emisor_perfil.perfil,
     'nro_de_tracking' : nota.nro_de_tracking,
     'estado'        : nota.estado,
-    'motivo'        : nota.motivo,
+    'asunto'        : nota.asunto,
     'remitente'     : nota.remitente
       }
 
