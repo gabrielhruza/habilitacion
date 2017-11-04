@@ -67,17 +67,17 @@
                 <td>{{ neg.nro_de_tracking }}</td>
                 <td>{{ neg.estado }} [{{ neg.accion_por }}]</td>
                 <td>
+                {% if request.user|has_group:'recepcion' and neg.nota_fisica %} 
+                <a href="#" onclick="modaladv('{% url 'ni_me' neg.id %}', 'Despachar Nota Interna.')">
+                    <span class="glyphicon glyphicon-ok" data-toggle="tooltip" title="Despachar"></span>
+                </a>
+                {% else %}
                 <a href="{% url 'ne_show' neg.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
                 </a>
                 |
                 <a href="#" onclick="modal('{% url 'ne_tracking' neg.nro_de_tracking %}', 'Movimientos de Nota')">
                     <span class="glyphicon glyphicon-road" aria-hidden="true"></span>
-                </a>
-                {% if request.user|has_group:'recepcion' %} 
-                |
-                <a href="#" onclick="modaladv('{% url 'ni_me' neg.id %}', 'Despachar Nota Interna.')">
-                    <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </a>
                 {% endif %}
                 </td>
@@ -211,23 +211,8 @@ function modal($url, $titulo){
 </script>
 
 <script>
-function filtro(e){
-
-  perfil = e.toElement.innerText;
-  perfil = perfil.toUpperCase();
-  table = document.getElementById("table-rec");
-  tr = table.getElementsByTagName("tr");
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[3];
-    if (td) {
-      if (perfil.indexOf(td.innerText) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-
-}
+$(function () {
+  $('[data-toggle="tooltip"]').tooltip()
+})
 </script>
 {% endblock %}
