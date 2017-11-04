@@ -8,9 +8,6 @@
 
 <div class="container">
 
-{% include './menu_buzon.html' %}
-
-
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">{{ titulo_plantilla }}</h3>
@@ -26,7 +23,7 @@
                 <th>Remitente</th>
                 <th>Emisor</th>
                 <th>Receptor</th>
-                <th>Motivo</th>
+                <th>Asunto</th>
                 <th colspan="3">Preinscripcion</th>
                 <th>N° de tracking</th>
                 <th>Estado</th>
@@ -44,7 +41,7 @@
                 <td>{{ neg.remitente }}</td>
                 <td>{{ neg.emisor }}</td>
                 <td>{{ neg.receptor }}</td>
-                <td>{{ neg.motivo }}</td>
+                <td>{{ neg.asunto }}</td>
 
                 <td>{{ neg.notap.pg.nro_de_preinscripto }}</td>
                 <td>{{ neg.notap.pg.nivel }}</td>

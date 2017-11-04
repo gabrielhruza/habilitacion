@@ -164,6 +164,7 @@ box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
 
 
 ## dropdown nested
+.
 .dropdown-submenu {
     position: relative;
 }
@@ -210,25 +211,7 @@ box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
     -webkit-border-radius: 6px 0 6px 6px;
     -moz-border-radius: 6px 0 6px 6px;
     border-radius: 6px 0 6px 6px;
-}
-
-## ./dropdown nested
-
-
-## menu_buzon
-.nav-tabs {
-  border-bottom: 0px !important;
-}
-
-.tabbable{
-  background-color: white;
-  border-radius: 4px;
-}
-
-.nav-tabs-menu > li > a{
-  padding: 5px 5px !important;
-}
-## ./menu_buzon
+}## ./dropdown nested
 
 
 .glyphicon-eye-open {
