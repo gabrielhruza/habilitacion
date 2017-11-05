@@ -34,17 +34,15 @@
         	{% csrf_token %}
             
             <div class="funkyradio">
-
             {% for up in user_perfiles %}
         
             <div class="funkyradio-primary">
-            <input type="radio" checked id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
+            <input type="radio" required="true" id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
             <label for="radio-{{ up }}">{{ up.perfil }} </label>
             </div>
 
 			{% endfor %}
             </div>
-
      		<div style="margin-top:10px" class="form-group">
             	<div class="col-sm-12 controls">
                 	<input type="submit" class="btn btn-success" value="Seleccionar">

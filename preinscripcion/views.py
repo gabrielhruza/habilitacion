@@ -75,6 +75,12 @@ def login_mio(request):
 @group_required('mes')
 def select_perfil(request):
 
+  ## compruebo si esta seteada la vble perfil_selec en session
+  pact = False
+  if 'perfil_selec' in request.session:
+    pact = True
+
+
   user_logueado = request.user
 
   user_perfiles = user_logueado.profile.perfil.all()
@@ -86,9 +92,14 @@ def select_perfil(request):
 
     return admin_mio(request)
 
+  #elif user_perfiles.count() == 2 and pact:
+
+   # perfil_actual = user_logueado.profile.perfil.get(perfil=request.session['perfil_selec'])
+    #up = user_perfiles.all().exclude(perfil=perfil_actual)
+    #request.session['perfil_selec'] = up.perfil
+
   else:
 
-    print 'hola'
     if request.method == 'POST':
 
       perfil_selec    = request.POST.get('selec_perfil', '')

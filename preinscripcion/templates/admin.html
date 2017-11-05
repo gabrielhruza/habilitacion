@@ -116,12 +116,11 @@
           {% if request.user|has_group:'recepcion' %} 
           <li><a tabindex="-1" href="{% url 'neg_rec_index' %}">Ingresadas por Mesa de Entrada</a></li>
           <li><a href="{% url 'neg_env_index' %}">Registradas</a></li>
-          <li><a href="{% url 'neg_new' %}">Registrar</a></li>
-          <li><a href="{% url 'admin_pg_index_recepcion' %}">Asociar Nota a Postulante</a></li>
+          <li><a href="{% url 'neg_new' %}">Registrar nueva</a></li>
+          <li><a href="{% url 'admin_pg_index_recepcion' %}">Asociar nota a postulante</a></li>
           {% else %}
           <li><a href="{% url 'neg_env_index' %}">Registradas</a></li>
-          <li><a href="{% url 'neg_new' %}">Registrar</a></li>
-          <li><a href="{% url 'admin_pg_confirmados' %}">Asociar Nota a Postulante</a></li>
+          <li><a href="{% url 'neg_new' %}">Registrar nueva</a></li>
           {% endif %}
         </ul>
         </li>
@@ -130,7 +129,7 @@
         <ul class="dropdown-menu">
           <li><a href="{% url 'ni_rec_index' %}">Recibidas</a></li>
           <li><a href="{% url 'ni_env_index' %}">Enviadas</a></li>
-          <li><a href="{% url 'ni_new' %}">Registrar Nueva</a></li>
+          <li><a href="{% url 'ni_new' %}">Registrar nueva</a></li>
         </ul>
         </li>
       </ul>

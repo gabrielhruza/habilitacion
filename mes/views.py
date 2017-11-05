@@ -290,6 +290,8 @@ def nep_new(request, pgid):
       pg 	= PreinscripcionGeneral.objects.get(pk=pgid)
 
       emisor = request.user
+      pact = request.session['perfil_selec']
+      emisor_perfil = emisor.profile.perfil.get(perfil=pact)
       nivel = pg.nivel
       destino = Profile.objects.select_related('user').get(nivel=nivel)
 
@@ -297,7 +299,7 @@ def nep_new(request, pgid):
 
       nep = nep.save(commit=False)
       nep.setEmisor(emisor)
-      #nep.emisor_perfil = emisor.profile.perfil.all()[0]
+      nep.emisor_perfil = emisor_perfil
       nep.setDestino(perfil_destino)
       nep.setPG(pg)
       nep.save()
