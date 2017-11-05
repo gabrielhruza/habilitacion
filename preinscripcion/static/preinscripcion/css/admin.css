@@ -169,9 +169,9 @@ box-shadow: 0px 0px 15px -4px rgba(66,65,66,0.48);
 }
 
 .dropdown-submenu .dropdown-menu {
-    top: 0;
+    top: inherit;
     right: 100%;
-    margin-top: -1px;
+    margin-top: -10px;
 }
 ## ./dropdown nested
 
