@@ -161,24 +161,4 @@ function modal($url, $titulo){
 </script>
 <!-- ./Modal -->
 
-<script>
-function filtro(e){
-
-  perfil = e.toElement.innerText;
-  perfil = perfil.toUpperCase();
-  table = document.getElementById("table-env");
-  tr = table.getElementsByTagName("tr");
-  for (i = 1; i < tr.length; i++) {
-    td = tr[i].getElementsByTagName("td")[3];
-    if (td) {
-      if (perfil.indexOf(td.innerText) > -1) {
-        tr[i].style.display = "";
-      } else {
-        tr[i].style.display = "none";
-      }
-    }       
-  }
-
-}
-</script>
 {% endblock %}

@@ -119,8 +119,7 @@
           <li><a href="{% url 'neg_new' %}">Registrar nueva</a></li>
           <li><a href="{% url 'admin_pg_index_recepcion' %}">Asociar nota a postulante</a></li>
           {% else %}
-          <li><a href="{% url 'neg_env_index' %}">Registradas</a></li>
-          <li><a href="{% url 'neg_new' %}">Registrar nueva</a></li>
+          <li><a tabindex="-1" href="{% url 'neg_rec_index' %}">Ingresadas por Mesa de Entrada</a></li>
           {% endif %}
         </ul>
         </li>

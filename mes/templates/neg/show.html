@@ -35,7 +35,7 @@
   	<h4>Destino:<b> {{ ne.destino }}</b></h4>
     <h4>Estado:<b> {{ ne.estado }}</b></h4>
     <h4>Preinscripcion:<b> {{ ne.notap.pg.nro_de_preinscripto }}</b></h4>
-    <h4>Motivo:<b> {{ ne.motivo|safe }}</b></h4>
+    <h4>Motivo:{{ ne.motivo|safe }}</h4>
 
   </div>
   </div>
@@ -43,12 +43,14 @@
   
 
 	<hr>
+
   <a onClick="javascript:history.go(-1);" class="btn btn-default">Volver</a>
+  
   <a onclick="modal('{% url 'ne_recibida' ne.id %}', 'Marcar como Recibida')" href="#" class="btn btn-primary">Recibida</a>
   <a onclick="modal('{% url 'ne_tramite' ne.id %}', 'En Trámite')" href="#" class="btn btn-info">En Trámite</a>
   <a href="{% url 'ne_derivar' ne.id %}" class="btn btn-warning">Derivar</a>
   <a onclick="modal('{% url 'ne_rechazar' ne.id %}', 'Marcar como rechazada')" href="#" class="btn btn-danger">Rechazar</a>
-
+  
 </div>
 
 </div>
