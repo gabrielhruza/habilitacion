@@ -133,7 +133,8 @@ def neg_env_index(request):
     nxp.append(Nota.objects.exclude(remitente=None).filter(emisor= user, emisor_perfil=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = Nota.objects.filter(emisor=user).exclude(remitente=None).order_by('-fecha_emision')
+  perfil_selec = request.session['perfil_selec']
+  negs = Nota.objects.filter(emisor=user,emisor_perfil__perfil=perfil_selec).exclude(remitente=None).order_by('-fecha_emision')
   
 
   #paginator
@@ -256,7 +257,8 @@ def ni_env_index(request):
     nxp.append(NotaI.objects.filter(emisor=user, emisor_perfil=up , estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = NotaI.objects.filter(emisor=user).order_by('-fecha_emision')
+  perfil_selec = request.session['perfil_selec']
+  negs = NotaI.objects.filter(emisor=user, emisor_perfil__perfil=perfil_selec).order_by('-fecha_emision')
   
   
   #paginator

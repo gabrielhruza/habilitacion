@@ -69,7 +69,7 @@
                 <td>{{ neg.nro_de_tracking }}</td>
                 <td>{{ neg.estado }} [{{ neg.accion_por }}]</td>
                 <td>
-                {% if request.user|has_group:'recepcion' and neg.nota_fisica %} 
+                {% if request.user|has_group:'recepcion' and neg.nota_fisica and neg.estado != 'DESPACHADA' %} 
                 <a href="#" onclick="modaladv('{% url 'ni_me' neg.id %}', 'Despachar Nota Interna.')">
                     <span class="glyphicon glyphicon-ok" data-toggle="tooltip" title="Despachar"></span>
                 </a>
