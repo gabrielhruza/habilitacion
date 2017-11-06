@@ -55,6 +55,8 @@
                 <tr class="warning">
             {% elif neg.estado == 'DESPACHADA' %}       
                 <tr class="info">
+            {% else %}
+                <tr>
             {% endif %}
                 <td>{{ neg.fecha_emision }}</td>
                 <td>{{ neg.emisor }}</td>
@@ -115,7 +117,6 @@
                 <th>Emisor</th>
                 <th>Destino</th>
                 <th>Motivo derivacion</th>
-                <th>Estado</th>
             </tr>
         </thead>
         <tbody>      
@@ -147,7 +148,6 @@ function modal($url, $titulo){
                 '<p><b>Asunto:</b> ' + nota.asunto +
                 '  <b>N° de Tracking:</b> ' + nota.nro_de_tracking + '</p>' +
                 '  <p><b> Fecha de inicio: </b>' + nota.fecha_emision + '</p>' +
-                '<p><b> Remitente: </b>' + nota.remitente + 
                 '<b> Estado actual: </b>' + nota.estado + '</p>'
                 ;
 
@@ -164,10 +164,9 @@ function modal($url, $titulo){
                 trHTML += 
 
                 '<tr><td>'  + fecha_emision +
-                '</td><td>' + item.emisor + 
+                '</td><td>' + item.emisor_perfil + 
                 '</td><td>' + item.destino +
                 '</td><td>' + item.motivo_derivar +
-                '</td><td>' + item.estado +
                 '</td></tr>';
             });
 

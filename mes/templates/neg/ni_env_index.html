@@ -53,7 +53,9 @@
         {% for neg in negs %}
             {% if neg.estado == 'NUEVA' %}
                 <tr class="warning">
-            {% else %}       
+            {% elif neg.estado == 'DESPACHADA' %}       
+                <tr class="info">
+            {% else %}
                 <tr>
             {% endif %}
                 <td>{{ neg.fecha_emision }}</td>
