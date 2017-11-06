@@ -35,9 +35,14 @@
             
             <div class="funkyradio">
             {% for up in user_perfiles %}
-        
+
             <div class="funkyradio-primary">
-            <input type="radio" required="true" id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
+            {% if ps == up.perfil %}
+            <input checked type="radio" id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
+            {% else %}
+            <input type="radio" id="radio-{{ up }}" name="selec_perfil" value="{{ up }}" />
+            {% endif %}
+
             <label for="radio-{{ up }}">{{ up.perfil }} </label>
             </div>
 

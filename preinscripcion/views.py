@@ -76,9 +76,11 @@ def login_mio(request):
 def select_perfil(request):
 
   ## compruebo si esta seteada la vble perfil_selec en session
-  pact = False
+  pact  = False
+  ps    = ''
   if 'perfil_selec' in request.session:
-    pact = True
+    pact  = True
+    ps    = request.session['perfil_selec']
 
 
   user_logueado = request.user
@@ -92,11 +94,14 @@ def select_perfil(request):
 
     return admin_mio(request)
 
-  #elif user_perfiles.count() == 2 and pact:
+  elif user_perfiles.count() == 2 and pact:
 
-   # perfil_actual = user_logueado.profile.perfil.get(perfil=request.session['perfil_selec'])
-    #up = user_perfiles.all().exclude(perfil=perfil_actual)
-    #request.session['perfil_selec'] = up.perfil
+    perfil_actual = user_logueado.profile.perfil.get(perfil=request.session['perfil_selec'])
+    up = user_perfiles.all().exclude(perfil=perfil_actual)
+    request.session['perfil_selec'] = up[0].perfil
+    string = 'Cambio de perfil con éxito. Perfil actual: ' + request.session['perfil_selec']
+    messages.success(request, string)
+    return admin_mio(request)
 
   else:
 
@@ -110,7 +115,8 @@ def select_perfil(request):
       
   return render(request, 'accounts/select_perfil.html', {
       'user_logueado'   : user_logueado,
-      'user_perfiles'   : user_perfiles
+      'user_perfiles'   : user_perfiles,
+      'ps'              : ps
     })
 
 

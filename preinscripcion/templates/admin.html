@@ -120,6 +120,7 @@
           <li><a href="{% url 'admin_pg_index_recepcion' %}">Asociar nota a postulante</a></li>
           {% else %}
           <li><a tabindex="-1" href="{% url 'neg_rec_index' %}">Ingresadas por Mesa de Entrada</a></li>
+          <li><a href="{% url 'admin_pg_confirmados' %}">Asociar nota a postulante</a></li>
           {% endif %}
         </ul>
         </li>
@@ -165,7 +166,19 @@
 
     <div class="col-md-12">
       {% block filtros %}{% endblock %}
-	    {% block content %}{% endblock %}
+	    {% block content %}
+
+        {% if messages %}
+        <div class="alert alert-success" role="alert">
+        <button class="close" type="button" data-dismiss="alert" aria-hidden="true">×</button>
+        {% for message in messages %}
+        <p><b>{{ message }}</b></p>
+        {% endfor %}
+                            
+        </div>
+        {% endif %}
+
+      {% endblock %}
 	  </div>
 
 	</div>
@@ -258,7 +271,9 @@
   });
   </script>
 
-  <!-- push notifications -->
+
+<!-- push notifications -->
+<!--
 <script type="text/javascript">
 
   function push($title, $body, $id){
@@ -299,8 +314,8 @@ $.ajax({
     }
   }
 });
-
 </script>
+-->
 
 </body>
 </html>

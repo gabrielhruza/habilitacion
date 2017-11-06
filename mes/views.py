@@ -133,7 +133,7 @@ def neg_env_index(request):
     nxp.append(Nota.objects.exclude(remitente=None).filter(emisor= user, emisor_perfil=up, estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = Nota.objects.filter(emisor=user).exclude(remitente=None)
+  negs = Nota.objects.filter(emisor=user).exclude(remitente=None).order_by('-fecha_emision')
   
 
   #paginator
@@ -175,7 +175,7 @@ def neg_rec_index(request):
   #selecciono perfil de session
   perfil_selec = Perfil.objects.get(perfil=request.session['perfil_selec'])
 
-  negs = Nota.objects.filter(destino=perfil_selec).exclude(remitente=None)
+  negs = Nota.objects.filter(destino=perfil_selec).exclude(remitente=None).order_by('-fecha_emision')
   
   
   #paginator
@@ -218,7 +218,7 @@ def ni_rec_index(request):
   #selecciono perfil de session
   perfil_selec = Perfil.objects.get(perfil=request.session['perfil_selec'])
 
-  negs = NotaI.objects.filter(destino=perfil_selec)
+  negs = NotaI.objects.filter(destino=perfil_selec).order_by('-fecha_emision')
 
 
   #paginator
@@ -256,7 +256,7 @@ def ni_env_index(request):
     nxp.append(NotaI.objects.filter(emisor=user, emisor_perfil=up , estado='NUEVA').count())
     nxps.append(nxp)
 
-  negs = NotaI.objects.filter(emisor=user)
+  negs = NotaI.objects.filter(emisor=user).order_by('-fecha_emision')
   
   
   #paginator
@@ -320,7 +320,7 @@ def nep_pre_asociada(request, pgid):
 
   titulo_plantilla = 'Notas asociadas'
   
-  negs = NotaP.objects.filter(pg__id=pgid)
+  negs = NotaP.objects.filter(pg__id=pgid).order_by('-fecha_emision')
 
   return render(request, 'neg/index.html', { 
     'negs' : negs,
