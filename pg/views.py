@@ -392,6 +392,26 @@ def admin_pg_ranking(request):
           )
 
 
+## asignar puntaje a preinscripcion asociada a postulante
+@group_required('gestion_pg')
+def admin_pg_asignarpuntaje(request, pgid):
+
+  titulo_plantilla = 'Asignar puntaje a postulante'
+
+  pg = PreinscripcionGeneral.objects.get(nro_de_preinscripto=pgid)
+  puntaje_actual = pg.puntaje
+
+  if request.method == 'POST':
+    puntaje   = int(request.POST.get('puntaje', ''))
+    pg.puntaje = puntaje
+    pg.save()
+    puntaje_actual = pg.puntaje
+
+  return render(request, 'pg/pg/asignar_puntaje.html', {
+    'titulo_plantilla'  : titulo_plantilla,
+    'puntaje_actual'    :  puntaje_actual,
+    })
+
 
 #generar pdf comprobante confirmacion
 ##generar pdf

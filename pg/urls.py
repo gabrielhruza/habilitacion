@@ -14,6 +14,7 @@ urlpatterns = [
     url(r'^show/(?P<pid>[0-9]+)/$', views.admin_pg_show, name='admin_pg_show'),
     url(r'^confirmados/$', views.admin_pg_confirmados, name='admin_pg_confirmados'), 
     url(r'^ranking/$', views.admin_pg_ranking, name='admin_pg_ranking'), 
+    url(r'^asignarpuntaje/(?P<pgid>[0-9]+)/$', views.admin_pg_asignarpuntaje, name='admin_pg_asignarpuntaje'), 
 
 
     url(r'^confirmar/(?P<pid>[0-9]+)/$', views.admin_pg_confirmar, name='admin_pg_confirmar'),

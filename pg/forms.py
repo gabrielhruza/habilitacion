@@ -15,3 +15,9 @@ class PgForm(forms.ModelForm):
         if len(caja) < 10:
             raise forms.ValidationError('Escribir el motivo')
         return caja
+
+
+class PgAPForm(forms.ModelForm):
+    class Meta:
+        model = PreinscripcionGeneral
+        fields = ['puntaje']  
