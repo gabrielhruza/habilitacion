@@ -70,8 +70,7 @@
                 <th>Dni</th>
                 <th>Numero</th>
                 <th>Estado</th>
-                <th>Notas</th>
-                <th>Motivo</th>
+                <th>Puntaje</th>
                 <th>Acciones</th>
             </tr>
         </thead>
@@ -82,8 +81,7 @@
                 <td>{{ postulante.dni }}</td>
                 <td>{{ postulante.pg.nro_de_preinscripto }}</td>
                 <td>{{ postulante.pg.estado }}</td>
-                <td>{{ postulante.pg.notas }}</td>
-                <td>{{ postulante.pg.motivo }}</td>
+                <td>{{ postulante.pg.puntaje }}</td>
                 <td>
                 <a href="{% url 'admin_pg_show' postulante.pg.id %}">
                     <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
@@ -172,7 +170,7 @@ if (nivel == 'INICIAL') {
               return mensaje + table.search();
             },
             exportOptions: {
-              columns: [ 0, 1, 2], 
+              columns: [ 0, 1, 2, 4], 
               }
           },
           { 
@@ -187,7 +185,7 @@ if (nivel == 'INICIAL') {
               return mensaje2;
             },
             exportOptions: {
-                  columns: [ 0, 1, 2], 
+                  columns: [ 0, 1, 2, 4], 
                 },
           }
         ]

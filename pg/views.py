@@ -364,7 +364,7 @@ def admin_pg_asignarvacante(request, pid):
 #Ranking por notas asociadas
 @group_required('gestion_pg')
 def admin_pg_ranking(request):
-  titulo_plantilla = 'Ranking por nota asociadas'
+  titulo_plantilla = 'Ranking de postulantes'
 
   user_nivel  = request.user.profile.nivel
 
@@ -379,7 +379,7 @@ def admin_pg_ranking(request):
   #ciclos lectivos
   clvs        = CicloLectivo.objects.all()
 
-  postulantes = Postulante.objects.filter(pg__nivel=user_nivel, pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__estado='CONFIRMADO')
+  postulantes = Postulante.objects.filter(pg__nivel=user_nivel, pg__anio=anio, pg__cicloLectivo__fecha_apertura_ciclo__year=cl, pg__estado='CONFIRMADO').order_by('-pg__puntaje')
 
   return render(request, 'pg/adminpg/ranking.html',{
           'titulo_plantilla' : titulo_plantilla,
