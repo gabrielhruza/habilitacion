@@ -156,6 +156,7 @@ if (nivel == 'INICIAL') {
     table = $('#table').DataTable(
       { 
         //stateSave: true,
+        order: [[ 4, "desc" ]],
         language: {
             url: "{% static 'preinscripcion/js/spanish.json' %}"
           },

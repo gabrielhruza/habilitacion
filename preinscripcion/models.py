@@ -121,7 +121,7 @@ class Responsable(models.Model):
     email 				= models.EmailField()
     domicilio 			= models.CharField(max_length=150)
     nacionalidad		= models.CharField(max_length=150)
-    telefonoPersonal	= models.CharField(max_length=30, default='3624')
+    telefonoPersonal	= models.CharField(max_length=30)
 
 
 class Postulante(models.Model):

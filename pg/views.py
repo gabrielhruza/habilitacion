@@ -364,7 +364,7 @@ def admin_pg_asignarvacante(request, pid):
 #Ranking por notas asociadas
 @group_required('gestion_pg')
 def admin_pg_ranking(request):
-  titulo_plantilla = 'Ranking de postulantes'
+  titulo_plantilla = 'Ranking de postulantes confirmados'
 
   user_nivel  = request.user.profile.nivel
 
