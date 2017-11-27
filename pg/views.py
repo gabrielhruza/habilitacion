@@ -409,7 +409,8 @@ def admin_pg_asignarpuntaje(request, pgid):
 
   return render(request, 'pg/pg/asignar_puntaje.html', {
     'titulo_plantilla'  : titulo_plantilla,
-    'puntaje_actual'    :  puntaje_actual,
+    'puntaje_actual'    : puntaje_actual,
+    'pg'                : pg,
     })
 
 

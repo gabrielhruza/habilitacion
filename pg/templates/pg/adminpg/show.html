@@ -57,6 +57,7 @@
     <h5>Fecha de Nacimiento: <b>{{ postulante.fecha_nacimiento }}</b></h5>
     <h5>Edad: <b>{{ postulante.edad }}</b></h5>
     <h5>Género: <b>{{ postulante.genero }}</b></h5>
+    <h5>Puntaje: <b>{{ p.puntaje }}</b></h5>
   </div>
   </div>
   </div>
@@ -159,6 +160,7 @@
   {% if alumno %}
   <a  href="{% url 'nep_pre_asociada' p.id %}" class="btn btn-primary">Ver notas asociadas</a>
   <a  href="{% url 'nep_new' p.id %}" class="btn btn-info">Asociar Nota</a>
+  <a  href="{% url 'admin_pg_asignarpuntaje' p.nro_de_preinscripto %}" class="btn btn-success">Modificar Puntaje</a>
   {% endif %}
 
 </div>
