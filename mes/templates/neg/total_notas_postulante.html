@@ -17,6 +17,18 @@
     </div>
 <div class="panel-body">
 
+    <form class="form-inline" method="post">{% csrf_token %}
+      <div class="form-group">
+        <label for="dni">Dni Postulante</label>
+        <input required type="number" class="form-control" name="dni" id="dni" placeholder="Ingrese DNI de Postulante">
+      </div>
+       
+      <button class="btn btn-default">Buscar</button>
+    </form>
+
+    <hr>
+
+    {% if resultado|length > 0 %}
     <h4>Apellidos y nombres: <b>{{ postulante.apellido }} {{ postulante.nombre }}</b></h4>
     <h4>DNI N°.: <b>{{ postulante.dni }}</b></h4>
     <h4>Fecha: <b>{{ fecha_actual }} hs.</b></h4>
@@ -32,6 +44,11 @@
        <h4>Cantidad de notas presentadas <b>{{ corte.1 | length }}</b></h4>
        <br>
     {% endfor %}
+    {% else %}
+
+    <h4>No se encontraron resultados para el dni: {{ pdni }}.</h4>
+
+    {% endif %}
 
 </div>
 </div>

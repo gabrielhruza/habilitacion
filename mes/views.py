@@ -333,34 +333,43 @@ def nep_pre_asociada(request, pgid):
 
 #ver notas asociadas a dni de postulante
 @group_required('mes')
-def nep_post_asociadas(request, pdni):
+def nep_post_asociadas(request):
   
   titulo_plantilla = 'Totales de notas presentadas por postulante'
 
-  negs  = []
-  resultado = []
-  fecha_actual = datetime.now
+  negs          = []
+  resultado     = []
+  fecha_actual  = datetime.now
   user_logueado = request.user.username
+  postulante    = []
 
-  postulantes = Postulante.objects.filter(dni=pdni)
+  
+  if request.method == "POST":
 
-  postulante = postulantes.first()
+    pdni = int(request.POST.get('dni', ''))
 
-  for p in postulantes:
-    corte = []
-    pg = p.pg
-    
-    corte.append(pg)
+    print pdni 
 
-    if not p.pg == None:
-      notas = NotaP.objects.filter(pg=pg.id)
-      corte.append(notas)
-    
-    resultado.append(corte)
+    postulantes = Postulante.objects.filter(dni=pdni)
+
+    postulante = postulantes.first()
+
+    for p in postulantes:
+      corte = []
+      pg = p.pg
+      
+      corte.append(pg)
+
+      if not p.pg == None:
+        notas = NotaP.objects.filter(pg=pg.id)
+        corte.append(notas)
+      
+      resultado.append(corte)
 
   return render(request, 'neg/total_notas_postulante.html', { 
     'titulo_plantilla' : titulo_plantilla,
-    'negs' : negs,
+    'negs'  : negs,
+    'pdni'  : pdni,
     'postulante'  : postulante,
     'resultado'   : resultado,
     'fecha_actual': fecha_actual,
