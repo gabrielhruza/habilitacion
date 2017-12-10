@@ -11,12 +11,19 @@
 <div class="panel panel-info">
     <div class="panel-heading">
         <h3 class="panel-title">{{ titulo_plantilla }}</h3>
+        <a class="btn btn-default btn-sm pull-right" style="margin-top: -23px" onclick="window.print()">
+        <span class="glyphicon glyphicon-print" aria-hidden="true"></span> Imprimir
+        </a>
     </div>
 <div class="panel-body">
 
-    <h4>Apellidos y nombres: {{ postulante.apellido }} {{ postulante.nombre }}</h4>
-    <h4>DNI N°.: {{ postulante.dni }}</h4>
+    <h4>Apellidos y nombres: <b>{{ postulante.apellido }} {{ postulante.nombre }}</b></h4>
+    <h4>DNI N°.: <b>{{ postulante.dni }}</b></h4>
+    <h4>Fecha: <b>{{ fecha_actual }} hs.</b></h4>
+    <h4>Emitido por: <b>{{ user_logueado }}</b></h4>
     <br>
+    <h5><i>*Ordenado por: Ciclo Lectivo, Nivel y Curso</i></h5>
+
     {% for corte in resultado %}
 
        <h4>Ciclo Lectivo: <b>{{ corte.0.cicloLectivo }}</b></h4> 

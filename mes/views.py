@@ -3,11 +3,11 @@ from __future__ import unicode_literals
 
 from django.shortcuts import render
 from preinscripcion.decorators import group_required
-from preinscripcion.models import PreinscripcionGeneral
 from django.contrib import messages
 from django.http import JsonResponse
 from django.core import serializers
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from datetime import datetime    
 
 from .models 	import Nota, NotaP, NotaI, Movimiento
 from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm
@@ -339,6 +339,8 @@ def nep_post_asociadas(request, pdni):
 
   negs  = []
   resultado = []
+  fecha_actual = datetime.now
+  user_logueado = request.user.username
 
   postulantes = Postulante.objects.filter(dni=pdni)
 
@@ -360,7 +362,9 @@ def nep_post_asociadas(request, pdni):
     'titulo_plantilla' : titulo_plantilla,
     'negs' : negs,
     'postulante'  : postulante,
-    'resultado'   : resultado
+    'resultado'   : resultado,
+    'fecha_actual': fecha_actual,
+    'user_logueado': user_logueado
     })
 
 
