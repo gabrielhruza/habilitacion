@@ -158,7 +158,7 @@
   {% endif %}
 
   {% if alumno %}
-  <a  href="{% url 'nep_pre_asociada' p.id %}" class="btn btn-primary">Ver notas asociadas</a>
+  <!--<a  href="{% url 'nep_pre_asociada' p.id %}" class="btn btn-primary">Ver notas asociadas</a>-->
   <a  href="{% url 'nep_new' p.id %}" class="btn btn-info">Asociar Nota</a>
   <a  href="{% url 'admin_pg_asignarpuntaje' p.nro_de_preinscripto %}" class="btn btn-success">Modificar Puntaje</a>
   {% endif %}

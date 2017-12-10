@@ -25,11 +25,11 @@
 	<div class="col-sm-12 col-md-8 col-md-offset-2 well">
 	<h4><b>Puntaje actual: {{ puntaje_actual }}</b></h4>
 	<hr>
-	<form method="POST" class="" id="" novalidate>{% csrf_token %}
+	<form method="POST" class="" id="">{% csrf_token %}
 
 	<div class="form-group">
     <label for="puntaje">Nuevo Puntaje</label>
-    <input type="integer" name="puntaje" class="form-control" id="puntaje" value="{{ puntaje_actual }}">
+    <input type="number" required name="puntaje" class="form-control" id="puntaje">
   	</div>
 
 	<a  href="{% url 'admin_pg_show' pg.id %}" class="btn btn-default">Volver</a>
