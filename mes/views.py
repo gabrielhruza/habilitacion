@@ -342,13 +342,11 @@ def nep_post_asociadas(request):
   fecha_actual  = datetime.now
   user_logueado = request.user.username
   postulante    = []
-
+  pdni          = []
   
   if request.method == "POST":
 
     pdni = int(request.POST.get('dni', ''))
-
-    print pdni 
 
     postulantes = Postulante.objects.filter(dni=pdni)
 
