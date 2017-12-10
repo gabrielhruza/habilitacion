@@ -1,0 +1,33 @@
+{% extends 'admin.html' %}
+
+{% block ciclo %}
+{% endblock %}
+
+{% block content %}
+{% load static %}
+
+<div class="container">
+
+<div class="panel panel-info">
+    <div class="panel-heading">
+        <h3 class="panel-title">{{ titulo_plantilla }}</h3>
+    </div>
+<div class="panel-body">
+
+    <h4>Apellidos y nombres: {{ postulante.apellido }} {{ postulante.nombre }}</h4>
+    <h4>DNI N°.: {{ postulante.dni }}</h4>
+    <br>
+    {% for corte in resultado %}
+
+       <h4>Ciclo Lectivo: <b>{{ corte.0.cicloLectivo }}</b></h4> 
+       <h4>Nivel: <b>{{ corte.0.nivel }}</b></h4>
+       <h4>Curso: <b>{{ corte.0.anio }}</b></h4>
+       <h4>Cantidad de notas presentadas <b>{{ corte.1 | length }}</b></h4>
+       <br>
+    {% endfor %}
+
+</div>
+</div>
+</div>
+
+{% endblock %}

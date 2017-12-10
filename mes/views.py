@@ -13,6 +13,7 @@ from .models 	import Nota, NotaP, NotaI, Movimiento
 from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm
 
 from pg.models import Profile, Perfil
+from preinscripcion.models import Postulante, PreinscripcionGeneral
 
 
 ## operaciones relacionadas con el rol mes
@@ -320,7 +321,7 @@ def nep_new(request, pgid):
 @group_required('mes')
 def nep_pre_asociada(request, pgid):
 
-  titulo_plantilla = 'Notas asociadas'
+  titulo_plantilla = 'Notas asociadas a preinscripcion'
   
   negs = NotaP.objects.filter(pg__id=pgid).order_by('-fecha_emision')
 
@@ -328,6 +329,40 @@ def nep_pre_asociada(request, pgid):
     'negs' : negs,
     'titulo_plantilla' : titulo_plantilla
     })
+
+
+#ver notas asociadas a dni de postulante
+@group_required('mes')
+def nep_post_asociadas(request, pdni):
+  
+  titulo_plantilla = 'Totales de notas presentadas por postulante'
+
+  negs  = []
+  resultado = []
+
+  postulantes = Postulante.objects.filter(dni=pdni)
+
+  postulante = postulantes.first()
+
+  for p in postulantes:
+    corte = []
+    pg = p.pg
+    
+    corte.append(pg)
+
+    if not p.pg == None:
+      notas = NotaP.objects.filter(pg=pg.id)
+      corte.append(notas)
+    
+    resultado.append(corte)
+
+  return render(request, 'neg/total_notas_postulante.html', { 
+    'titulo_plantilla' : titulo_plantilla,
+    'negs' : negs,
+    'postulante'  : postulante,
+    'resultado'   : resultado
+    })
+
 
 
 #ver una nota de entrada
