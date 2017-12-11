@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 25-11-2017 a las 20:05:50
+-- Tiempo de generación: 11-12-2017 a las 16:33:22
 -- Versión del servidor: 5.5.55-0ubuntu0.14.04.1
 -- Versión de PHP: 5.5.9-1ubuntu4.21
 
@@ -185,11 +185,11 @@ CREATE TABLE IF NOT EXISTS `auth_user` (
 
 INSERT INTO `auth_user` (`id`, `password`, `last_login`, `is_superuser`, `username`, `first_name`, `last_name`, `email`, `is_staff`, `is_active`, `date_joined`) VALUES
 (1, 'pbkdf2_sha256$36000$cJBUE4zcZsiu$PYBNBaoxA7+hiUm46VEF8VwIJeiIYwr2SkPiI4UCmqk=', '2017-11-06 13:47:23', 1, 'Habilitacion', '', '', 'habilitacion@gmail.com', 1, 1, '2017-06-26 13:29:58'),
-(2, 'pbkdf2_sha256$36000$lfpRUDGP3YKt$vOmCy7mA/lB9Oopf900hkvpZluD3LPXQnEsfUkVmd2w=', '2017-10-06 02:31:18', 0, 'DirectoraNI', '', '', '', 0, 1, '2017-06-26 13:30:58'),
+(2, 'pbkdf2_sha256$36000$lfpRUDGP3YKt$vOmCy7mA/lB9Oopf900hkvpZluD3LPXQnEsfUkVmd2w=', '2017-12-10 03:18:45', 0, 'DirectoraNI', '', '', '', 0, 1, '2017-06-26 13:30:58'),
 (3, 'pbkdf2_sha256$36000$g54hm3OVBcco$tXTKgncRX/xdxxnL/XzKty35zsNsgbThHAO46yY8fVM=', '2017-09-11 23:16:49', 0, 'Director', '', '', '', 0, 1, '2017-06-26 13:31:23'),
 (4, 'pbkdf2_sha256$36000$oKybHiHbYTDu$MqUSeSsJ9FCSN0DZuQIEggmPtawOc26VM5bClZx9sAg=', '2017-11-06 19:18:55', 0, 'DirectoraGNI', '', '', '', 0, 1, '2017-09-09 00:39:08'),
-(6, 'pbkdf2_sha256$36000$w031KsMzZhDE$VUuHONBdYiVIMEBeQIYJTsp66uiU5Hwu40VgIJfRdyk=', '2017-11-25 17:58:09', 0, 'DirectoraGNP', '', '', '', 0, 1, '2017-09-12 23:08:25'),
-(7, 'pbkdf2_sha256$36000$ULvU6sfKnlzM$VaWaRg3CDbwuf9aj2EHAMJT3rUd9Xypqt5xxfErQTis=', '2017-11-06 19:23:15', 0, 'DirectoraGNS', '', '', '', 0, 1, '2017-09-12 23:09:37'),
+(6, 'pbkdf2_sha256$36000$w031KsMzZhDE$VUuHONBdYiVIMEBeQIYJTsp66uiU5Hwu40VgIJfRdyk=', '2017-12-10 03:22:58', 0, 'DirectoraGNP', '', '', '', 0, 1, '2017-09-12 23:08:25'),
+(7, 'pbkdf2_sha256$36000$ULvU6sfKnlzM$VaWaRg3CDbwuf9aj2EHAMJT3rUd9Xypqt5xxfErQTis=', '2017-11-27 17:56:35', 0, 'DirectoraGNS', '', '', '', 0, 1, '2017-09-12 23:09:37'),
 (8, 'pbkdf2_sha256$36000$PjlRR7quSbPl$xR2WJyuOMG9IkLIi+YfR2LXMjXV76s2A6fZfVEix0W0=', '2017-11-06 19:13:43', 0, 'Recepcion', '', '', '', 0, 1, '2017-09-29 18:56:08');
 
 -- --------------------------------------------------------
@@ -518,7 +518,6 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('egakahcq2zu5y61gxmoz64tc5gnwoera', 'ZjdlMWM0MTNjNDc2Mjk3NjRlMDkyNjkzY2UwMjQ2YjI2NTI5MjdmNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImUwNzUyZWY5Mzc4ZjliNTAxMTFlN2M4M2QwN2NiZWM5MTc1ODI0YzkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=', '2017-09-28 03:05:44'),
 ('errimyt7m0771fsjgslqphh8ni7x9o5m', 'ZjZmNGQyNDQ1Nzc0N2NhODQ3Nzc4OTQxZTM2ZDZkMWM1OWE2ZWNiYzp7Il9hdXRoX3VzZXJfaGFzaCI6IjlkMmVhOTk2ZDAyNTEzOTNkMDQ0OGU1NWFkOTdiMTk5YjQ3YTJkMmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI4In0=', '2017-10-17 12:25:52'),
 ('fdyscvacys3evtq2qvodgrq3b0n9xq2r', 'YThhNWI2ZWRhZGQ5NWE5MGJkZjJhNTRiMTk1YTMyNDViZjNiZjQ1MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImU0NmQ5NzU3ZmVjY2FhOWEzMjhmYjljYjhkMzg2YzM2MDFhMDFhZDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=', '2017-07-11 00:12:01'),
-('fol4hvszkh5bcyqyx69sqrqfjt3a1i3p', 'OWRhOTM4NWY4OGQyZDU4NzRkMmM5Mjg0YWMwN2U1M2Y4ZjZiMWJkYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwicGVyZmlsX3NlbGVjIjoiUFJJTUFSSU8iLCJfYXV0aF91c2VyX2hhc2giOiI0OWY0MjMzM2JmMWEyNzU3YTRmZDZlYjVlZjRhMzMzODMyMjVjZWU4IiwiX2F1dGhfdXNlcl9pZCI6IjYifQ==', '2017-12-09 17:58:26'),
 ('gg3p9tt0amqquue6kw1naxhcnw9vsut2', 'ZjZmNGQyNDQ1Nzc0N2NhODQ3Nzc4OTQxZTM2ZDZkMWM1OWE2ZWNiYzp7Il9hdXRoX3VzZXJfaGFzaCI6IjlkMmVhOTk2ZDAyNTEzOTNkMDQ0OGU1NWFkOTdiMTk5YjQ3YTJkMmEiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI4In0=', '2017-10-16 18:38:05'),
 ('hphmkfax0n5nywprn7gby71wxqajc0jv', 'N2JlMDRkZTgzNmU5NDk5OWQwYWI2YzcyZTkxYWUzOTUyOGI5ZTc0Yjp7ImRhdGFfbWFkcmUiOnsidGVsZWZvbm9QZXJzb25hbCI6IjU1MzQ1MzQ1MzQ1IiwiYXBlbGxpZG8iOiJWYXN0aWsiLCJkbmkiOiIxNjYzNjIxMiIsIm5vbWJyZSI6Ik1hcnRhIiwibmFjaW9uYWxpZGFkIjoiQXJnZW50aW5vIiwiZW1haWwiOiJjYWZzZGZzZGZAc2QuY29tIiwiZG9taWNpbGlvIjoic2Rmc2ZkZnZ4Y3ZjdiJ9LCJkYXRhX3ZpdmVjb24iOnsidGVsZWZvbm9QZXJzb25hbCI6IjU1MzQ1MzQ1MzQ1IiwiYXBlbGxpZG8iOiJQZXJlemllbmUiLCJkbmkiOiIzNDM0MzQzNCIsIm5vbWJyZSI6ImRkZnNkZiIsIm5hY2lvbmFsaWRhZCI6InNkZnNkZnNkZmYiLCJlbWFpbCI6ImNhZnNkZnNkZkBzZC5jb20iLCJkb21pY2lsaW8iOiJzZGZzZmRmdnhjdmN2In0sIm5yb3ByZWluc2NyaXB0byI6IjkxOTU4NTM2IiwiZGF0YV9wYWRyZSI6eyJ0ZWxlZm9ub1BlcnNvbmFsIjoiNTUzNDUzNDUzNDUiLCJhcGVsbGlkbyI6IlBlcmV6aWVuZSIsImRuaSI6IjM0MzQzNDM0Iiwibm9tYnJlIjoiZGRmc2RmIiwibmFjaW9uYWxpZGFkIjoic2Rmc2Rmc2RmZiIsImVtYWlsIjoiY2Fmc2Rmc2RmQHNkLmNvbSIsImRvbWljaWxpbyI6InNkZnNmZGZ2eGN2Y3YifX0=', '2017-09-25 19:46:33'),
 ('jht14eb76vjtfb911sfsaze1v4bway9v', 'OWFkZjRkNzg0YjM4YWI2NmMzYjljNzFlNzNlOTQ3ZmZmOTgwYmI2NDp7InBlcmZpbF9zZWxlYyI6IlBSSU1BUklPIiwiX2F1dGhfdXNlcl9oYXNoIjoiNDlmNDIzMzNiZjFhMjc1N2E0ZmQ2ZWI1ZWY0YTMzMzgzMjI1Y2VlOCIsIl9hdXRoX3VzZXJfaWQiOiI2IiwiX2F1dGhfdXNlcl9iYWNrZW5kIjoiZGphbmdvLmNvbnRyaWIuYXV0aC5iYWNrZW5kcy5Nb2RlbEJhY2tlbmQifQ==', '2017-11-14 01:45:38'),
@@ -528,6 +527,7 @@ INSERT INTO `django_session` (`session_key`, `session_data`, `expire_date`) VALU
 ('oqinlwjwm70j186399rbum0xol5toulm', 'YmVjMDQxMmZjODYxNzgwZGRjZTllMTNiNDVjYzVmZjJkZjkyMDRlNDp7InBlcmZpbF9zZWxlYyI6Ik1FU0EgREUgRU5UUkFEQSIsIl9hdXRoX3VzZXJfaGFzaCI6IjlkMmVhOTk2ZDAyNTEzOTNkMDQ0OGU1NWFkOTdiMTk5YjQ3YTJkMmEiLCJfYXV0aF91c2VyX2lkIjoiOCIsIl9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIn0=', '2017-11-18 21:52:14'),
 ('otab6rmx19duuuvv852e1eknxtkac877', 'ZjdlMWM0MTNjNDc2Mjk3NjRlMDkyNjkzY2UwMjQ2YjI2NTI5MjdmNDp7Il9hdXRoX3VzZXJfaGFzaCI6ImUwNzUyZWY5Mzc4ZjliNTAxMTFlN2M4M2QwN2NiZWM5MTc1ODI0YzkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiI0In0=', '2017-09-24 23:31:41'),
 ('pmn6al9eejl17uois5zbtff10v57on7m', 'OWRhOTM4NWY4OGQyZDU4NzRkMmM5Mjg0YWMwN2U1M2Y4ZjZiMWJkYTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwicGVyZmlsX3NlbGVjIjoiUFJJTUFSSU8iLCJfYXV0aF91c2VyX2hhc2giOiI0OWY0MjMzM2JmMWEyNzU3YTRmZDZlYjVlZjRhMzMzODMyMjVjZWU4IiwiX2F1dGhfdXNlcl9pZCI6IjYifQ==', '2017-11-20 19:22:07'),
+('q93id2qc3pswkmm28m4mip5vz9cv4l3i', 'YzNjYWJmNDFhNTk0NGViZjBmYzkyOTI5ZDA4MWZjZmUxODllZDQ0Yjp7ImRhdGFfbWFkcmUiOnsidGVsZWZvbm9QZXJzb25hbCI6IjM2MjQyNDIzNDIzNCIsImFwZWxsaWRvIjoiVmFzdGlrIEFzZGRkZCIsImRuaSI6IjE2NjM2MjEyIiwibm9tYnJlIjoiTWFydGEiLCJuYWNpb25hbGlkYWQiOiJBcmdlbnRpbm8iLCJlbWFpbCI6ImNhcmxvc0BnbWFpbC5jb20iLCJkb21pY2lsaW8iOiJBdmRhIEVkaXNvbiAxNDMwIn0sImRhdGFfdHV0b3IiOnsidGVsZWZvbm9QZXJzb25hbCI6IjM2MjQyODk3MzczMyIsImFwZWxsaWRvIjoiQ2FybG9zIiwiZG5pIjoiMjExMTExMTEiLCJub21icmUiOiJDYXJsb3MiLCJuYWNpb25hbGlkYWQiOiJBcmdlbnRpbm8iLCJlbWFpbCI6ImNhcmxvc0BnbWFpbC5jb20iLCJkb21pY2lsaW8iOiJSaXZhZGF2aWEgMjQzIn0sImRhdGFfdml2ZWNvbiI6eyJ0ZWxlZm9ub1BlcnNvbmFsIjoiMzYyNDI0MjM0MjM0IiwiYXBlbGxpZG8iOiJQZXJleiIsImRuaSI6IjIzMjMyMzIzIiwibm9tYnJlIjoiSmF2aWVyIiwibmFjaW9uYWxpZGFkIjoiQXJnZW50aW5vIiwiZW1haWwiOiJjYXJsb3NAZ21haWwuY29tIiwiZG9taWNpbGlvIjoiQXZkYSBFZGlzb24gMTQzMCJ9LCJucm9wcmVpbnNjcmlwdG8iOiI2ODExMTcxNiIsImRhdGFfcGFkcmUiOnsidGVsZWZvbm9QZXJzb25hbCI6IjM2MjQyNDIzNDIzNCIsImFwZWxsaWRvIjoiUGVyZXoiLCJkbmkiOiIyMzIzMjMyMyIsIm5vbWJyZSI6IkphdmllciIsIm5hY2lvbmFsaWRhZCI6IkFyZ2VudGlubyIsImVtYWlsIjoiY2FybG9zQGdtYWlsLmNvbSIsImRvbWljaWxpbyI6IkF2ZGEgRWRpc29uIDE0MzAifX0=', '2017-12-11 12:15:21'),
 ('qv7tejf644woct19zag0v2tizf85tu8t', 'NjQ1OTI5MDdmYzMxOGU5MTAxNGIyNDJkNjEyMWY0ZDQzZDQyYjZmOTp7Il9hdXRoX3VzZXJfaGFzaCI6ImJlODBiNzFiYTkzYzA5MWM3YWYxZTU3YzE3ZTY5MzVjNDhhYjhmNTAiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIxIn0=', '2017-09-26 22:51:28'),
 ('qya759jjos0phvg2vlnix28vy6chbuat', 'YThhNWI2ZWRhZGQ5NWE5MGJkZjJhNTRiMTk1YTMyNDViZjNiZjQ1MDp7Il9hdXRoX3VzZXJfaGFzaCI6ImU0NmQ5NzU3ZmVjY2FhOWEzMjhmYjljYjhkMzg2YzM2MDFhMDFhZDkiLCJfYXV0aF91c2VyX2JhY2tlbmQiOiJkamFuZ28uY29udHJpYi5hdXRoLmJhY2tlbmRzLk1vZGVsQmFja2VuZCIsIl9hdXRoX3VzZXJfaWQiOiIyIn0=', '2017-07-10 18:26:38'),
 ('uazruxqbrcg3e7togd2bpsmbqyzfzo1d', 'YmZhYTBjZjljN2FiZTcxNWQ3ZDg5MTc5YjVkMmIzZjkzMDU1ZTJiZTp7Il9hdXRoX3VzZXJfYmFja2VuZCI6ImRqYW5nby5jb250cmliLmF1dGguYmFja2VuZHMuTW9kZWxCYWNrZW5kIiwicGVyZmlsX3NlbGVjIjoiU0VDVU5EQVJJTyIsIl9hdXRoX3VzZXJfaGFzaCI6IjAwNzlmYWNjYjAxZGRlYjZiYzU3N2RmMmE0N2I4M2VlMWM0ODdmYzciLCJfYXV0aF91c2VyX2lkIjoiNyJ9', '2017-11-20 19:25:13'),
@@ -555,7 +555,7 @@ CREATE TABLE IF NOT EXISTS `mes_movimiento` (
   KEY `mes_movimiento_nota_id_17e21eab_fk_mes_nota_id` (`nota_id`),
   KEY `mes_movimiento_emisor_id_6b38e5b6_fk_auth_user_id` (`emisor_id`),
   KEY `mes_movimiento_emisor_perfil_id_64224cc6_fk_pg_perfil_id` (`emisor_perfil_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 --
 -- Volcado de datos para la tabla `mes_movimiento`
@@ -566,7 +566,8 @@ INSERT INTO `mes_movimiento` (`id`, `motivo_derivar`, `fecha`, `destino_id`, `em
 (8, 'Cuentas por cobrar', '2017-11-06', 21, 6, 242, 22),
 (9, 'Cuentas por cobrar', '2017-11-06', 14, 7, 247, 21),
 (10, 'sfdsf sdf sf sdfsdf s f', '2017-11-06', 23, 4, 253, 21),
-(11, 'sda dasd asd asdsd', '2017-11-06', 14, 6, 253, 21);
+(11, 'sda dasd asd asdsd', '2017-11-06', 14, 6, 253, 21),
+(12, 'safsdfdsfdf', '2017-12-09', 14, 6, 253, 21);
 
 -- --------------------------------------------------------
 
@@ -788,7 +789,7 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_ciclolectivo` (
 --
 
 INSERT INTO `preinscripcion_ciclolectivo` (`id`, `fecha_apertura_ciclo`, `fecha_cierre_ciclo`, `fecha_inicio_preinsc_ni`, `fecha_fin_preinsc_ni`, `vacantes`, `ultimo_nro_sorteo`, `fecha_dia_sorteo`) VALUES
-(1, '2018-01-12', '2018-12-12', '2018-08-12', '2018-09-12', 35, 9, '2018-10-12'),
+(1, '2018-01-12', '2018-12-12', '2018-08-12', '2018-09-12', 35, 10, '2018-10-12'),
 (2, '2017-01-12', '2017-12-12', '2017-08-12', '2017-09-12', 34, 0, '2017-10-12');
 
 -- --------------------------------------------------------
@@ -819,7 +820,7 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_postulante` (
   KEY `preinscripcion_postu_preinscripcion_id_3926d06c_fk_preinscri` (`preinscripcion_id`),
   KEY `preinscripcion_postu_tutor_id_5da4810b_fk_preinscri` (`tutor_id`),
   KEY `preinscripcion_postu_vive_con_id_9425090a_fk_preinscri` (`vive_con_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=10 ;
 
 --
 -- Volcado de datos para la tabla `preinscripcion_postulante`
@@ -831,7 +832,8 @@ INSERT INTO `preinscripcion_postulante` (`id`, `apellido`, `nombre`, `fecha_naci
 (5, 'Pereziene', 'Jose luis', '2014-09-03', 3, '45789987', 'MASCULINO', 'French 414', 365, 364, 102, NULL, NULL, 366),
 (6, 'Pereziene', 'Gerardo', '2014-10-01', 3, '32456789', 'MASCULINO', 'French 414', 368, 367, 103, NULL, NULL, 369),
 (7, 'Yacuzzi', 'Jose luis', '2017-06-01', 0, '32456789', 'MASCULINO', 'French 414', 371, 370, NULL, 1, NULL, 372),
-(8, 'Yacuzzi', 'Gabriel', '2017-06-01', 0, '45789987', 'MASCULINO', 'French 414', 371, 370, NULL, 2, NULL, 372);
+(8, 'Yacuzzi', 'Gabriel', '2017-06-01', 0, '45789987', 'MASCULINO', 'French 414', 371, 370, NULL, 2, NULL, 372),
+(9, 'Hruza', 'Gabriel CAarlos', '2014-09-02', 3, '45789987', 'MASCULINO', 'French 414 Presidencia Roque Saenz Peña Chaco', 374, 373, 104, NULL, NULL, 375);
 
 -- --------------------------------------------------------
 
@@ -846,7 +848,14 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_postulanteconfirmado` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `dni` (`dni`),
   KEY `preinscripcion_postu_postulante_id_bd53f49f_fk_preinscri` (`postulante_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Volcado de datos para la tabla `preinscripcion_postulanteconfirmado`
+--
+
+INSERT INTO `preinscripcion_postulanteconfirmado` (`id`, `dni`, `postulante_id`) VALUES
+(1, '32456789', 7);
 
 -- --------------------------------------------------------
 
@@ -902,7 +911,7 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_preinscripcion4anios` (
 --
 
 INSERT INTO `preinscripcion_preinscripcion4anios` (`id`, `fecha`, `hora`, `nro_de_preinscripto`, `estado`, `fecha_confirmado`, `confirmado`, `responsablequeconfirma`, `motivo`, `nro_de_sorteo`, `cicloLectivo_id`, `usuarioqueconfirma_id`, `puntaje`) VALUES
-(1, '2017-10-03', '12:40:46', '50429142', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 0, 1, NULL, 0),
+(1, '2017-10-03', '12:40:46', '50429142', 'CONFIRMADO', '2017-12-10', 1, NULL, 'No contesta', 10, 1, NULL, 0),
 (2, '2017-10-03', '12:40:46', '03649186', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 0, 1, NULL, 0);
 
 -- --------------------------------------------------------
@@ -935,7 +944,7 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_preinscripciongeneral` (
   UNIQUE KEY `nro_de_preinscripto` (`nro_de_preinscripto`),
   KEY `preinscripcion_prein_cicloLectivo_id_5a790dec_fk_preinscri` (`cicloLectivo_id`),
   KEY `preinscripcion_prein_usuarioqueconfirma_i_bfe0d098_fk_auth_user` (`usuarioqueconfirma_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=104 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=105 ;
 
 --
 -- Volcado de datos para la tabla `preinscripcion_preinscripciongeneral`
@@ -944,8 +953,9 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_preinscripciongeneral` (
 INSERT INTO `preinscripcion_preinscripciongeneral` (`id`, `fecha`, `hora`, `nro_de_preinscripto`, `estado`, `fecha_confirmado`, `confirmado`, `responsablequeconfirma`, `motivo`, `nivel`, `anio`, `institucion_anterior`, `localidad`, `provincia`, `telefono`, `cubrio_vacante`, `cicloLectivo_id`, `usuarioqueconfirma_id`, `puntaje`) VALUES
 (100, '2017-09-29', '14:59:02', '79225888', 'CONFIRMADO', '2017-09-29', 1, NULL, 'No contesta', 'PRIMARIO', '7', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, 6, 0),
 (101, '2017-09-29', '16:52:15', '85068458', 'CONFIRMADO', '2017-09-29', 1, NULL, 'No contestaNo contestaNo contestaNo contestaNo contesta', 'INICIAL', '2', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 2, 4, 0),
-(102, '2017-10-01', '11:42:41', '39345260', 'CONFIRMADO', '2017-10-01', 1, NULL, 'No contestaNo contestaNo contestaNo contestaNo contesta', 'PRIMARIO', '3', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, 6, 0),
-(103, '2017-10-03', '12:39:01', '28676698', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'INICIAL', '2', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, NULL, 0);
+(102, '2017-10-01', '11:42:41', '39345260', 'CONFIRMADO', '2017-10-01', 1, NULL, 'No contestaNo contestaNo contestaNo contestaNo contesta', 'PRIMARIO', '3', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, 6, 23322323),
+(103, '2017-10-03', '12:39:01', '28676698', 'PREINSCRIPTO', NULL, 0, NULL, 'No contesta', 'INICIAL', '2', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, NULL, 0),
+(104, '2017-11-27', '09:15:21', '68111716', 'CONFIRMADO', '2017-11-27', 1, NULL, 'No contesta', 'PRIMARIO', '3', 'Escuela actual', 'RESISTENCIA', 'SANTA FE', '262626262', 0, 1, 6, 345);
 
 -- --------------------------------------------------------
 
@@ -963,7 +973,7 @@ CREATE TABLE IF NOT EXISTS `preinscripcion_responsable` (
   `nacionalidad` varchar(150) NOT NULL,
   `telefonoPersonal` varchar(30) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=373 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=376 ;
 
 --
 -- Volcado de datos para la tabla `preinscripcion_responsable`
@@ -984,7 +994,10 @@ INSERT INTO `preinscripcion_responsable` (`id`, `apellido`, `nombre`, `dni`, `em
 (369, 'Pereziene', 'Javier', '23232323', 'carlos@gmail.com', 'French 414', 'Argentino', '55345345345'),
 (370, 'Alfonso', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'French 414', 'Argentino', '55345345345'),
 (371, 'Alcides', 'Marta', '16636214', 'cafsdfsdf@sd.com', 'French 414', 'Argentino', '55345345345'),
-(372, 'Alfonso', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'French 414', 'Argentino', '55345345345');
+(372, 'Alfonso', 'ddfsdf', '34343434', 'cafsdfsdf@sd.com', 'French 414', 'Argentino', '55345345345'),
+(373, 'Perez', 'Javier', '23232323', 'carlos@gmail.com', 'Avda Edison 1430', 'Argentino', '362424234234'),
+(374, 'Vastik Asdddd', 'Marta', '16636212', 'carlos@gmail.com', 'Avda Edison 1430', 'Argentino', '362424234234'),
+(375, 'Perez', 'Javier', '23232323', 'carlos@gmail.com', 'Avda Edison 1430', 'Argentino', '362424234234');
 
 --
 -- Restricciones para tablas volcadas
