@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bootstrap3',
     'dynamic_formsets',
     'ckeditor',
+    'django_filters',
 ]
 
 MIDDLEWARE_CLASSES= [

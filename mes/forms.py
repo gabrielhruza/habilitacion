@@ -1,6 +1,21 @@
 from django import forms
 from .models import Nota, NotaP, NotaI, Perfil, Movimiento
 
+#import django_filters
+from django_filters import rest_framework as filters
+
+class NotaFilter(filters.FilterSet):
+	class Meta:
+		model 	= Nota
+		fields 	= ['estado', 'nro_de_tracking','remitente']
+
+
+class NotaIFilter(filters.FilterSet):
+	class Meta:
+		model 	= NotaI
+		fields 	= ['estado', 'nro_de_tracking','remitente']
+
+
 class NegForm(forms.ModelForm):
 	class Meta:
 		model 	= Nota
@@ -15,7 +30,6 @@ class  NIForm(forms.ModelForm):
 	def __init__(self, *args, **kwargs):
 		super(NIForm, self).__init__(*args, **kwargs)
 		self.fields['enviar_a'] = forms.ModelChoiceField(queryset=Perfil.objects.all())
-
 
 
 class NepForm(forms.ModelForm):

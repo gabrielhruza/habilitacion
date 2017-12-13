@@ -10,7 +10,7 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from datetime import datetime    
 
 from .models 	import Nota, NotaP, NotaI, Movimiento
-from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm
+from .forms 	import NeForm, NeDerivarForm, NegForm, NIForm, NepForm, NotaFilter, NotaIFilter
 
 from pg.models import Profile, Perfil
 from preinscripcion.models import Postulante, PreinscripcionGeneral
@@ -124,7 +124,7 @@ def neg_env_index(request):
 
   page = request.GET.get('page', 1)
 
-  
+ 
   #notas por perfil con estado = 'NUEVA'
   nxps = []
 
@@ -135,8 +135,11 @@ def neg_env_index(request):
     nxps.append(nxp)
 
   perfil_selec = request.session['perfil_selec']
-  negs = Nota.objects.filter(emisor=user,emisor_perfil__perfil=perfil_selec).exclude(remitente=None).order_by('-fecha_emision')
   
+  #filtro
+  negs_sf = Nota.objects.filter(emisor=user,emisor_perfil__perfil=perfil_selec).exclude(remitente=None).order_by('-fecha_emision')
+  negs = NotaFilter(request.GET, queryset=negs_sf)
+  negs = negs.qs
 
   #paginator
   paginator = Paginator(negs, 15)
@@ -165,6 +168,13 @@ def neg_rec_index(request):
   
   page = request.GET.get('page', 1)
 
+  #filtro 
+  desde     = request.GET.get('desde', '')
+  hasta     = request.GET.get('hasta', '')
+  estado    = request.GET.get('estado', '')
+  tracking  = request.GET.get('nro_de_tracking', '')
+  remitente = request.GET.get('remitente', '')
+
   #notas por perfil con estado = NUEVA
   nxps = []
 
@@ -177,9 +187,11 @@ def neg_rec_index(request):
   #selecciono perfil de session
   perfil_selec = Perfil.objects.get(perfil=request.session['perfil_selec'])
 
-  negs = Nota.objects.filter(destino=perfil_selec).exclude(remitente=None).order_by('-fecha_emision')
-  
-  
+  #filtro
+  negs_sf = Nota.objects.filter(destino=perfil_selec).exclude(remitente=None).order_by('-fecha_emision')
+  negs = NotaFilter(request.GET, queryset=negs_sf)
+  negs = negs.qs
+
   #paginator
   paginator = Paginator(negs, 15)
   try:
@@ -220,7 +232,9 @@ def ni_rec_index(request):
   #selecciono perfil de session
   perfil_selec = Perfil.objects.get(perfil=request.session['perfil_selec'])
 
-  negs = NotaI.objects.filter(destino=perfil_selec).order_by('-fecha_emision')
+  negs_sf = NotaI.objects.filter(destino=perfil_selec).order_by('-fecha_emision')
+  negs = NotaIFilter(request.GET, queryset=negs_sf)
+  negs = negs.qs
 
 
   #paginator
@@ -259,8 +273,9 @@ def ni_env_index(request):
     nxps.append(nxp)
 
   perfil_selec = request.session['perfil_selec']
-  negs = NotaI.objects.filter(emisor=user, emisor_perfil__perfil=perfil_selec).order_by('-fecha_emision')
-  
+  negs_sf = NotaI.objects.filter(emisor=user, emisor_perfil__perfil=perfil_selec).order_by('-fecha_emision')
+  negs = NotaIFilter(request.GET, queryset=negs_sf)
+  negs = negs.qs
   
   #paginator
   paginator = Paginator(negs, 10)
