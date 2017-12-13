@@ -31,10 +31,13 @@
 
   	<h4>Fecha: <b> {{ ne.fecha_emision }}</b></h4>
     <h4>N° de tracking: <b> {{ ne.nro_de_tracking }}</b></h4>
-  	<h4>Emisor:<b> {{ ne.emisor }}</b></h4>
+    <h4>Perfil Emisor:<b> {{ ne.emisor_perfil }}</b></h4>
+  	<h4>Usuario Emisor:<b> {{ ne.emisor }}</b></h4>
   	<h4>Destino:<b> {{ ne.destino }}</b></h4>
     <h4>Estado:<b> {{ ne.estado }}</b></h4>
+    {% if not ne.notap.pg.nro_de_preinscripto == '' %}
     <h4>Preinscripcion:<b> {{ ne.notap.pg.nro_de_preinscripto }}</b></h4>
+    {% endif %}
     <h4>Contenido</h4>
     <div class="well">
       {{ ne.motivo|safe }}
@@ -48,12 +51,14 @@
 	<hr>
 
   <a onClick="javascript:history.go(-1);" class="btn btn-default">Volver</a>
-  
+
+  {% if not ne.emisor == request.user or not ne.emisor_perfil.perfil == request.session.perfil_selec %}
   <a onclick="modal('{% url 'ne_recibida' ne.id %}', 'Marcar como Recibida')" href="#" class="btn btn-primary">Recibida</a>
   <a onclick="modal('{% url 'ne_tramite' ne.id %}', 'En Trámite')" href="#" class="btn btn-info">En Trámite</a>
   <a href="{% url 'ne_derivar' ne.id %}" class="btn btn-warning">Derivar</a>
   <a onclick="modal('{% url 'ne_rechazar' ne.id %}', 'Marcar como rechazada')" href="#" class="btn btn-danger">Rechazar</a>
-  
+  {% endif %}
+
 </div>
 
 </div>

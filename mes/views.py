@@ -397,13 +397,10 @@ def ne_recibida(request, pid):
   userlogueado = request.user
   ne = Nota.objects.get(pk=pid)
 
-  if ne.emisor == userlogueado:
-    messages.error(request, "Error, no puede marcar como RECIBIDA.")
-    return ne_show(request, ne.id)
-  else:
-    ne.setEstadoRecibida(userlogueado)
-    ne.save()
-    messages.success(request, 'Acción realizada correctamente.')
+  ne.setEstadoRecibida(userlogueado)
+  ne.save()
+  messages.success(request, 'Acción realizada correctamente.')
+
   return ne_show(request, ne.id)
 
 
@@ -414,13 +411,10 @@ def ne_rechazar(request, pid):
   userlogueado = request.user  
   ne = Nota.objects.get(pk=pid)
 
-  if ne.emisor == userlogueado:
-    messages.error(request, "Error, no es posible RECHAZAR.")
-    return ne_show(request, ne.id)
-  else:
-    ne.setEstadoRechazada(userlogueado)
-    ne.save()
-    messages.success(request, 'Acción realizada correctamente.')  
+  ne.setEstadoRechazada(userlogueado)
+  ne.save()
+  messages.success(request, 'Acción realizada correctamente.')
+
   return ne_show(request, ne.id)
 
 
@@ -431,13 +425,9 @@ def ne_tramite(request, pid):
   userlogueado = request.user  
   ne = Nota.objects.get(pk=pid)
 
-  if ne.emisor == userlogueado:
-    messages.error(request, "Error, no es posible realizar la acción.")
-    return ne_show(request, ne.id)
-  else:
-    ne.setEstadoEnTramite(userlogueado)
-    ne.save()
-    messages.success(request, 'Acción realizada correctamente.')
+  ne.setEstadoEnTramite(userlogueado)
+  ne.save()
+  messages.success(request, 'Acción realizada correctamente.')
   
   return ne_show(request, ne.id)
 
